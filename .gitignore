@@ -16,3 +16,8 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+
+*.dmg
+
+Charm SSH Proxy-1.0.dmg.zip
+Charm SSH Proxy.app/

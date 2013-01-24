@@ -1,0 +1,666 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4A03F73916A69519009BCD79 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A03F73816A69519009BCD79 /* AppController.m */; };
+		4A03F73C16A69567009BCD79 /* bad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A03F73B16A69567009BCD79 /* bad.png */; };
+		4A03F73E16A695F0009BCD79 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A03F73D16A695F0009BCD79 /* StatusMenu.xib */; };
+		4A1841D416AD3D0A00CB5D2B /* black-hard-drive-network_64x64.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4A1841D316AD3D0A00CB5D2B /* black-hard-drive-network_64x64.icns */; };
+		4A1841D616AD3E0200CB5D2B /* blue-hard-drive-network_64x64.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4A1841D516AD3E0200CB5D2B /* blue-hard-drive-network_64x64.icns */; };
+		4A1841D916AE211600CB5D2B /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1841D816AE211600CB5D2B /* Settings.m */; };
+		4A1BE47C16A5BAA0000E56D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1BE47B16A5BAA0000E56D7 /* Foundation.framework */; };
+		4A1BE49D16A68F30000E56D7 /* sshproxy.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4A1BE49C16A68F30000E56D7 /* sshproxy.entitlements */; };
+		4A1F18AD16A7E65A00F39F74 /* CharmNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F18AC16A7E65A00F39F74 /* CharmNumberFormatter.m */; };
+		4A44D67816A8331100EB44A8 /* PasswordHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A44D67716A8331100EB44A8 /* PasswordHelper.m */; };
+		4A44D67A16A834F200EB44A8 /* PasswordHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A44D67716A8331100EB44A8 /* PasswordHelper.m */; };
+		4A44D67C16A8352200EB44A8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A44D67B16A8352200EB44A8 /* Security.framework */; };
+		4A44D67D16A8354300EB44A8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A44D67B16A8352200EB44A8 /* Security.framework */; };
+		4A44D67E16A8368900EB44A8 /* Charm SSH Proxy - Ask Password in Resources */ = {isa = PBXBuildFile; fileRef = 4A1BE47916A5BAA0000E56D7 /* Charm SSH Proxy - Ask Password */; };
+		4A44D68216A837CB00EB44A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A44D67F16A8379C00EB44A8 /* main.m */; };
+		4A44D68D16AD146D00EB44A8 /* icon_64x64@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A44D68C16AD146D00EB44A8 /* icon_64x64@2x.png */; };
+		4A44D69116AD194C00EB44A8 /* black-hard-drive-network_64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A44D68E16AD194B00EB44A8 /* black-hard-drive-network_64x64.png */; };
+		4A44D69216AD194C00EB44A8 /* red-hard-drive-network_64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A44D68F16AD194B00EB44A8 /* red-hard-drive-network_64x64.png */; };
+		4A44D69316AD194C00EB44A8 /* yellow-hard-drive-network_64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A44D69016AD194C00EB44A8 /* yellow-hard-drive-network_64x64.png */; };
+		4A44D69516AD1D6E00EB44A8 /* green-hard-drive-network_64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A44D69416AD1D6E00EB44A8 /* green-hard-drive-network_64x64.png */; };
+		4AD3FDDE16A56EF400378F77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD3FDDD16A56EF400378F77 /* Cocoa.framework */; };
+		4AD3FDE816A56EF400378F77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AD3FDE616A56EF400378F77 /* InfoPlist.strings */; };
+		4AD3FDEA16A56EF400378F77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3FDE916A56EF400378F77 /* main.m */; };
+		4AD3FDEE16A56EF400378F77 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4AD3FDEC16A56EF400378F77 /* Credits.rtf */; };
+		4AD3FDFC16A56EF400378F77 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD3FDFB16A56EF400378F77 /* SenTestingKit.framework */; };
+		4AD3FDFD16A56EF400378F77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD3FDDD16A56EF400378F77 /* Cocoa.framework */; };
+		4AD3FE0516A56EF400378F77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AD3FE0316A56EF400378F77 /* InfoPlist.strings */; };
+		4AD3FE0816A56EF400378F77 /* SSH_ProxyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3FE0716A56EF400378F77 /* SSH_ProxyTests.m */; };
+		4AEC465916A6A35E008BD118 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEC465816A6A35E008BD118 /* Preferences.xib */; };
+		4AEC465C16A6A3F5008BD118 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEC465B16A6A3F5008BD118 /* PreferencesController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4A1BE49E16A69049000E56D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4AD3FDD016A56EF400378F77 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A1BE47816A5BAA0000E56D7;
+			remoteInfo = authenticator;
+		};
+		4AD3FDFE16A56EF400378F77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4AD3FDD016A56EF400378F77 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AD3FDD816A56EF400378F77;
+			remoteInfo = "SSH Proxy";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4A1BE47716A5BAA0000E56D7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4A03F73716A69519009BCD79 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		4A03F73816A69519009BCD79 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		4A03F73B16A69567009BCD79 /* bad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bad.png; sourceTree = "<group>"; };
+		4A03F73D16A695F0009BCD79 /* StatusMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusMenu.xib; sourceTree = "<group>"; };
+		4A1841D316AD3D0A00CB5D2B /* black-hard-drive-network_64x64.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "black-hard-drive-network_64x64.icns"; sourceTree = "<group>"; };
+		4A1841D516AD3E0200CB5D2B /* blue-hard-drive-network_64x64.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "blue-hard-drive-network_64x64.icns"; sourceTree = "<group>"; };
+		4A1841D716AE211600CB5D2B /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		4A1841D816AE211600CB5D2B /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		4A1BE47916A5BAA0000E56D7 /* Charm SSH Proxy - Ask Password */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Charm SSH Proxy - Ask Password"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A1BE47B16A5BAA0000E56D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4A1BE49C16A68F30000E56D7 /* sshproxy.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sshproxy.entitlements; sourceTree = "<group>"; };
+		4A1F18AB16A7E65A00F39F74 /* CharmNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharmNumberFormatter.h; sourceTree = "<group>"; };
+		4A1F18AC16A7E65A00F39F74 /* CharmNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharmNumberFormatter.m; sourceTree = "<group>"; };
+		4A44D67616A8331100EB44A8 /* PasswordHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordHelper.h; sourceTree = "<group>"; };
+		4A44D67716A8331100EB44A8 /* PasswordHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordHelper.m; sourceTree = "<group>"; };
+		4A44D67B16A8352200EB44A8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4A44D67F16A8379C00EB44A8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = askpass/main.m; sourceTree = SOURCE_ROOT; };
+		4A44D68116A837A800EB44A8 /* askpass-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "askpass-Prefix.pch"; path = "askpass/askpass-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		4A44D68C16AD146D00EB44A8 /* icon_64x64@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_64x64@2x.png"; sourceTree = "<group>"; };
+		4A44D68E16AD194B00EB44A8 /* black-hard-drive-network_64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black-hard-drive-network_64x64.png"; sourceTree = "<group>"; };
+		4A44D68F16AD194B00EB44A8 /* red-hard-drive-network_64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-hard-drive-network_64x64.png"; sourceTree = "<group>"; };
+		4A44D69016AD194C00EB44A8 /* yellow-hard-drive-network_64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow-hard-drive-network_64x64.png"; sourceTree = "<group>"; };
+		4A44D69416AD1D6E00EB44A8 /* green-hard-drive-network_64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-hard-drive-network_64x64.png"; sourceTree = "<group>"; };
+		4AD3FDD916A56EF400378F77 /* Charm SSH Proxy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Charm SSH Proxy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AD3FDDD16A56EF400378F77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4AD3FDE016A56EF400378F77 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		4AD3FDE116A56EF400378F77 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		4AD3FDE216A56EF400378F77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4AD3FDE516A56EF400378F77 /* sshproxy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sshproxy-Info.plist"; sourceTree = "<group>"; };
+		4AD3FDE716A56EF400378F77 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4AD3FDE916A56EF400378F77 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4AD3FDEB16A56EF400378F77 /* sshproxy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sshproxy-Prefix.pch"; sourceTree = "<group>"; };
+		4AD3FDED16A56EF400378F77 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		4AD3FDFA16A56EF400378F77 /* sshproxyTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sshproxyTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AD3FDFB16A56EF400378F77 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		4AD3FE0216A56EF400378F77 /* sshproxyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sshproxyTests-Info.plist"; sourceTree = "<group>"; };
+		4AD3FE0416A56EF400378F77 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4AD3FE0616A56EF400378F77 /* SSH_ProxyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSH_ProxyTests.h; sourceTree = "<group>"; };
+		4AD3FE0716A56EF400378F77 /* SSH_ProxyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSH_ProxyTests.m; sourceTree = "<group>"; };
+		4AEC465816A6A35E008BD118 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
+		4AEC465A16A6A3F5008BD118 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
+		4AEC465B16A6A3F5008BD118 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4A1BE47616A5BAA0000E56D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A44D67C16A8352200EB44A8 /* Security.framework in Frameworks */,
+				4A1BE47C16A5BAA0000E56D7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AD3FDD616A56EF400378F77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A44D67D16A8354300EB44A8 /* Security.framework in Frameworks */,
+				4AD3FDDE16A56EF400378F77 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AD3FDF616A56EF400378F77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AD3FDFC16A56EF400378F77 /* SenTestingKit.framework in Frameworks */,
+				4AD3FDFD16A56EF400378F77 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4A1BE47D16A5BAA0000E56D7 /* askpass */ = {
+			isa = PBXGroup;
+			children = (
+				4A44D67F16A8379C00EB44A8 /* main.m */,
+				4A1BE48016A5BAA0000E56D7 /* Supporting Files */,
+			);
+			name = askpass;
+			path = authenticator;
+			sourceTree = "<group>";
+		};
+		4A1BE48016A5BAA0000E56D7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4A44D68116A837A800EB44A8 /* askpass-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4AD3FDCE16A56EF400378F77 = {
+			isa = PBXGroup;
+			children = (
+				4A1841D516AD3E0200CB5D2B /* blue-hard-drive-network_64x64.icns */,
+				4A1841D316AD3D0A00CB5D2B /* black-hard-drive-network_64x64.icns */,
+				4A44D69416AD1D6E00EB44A8 /* green-hard-drive-network_64x64.png */,
+				4A44D68E16AD194B00EB44A8 /* black-hard-drive-network_64x64.png */,
+				4A44D68F16AD194B00EB44A8 /* red-hard-drive-network_64x64.png */,
+				4A44D69016AD194C00EB44A8 /* yellow-hard-drive-network_64x64.png */,
+				4A44D68C16AD146D00EB44A8 /* icon_64x64@2x.png */,
+				4A44D67B16A8352200EB44A8 /* Security.framework */,
+				4A44D67616A8331100EB44A8 /* PasswordHelper.h */,
+				4A44D67716A8331100EB44A8 /* PasswordHelper.m */,
+				4AD3FDE316A56EF400378F77 /* sshproxy */,
+				4AD3FE0016A56EF400378F77 /* sshproxyTests */,
+				4A1BE47D16A5BAA0000E56D7 /* askpass */,
+				4AD3FDDC16A56EF400378F77 /* Frameworks */,
+				4AD3FDDA16A56EF400378F77 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4AD3FDDA16A56EF400378F77 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4AD3FDD916A56EF400378F77 /* Charm SSH Proxy.app */,
+				4AD3FDFA16A56EF400378F77 /* sshproxyTests.octest */,
+				4A1BE47916A5BAA0000E56D7 /* Charm SSH Proxy - Ask Password */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4AD3FDDC16A56EF400378F77 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4AD3FDDD16A56EF400378F77 /* Cocoa.framework */,
+				4AD3FDFB16A56EF400378F77 /* SenTestingKit.framework */,
+				4A1BE47B16A5BAA0000E56D7 /* Foundation.framework */,
+				4AD3FDDF16A56EF400378F77 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4AD3FDDF16A56EF400378F77 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4AD3FDE016A56EF400378F77 /* AppKit.framework */,
+				4AD3FDE116A56EF400378F77 /* CoreData.framework */,
+				4AD3FDE216A56EF400378F77 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		4AD3FDE316A56EF400378F77 /* sshproxy */ = {
+			isa = PBXGroup;
+			children = (
+				4AEC465816A6A35E008BD118 /* Preferences.xib */,
+				4A1F18AB16A7E65A00F39F74 /* CharmNumberFormatter.h */,
+				4A1F18AC16A7E65A00F39F74 /* CharmNumberFormatter.m */,
+				4A03F73B16A69567009BCD79 /* bad.png */,
+				4A03F73716A69519009BCD79 /* AppController.h */,
+				4A03F73D16A695F0009BCD79 /* StatusMenu.xib */,
+				4A03F73816A69519009BCD79 /* AppController.m */,
+				4A1BE49C16A68F30000E56D7 /* sshproxy.entitlements */,
+				4AD3FDE416A56EF400378F77 /* Supporting Files */,
+				4AEC465A16A6A3F5008BD118 /* PreferencesController.h */,
+				4AEC465B16A6A3F5008BD118 /* PreferencesController.m */,
+				4A1841D716AE211600CB5D2B /* Settings.h */,
+				4A1841D816AE211600CB5D2B /* Settings.m */,
+			);
+			path = sshproxy;
+			sourceTree = "<group>";
+		};
+		4AD3FDE416A56EF400378F77 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4AD3FDE516A56EF400378F77 /* sshproxy-Info.plist */,
+				4AD3FDE616A56EF400378F77 /* InfoPlist.strings */,
+				4AD3FDE916A56EF400378F77 /* main.m */,
+				4AD3FDEB16A56EF400378F77 /* sshproxy-Prefix.pch */,
+				4AD3FDEC16A56EF400378F77 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4AD3FE0016A56EF400378F77 /* sshproxyTests */ = {
+			isa = PBXGroup;
+			children = (
+				4AD3FE0616A56EF400378F77 /* SSH_ProxyTests.h */,
+				4AD3FE0716A56EF400378F77 /* SSH_ProxyTests.m */,
+				4AD3FE0116A56EF400378F77 /* Supporting Files */,
+			);
+			path = sshproxyTests;
+			sourceTree = "<group>";
+		};
+		4AD3FE0116A56EF400378F77 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4AD3FE0216A56EF400378F77 /* sshproxyTests-Info.plist */,
+				4AD3FE0316A56EF400378F77 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4A1BE47816A5BAA0000E56D7 /* askpass */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A1BE48416A5BAA0000E56D7 /* Build configuration list for PBXNativeTarget "askpass" */;
+			buildPhases = (
+				4A1BE47516A5BAA0000E56D7 /* Sources */,
+				4A1BE47616A5BAA0000E56D7 /* Frameworks */,
+				4A1BE47716A5BAA0000E56D7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = askpass;
+			productName = askpass;
+			productReference = 4A1BE47916A5BAA0000E56D7 /* Charm SSH Proxy - Ask Password */;
+			productType = "com.apple.product-type.tool";
+		};
+		4AD3FDD816A56EF400378F77 /* sshproxy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AD3FE0B16A56EF400378F77 /* Build configuration list for PBXNativeTarget "sshproxy" */;
+			buildPhases = (
+				4AD3FDD516A56EF400378F77 /* Sources */,
+				4AD3FDD616A56EF400378F77 /* Frameworks */,
+				4AD3FDD716A56EF400378F77 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A1BE49F16A69049000E56D7 /* PBXTargetDependency */,
+			);
+			name = sshproxy;
+			productName = "SSH Proxy";
+			productReference = 4AD3FDD916A56EF400378F77 /* Charm SSH Proxy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4AD3FDF916A56EF400378F77 /* sshproxyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AD3FE0E16A56EF400378F77 /* Build configuration list for PBXNativeTarget "sshproxyTests" */;
+			buildPhases = (
+				4AD3FDF516A56EF400378F77 /* Sources */,
+				4AD3FDF616A56EF400378F77 /* Frameworks */,
+				4AD3FDF716A56EF400378F77 /* Resources */,
+				4AD3FDF816A56EF400378F77 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4AD3FDFF16A56EF400378F77 /* PBXTargetDependency */,
+			);
+			name = sshproxyTests;
+			productName = "SSH ProxyTests";
+			productReference = 4AD3FDFA16A56EF400378F77 /* sshproxyTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4AD3FDD016A56EF400378F77 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Charm Studio";
+			};
+			buildConfigurationList = 4AD3FDD316A56EF400378F77 /* Build configuration list for PBXProject "sshproxy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4AD3FDCE16A56EF400378F77;
+			productRefGroup = 4AD3FDDA16A56EF400378F77 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4AD3FDD816A56EF400378F77 /* sshproxy */,
+				4AD3FDF916A56EF400378F77 /* sshproxyTests */,
+				4A1BE47816A5BAA0000E56D7 /* askpass */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4AD3FDD716A56EF400378F77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A44D67E16A8368900EB44A8 /* Charm SSH Proxy - Ask Password in Resources */,
+				4AD3FDE816A56EF400378F77 /* InfoPlist.strings in Resources */,
+				4AD3FDEE16A56EF400378F77 /* Credits.rtf in Resources */,
+				4A1BE49D16A68F30000E56D7 /* sshproxy.entitlements in Resources */,
+				4A03F73C16A69567009BCD79 /* bad.png in Resources */,
+				4A03F73E16A695F0009BCD79 /* StatusMenu.xib in Resources */,
+				4AEC465916A6A35E008BD118 /* Preferences.xib in Resources */,
+				4A44D68D16AD146D00EB44A8 /* icon_64x64@2x.png in Resources */,
+				4A44D69116AD194C00EB44A8 /* black-hard-drive-network_64x64.png in Resources */,
+				4A44D69216AD194C00EB44A8 /* red-hard-drive-network_64x64.png in Resources */,
+				4A44D69316AD194C00EB44A8 /* yellow-hard-drive-network_64x64.png in Resources */,
+				4A44D69516AD1D6E00EB44A8 /* green-hard-drive-network_64x64.png in Resources */,
+				4A1841D416AD3D0A00CB5D2B /* black-hard-drive-network_64x64.icns in Resources */,
+				4A1841D616AD3E0200CB5D2B /* blue-hard-drive-network_64x64.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AD3FDF716A56EF400378F77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AD3FE0516A56EF400378F77 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4AD3FDF816A56EF400378F77 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4A1BE47516A5BAA0000E56D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A44D68216A837CB00EB44A8 /* main.m in Sources */,
+				4A44D67A16A834F200EB44A8 /* PasswordHelper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AD3FDD516A56EF400378F77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AD3FDEA16A56EF400378F77 /* main.m in Sources */,
+				4A03F73916A69519009BCD79 /* AppController.m in Sources */,
+				4AEC465C16A6A3F5008BD118 /* PreferencesController.m in Sources */,
+				4A1F18AD16A7E65A00F39F74 /* CharmNumberFormatter.m in Sources */,
+				4A44D67816A8331100EB44A8 /* PasswordHelper.m in Sources */,
+				4A1841D916AE211600CB5D2B /* Settings.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AD3FDF516A56EF400378F77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AD3FE0816A56EF400378F77 /* SSH_ProxyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4A1BE49F16A69049000E56D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A1BE47816A5BAA0000E56D7 /* askpass */;
+			targetProxy = 4A1BE49E16A69049000E56D7 /* PBXContainerItemProxy */;
+		};
+		4AD3FDFF16A56EF400378F77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4AD3FDD816A56EF400378F77 /* sshproxy */;
+			targetProxy = 4AD3FDFE16A56EF400378F77 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4AD3FDE616A56EF400378F77 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4AD3FDE716A56EF400378F77 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4AD3FDEC16A56EF400378F77 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4AD3FDED16A56EF400378F77 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		4AD3FE0316A56EF400378F77 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4AD3FE0416A56EF400378F77 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4A1BE48516A5BAA0000E56D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "askpass/askpass-Prefix.pch";
+				PRODUCT_NAME = "Charm SSH Proxy - Ask Password";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4A1BE48616A5BAA0000E56D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "askpass/askpass-Prefix.pch";
+				PRODUCT_NAME = "Charm SSH Proxy - Ask Password";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		4AD3FE0916A56EF400378F77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Charm Studio Test Certificate";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
+			};
+			name = Debug;
+		};
+		4AD3FE0A16A56EF400378F77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Charm Studio Test Certificate";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
+		4AD3FE0C16A56EF400378F77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = sshproxy/sshproxy.entitlements;
+				CODE_SIGN_IDENTITY = "Charm Studio Test Certificate";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sshproxy/sshproxy-Prefix.pch";
+				INFOPLIST_FILE = "sshproxy/sshproxy-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "Charm SSH Proxy";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		4AD3FE0D16A56EF400378F77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = sshproxy/sshproxy.entitlements;
+				CODE_SIGN_IDENTITY = "Charm Studio Test Certificate";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sshproxy/sshproxy-Prefix.pch";
+				INFOPLIST_FILE = "sshproxy/sshproxy-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "Charm SSH Proxy";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		4AD3FE0F16A56EF400378F77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SSH Proxy.app/Contents/MacOS/SSH Proxy";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SSH Proxy/SSH Proxy-Prefix.pch";
+				INFOPLIST_FILE = "SSH ProxyTests/sshproxyTests-Info.plist";
+				PRODUCT_NAME = sshproxyTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALID_ARCHS = x86_64;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		4AD3FE1016A56EF400378F77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SSH Proxy.app/Contents/MacOS/SSH Proxy";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SSH Proxy/SSH Proxy-Prefix.pch";
+				INFOPLIST_FILE = "SSH ProxyTests/sshproxyTests-Info.plist";
+				PRODUCT_NAME = sshproxyTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALID_ARCHS = x86_64;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4A1BE48416A5BAA0000E56D7 /* Build configuration list for PBXNativeTarget "askpass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A1BE48516A5BAA0000E56D7 /* Debug */,
+				4A1BE48616A5BAA0000E56D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AD3FDD316A56EF400378F77 /* Build configuration list for PBXProject "sshproxy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AD3FE0916A56EF400378F77 /* Debug */,
+				4AD3FE0A16A56EF400378F77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AD3FE0B16A56EF400378F77 /* Build configuration list for PBXNativeTarget "sshproxy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AD3FE0C16A56EF400378F77 /* Debug */,
+				4AD3FE0D16A56EF400378F77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AD3FE0E16A56EF400378F77 /* Build configuration list for PBXNativeTarget "sshproxyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AD3FE0F16A56EF400378F77 /* Debug */,
+				4AD3FE1016A56EF400378F77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4AD3FDD016A56EF400378F77 /* Project object */;
+}
