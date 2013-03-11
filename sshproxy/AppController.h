@@ -3,18 +3,20 @@
 //  sshproxy
 //
 //  Created by Brant Young on 16/1/13.
-//  Copyright (c) 2013 Charm Studio. All rights reserved.
+//  Copyright (c) 2013 Codinn Studio. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PreferencesController.h"
+#import "GeneralPreferencesViewController.h"
 
-@interface AppController : NSObject {
+@interface AppController : NSObject <NSApplicationDelegate> {
     /* Our outlets which allow us to access the interface */
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem* statusMenuItem;
     IBOutlet NSMenuItem* turnOnMenuItem;
     IBOutlet NSMenuItem* turnOffMenuItem;
+    IBOutlet NSWindow* aboutWindow;
+    IBOutlet NSMenu* mainMenu;
     
     /* The other stuff :P */
     NSStatusItem *statusItem;
@@ -28,12 +30,13 @@
     NSString* taskOutput;
     
     int proxyStatus;
+    
+    NSWindowController *_preferencesWindowController;
 }
 
-@property (retain) PreferencesController *preferencesController;
+@property (nonatomic, readonly) NSWindowController *preferencesWindowController;
 
 /* Our IBAction which will call the helloWorld method when our connected Menu Item is pressed */
--(IBAction)helloWorld:(id)sender;
 
 -(IBAction)turnOnProxy:(id)sender;
 
@@ -42,14 +45,13 @@
 -(IBAction)turnOffProxy:(id)sender;
 
 -(IBAction)openPreferences:(id)sender;
-
--(IBAction)quitApp:(id)sender;
+-(IBAction)openAboutWindow:(id)sender;
 
 enum {
-    CHARM_PROXY_OFF = 0,
-    CHARM_PROXY_ON,
-    CHARM_PROXY_DISCONNECTED,
-    CHARM_PROXY_CONNECTED,
+    SSHPROXY_OFF = 0,
+    SSHPROXY_ON,
+    SSHPROXY_DISCONNECTED,
+    SSHPROXY_CONNECTED,
 };
 
 @end

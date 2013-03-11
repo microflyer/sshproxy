@@ -3,7 +3,7 @@
 //  askpass
 //
 //  Created by Brant Young on 16/1/13.
-//  Copyright (c) 2013 Charm Studio. All rights reserved.
+//  Copyright (c) 2013 Codinn Studio. All rights reserved.
 //
 
 #include <Cocoa/Cocoa.h>
@@ -22,10 +22,10 @@
 int main() {
 	// Get basic information from environment variables that were set along with the NSTask itself. We need this info in order to get the correct password from the security keychain
 	NSDictionary *dict = [[NSProcessInfo processInfo] environment];
-	NSString *loginname = [dict valueForKey:@"CHARM_SSH_LOGIN_NAME"];
-	NSString *remotehost = [dict valueForKey:@"CHARM_SSH_REMOTE_HOST"];
-    int hostport = [[dict valueForKey:@"CHARM_SSH_REMOTE_PORT"] intValue];
-    NSString* userhome = [dict valueForKey:@"CHARM_SSH_USER_HOME"];
+	NSString *loginname = [dict valueForKey:@"SSHPROXY_LOGIN_NAME"];
+	NSString *remotehost = [dict valueForKey:@"SSHPROXY_REMOTE_HOST"];
+    int hostport = [[dict valueForKey:@"SSHPROXY_REMOTE_PORT"] intValue];
+    NSString* userhome = [dict valueForKey:@"SSHPROXY_USER_HOME"];
     
 //	NSLog(@"%@",dict);
     
@@ -42,7 +42,7 @@ int main() {
 	}
 	
 	if ( loginname!=nil && remotehost!=nil ){
-        NSString* lockFile= [userhome stringByAppendingPathComponent:@".charmssh_askssh_lock"];
+        NSString* lockFile= [userhome stringByAppendingPathComponent:@".sshproxy_askpass_lock"];
         
         BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:lockFile];
         

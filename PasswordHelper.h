@@ -2,7 +2,8 @@
 //   PasswordHelper.h
 //
 //  Created by Ira Cooke on 27/07/2009.
-//  Copyright 2009 Mudflat Software. 
+//  Copyright 2009 Mudflat Software.
+//  Copyright (c) 2013 Codinn Studio.
 //
 
 #import <Cocoa/Cocoa.h>

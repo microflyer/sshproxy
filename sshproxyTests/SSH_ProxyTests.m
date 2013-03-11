@@ -3,7 +3,7 @@
 //  SSH ProxyTests
 //
 //  Created by Brant Young on 15/1/13.
-//  Copyright (c) 2013 Charm Studio. All rights reserved.
+//  Copyright (c) 2013 Codinn Studio. All rights reserved.
 //
 
 #import "SSH_ProxyTests.h"

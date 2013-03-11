@@ -3,12 +3,12 @@
 //  sshproxy
 //
 //  Created by Brant Young on 16/1/13.
-//  Copyright (c) 2013 Charm Studio. All rights reserved.
+//  Copyright (c) 2013 Codinn Studio. All rights reserved.
 //
-
 #import "AppController.h"
-#import "PreferencesController.h"
-
+#import "GeneralPreferencesViewController.h"
+#import "MASPreferencesWindowController.h"
+#import <ServiceManagement/ServiceManagement.h>
 
 @implementation AppController
 
@@ -22,6 +22,8 @@
 
 
 - (void) awakeFromNib{
+    [NSApp setMainMenu:mainMenu];
+    
     //Create the NSStatusBar and set its length
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     
@@ -48,16 +50,24 @@
     //Tells the NSStatusItem what menu to load
     [statusItem setMenu:statusMenu];
     //Sets the tooptip for our item
-    [statusItem setToolTip:@"Charm SSH Proxy"];
+    [statusItem setToolTip:@"SSH Proxy"];
     //Enables highlighting
     [statusItem setHighlightMode:YES];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     BOOL disableAutoconnect = [[NSUserDefaults standardUserDefaults] boolForKey:@"disable_autoconnect"];
+    BOOL autoLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:@"auto_launch"];
     
     if (! disableAutoconnect) {
         [self performSelector: @selector(turnOnProxy:) withObject:self afterDelay: 0.0];
+    }
+    
+    if (autoLaunch) {
+        // reenable
+        SMLoginItemSetEnabled ((__bridge CFStringRef)@"com.codinnstudio.sshproxyhelper", YES);
+    } else {
+        SMLoginItemSetEnabled ((__bridge CFStringRef)@"com.codinnstudio.sshproxyhelper", NO);
     }
 }
 
@@ -68,12 +78,8 @@
 //    [super dealloc];
 }
 
--(IBAction)helloWorld:(id)sender{
-    NSLog(@"Hello there!");
-}
-
 -(IBAction)turnOnProxy:(id)sender{
-    proxyStatus = CHARM_PROXY_ON;
+    proxyStatus = SSHPROXY_ON;
     
     [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 0.0];
 }
@@ -86,34 +92,8 @@
         return;
     }
     
-    [statusItem setImage:inStatusImage];
-    [statusMenuItem setTitle:@"Proxy: Connecting..."];
-    
-    // TODO: CATCH TASK EXCEPTION
-    
-    [turnOnMenuItem setHidden:YES];
-    [turnOnMenuItem setEnabled:NO];
-    
-    [turnOffMenuItem setHidden:NO];
-    [turnOffMenuItem setEnabled:YES];
-    
-    if (task) {
-        // task already running, do noting
-        return;
-    }
-    
-    task = [[NSTask alloc] init];
-    NSString* userHome = NSHomeDirectory();
-    NSString* knownHostFile= [userHome stringByAppendingPathComponent:@".charmssh_known_hosts"];
-    NSString* identityFile= [userHome stringByAppendingPathComponent:@".charmssh_ssh_identity"];
-//    NSString* configFile= [userHome stringByAppendingPathComponent:@".charmssh_ssh_config"];
-    
-    // Get the path of our Askpass program, which we've included as part of the main application bundle
-    NSString *askPassPath = [NSBundle pathForResource:@"Charm SSH Proxy - Ask Password" ofType:@""
-                                          inDirectory:[[NSBundle mainBundle] bundlePath]];
-    
     // get perferences
-//    NSString* remoteHost = (NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"remote_host"];
+    //    NSString* remoteHost = (NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"remote_host"];
     if (!remoteHost) {
         remoteHost = @"";
     }
@@ -133,17 +113,56 @@
         localPort = 7070;
     }
     
+    NSString* connectingString = [NSString stringWithFormat:@"Proxy: Connecting to \"%@@%@:%d\" ...", loginName, remoteHost, remotePort];
+    [statusItem setImage:inStatusImage];
+    [statusMenuItem setTitle:connectingString];
+    
+    // TODO: CATCH TASK EXCEPTION
+    
+    [turnOnMenuItem setHidden:YES];
+    [turnOnMenuItem setEnabled:NO];
+    
+    [turnOffMenuItem setHidden:NO];
+    [turnOffMenuItem setEnabled:YES];
+    
+    if (task) {
+        // task already running, do noting
+        return;
+    }
+    
+    task = [[NSTask alloc] init];
+    NSString* userHome = NSHomeDirectory();
+    NSString* knownHostFile= [userHome stringByAppendingPathComponent:@".sshproxy_known_hosts"];
+    NSString* identityFile= [userHome stringByAppendingPathComponent:@".sshproxy_identity"];
+//    NSString* configFile= [userHome stringByAppendingPathComponent:@".sshproxy_config"];
+    
+    // Get the path of our Askpass program, which we've included as part of the main application bundle
+    NSString *askPassPath = [NSBundle pathForResource:@"SSH Proxy - Ask Password" ofType:@""
+                                          inDirectory:[[NSBundle mainBundle] bundlePath]];
+    
     // This creates a dictionary of environment variables (keys) and their values (objects) to be set in the environment where the task will be run. This environment dictionary will then be accessible to our Askpass program.
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                loginName, @"CHARM_SSH_LOGIN_NAME",
-                                remoteHost, @"CHARM_SSH_REMOTE_HOST",
-                                [NSString stringWithFormat:@"%d", remotePort], @"CHARM_SSH_REMOTE_PORT",
-//                                [NSString stringWithFormat:@"%d", localPort], @"CHARM_SSH_LOCAL_PORT",
+                                loginName, @"SSHPROXY_LOGIN_NAME",
+                                remoteHost, @"SSHPROXY_REMOTE_HOST",
+                                [NSString stringWithFormat:@"%d", remotePort], @"SSHPROXY_REMOTE_PORT",
+//                                [NSString stringWithFormat:@"%d", localPort], @"SSHPROXY_LOCAL_PORT",
                                 @":9999", @"DISPLAY",
                                 askPassPath, @"SSH_ASKPASS",
-                                userHome, @"CHARM_SSH_USER_HOME",
+                                userHome, @"SSHPROXY_USER_HOME",
                                 @"1",@"INTERACTION",
                                 nil];
+    
+    BOOL enableCompression = [[NSUserDefaults standardUserDefaults] boolForKey:@"enable_compression"];
+    BOOL shareSocks = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_socks"];
+    
+    NSMutableString* advancedOptions = [NSMutableString stringWithString:@"-"];
+    if (shareSocks) {
+        [advancedOptions appendString:@"g"];
+    }
+    if (enableCompression) {
+        [advancedOptions appendString:@"C"];
+    }
+    [advancedOptions appendString:@"ND"];
     
     
 //    NSLog(@"Environment dict %@",env);
@@ -163,7 +182,7 @@
                         @"-oStrictHostKeyChecking=no", @"-oExitOnForwardFailure=yes",
                         @"-oLogLevel=VERBOSE",
                         @"-oPreferredAuthentications=password",
-                        @"-ND", [NSString stringWithFormat:@"%d", localPort],
+                        advancedOptions, [NSString stringWithFormat:@"%d", localPort],
                         [NSString stringWithFormat:@"%@@%@", loginName, remoteHost],
                         @"-p", [NSString stringWithFormat:@"%d", remotePort],
                         nil]];
@@ -193,7 +212,7 @@
              object:task];
     
     // delete askpass lock file
-    NSString* lockFile= [userHome stringByAppendingPathComponent:@".charmssh_askssh_lock"];
+    NSString* lockFile= [userHome stringByAppendingPathComponent:@".sshproxy_askpass_lock"];
     [[NSFileManager defaultManager] removeItemAtPath:lockFile error:nil];
     
     [task launch];
@@ -202,27 +221,27 @@
     [fh readInBackgroundAndNotify];
 }
 
-- (void)appendData:(NSData *)d {
-    NSString *s = [[NSString alloc] initWithData:d
-                        encoding:NSUTF8StringEncoding];
-    
-    taskOutput = [taskOutput stringByAppendingString:s];
+- (void)set2connected {
+    [statusItem setImage:onStatusImage];
+    [statusMenuItem setTitle:@"Proxy: On"];
+    proxyStatus = SSHPROXY_CONNECTED;
 }
 
 - (void)dataReady:(NSNotification *)n
 {
     NSData *d;
     d = [[n userInfo] valueForKey:NSFileHandleNotificationDataItem];
-    NSLog(@"dataReady:% ld bytes", [d length]);
+//    NSLog(@"dataReady:% ld bytes", [d length]);
     if ([d length]) {
-        [self appendData:d];
+        NSString *s = [[NSString alloc] initWithData:d
+                                            encoding:NSUTF8StringEncoding];
+        
+        taskOutput = [taskOutput stringByAppendingString:s];
     }
     // If the task is running, start reading again
     if (task) {
         if ([taskOutput rangeOfString:@"Authenticated to"].location != NSNotFound) {
-            [statusItem setImage:onStatusImage];
-            [statusMenuItem setTitle:@"Proxy: On"];
-            proxyStatus = CHARM_PROXY_CONNECTED;
+            [self set2connected];
         }
         [[pipe fileHandleForReading] readInBackgroundAndNotify];
     } else {
@@ -233,7 +252,7 @@
             [statusMenuItem setTitle:@"Proxy: Off - incorrect password"];
             return;
         } else if ([taskOutput rangeOfString:@"ssh: Could not resolve hostname"].location != NSNotFound) {
-            if (proxyStatus==CHARM_PROXY_CONNECTED) {
+            if (proxyStatus==SSHPROXY_CONNECTED) {
                 [statusItem setImage:inStatusImage];
                 [statusMenuItem setTitle:@"Proxy: Reconnecting - could not resolve hostname"];
                 [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
@@ -241,7 +260,7 @@
                 [statusMenuItem setTitle:@"Proxy: Off - could not resolve hostname"];
             }
         } else if ([taskOutput rangeOfString:@"Connection refused"].location != NSNotFound) {
-            if (proxyStatus==CHARM_PROXY_CONNECTED) {
+            if (proxyStatus==SSHPROXY_CONNECTED) {
                 [statusItem setImage:inStatusImage];
                 [statusMenuItem setTitle:@"Proxy: Reconnecting - connection refused"];
                 [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
@@ -249,29 +268,40 @@
                 [statusMenuItem setTitle:@"Proxy: Off - connection refused"];
             }
         } else if ([taskOutput rangeOfString:@"Timeout,"].location != NSNotFound) {
-            if (proxyStatus==CHARM_PROXY_CONNECTED) {
+            if (proxyStatus==SSHPROXY_CONNECTED) {
                 [statusItem setImage:inStatusImage];
-                [statusMenuItem setTitle:@"Proxy: Reconnecting - Timeout, server not responding"];
+                [statusMenuItem setTitle:@"Proxy: Reconnecting - timeout, server not responding"];
                 [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
             } else {
                 [statusMenuItem setTitle:@"Proxy: Off - timeout, server not responding"];
             }
+        } else if ([taskOutput rangeOfString:@"timed out"].location != NSNotFound) {
+            if (proxyStatus==SSHPROXY_CONNECTED) {
+                [statusItem setImage:inStatusImage];
+                [statusMenuItem setTitle:@"Proxy: Reconnecting - connection timed out"];
+                [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
+            } else {
+                [statusMenuItem setTitle:@"Proxy: Off - connection timed out"];
+            }
         } else {
-            if (proxyStatus==CHARM_PROXY_CONNECTED) {
+            if (proxyStatus==SSHPROXY_CONNECTED) {
                 [statusItem setImage:inStatusImage];
                 [statusMenuItem setTitle:@"Proxy: Reconnecting - unknown error"];
                 [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
             } else {
-                [statusMenuItem setTitle:@"Proxy: Off - unknown error"];
+                [statusMenuItem setTitle:@"Proxy: Off"];
             }
         }
+        
+        // clear taskOutput buffer
+        taskOutput = [[NSString alloc] init];
     }
 }
 // When the process is done, we should do some cleanup:
 - (void)taskTerminated:(NSNotification *)note {
     [statusItem setImage:offStatusImage];
 //    [statusMenuItem setTitle:@"Proxy: Off"];
-    NSLog([NSString stringWithFormat:@"taskTerminated: %@", taskOutput]);
+//    NSLog([NSString stringWithFormat:@"taskTerminated: %@", taskOutput]);
 //    NSLog([NSString stringWithFormat:@"taskTerminated: %@", taskOutput]);
     task = nil;
     
@@ -289,7 +319,10 @@
 
 
 -(IBAction)turnOffProxy:(id)sender{
-    proxyStatus = CHARM_PROXY_OFF;
+    proxyStatus = SSHPROXY_OFF;
+    
+    // clear taskOutput buffer
+    taskOutput = [[NSString alloc] init];
     
     // TODO: CATCH TASK EXCEPTION
     
@@ -307,27 +340,51 @@
     [task interrupt];
 }
 
--(IBAction)openPreferences:(id)sender{
-    if(self.preferencesController) {
-        [self.preferencesController close];
-        self.preferencesController = nil;
+
+- (NSWindowController *)preferencesWindowController
+{
+    if (_preferencesWindowController == nil)
+    {
+        NSViewController *generalViewController = [[GeneralPreferencesViewController alloc] init];
+//        NSViewController *advancedViewController = [[AdvancedPreferencesViewController alloc] init];
+        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, nil];
+        
+        // To add a flexible space between General and Advanced preference panes insert [NSNull null]:
+        //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];
+        
+        NSString *title = NSLocalizedString(@"SSH Proxy Preferences", @"SSH Proxy Preferences");
+        _preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
+        
+        [[_preferencesWindowController window] setReleasedWhenClosed: NO];
     }
-    
-    self.preferencesController = [[PreferencesController alloc] initWithWindowNibName:@"Preferences"];
-    [[self.preferencesController window] setReleasedWhenClosed: NO];
-    
-    [NSApp activateIgnoringOtherApps:YES];
-    [[self.preferencesController window] makeKeyAndOrderFront:nil];
-    [[self.preferencesController window] setLevel:NSFloatingWindowLevel];
-    [self.preferencesController showWindow:nil];
-    [[self.preferencesController window] setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
-    
-//    self.preferencesController = nil;
+    return _preferencesWindowController;
 }
 
--(IBAction)quitApp:(id)sender {
+-(IBAction)openPreferences:(id)sender {
+    if(_preferencesWindowController) {
+       [_preferencesWindowController close];
+        _preferencesWindowController = nil;
+    }
+    
+    [NSApp activateIgnoringOtherApps:YES];
+//    [[self.preferencesWindowController window] makeKeyAndOrderFront:nil];
+//    [[self.preferencesWindowController window] setLevel:NSFloatingWindowLevel];
+    [[self.preferencesWindowController window] setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
+    [[self.preferencesWindowController window] center];
+    [self.preferencesWindowController showWindow:nil];
+}
+
+-(IBAction)openAboutWindow:(id)sender {
+    [NSApp activateIgnoringOtherApps:YES];
+    
+    [aboutWindow makeKeyAndOrderFront:nil];
+    [aboutWindow setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
+    [aboutWindow center];
+}
+
+-(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
     [task interrupt];
-    [NSApp terminate:nil];
+    return NSTerminateNow;
 }
 
 @end

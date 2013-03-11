@@ -2,7 +2,8 @@
 //  PasswordHelper.m
 //
 //  Created by Ira Cooke on 27/07/2009.
-//  Copyright 2009 Mudflat Software. 
+//  Copyright 2009 Mudflat Software.
+//  Copyright (c) 2013 Codinn Studio.
 //
 
 #import "PasswordHelper.h"
@@ -33,7 +34,7 @@
 	NSString *passwordMessageString = [NSString stringWithFormat:@"Enter the password for user “%@”.",
                                        hostString];
     
-    NSString* headerString = [NSString stringWithFormat:@"Charm SSH Proxy connecting to the SSH server “%@”.",
+    NSString* headerString = [NSString stringWithFormat:@"SSH Proxy connecting to the SSH server “%@”.",
                               hostString];
                               
 	
