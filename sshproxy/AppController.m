@@ -180,7 +180,7 @@
                         @"-oConnectTimeout=8", @"-oConnectionAttempts=3",
                         @"-oServerAliveInterval=8", @"-oServerAliveCountMax=1",
                         @"-oStrictHostKeyChecking=no", @"-oExitOnForwardFailure=yes",
-                        @"-oLogLevel=VERBOSE",
+                        @"-oLogLevel=DEBUG",
                         @"-oPreferredAuthentications=password",
                         advancedOptions, [NSString stringWithFormat:@"%d", localPort],
                         [NSString stringWithFormat:@"%@@%@", loginName, remoteHost],
@@ -240,7 +240,8 @@
     }
     // If the task is running, start reading again
     if (task) {
-        if ([taskOutput rangeOfString:@"Authenticated to"].location != NSNotFound) {
+        if ( ([taskOutput rangeOfString:@"Authenticated to"].location != NSNotFound) ||
+            ([taskOutput rangeOfString:@"Authentication succeeded"].location != NSNotFound) ){
             [self set2connected];
         }
         [[pipe fileHandleForReading] readInBackgroundAndNotify];
