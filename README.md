@@ -4,8 +4,8 @@ SSH Proxy - The most simple and useful tool to help you create a SOCKS 5 proxy t
 
 ## Sponsor This App
 
-* Through USA Mac App Store: <a href="https://itunes.apple.com/us/app/ssh-proxy/id597790822?mt=12&uo=4" target="itunes_store"><img src="http://r.mzstatic.com/images/web/linkmaker/badge_macappstore-lrg.gif" alt="SSH Proxy - Yang Yubo" style="border: 0;"/></a>
-* Through China Mac App Store: <a href="https://itunes.apple.com/cn/app/ssh-proxy/id597790822?mt=12&uo=4" target="itunes_store"><img src="http://r.mzstatic.com/images/web/linkmaker/badge_macappstore-lrg.gif" alt="SSH Proxy - Yang Yubo" style="border: 0;"/></a>
+* Through **United States** Mac App Store: <a href="https://itunes.apple.com/us/app/ssh-proxy/id597790822?mt=12&uo=4" target="itunes_store"><img src="http://r.mzstatic.com/images/web/linkmaker/badge_macappstore-lrg.gif" alt="SSH Proxy - Yang Yubo" style="border: 0;"/></a>
+* Through **China** Mac App Store: <a href="https://itunes.apple.com/cn/app/ssh-proxy/id597790822?mt=12&uo=4" target="itunes_store"><img src="http://r.mzstatic.com/images/web/linkmaker/badge_macappstore-lrg.gif" alt="SSH Proxy - Yang Yubo" style="border: 0;"/></a>
 
 ## Features
 
@@ -19,4 +19,7 @@ SSH Proxy - The most simple and useful tool to help you create a SOCKS 5 proxy t
 
 ## TODO
 
-- Add support for switching between multiple SSH accounts
+Feature request:
+
+- Switching between multiple SSH accounts
+- Connecting through Proxy server with authentication
