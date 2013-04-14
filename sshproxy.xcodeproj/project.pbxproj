@@ -16,6 +16,7 @@
 		4A1BE49D16A68F30000E56D7 /* sshproxy.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4A1BE49C16A68F30000E56D7 /* sshproxy.entitlements */; };
 		4A1E89041701F09F007DF2A0 /* logo.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 4A1E89031701F09F007DF2A0 /* logo.iconset */; };
 		4A1F18AD16A7E65A00F39F74 /* CharmNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F18AC16A7E65A00F39F74 /* CharmNumberFormatter.m */; };
+		4A37A086171AEC6300605BE1 /* CharmTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A37A085171AEC6300605BE1 /* CharmTextField.m */; };
 		4A41067A16BE7F4600D46D91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067916BE7F4600D46D91 /* Security.framework */; };
 		4A41067C16BE7FB000D46D91 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067B16BE7FB000D46D91 /* ServiceManagement.framework */; };
 		4A41067D16BE7FD000D46D91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067916BE7F4600D46D91 /* Security.framework */; };
@@ -129,6 +130,8 @@
 		4A1E89031701F09F007DF2A0 /* logo.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = logo.iconset; sourceTree = "<group>"; };
 		4A1F18AB16A7E65A00F39F74 /* CharmNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CharmNumberFormatter.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A1F18AC16A7E65A00F39F74 /* CharmNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CharmNumberFormatter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4A37A084171AEC6300605BE1 /* CharmTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharmTextField.h; sourceTree = "<group>"; };
+		4A37A085171AEC6300605BE1 /* CharmTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharmTextField.m; sourceTree = "<group>"; };
 		4A41067916BE7F4600D46D91 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4A41067B16BE7FB000D46D91 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		4A4231091719A96800ABD4F6 /* connect */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = connect; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,6 +357,8 @@
 		4AD3FDE316A56EF400378F77 /* sshproxy */ = {
 			isa = PBXGroup;
 			children = (
+				4A37A084171AEC6300605BE1 /* CharmTextField.h */,
+				4A37A085171AEC6300605BE1 /* CharmTextField.m */,
 				4A1F18AB16A7E65A00F39F74 /* CharmNumberFormatter.h */,
 				4A1F18AC16A7E65A00F39F74 /* CharmNumberFormatter.m */,
 				4A03F73D16A695F0009BCD79 /* StatusMenu.xib */,
@@ -620,6 +625,7 @@
 				4AEC465C16A6A3F5008BD118 /* GeneralPreferencesViewController.m in Sources */,
 				4A1F18AD16A7E65A00F39F74 /* CharmNumberFormatter.m in Sources */,
 				4AA6471416BD006700DE5CAD /* MASPreferencesWindowController.m in Sources */,
+				4A37A086171AEC6300605BE1 /* CharmTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
