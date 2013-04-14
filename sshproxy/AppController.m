@@ -12,7 +12,8 @@
 
 @implementation AppController
 
--(id)init{
+-(id)init
+{
     self = [super init];
     if (self){
         taskOutput = [[NSString alloc] init];
@@ -21,7 +22,8 @@
 }
 
 
-- (void) awakeFromNib{
+- (void) awakeFromNib
+{
     [NSApp setMainMenu:mainMenu];
     
     //Create the NSStatusBar and set its length
@@ -45,7 +47,7 @@
     
     //Sets the images in our NSStatusItem
     [statusItem setImage:offStatusImage];
-//    [statusItem setAlternateImage:statusHighlightImage];
+    //    [statusItem setAlternateImage:statusHighlightImage];
     
     //Tells the NSStatusItem what menu to load
     [statusItem setMenu:statusMenu];
@@ -55,7 +57,8 @@
     [statusItem setHighlightMode:YES];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
     BOOL disableAutoconnect = [[NSUserDefaults standardUserDefaults] boolForKey:@"disable_autoconnect"];
     BOOL autoLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:@"auto_launch"];
     
@@ -71,21 +74,85 @@
     }
 }
 
-- (void) dealloc {
+- (void) dealloc
+{
     //Releases the 2 images we loaded into memory
-//    [statusImage release];
-//    [statusHighlightImage release];
-//    [super dealloc];
+    //    [statusImage release];
+    //    [statusHighlightImage release];
+    //    [super dealloc];
 }
 
--(IBAction)turnOnProxy:(id)sender{
+-(IBAction)turnOnProxy:(id)sender
+{
     proxyStatus = SSHPROXY_ON;
     
     [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 0.0];
 }
 
--(IBAction)_turnOnProxy:(id)sender{
-    NSString* remoteHost = (NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"remote_host"];
+// for ProxyCommand
+-(NSString*) getProxyCommandStr
+{
+    NSString *connectPath = [NSBundle pathForResource:@"connect" ofType:@""
+                                          inDirectory:[[NSBundle mainBundle] bundlePath]];
+    
+    BOOL proxyCommand = [[NSUserDefaults standardUserDefaults] boolForKey:@"proxy_command"];
+    int proxyCommandType = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"proxy_command_type"];
+    NSString* proxyCommandHost = (NSString*)[[NSUserDefaults standardUserDefaults] stringForKey:@"proxy_command_host"];
+    int proxyCommandPort = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"proxy_command_port"];
+    
+    NSString* proxyCommandStr = nil;
+    if (proxyCommand){
+        if (proxyCommandHost) {
+            NSString* proxyType = @"-S";
+            
+            switch (proxyCommandType) {
+                case 0:
+                    proxyType = @"-5 -S";
+                    break;
+                case 1:
+                    proxyType = @"-4 -S";
+                    break;
+                case 2:
+                    proxyType = @"-H";
+                    break;
+            }
+            
+            if (proxyCommandPort<=0 || proxyCommandPort>65535) {
+                proxyCommandPort = 1080;
+            }
+            
+            proxyCommandStr = [NSString stringWithFormat:@"-oProxyCommand=\"%@\" -w 8 %@ %@:%d %@", connectPath, proxyType, proxyCommandHost, proxyCommandPort, @"%h %p"];
+        }
+    }
+    
+    return proxyCommandStr;
+}
+
+// for ProxyCommand Env
+-(NSMutableDictionary*) getProxyCommandEnv
+{
+    NSMutableDictionary* env = [NSMutableDictionary dictionary];
+    
+    BOOL proxyCommand = [[NSUserDefaults standardUserDefaults] boolForKey:@"proxy_command"];
+    BOOL proxyCommandAuth = [[NSUserDefaults standardUserDefaults] boolForKey:@"proxy_command_auth"];
+    NSString* proxyCommandUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"proxy_command_username"];
+    NSString* proxyCommandPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"proxy_command_password"];
+    
+    if (proxyCommand && proxyCommandAuth) {
+        if (proxyCommandUsername) {
+            [env setValue:proxyCommandUsername forKey:@"CONNECT_USER"];
+            if (proxyCommandPassword) {
+                [env setValue:proxyCommandPassword forKey:@"CONNECT_PASSWORD"];
+            }
+        }
+    }
+    
+    return env;
+}
+
+-(IBAction)_turnOnProxy:(id)sender
+{
+    NSString* remoteHost = [[NSUserDefaults standardUserDefaults] stringForKey:@"remote_host"];
     // open preferences window if remoteHost is empty
     if (!remoteHost) {
         [self performSelector: @selector(openPreferences:) withObject:self afterDelay: 0.0];
@@ -93,12 +160,12 @@
     }
     
     // get perferences
-    //    NSString* remoteHost = (NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"remote_host"];
+    //    NSString* remoteHost = [[NSUserDefaults standardUserDefaults] stringForKey:@"remote_host"];
     if (!remoteHost) {
         remoteHost = @"";
     }
     
-    NSString* loginName = (NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"login_name"];
+    NSString* loginName = [[NSUserDefaults standardUserDefaults] stringForKey:@"login_name"];
     if (!loginName) {
         loginName = @"";
     }
@@ -134,27 +201,23 @@
     NSString* userHome = NSHomeDirectory();
     NSString* knownHostFile= [userHome stringByAppendingPathComponent:@".sshproxy_known_hosts"];
     NSString* identityFile= [userHome stringByAppendingPathComponent:@".sshproxy_identity"];
-//    NSString* configFile= [userHome stringByAppendingPathComponent:@".sshproxy_config"];
+    //    NSString* configFile= [userHome stringByAppendingPathComponent:@".sshproxy_config"];
     
     // Get the path of our Askpass program, which we've included as part of the main application bundle
     NSString *askPassPath = [NSBundle pathForResource:@"SSH Proxy - Ask Password" ofType:@""
                                           inDirectory:[[NSBundle mainBundle] bundlePath]];
-    NSString *connectPath = [NSBundle pathForResource:@"connect" ofType:@""
-                                          inDirectory:[[NSBundle mainBundle] bundlePath]];
-    
-    NSLog(@"---------------%@", connectPath);
     
     // This creates a dictionary of environment variables (keys) and their values (objects) to be set in the environment where the task will be run. This environment dictionary will then be accessible to our Askpass program.
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                 loginName, @"SSHPROXY_LOGIN_NAME",
                                 remoteHost, @"SSHPROXY_REMOTE_HOST",
                                 [NSString stringWithFormat:@"%d", remotePort], @"SSHPROXY_REMOTE_PORT",
-//                                [NSString stringWithFormat:@"%d", localPort], @"SSHPROXY_LOCAL_PORT",
                                 @":9999", @"DISPLAY",
                                 askPassPath, @"SSH_ASKPASS",
                                 userHome, @"SSHPROXY_USER_HOME",
                                 @"1",@"INTERACTION",
                                 nil];
+    [env addEntriesFromDictionary:[self getProxyCommandEnv]];
     
     BOOL enableCompression = [[NSUserDefaults standardUserDefaults] boolForKey:@"enable_compression"];
     BOOL shareSocks = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_socks"];
@@ -168,29 +231,39 @@
     }
     [advancedOptions appendString:@"ND"];
     
+    //    NSLog(@"Environment dict %@",env);
     
-//    NSLog(@"Environment dict %@",env);
+    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:
+                                 [NSString stringWithFormat:@"-oUserKnownHostsFile=\"%@\"", knownHostFile],
+                                 [NSString stringWithFormat:@"-oGlobalKnownHostsFile=\"%@\"", knownHostFile],
+                                 [NSString stringWithFormat:@"-oIdentityFile=\"%@\"", identityFile],
+                                 // TODO:
+                                 //                        [NSString stringWithFormat:@"-F \"%@\"", configFile],
+                                 @"-oIdentitiesOnly=yes",
+                                 @"-oPubkeyAuthentication=no",
+                                 @"-T", @"-2", @"-a",
+                                 @"-oConnectTimeout=8", @"-oConnectionAttempts=3",
+                                 @"-oServerAliveInterval=8", @"-oServerAliveCountMax=1",
+                                 @"-oStrictHostKeyChecking=no", @"-oExitOnForwardFailure=yes",
+                                 @"-oLogLevel=DEBUG",
+                                 @"-oPreferredAuthentications=password",
+                                 nil];
+    NSString *proxyCommandStr = [self getProxyCommandStr];
+    
+    if (proxyCommandStr) {
+        [arguments addObject:[self getProxyCommandStr]];
+    }
+    
+    [arguments addObjectsFromArray:@[
+     advancedOptions,
+     [NSString stringWithFormat:@"%d", localPort],
+     [NSString stringWithFormat:@"%@@%@", loginName, remoteHost],
+     @"-p",
+     [NSString stringWithFormat:@"%d", remotePort]
+     ]];
     
     [task setEnvironment:env];
-    [task setArguments:[NSArray arrayWithObjects:
-                        [NSString stringWithFormat:@"-oUserKnownHostsFile=\"%@\"", knownHostFile],
-                        [NSString stringWithFormat:@"-oGlobalKnownHostsFile=\"%@\"", knownHostFile],
-                        [NSString stringWithFormat:@"-oIdentityFile=\"%@\"", identityFile],
-                        // TODO:
-//                        [NSString stringWithFormat:@"-F \"%@\"", configFile],
-                        @"-oIdentitiesOnly=yes",
-                        @"-oPubkeyAuthentication=no",
-                        @"-T", @"-2", @"-a",
-                        @"-oConnectTimeout=8", @"-oConnectionAttempts=3",
-                        @"-oServerAliveInterval=8", @"-oServerAliveCountMax=1",
-                        @"-oStrictHostKeyChecking=no", @"-oExitOnForwardFailure=yes",
-                        @"-oLogLevel=DEBUG",
-                        [NSString stringWithFormat:@"-oProxyCommand=\"%@\" -5 -S 127.0.0.1:1080 %@", connectPath, @"%h %p"],
-                        @"-oPreferredAuthentications=password",
-                        advancedOptions, [NSString stringWithFormat:@"%d", localPort],
-                        [NSString stringWithFormat:@"%@@%@", loginName, remoteHost],
-                        @"-p", [NSString stringWithFormat:@"%d", remotePort],
-                        nil]];
+    [task setArguments:arguments];
     
     [task setLaunchPath:@"/usr/bin/ssh"];
     
@@ -235,7 +308,7 @@
 {
     NSData *d;
     d = [[n userInfo] valueForKey:NSFileHandleNotificationDataItem];
-//    NSLog(@"dataReady:% ld bytes", [d length]);
+    //    NSLog(@"dataReady:% ld bytes", [d length]);
     if ([d length]) {
         NSString *s = [[NSString alloc] initWithData:d
                                             encoding:NSUTF8StringEncoding];
@@ -321,7 +394,7 @@
 // When the process is done, we should do some cleanup:
 - (void)taskTerminated:(NSNotification *)note {
     [statusItem setImage:offStatusImage];
-//    [statusMenuItem setTitle:@"Proxy: Off"];
+    //    [statusMenuItem setTitle:@"Proxy: Off"];
     NSLog(@"taskTerminated: %@", taskOutput);
     task = nil;
     
@@ -363,7 +436,7 @@
     if (_preferencesWindowController == nil)
     {
         NSViewController *generalViewController = [[GeneralPreferencesViewController alloc] init];
-//        NSViewController *advancedViewController = [[AdvancedPreferencesViewController alloc] init];
+        //        NSViewController *advancedViewController = [[AdvancedPreferencesViewController alloc] init];
         NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, nil];
         
         // To add a flexible space between General and Advanced preference panes insert [NSNull null]:
@@ -379,13 +452,13 @@
 
 -(IBAction)openPreferences:(id)sender {
     if(_preferencesWindowController) {
-       [_preferencesWindowController close];
+        [_preferencesWindowController close];
         _preferencesWindowController = nil;
     }
     
     [NSApp activateIgnoringOtherApps:YES];
-//    [[self.preferencesWindowController window] makeKeyAndOrderFront:nil];
-//    [[self.preferencesWindowController window] setLevel:NSFloatingWindowLevel];
+    //    [[self.preferencesWindowController window] makeKeyAndOrderFront:nil];
+    //    [[self.preferencesWindowController window] setLevel:NSFloatingWindowLevel];
     [[self.preferencesWindowController window] setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
     [[self.preferencesWindowController window] center];
     [self.preferencesWindowController showWindow:nil];
