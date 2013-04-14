@@ -735,6 +735,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = connect/connect.entitlements;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -748,6 +749,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = connect/connect.entitlements;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -937,6 +939,7 @@
 				4A4231101719A96800ABD4F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4AA6472E16BE3DBA00DE5CAD /* Build configuration list for PBXNativeTarget "sshproxyhelper" */ = {
 			isa = XCConfigurationList;

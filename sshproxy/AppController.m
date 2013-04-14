@@ -139,6 +139,10 @@
     // Get the path of our Askpass program, which we've included as part of the main application bundle
     NSString *askPassPath = [NSBundle pathForResource:@"SSH Proxy - Ask Password" ofType:@""
                                           inDirectory:[[NSBundle mainBundle] bundlePath]];
+    NSString *connectPath = [NSBundle pathForResource:@"connect" ofType:@""
+                                          inDirectory:[[NSBundle mainBundle] bundlePath]];
+    
+    NSLog(@"---------------%@", connectPath);
     
     // This creates a dictionary of environment variables (keys) and their values (objects) to be set in the environment where the task will be run. This environment dictionary will then be accessible to our Askpass program.
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -181,6 +185,7 @@
                         @"-oServerAliveInterval=8", @"-oServerAliveCountMax=1",
                         @"-oStrictHostKeyChecking=no", @"-oExitOnForwardFailure=yes",
                         @"-oLogLevel=DEBUG",
+                        [NSString stringWithFormat:@"-oProxyCommand=\"%@\" -5 -S 127.0.0.1:1080 %@", connectPath, @"%h %p"],
                         @"-oPreferredAuthentications=password",
                         advancedOptions, [NSString stringWithFormat:@"%d", localPort],
                         [NSString stringWithFormat:@"%@@%@", loginName, remoteHost],
@@ -217,7 +222,6 @@
     
     [task launch];
     
-    //        [outputView setString:@""];
     [fh readInBackgroundAndNotify];
 }
 
@@ -284,7 +288,23 @@
             } else {
                 [statusMenuItem setTitle:@"Proxy: Off - connection timed out"];
             }
-        } else {
+        } else if ([taskOutput rangeOfString:@"Write failed: Broken pipe"].location != NSNotFound) {
+            if (proxyStatus==SSHPROXY_CONNECTED) {
+                [statusItem setImage:inStatusImage];
+                [statusMenuItem setTitle:@"Proxy: Reconnecting - disconnected from remote proxy server"];
+                [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
+            } else {
+                [statusMenuItem setTitle:@"Proxy: Off - disconnected from  remote proxy server"];
+            }
+        } else if ([taskOutput rangeOfString:@"Connection closed by remote host"].location != NSNotFound) {
+            if (proxyStatus==SSHPROXY_CONNECTED) {
+                [statusItem setImage:inStatusImage];
+                [statusMenuItem setTitle:@"Proxy: Reconnecting - failed to connect remote proxy server"];
+                [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
+            } else {
+                [statusMenuItem setTitle:@"Proxy: Off - failed to connect remote proxy server"];
+            }
+        }  else {
             if (proxyStatus==SSHPROXY_CONNECTED) {
                 [statusItem setImage:inStatusImage];
                 [statusMenuItem setTitle:@"Proxy: Reconnecting - unknown error"];
@@ -302,20 +322,16 @@
 - (void)taskTerminated:(NSNotification *)note {
     [statusItem setImage:offStatusImage];
 //    [statusMenuItem setTitle:@"Proxy: Off"];
-//    NSLog([NSString stringWithFormat:@"taskTerminated: %@", taskOutput]);
-//    NSLog([NSString stringWithFormat:@"taskTerminated: %@", taskOutput]);
+    NSLog(@"taskTerminated: %@", taskOutput);
     task = nil;
     
     // ensure
     [turnOffMenuItem setHidden:YES];
     [turnOffMenuItem setEnabled:NO];
     
+    // show and enable turn on menu
     [turnOnMenuItem setHidden:NO];
     [turnOnMenuItem setEnabled:YES];
-    
-    // show and enable turn on menu
-//    [turnOnMenuItem setHidden:NO];
-//    [turnOnMenuItem setEnabled:YES];
 }
 
 
