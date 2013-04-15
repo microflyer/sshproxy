@@ -1,7 +1,7 @@
 /***********************************************************************
  * connect.c -- Make socket connection using SOCKS4/5 and HTTP tunnel.
  *
- * Copyright (c) 2000-2006 Shun-ichi Goto
+ * Copyright (c) 2000-2006, 2012 Shun-ichi Goto
  * Copyright (c) 2002, J. Grant (English Corrections)
  *
  * This program is free software; you can redistribute it and/or
@@ -22,7 +22,6 @@
  * PROJECT:  My Test Program
  * AUTHOR:   Shun-ichi GOTO <gotoh@taiyo.co.jp>
  * CREATE:   Wed Jun 21, 2000
- * REVISION: $Revision: 100 $
  * ---------------------------------------------------------
  *
  * Getting Source
@@ -47,12 +46,12 @@
  *  On SOLARIS:
  *      $ gcc -o connect -lresolv -lsocket -lnsl connect.c
  *
- *  on Win32 environment:
- *      $ cl connect.c wsock32.lib advapi32.lib
+ *  on Win32 environment, platform SDK (for iphlpapi.lib) is required:
+ *      $ cl connect.c advapi32.lib iphlpapi.lib ws2_32.lib
  *    or
- *      $ bcc32 connect.c wsock32.lib advapi32.lib
- *    or
- *      $ gcc connect.c -o connect
+ *      $ bcc32 connect.c advapi32.lib iphlpapi.lib ws2_32.lib
+ *    or for mingw32
+ *      $ gcc connect.c -o connect -lwsock32 -liphlpapi
  *
  *  on Mac OS X environment:
  *      $ gcc connect.c -o connect -lresolv
@@ -200,6 +199,15 @@
  *  HTTP Authentication: Basic and Digest Access Authentication -- RFC 2617
  *             For proxy authentication, refer these documents.
  *
+ * History
+ * =======
+ *
+ *   2012-04-21: Add feature to make direct connection when remote target
+ *               host is in local network. For this featurer, enumerates
+ *               network interface addresses and add them to direct
+ *               address table automatically. Currently, this feature is
+ *               available on win32 platform only and needs to link with
+ *               iphlpapi.lib.
  ***********************************************************************/
 
 #include <stdio.h>
@@ -221,6 +229,7 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <winsock.h>
+#include <iphlpapi.h>
 #include <sys/stat.h>
 #include <io.h>
 #include <conio.h>
@@ -236,7 +245,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-#if !defined(_WIN32) && !defined(__CYGWIN32__)
+#if !defined(_WIN32) && !defined(__CYGWIN32__) && !defined(__INTERIX)
 #define WITH_RESOLVER 1
 #include <arpa/nameser.h>
 #include <resolv.h>
@@ -245,15 +254,18 @@
 #endif /* not ( not _WIN32 && not __CYGWIN32__) */
 #endif /* !_WIN32 */
 
+/* Older Solaris doesn't define INADDR_NONE so we may need to */
+#ifndef INADDR_NONE
+#define INADDR_NONE ((unsigned long) -1)
+#endif
+
 #ifdef _WIN32
+#ifndef ECONNRESET
 #define ECONNRESET WSAECONNRESET
+#endif	/* not ECONNRESET */
 #endif /* _WI32 */
 
 
-
-#ifndef LINT
-static char *vcid = "$Id: connect.c 100 2007-07-03 10:48:26Z gotoh $";
-#endif
 
 /* Microsoft Visual C/C++ has _snprintf() and _vsnprintf() */
 #ifdef _MSC_VER
@@ -290,10 +302,7 @@ static char *usage = "usage: %s [-dnhst45] [-p local-port]"
 /* name of this program */
 char *progname = NULL;
 char *progdesc = "connect --- simple relaying command via proxy.";
-char *rcs_revstr = "$Revision: 100 $";
-char *revstr = NULL;
-int major_version = 1;
-int minor_version = 0;
+char *version = "1.103";
 
 /* set of character for strspn() */
 const char *digits    = "0123456789";
@@ -926,6 +935,36 @@ parse_addr_pair (const char *str, struct in_addr *addr, struct in_addr *mask)
     return 0;
 }
 
+#ifdef _WIN32
+// updates direct table with local net addr/mask informations
+// NOTE: needs platform SDK for compile and link with iphlpapi.lib.
+void
+make_localnet_as_direct (void)
+{
+    DWORD i;
+    PMIB_IPADDRTABLE table;
+    DWORD size = 0;
+    DWORD ret = 0;
+    /* allocate table */
+    if (GetIpAddrTable(NULL, &size, 0) == ERROR_INSUFFICIENT_BUFFER)
+        table = (MIB_IPADDRTABLE *) xmalloc (size);
+    /* get information */
+    ret = GetIpAddrTable(table, &size, 0);
+    if (ret != NO_ERROR) {
+        error("GetIpAddrTable() failed, errno=%d\n", WSAGetLastError());
+        return;
+    }
+    /* add local addr/mask to the table */
+    debug("making direct addr list from network adapter address:\n");
+    for (i=0; i<table->dwNumEntries; i++) {
+        add_direct_addr((struct in_addr *)&table->table[i].dwAddr,
+                        (struct in_addr *)&table->table[i].dwMask, 0);
+    }
+    free(table);
+}
+#endif
+
+
 void
 initialize_direct_addr (void)
 {
@@ -1028,6 +1067,7 @@ is_direct_address (const struct in_addr addr)
  ends_with("foo.beebar.com", "bar.com") => 0 (partial match)
  ends_with("bar", "bar.com")            => 0 (shorter)
  */
+int
 domain_match(const char *s1, const char *s2)
 {
     int len1, len2;
@@ -1465,23 +1505,6 @@ resolve_port( const char *service )
     return (u_short)port;
 }
 
-void
-make_revstr(void)
-{
-    char *ptr;
-    size_t len;
-    ptr = strstr(rcs_revstr, ": ");
-    if (!ptr) {
-        revstr = strdup("unknown");
-        return;
-    }
-    ptr += 2;
-    /* assume subversion's keyword expansion like "Revision: 96". */
-    minor_version = atoi(ptr);
-    revstr = xmalloc(20);
-    snprintf(revstr, 20, "%d.%d", major_version, minor_version);
-}
-
 int
 getarg( int argc, char **argv )
 {
@@ -1609,7 +1632,7 @@ getarg( int argc, char **argv )
                     break;
                     
                 case 'V':                           /* print version */
-                    fprintf(stderr, "%s\nVersion %s\n", progdesc, revstr);
+                    fprintf(stderr, "%s\nVersion %s\n", progdesc, version);
                     exit(0);
                     
                 case 'd':                           /* debug mode */
@@ -1629,15 +1652,20 @@ getarg( int argc, char **argv )
     if ( 0 < err )
         goto quit;
     
+#ifdef _WIN32
+    /* add local addr/mask to direct table automaticaly */
+    make_localnet_as_direct();
+#endif
+    
     set_relay( method, server );
     
     /* check destination HOST (MUST) */
     if ( argc == 0  ) {
-        fprintf(stderr, "%s\nVersion %s\n", progdesc, revstr);
+        fprintf(stderr, "%s\nVersion %s\n", progdesc, version);
         fprintf(stderr, usage, progname);
         exit(0);
     }
-    dest_host = argv[0];
+    dest_host = strdup(argv[0]);
     /* decide port or service name from programname or argument */
     if ( ((ptr=strrchr( progname, '/' )) != NULL) ||
         ((ptr=strchr( progname, '\\')) != NULL) )
@@ -1730,7 +1758,7 @@ set_timeout(int timeout)
 }
 #endif
 
-#if !defined(_WIN32) && !defined(__CYGWIN32__)
+#if !defined(_WIN32) && !defined(__CYGWIN32__) && !defined(__INTERIX)
 void
 switch_ns (struct sockaddr_in *ns)
 {
@@ -1739,7 +1767,7 @@ switch_ns (struct sockaddr_in *ns)
     _res.nscount = 1;
     debug("Using nameserver at %s\n", inet_ntoa(ns->sin_addr));
 }
-#endif /* !_WIN32 && !__CYGWIN32__ */
+#endif /* !_WIN32 && !__CYGWIN32__ && !__INTERIX */
 
 /* TODO: IPv6
  TODO: fallback if askpass execution failed.
@@ -1988,7 +2016,23 @@ readpass( const char* prompt, ...)
         char *askpass = getparam(ENV_SSH_ASKPASS), *cmd;
         int cmd_size = strlen(askpass) +1 +1 +strlen(buf) +1 +1;
         cmd = xmalloc(cmd_size);
+#if defined(_WIN32) && !defined(__CYGWIN32__)
+        {
+            /* Normalize path string of command ('/' => '\\').  This is
+             required for the case of env value is for the cygwin ssh
+             because cmd.exe treats '/' as option character.
+             Note that this does not resolve mounts on cygwin.
+             */
+            char *p= askpass;
+            while (*p) {
+                if (*p == '/')
+                    *p = '\\';
+                p++;
+            }
+        }
+#endif	/* _WIN32 && not __CYGWIN32__ */
         snprintf(cmd, cmd_size, "%s \"%s\"", askpass, buf);
+        debug("executing: %s", cmd);
         fp = popen(cmd, "r");
         free(cmd);
         if ( fp == NULL )
@@ -2861,9 +2905,7 @@ main( int argc, char **argv )
 #endif /* _WIN32 */
     
     /* initialization */
-    make_revstr();
     getarg( argc, argv );
-    debug("Program is $Revision: 100 $\n");
     
     /* Open local_in and local_out if forwarding a port */
     if ( local_type == LOCAL_SOCKET ) {
@@ -2885,6 +2927,16 @@ retry:
         set_timeout (connect_timeout);
 #endif /* not _WIN32 */
     
+    /* resolve host name localy to determine direct or not if allowed */
+    if (relay_method == METHOD_SOCKS &&
+        socks_resolve == RESOLVE_LOCAL &&
+        local_resolve (dest_host, &dest_addr) == 0) {
+        /* resolved, replace dest_host
+         if failed, simply ignore here */
+        free(dest_host);
+        dest_host = strdup(inet_ntoa(dest_addr.sin_addr));
+    }
+	
     if (check_direct(dest_host))
         relay_method = METHOD_DIRECT;
     /* make connection */
@@ -2901,15 +2953,10 @@ retry:
     }
     
     /** resolve destination host (SOCKS) **/
-#if !defined(_WIN32) && !defined(__CYGWIN32__)
+#if !defined(_WIN32) && !defined(__CYGWIN32__) && !defined(__INTERIX)
     if (socks_ns.sin_addr.s_addr != 0)
         switch_ns (&socks_ns);
-#endif /* not _WIN32 && not __CYGWIN32__ */
-    if (relay_method == METHOD_SOCKS &&
-        socks_resolve == RESOLVE_LOCAL &&
-        local_resolve (dest_host, &dest_addr) < 0) {
-        fatal("Unknown host: %s", dest_host);
-    }
+#endif /* not _WIN32 && not __CYGWIN32__ && !defined(__INTERIX) */
     
     /** relay negociation **/
     switch ( relay_method ) {
@@ -2923,13 +2970,13 @@ retry:
             ret = begin_http_relay(remote);
             switch (ret) {
                 case START_ERROR:
-                    close (remote);
+                    closesocket (remote);
                     fatal("failed to begin relaying via HTTP.\n");
                 case START_OK:
                     break;
                 case START_RETRY:
                     /* retry with authentication */
-                    close (remote);
+                    closesocket (remote);
                     goto retry;
             }
             break;
