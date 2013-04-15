@@ -121,7 +121,7 @@
                 proxyCommandPort = 1080;
             }
             
-            proxyCommandStr = [NSString stringWithFormat:@"-oProxyCommand=\"%@\" -w 8 %@ %@:%d %@", connectPath, proxyType, proxyCommandHost, proxyCommandPort, @"%h %p"];
+            proxyCommandStr = [NSString stringWithFormat:@"-oProxyCommand=\"%@\" -d -w 8 %@ %@:%d %@", connectPath, proxyType, proxyCommandHost, proxyCommandPort, @"%h %p"];
         }
     }
     
@@ -140,6 +140,7 @@
     
     if (proxyCommand && proxyCommandAuth) {
         if (proxyCommandUsername) {
+            [env setValue:@"YES" forKey:@"HTTP_PROXY_FORCE_AUTH"];
             [env setValue:proxyCommandUsername forKey:@"CONNECT_USER"];
             if (proxyCommandPassword) {
                 [env setValue:proxyCommandPassword forKey:@"CONNECT_PASSWORD"];
@@ -231,7 +232,7 @@
     }
     [advancedOptions appendString:@"ND"];
     
-    //    NSLog(@"Environment dict %@",env);
+    //    DLog(@"Environment dict %@",env);
     
     NSMutableArray *arguments = [NSMutableArray arrayWithObjects:
                                  [NSString stringWithFormat:@"-oUserKnownHostsFile=\"%@\"", knownHostFile],
@@ -251,7 +252,7 @@
     NSString *proxyCommandStr = [self getProxyCommandStr];
     
     if (proxyCommandStr) {
-        [arguments addObject:[self getProxyCommandStr]];
+        [arguments addObject:proxyCommandStr];
     }
     
     [arguments addObjectsFromArray:@[
@@ -308,7 +309,7 @@
 {
     NSData *d;
     d = [[n userInfo] valueForKey:NSFileHandleNotificationDataItem];
-    //    NSLog(@"dataReady:% ld bytes", [d length]);
+    //    DLog(@"dataReady:% ld bytes", [d length]);
     if ([d length]) {
         NSString *s = [[NSString alloc] initWithData:d
                                             encoding:NSUTF8StringEncoding];
@@ -395,7 +396,7 @@
 - (void)taskTerminated:(NSNotification *)note {
     [statusItem setImage:offStatusImage];
     //    [statusMenuItem setTitle:@"Proxy: Off"];
-    NSLog(@"taskTerminated: %@", taskOutput);
+    DLog(@"taskTerminated: %@", taskOutput);
     task = nil;
     
     // ensure
@@ -410,6 +411,8 @@
 
 -(IBAction)turnOffProxy:(id)sender{
     proxyStatus = SSHPROXY_OFF;
+    
+    DLog(@"Turn off proxy: %@", taskOutput);
     
     // clear taskOutput buffer
     taskOutput = [[NSString alloc] init];

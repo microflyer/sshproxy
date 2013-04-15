@@ -4,4 +4,15 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+
+    #ifdef DEBUG
+        #include <libgen.h>
+        #define DLogm() NSLog([NSString stringWithFormat:@"[%s:%d %@]",basename(__FILE__),__LINE__,NSStringFromSelector(_cmd)])
+        #define DLog(format, ...) NSLog([NSString stringWithFormat:@"[%s:%d %@] %@",basename(__FILE__),__LINE__,NSStringFromSelector(_cmd),format], ##__VA_ARGS__)
+        #define DLogv(var) NSLog([NSString stringWithFormat:@"[%s:%d %@] "# var "=%@",basename(__FILE__),__LINE__,NSStringFromSelector(_cmd), var] )
+    #else
+        #define DLog(...) /* */
+        #define DLogv(var) /* */
+        #define DLogm() /* */
+    #endif
 #endif
