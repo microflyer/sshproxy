@@ -424,9 +424,10 @@ char *socks5_auth = NULL;
 #define ENV_SOCKS5_PASSWD   "SOCKS5_PASSWD"     /* auth password for SOCKS5 */
 #define ENV_SOCKS5_PASSWORD "SOCKS5_PASSWORD"   /* old style */
 
-#define ENV_HTTP_PROXY          "HTTP_PROXY"    /* common env var */
-#define ENV_HTTP_PROXY_USER     "HTTP_PROXY_USER" /* auth user */
-#define ENV_HTTP_PROXY_PASSWORD "HTTP_PROXY_PASSWORD" /* auth password */
+#define ENV_HTTP_PROXY              "HTTP_PROXY"    /* common env var */
+#define ENV_HTTP_PROXY_USER         "HTTP_PROXY_USER" /* auth user */
+#define ENV_HTTP_PROXY_PASSWORD     "HTTP_PROXY_PASSWORD" /* auth password */
+#define ENV_HTTP_PROXY_FORCE_AUTH   "HTTP_PROXY_FORCE_AUTH"    /* force send authentication, for some http proxy do not support negotiate auth (ie. Polipo) */
 
 #define ENV_TELNET_PROXY          "TELNET_PROXY"    /* common env var */
 
@@ -686,6 +687,7 @@ PARAMETER_ITEM parameter_table[] = {
     { ENV_HTTP_PROXY, NULL },
     { ENV_HTTP_PROXY_USER, NULL },
     { ENV_HTTP_PROXY_PASSWORD, NULL },
+    { ENV_HTTP_PROXY_FORCE_AUTH, NULL },
     { ENV_CONNECT_USER, NULL },
     { ENV_CONNECT_PASSWORD, NULL },
     { ENV_SSH_ASKPASS, NULL },
@@ -2458,7 +2460,10 @@ begin_http_relay( SOCKET s )
     
     if (sendf(s,"CONNECT %s:%d HTTP/1.0\r\n", dest_host, dest_port) < 0)
         return START_ERROR;
-    if (proxy_auth_type == PROXY_AUTH_BASIC && basic_auth (s) < 0)
+    
+    char *force_auth = getparam(ENV_HTTP_PROXY_FORCE_AUTH);
+    
+    if ( (force_auth || proxy_auth_type == PROXY_AUTH_BASIC) && basic_auth (s) < 0)
         return START_ERROR;
     if (sendf(s,"\r\n") < 0)
         return START_ERROR;
