@@ -16,6 +16,7 @@ SSH Proxy - The most simple and useful tool to help you create a SOCKS 5 proxy t
 - Auto connect when awake from sleep
 - Support compress SSH connection
 - Auto launch when log in OS X
+- Support connecting through SOCKS v5 / SOCKS v4 / HTTP proxy with authentication
 
 ## TODO
 
