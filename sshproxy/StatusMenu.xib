@@ -557,7 +557,7 @@
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents">Cancel</string>
-								<object class="NSFont" key="NSSupport" id="799877219">
+								<object class="NSFont" key="NSSupport" id="1068448359">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">1044</int>
@@ -575,7 +575,7 @@
 						</object>
 						<object class="NSImageView" id="810404730">
 							<reference key="NSNextResponder" ref="94713192"/>
-							<int key="NSvFlags">268</int>
+							<int key="NSvFlags">264</int>
 							<set class="NSMutableSet" key="NSDragTypes">
 								<string>Apple PDF pasteboard type</string>
 								<string>Apple PICT pasteboard type</string>
@@ -608,8 +608,8 @@
 						</object>
 						<object class="NSTextField" id="970551096">
 							<reference key="NSNextResponder" ref="94713192"/>
-							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{146, 212}, {87, 19}}</string>
+							<int key="NSvFlags">264</int>
+							<string key="NSFrame">{{17, 212}, {345, 19}}</string>
 							<reference key="NSSuperview" ref="94713192"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="689992370"/>
@@ -617,7 +617,7 @@
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="259961310">
 								<int key="NSCellFlags">68157504</int>
-								<int key="NSCellFlags2">272630784</int>
+								<int key="NSCellFlags2">138413056</int>
 								<string key="NSContents">SSH Proxy</string>
 								<object class="NSFont" key="NSSupport">
 									<string key="NSName">LucidaGrande-Bold</string>
@@ -751,22 +751,22 @@
 											</object>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 										</object>
-										<object class="NSButton" id="601181728">
+										<object class="NSButton" id="308846415">
 											<reference key="NSNextResponder" ref="701179940"/>
-											<int key="NSvFlags">268</int>
+											<int key="NSvFlags">288</int>
 											<string key="NSFrame">{{122, 144}, {134, 32}}</string>
 											<reference key="NSSuperview" ref="701179940"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="674061377"/>
+											<reference key="NSNextKeyView" ref="120350161"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
-											<object class="NSButtonCell" key="NSCell" id="593518880">
+											<object class="NSButtonCell" key="NSCell" id="607090558">
 												<int key="NSCellFlags">67108864</int>
 												<int key="NSCellFlags2">134217728</int>
 												<string key="NSContents">Send Feedback</string>
-												<reference key="NSSupport" ref="799877219"/>
+												<reference key="NSSupport" ref="1068448359"/>
 												<string key="NSCellIdentifier">_NS:9</string>
-												<reference key="NSControlView" ref="601181728"/>
+												<reference key="NSControlView" ref="308846415"/>
 												<int key="NSButtonFlags">-2038284288</int>
 												<int key="NSButtonFlags2">129</int>
 												<string key="NSAlternateContents"/>
@@ -776,22 +776,22 @@
 											</object>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 										</object>
-										<object class="NSButton" id="674061377">
+										<object class="NSButton" id="120350161">
 											<reference key="NSNextResponder" ref="701179940"/>
-											<int key="NSvFlags">268</int>
+											<int key="NSvFlags">288</int>
 											<string key="NSFrame">{{122, 111}, {134, 32}}</string>
 											<reference key="NSSuperview" ref="701179940"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="471145965"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
-											<object class="NSButtonCell" key="NSCell" id="437861758">
+											<object class="NSButtonCell" key="NSCell" id="8831353">
 												<int key="NSCellFlags">67108864</int>
 												<int key="NSCellFlags2">134217728</int>
 												<string key="NSContents">Rate SSH Proxy</string>
-												<reference key="NSSupport" ref="799877219"/>
+												<reference key="NSSupport" ref="1068448359"/>
 												<string key="NSCellIdentifier">_NS:9</string>
-												<reference key="NSControlView" ref="674061377"/>
+												<reference key="NSControlView" ref="120350161"/>
 												<int key="NSButtonFlags">-2038284288</int>
 												<int key="NSButtonFlags2">129</int>
 												<string key="NSAlternateContents"/>
@@ -805,7 +805,7 @@
 									<string key="NSFrameSize">{379, 188}</string>
 									<reference key="NSSuperview" ref="689992370"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="601181728"/>
+									<reference key="NSNextKeyView" ref="308846415"/>
 									<string key="NSReuseIdentifierKey">_NS:11</string>
 								</object>
 							</array>
@@ -1213,7 +1213,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">openMacAppStore:</string>
 						<reference key="source" ref="135814413"/>
-						<reference key="destination" ref="674061377"/>
+						<reference key="destination" ref="120350161"/>
 					</object>
 					<int key="connectionID">1196</int>
 				</object>
@@ -1221,7 +1221,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">openSendFeedback:</string>
 						<reference key="source" ref="135814413"/>
-						<reference key="destination" ref="601181728"/>
+						<reference key="destination" ref="308846415"/>
 					</object>
 					<int key="connectionID">1197</int>
 				</object>
@@ -1404,8 +1404,8 @@
 							<reference ref="471145965"/>
 							<reference ref="436886593"/>
 							<reference ref="766616117"/>
-							<reference ref="601181728"/>
-							<reference ref="674061377"/>
+							<reference ref="308846415"/>
+							<reference ref="120350161"/>
 						</array>
 						<reference key="parent" ref="94713192"/>
 					</object>
@@ -1777,29 +1777,29 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1192</int>
-						<reference key="object" ref="601181728"/>
+						<reference key="object" ref="308846415"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="593518880"/>
+							<reference ref="607090558"/>
 						</array>
 						<reference key="parent" ref="689992370"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1193</int>
-						<reference key="object" ref="593518880"/>
-						<reference key="parent" ref="601181728"/>
+						<reference key="object" ref="607090558"/>
+						<reference key="parent" ref="308846415"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1194</int>
-						<reference key="object" ref="674061377"/>
+						<reference key="object" ref="120350161"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="437861758"/>
+							<reference ref="8831353"/>
 						</array>
 						<reference key="parent" ref="689992370"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1195</int>
-						<reference key="object" ref="437861758"/>
-						<reference key="parent" ref="674061377"/>
+						<reference key="object" ref="8831353"/>
+						<reference key="parent" ref="120350161"/>
 					</object>
 				</array>
 			</object>
