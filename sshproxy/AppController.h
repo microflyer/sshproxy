@@ -47,6 +47,9 @@
 -(IBAction)openPreferences:(id)sender;
 -(IBAction)openAboutWindow:(id)sender;
 
+-(IBAction)openSendFeedback:(id)sender;
+-(IBAction)openMacAppStore:(id)sender;
+
 enum {
     SSHPROXY_OFF = 0,
     SSHPROXY_ON,

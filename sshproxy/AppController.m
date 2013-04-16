@@ -467,12 +467,33 @@
     [self.preferencesWindowController showWindow:nil];
 }
 
--(IBAction)openAboutWindow:(id)sender {
+-(IBAction)openAboutWindow:(id)sender
+{
     [NSApp activateIgnoringOtherApps:YES];
     
     [aboutWindow makeKeyAndOrderFront:nil];
     [aboutWindow setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
     [aboutWindow center];
+}
+
+-(IBAction)openSendFeedback:(id)sender
+{
+    NSString *encodedSubject = @"subject=SSH Proxy Support";
+    NSString *encodedBody = @"body=Hi Yang,";
+    NSString *encodedTo = @"yang@yangyubo.com";
+    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:%@?%@&%@",
+                                  [encodedTo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                  [encodedSubject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                  [encodedBody stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    DLog(@"%@", encodedURLString);
+    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
+    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
+}
+
+-(IBAction)openMacAppStore:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL:
+     [NSURL URLWithString:@"macappstore://itunes.apple.com/app/ssh-proxy/id597790822?mt=12"]];
 }
 
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
