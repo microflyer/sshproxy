@@ -7,6 +7,7 @@
 //
 #import "AppController.h"
 #import "GeneralPreferencesViewController.h"
+#import "ServersPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
 #import <ServiceManagement/ServiceManagement.h>
 
@@ -439,8 +440,8 @@
     if (_preferencesWindowController == nil)
     {
         NSViewController *generalViewController = [[GeneralPreferencesViewController alloc] init];
-        //        NSViewController *advancedViewController = [[AdvancedPreferencesViewController alloc] init];
-        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, nil];
+        NSViewController *serversViewController = [[ServersPreferencesViewController alloc] init];
+        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, serversViewController, nil];
         
         // To add a flexible space between General and Advanced preference panes insert [NSNull null]:
         //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];
