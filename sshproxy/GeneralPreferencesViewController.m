@@ -112,4 +112,17 @@
 }
 
 
+-(IBAction)addServer:(id)sender {
+    NSMutableDictionary* defaultServer = [[NSMutableDictionary alloc] init];
+    
+    [defaultServer setObject:@"example.com" forKey:@"remote_host"];
+    [defaultServer setObject:[NSNumber numberWithInt:22] forKey:@"remote_port"];
+    [defaultServer setObject:@"user" forKey:@"login_name"];
+    [defaultServer setObject:[NSNumber numberWithBool:NO] forKey:@"enable_compression"];
+    [defaultServer setObject:[NSNumber numberWithBool:NO] forKey:@"share_socks"];
+    
+    [self.serverArrayController addObject:defaultServer];
+}
+
+
 @end

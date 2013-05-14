@@ -256,7 +256,6 @@
 														</array>
 														<reference key="NSMenuFont" ref="417688105"/>
 													</object>
-													<int key="NSSelectedIndex">2</int>
 													<bool key="NSPullDown">YES</bool>
 													<int key="NSPreferredEdge">1</int>
 													<bool key="NSUsesItemFromMenu">YES</bool>
@@ -942,14 +941,6 @@
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 			<object class="NSArrayController" id="350353262">
-				<array class="NSMutableArray" key="NSDeclaredKeys">
-					<string>remoteHost</string>
-					<string>remotePort</string>
-					<string>loginName</string>
-					<string>enableCompression</string>
-					<string>shareSocks</string>
-				</array>
-				<string key="NSObjectClassName">SSHServerModel</string>
 				<bool key="NSEditable">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
 				<bool key="NSAvoidsEmptySelection">YES</bool>
@@ -1545,6 +1536,30 @@
 					<int key="connectionID">1965</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">addServer:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="65579381"/>
+					</object>
+					<int key="connectionID">2250</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">serverArrayController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="350353262"/>
+					</object>
+					<int key="connectionID">2251</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">serversTableView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="802513767"/>
+					</object>
+					<int key="connectionID">2252</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.auto_launch</string>
 						<reference key="source" ref="559997738"/>
@@ -1562,15 +1577,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.loginName</string>
+						<string key="label">value: selection.login_name</string>
 						<reference key="source" ref="1044904739"/>
 						<reference key="destination" ref="350353262"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="1044904739"/>
 							<reference key="NSDestination" ref="350353262"/>
-							<string key="NSLabel">value: selection.loginName</string>
+							<string key="NSLabel">value: selection.login_name</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.loginName</string>
+							<string key="NSKeyPath">selection.login_name</string>
 							<dictionary key="NSOptions">
 								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
 								<string key="NSMultipleValuesPlaceholder">User name</string>
@@ -1582,7 +1597,7 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">2238</int>
+					<int key="connectionID">2255</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1602,15 +1617,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.remotePort</string>
+						<string key="label">value: selection.remote_port</string>
 						<reference key="source" ref="80116505"/>
 						<reference key="destination" ref="350353262"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="80116505"/>
 							<reference key="NSDestination" ref="350353262"/>
-							<string key="NSLabel">value: selection.remotePort</string>
+							<string key="NSLabel">value: selection.remote_port</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.remotePort</string>
+							<string key="NSKeyPath">selection.remote_port</string>
 							<dictionary key="NSOptions">
 								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
 								<string key="NSMultipleValuesPlaceholder">22</string>
@@ -1622,19 +1637,19 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">2236</int>
+					<int key="connectionID">2254</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.remoteHost</string>
+						<string key="label">value: selection.remote_host</string>
 						<reference key="source" ref="806897770"/>
 						<reference key="destination" ref="350353262"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="806897770"/>
 							<reference key="NSDestination" ref="350353262"/>
-							<string key="NSLabel">value: selection.remoteHost</string>
+							<string key="NSLabel">value: selection.remote_host</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.remoteHost</string>
+							<string key="NSKeyPath">selection.remote_host</string>
 							<dictionary key="NSOptions">
 								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
 								<string key="NSMultipleValuesPlaceholder">Host name or address</string>
@@ -1646,7 +1661,7 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">2234</int>
+					<int key="connectionID">2253</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1710,35 +1725,35 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.enableCompression</string>
+						<string key="label">value: selection.enable_compression</string>
 						<reference key="source" ref="23429800"/>
 						<reference key="destination" ref="350353262"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="23429800"/>
 							<reference key="NSDestination" ref="350353262"/>
-							<string key="NSLabel">value: selection.enableCompression</string>
+							<string key="NSLabel">value: selection.enable_compression</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.enableCompression</string>
+							<string key="NSKeyPath">selection.enable_compression</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">2240</int>
+					<int key="connectionID">2256</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.shareSocks</string>
+						<string key="label">value: selection.share_socks</string>
 						<reference key="source" ref="175198506"/>
 						<reference key="destination" ref="350353262"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="175198506"/>
 							<reference key="NSDestination" ref="350353262"/>
-							<string key="NSLabel">value: selection.shareSocks</string>
+							<string key="NSLabel">value: selection.share_socks</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.shareSocks</string>
+							<string key="NSKeyPath">selection.share_socks</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">2243</int>
+					<int key="connectionID">2257</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -2141,6 +2156,22 @@
 					<int key="connectionID">2177</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.remote_host</string>
+						<reference key="source" ref="219913777"/>
+						<reference key="destination" ref="350353262"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="219913777"/>
+							<reference key="NSDestination" ref="350353262"/>
+							<string key="NSLabel">value: arrangedObjects.remote_host</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.remote_host</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">2258</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">textField</string>
 						<object class="NSTableCellView" key="source" id="481337299">
@@ -2210,6 +2241,22 @@
 						<reference key="destination" ref="1003491095"/>
 					</object>
 					<int key="connectionID">2219</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentArray: values.servers</string>
+						<reference key="source" ref="350353262"/>
+						<reference key="destination" ref="235910576"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="350353262"/>
+							<reference key="NSDestination" ref="235910576"/>
+							<string key="NSLabel">contentArray: values.servers</string>
+							<string key="NSBinding">contentArray</string>
+							<string key="NSKeyPath">values.servers</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">2259</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3078,7 +3125,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">2243</int>
+			<int key="maxID">2259</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3102,12 +3149,17 @@
 					<string key="className">GeneralPreferencesViewController</string>
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="addServer:">id</string>
 						<string key="closePreferencesWindow:">id</string>
 						<string key="localStepperAction:">id</string>
 						<string key="remoteStepperAction:">id</string>
 						<string key="toggleLaunchAtLogin:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="addServer:">
+							<string key="name">addServer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="closePreferencesWindow:">
 							<string key="name">closePreferencesWindow:</string>
 							<string key="candidateClassName">id</string>
@@ -3134,6 +3186,8 @@
 						<string key="remoteHostTextField">NSTextField</string>
 						<string key="remotePortStepper">NSStepper</string>
 						<string key="remotePortTextField">NSTextField</string>
+						<string key="serverArrayController">NSArrayController</string>
+						<string key="serversTableView">NSTableView</string>
 						<string key="startAtLoginButton">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -3168,6 +3222,14 @@
 						<object class="IBToOneOutletInfo" key="remotePortTextField">
 							<string key="name">remotePortTextField</string>
 							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="serverArrayController">
+							<string key="name">serverArrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="serversTableView">
+							<string key="name">serversTableView</string>
+							<string key="candidateClassName">NSTableView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="startAtLoginButton">
 							<string key="name">startAtLoginButton</string>

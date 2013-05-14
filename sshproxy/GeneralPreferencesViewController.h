@@ -24,6 +24,9 @@
     IBOutlet NSPanel* advancedPanel;
 }
 
+@property IBOutlet NSTableView* serversTableView;
+@property IBOutlet NSArrayController* serverArrayController;
+
 -(IBAction)remoteStepperAction:(id)sender;
 
 -(IBAction)localStepperAction:(id)sender;
@@ -31,5 +34,7 @@
 -(IBAction)toggleLaunchAtLogin:(id)sender;
 
 -(IBAction)closePreferencesWindow:(id)sender;
+
+-(IBAction)addServer:(id)sender;
 
 @end
