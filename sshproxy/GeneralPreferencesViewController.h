@@ -10,31 +10,16 @@
 #import "MASPreferencesViewController.h"
 
 @interface GeneralPreferencesViewController : NSViewController <MASPreferencesViewController> {
-    IBOutlet NSTextField* remoteHostTextField;
-    IBOutlet NSTextField* remotePortTextField;
-    IBOutlet NSStepper* remotePortStepper;
-    
-    IBOutlet NSTextField* loginNameTextField;
     IBOutlet NSTextField* localPortTextField;
     IBOutlet NSStepper* localPortStepper;
     
     IBOutlet NSButton* autoConnectButton;
     
     IBOutlet NSButton* startAtLoginButton;
-    IBOutlet NSPanel* advancedPanel;
 }
-
-@property IBOutlet NSTableView* serversTableView;
-@property IBOutlet NSArrayController* serverArrayController;
-
--(IBAction)remoteStepperAction:(id)sender;
 
 -(IBAction)localStepperAction:(id)sender;
 
 -(IBAction)toggleLaunchAtLogin:(id)sender;
-
--(IBAction)closePreferencesWindow:(id)sender;
-
--(IBAction)addServer:(id)sender;
 
 @end

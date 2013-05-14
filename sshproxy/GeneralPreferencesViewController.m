@@ -38,14 +38,7 @@
 -(void)awakeFromNib
 {
     CharmNumberFormatter *formatter = [[CharmNumberFormatter alloc] init];
-    [remotePortTextField setFormatter:formatter];
     [localPortTextField setFormatter:formatter];
-    
-    NSInteger remotePort = [[NSUserDefaults standardUserDefaults] integerForKey:@"remote_port"];
-    if (remotePort<=0 || remotePort>65535) {
-        remotePort = 22;
-    }
-    [remotePortTextField setIntegerValue:remotePort];
     
     NSInteger localPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"local_port"];
     if (localPort<=0 || localPort>65535) {
@@ -53,31 +46,11 @@
     }
     [localPortTextField setIntegerValue:localPort];
     
-    [remotePortStepper setIntegerValue:remotePort];
     [localPortStepper setIntegerValue:localPort];
-}
-
-- (IBAction)remoteStepperAction:(id)sender {
-	[remotePortTextField setIntValue: [remotePortStepper intValue]];
 }
 
 - (IBAction)localStepperAction:(id)sender {
 	[localPortTextField setIntValue: [localPortStepper intValue]];
-}
-
-- (IBAction) showTheSheet:(id)sender {
-    [NSApp beginSheet:advancedPanel
-       modalForWindow:self.view.window
-        modalDelegate:self
-       didEndSelector:nil
-          contextInfo:nil];
-}
-
--(IBAction)endTheSheet:(id)sender {
-    [NSApp endSheet:advancedPanel];
-    [advancedPanel orderOut:sender];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(IBAction)toggleLaunchAtLogin:(id)sender
@@ -109,19 +82,6 @@
 
 -(IBAction)closePreferencesWindow:(id)sender {
     [self.view.window orderOut:nil];
-}
-
-
--(IBAction)addServer:(id)sender {
-    NSMutableDictionary* defaultServer = [[NSMutableDictionary alloc] init];
-    
-    [defaultServer setObject:@"example.com" forKey:@"remote_host"];
-    [defaultServer setObject:[NSNumber numberWithInt:22] forKey:@"remote_port"];
-    [defaultServer setObject:@"user" forKey:@"login_name"];
-    [defaultServer setObject:[NSNumber numberWithBool:NO] forKey:@"enable_compression"];
-    [defaultServer setObject:[NSNumber numberWithBool:NO] forKey:@"share_socks"];
-    
-    [self.serverArrayController addObject:defaultServer];
 }
 
 

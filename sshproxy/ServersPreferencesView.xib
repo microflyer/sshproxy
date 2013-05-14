@@ -11,6 +11,7 @@
 			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
+			<string>NSArrayController</string>
 			<string>NSBox</string>
 			<string>NSButton</string>
 			<string>NSButtonCell</string>
@@ -32,6 +33,7 @@
 			<string>NSTableView</string>
 			<string>NSTextField</string>
 			<string>NSTextFieldCell</string>
+			<string>NSUserDefaultsController</string>
 			<string>NSView</string>
 			<string>NSWindowTemplate</string>
 		</array>
@@ -284,7 +286,7 @@
 											<object class="NSStepper" id="452600336">
 												<reference key="NSNextResponder" ref="303307495"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{177, 232}, {19, 27}}</string>
+												<string key="NSFrame">{{193, 232}, {19, 27}}</string>
 												<reference key="NSSuperview" ref="303307495"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="1042953745"/>
@@ -353,7 +355,7 @@
 											<object class="NSTextField" id="359183891">
 												<reference key="NSNextResponder" ref="303307495"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{118, 235}, {60, 22}}</string>
+												<string key="NSFrame">{{118, 235}, {76, 22}}</string>
 												<reference key="NSSuperview" ref="303307495"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="452600336"/>
@@ -1202,6 +1204,18 @@
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
+			<object class="NSArrayController" id="524181486">
+				<bool key="NSEditable">YES</bool>
+				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
+				<bool key="NSAvoidsEmptySelection">YES</bool>
+				<bool key="NSPreservesSelection">YES</bool>
+				<bool key="NSSelectsInsertedObjects">YES</bool>
+				<bool key="NSFilterRestrictsInsertion">YES</bool>
+				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
+			</object>
+			<object class="NSUserDefaultsController" id="1018538961">
+				<bool key="NSSharedInstance">YES</bool>
+			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -1212,6 +1226,94 @@
 						<reference key="destination" ref="1005"/>
 					</object>
 					<int key="connectionID">180</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">serverArrayController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="524181486"/>
+					</object>
+					<int key="connectionID">221</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">addServer:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="396894196"/>
+					</object>
+					<int key="connectionID">224</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showTheSheet:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="811501542"/>
+					</object>
+					<int key="connectionID">228</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">remoteStepperAction:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="452600336"/>
+					</object>
+					<int key="connectionID">229</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">endTheSheet:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="555734891"/>
+					</object>
+					<int key="connectionID">249</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">advancedPanel</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="901766728"/>
+					</object>
+					<int key="connectionID">250</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">serversTableView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="808349274"/>
+					</object>
+					<int key="connectionID">251</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: canRemove</string>
+						<reference key="source" ref="184748351"/>
+						<reference key="destination" ref="524181486"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="184748351"/>
+							<reference key="NSDestination" ref="524181486"/>
+							<string key="NSLabel">enabled: canRemove</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">canRemove</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">227</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.remote_port</string>
+						<reference key="source" ref="237057381"/>
+						<reference key="destination" ref="524181486"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="237057381"/>
+							<reference key="NSDestination" ref="524181486"/>
+							<string key="NSLabel">value: arrangedObjects.remote_port</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.remote_port</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">223</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1233,11 +1335,7 @@
 										<int key="NSCellFlags">67108928</int>
 										<int key="NSCellFlags2">272631808</int>
 										<string key="NSContents">test@example.com</string>
-										<object class="NSFont" key="NSSupport">
-											<string key="NSName">LucidaGrande</string>
-											<double key="NSSize">14</double>
-											<int key="NSfFlags">16</int>
-										</object>
+										<reference key="NSSupport" ref="534336044"/>
 										<string key="NSCellIdentifier">_NS:20</string>
 										<reference key="NSControlView" ref="288507386"/>
 										<reference key="NSBackgroundColor" ref="995567531"/>
@@ -1258,11 +1356,7 @@
 										<int key="NSCellFlags">67108928</int>
 										<int key="NSCellFlags2">272631808</int>
 										<string key="NSContents">Port: 22</string>
-										<object class="NSFont" key="NSSupport">
-											<string key="NSName">LucidaGrande</string>
-											<double key="NSSize">12</double>
-											<int key="NSfFlags">16</int>
-										</object>
+										<reference key="NSSupport" ref="534336044"/>
 										<string key="NSCellIdentifier">_NS:20</string>
 										<reference key="NSControlView" ref="120640125"/>
 										<reference key="NSBackgroundColor" ref="995567531"/>
@@ -1286,35 +1380,212 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: objectValue.remote_host</string>
+						<string key="label">displayPatternValue1: objectValue.remote_host</string>
+						<reference key="source" ref="288507386"/>
+						<reference key="destination" ref="783700983"/>
+						<object class="NSNibBindingConnector" key="connector" id="186495205">
+							<reference key="NSSource" ref="288507386"/>
+							<reference key="NSDestination" ref="783700983"/>
+							<string key="NSLabel">displayPatternValue1: objectValue.remote_host</string>
+							<string key="NSBinding">displayPatternValue1</string>
+							<string key="NSKeyPath">objectValue.remote_host</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSDisplayPattern</string>
+								<string key="NS.object.0">%{value2}@@%{value1}@</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">269</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">displayPatternValue2: objectValue.login_name</string>
 						<reference key="source" ref="288507386"/>
 						<reference key="destination" ref="783700983"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="288507386"/>
 							<reference key="NSDestination" ref="783700983"/>
-							<string key="NSLabel">value: objectValue.remote_host</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">objectValue.remote_host</string>
+							<string key="NSLabel">displayPatternValue2: objectValue.login_name</string>
+							<string key="NSBinding">displayPatternValue2</string>
+							<string key="NSKeyPath">objectValue.login_name</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSDisplayPattern</string>
+								<string key="NS.object.0">%{value2}@@%{value1}@</string>
+							</object>
+							<reference key="NSPreviousConnector" ref="186495205"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">178</int>
+					<int key="connectionID">270</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: objectValue.remote_port</string>
+						<string key="label">displayPatternValue1: objectValue.remote_port</string>
 						<reference key="source" ref="120640125"/>
 						<reference key="destination" ref="783700983"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="120640125"/>
 							<reference key="NSDestination" ref="783700983"/>
-							<string key="NSLabel">value: objectValue.remote_port</string>
-							<string key="NSBinding">value</string>
+							<string key="NSLabel">displayPatternValue1: objectValue.remote_port</string>
+							<string key="NSBinding">displayPatternValue1</string>
 							<string key="NSKeyPath">objectValue.remote_port</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSDisplayPattern</string>
+								<string key="NS.object.0">Port: %{value1}@</string>
+							</object>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">179</int>
+					<int key="connectionID">273</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.share_socks</string>
+						<reference key="source" ref="386807787"/>
+						<reference key="destination" ref="524181486"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="386807787"/>
+							<reference key="NSDestination" ref="524181486"/>
+							<string key="NSLabel">value: selection.share_socks</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.share_socks</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValidatesImmediately</string>
+								<boolean value="YES" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">248</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.enable_compression</string>
+						<reference key="source" ref="131856894"/>
+						<reference key="destination" ref="524181486"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="131856894"/>
+							<reference key="NSDestination" ref="524181486"/>
+							<string key="NSLabel">value: selection.enable_compression</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.enable_compression</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValidatesImmediately</string>
+								<boolean value="YES" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">246</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.login_name</string>
+						<reference key="source" ref="1065489499"/>
+						<reference key="destination" ref="524181486"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="1065489499"/>
+							<reference key="NSDestination" ref="524181486"/>
+							<string key="NSLabel">value: selection.login_name</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.login_name</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
+								<boolean value="YES" key="NSValidatesImmediately"/>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">240</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.remote_port</string>
+						<reference key="source" ref="452600336"/>
+						<reference key="destination" ref="524181486"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="452600336"/>
+							<reference key="NSDestination" ref="524181486"/>
+							<string key="NSLabel">value: selection.remote_port</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.remote_port</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValidatesImmediately</string>
+								<boolean value="YES" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">244</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.remote_host</string>
+						<reference key="source" ref="295201419"/>
+						<reference key="destination" ref="524181486"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="295201419"/>
+							<reference key="NSDestination" ref="524181486"/>
+							<string key="NSLabel">value: selection.remote_host</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.remote_host</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
+								<boolean value="YES" key="NSValidatesImmediately"/>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">233</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.remote_port</string>
+						<reference key="source" ref="359183891"/>
+						<reference key="destination" ref="524181486"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="359183891"/>
+							<reference key="NSDestination" ref="524181486"/>
+							<string key="NSLabel">value: selection.remote_port</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.remote_port</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
+								<boolean value="YES" key="NSValidatesImmediately"/>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">237</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentArray: values.servers</string>
+						<reference key="source" ref="524181486"/>
+						<reference key="destination" ref="1018538961"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="524181486"/>
+							<reference key="NSDestination" ref="1018538961"/>
+							<string key="NSLabel">contentArray: values.servers</string>
+							<string key="NSBinding">contentArray</string>
+							<string key="NSKeyPath">values.servers</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSDeletesObjectsOnRemove"/>
+								<boolean value="YES" key="NSHandlesContentAsCompoundValue"/>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">220</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">remove:</string>
+						<reference key="source" ref="524181486"/>
+						<reference key="destination" ref="184748351"/>
+					</object>
+					<int key="connectionID">225</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1537,7 +1808,6 @@
 							<reference ref="913569890"/>
 							<reference ref="1065489499"/>
 							<reference ref="669800185"/>
-							<reference ref="452600336"/>
 							<reference ref="602322129"/>
 							<reference ref="295201419"/>
 							<reference ref="359183891"/>
@@ -1545,6 +1815,7 @@
 							<reference ref="131856894"/>
 							<reference ref="386807787"/>
 							<reference ref="811501542"/>
+							<reference ref="452600336"/>
 						</array>
 						<reference key="parent" ref="425535177"/>
 					</object>
@@ -1936,6 +2207,17 @@
 						<reference key="object" ref="169679268"/>
 						<reference key="parent" ref="99977160"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">215</int>
+						<reference key="object" ref="524181486"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">SSH Servers Array Controller</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">216</int>
+						<reference key="object" ref="1018538961"/>
+						<reference key="parent" ref="0"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -2042,12 +2324,14 @@
 				<string key="212.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="213.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="214.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="215.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="216.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">214</int>
+			<int key="maxID">273</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2070,6 +2354,74 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ServersPreferencesViewController</string>
 					<string key="superclassName">NSViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="addServer:">id</string>
+						<string key="closePreferencesWindow:">id</string>
+						<string key="endTheSheet:">id</string>
+						<string key="remoteStepperAction:">id</string>
+						<string key="showTheSheet:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="addServer:">
+							<string key="name">addServer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="closePreferencesWindow:">
+							<string key="name">closePreferencesWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="endTheSheet:">
+							<string key="name">endTheSheet:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="remoteStepperAction:">
+							<string key="name">remoteStepperAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showTheSheet:">
+							<string key="name">showTheSheet:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="advancedPanel">NSPanel</string>
+						<string key="loginNameTextField">NSTextField</string>
+						<string key="remoteHostTextField">NSTextField</string>
+						<string key="remotePortStepper">NSStepper</string>
+						<string key="remotePortTextField">NSTextField</string>
+						<string key="serverArrayController">NSArrayController</string>
+						<string key="serversTableView">NSTableView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="advancedPanel">
+							<string key="name">advancedPanel</string>
+							<string key="candidateClassName">NSPanel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="loginNameTextField">
+							<string key="name">loginNameTextField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="remoteHostTextField">
+							<string key="name">remoteHostTextField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="remotePortStepper">
+							<string key="name">remotePortStepper</string>
+							<string key="candidateClassName">NSStepper</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="remotePortTextField">
+							<string key="name">remotePortTextField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="serverArrayController">
+							<string key="name">serverArrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="serversTableView">
+							<string key="name">serversTableView</string>
+							<string key="candidateClassName">NSTableView</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ServersPreferencesViewController.h</string>
