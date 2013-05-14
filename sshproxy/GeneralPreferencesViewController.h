@@ -22,4 +22,6 @@
 
 -(IBAction)toggleLaunchAtLogin:(id)sender;
 
+-(IBAction)closePreferencesWindow:(id)sender;
+
 @end

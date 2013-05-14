@@ -547,10 +547,10 @@
 						<object class="NSButton" id="123848939">
 							<reference key="NSNextResponder" ref="94713192"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{372, 295}, {12, 32}}</string>
+							<string key="NSFrame">{{-372, -359}, {0, 32}}</string>
 							<reference key="NSSuperview" ref="94713192"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="970551096"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="539938308">
@@ -573,6 +573,31 @@
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
+						<object class="NSButton" id="100370770">
+							<reference key="NSNextResponder" ref="94713192"/>
+							<int key="NSvFlags">268</int>
+							<string key="NSFrame">{{-183, -209}, {0, 32}}</string>
+							<reference key="NSSuperview" ref="94713192"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="123848939"/>
+							<string key="NSReuseIdentifierKey">_NS:9</string>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSButtonCell" key="NSCell" id="999371322">
+								<int key="NSCellFlags">67108864</int>
+								<int key="NSCellFlags2">134217728</int>
+								<string key="NSContents">Cancel</string>
+								<reference key="NSSupport" ref="1068448359"/>
+								<string key="NSCellIdentifier">_NS:9</string>
+								<reference key="NSControlView" ref="100370770"/>
+								<int key="NSButtonFlags">-2038251520</int>
+								<int key="NSButtonFlags2">129</int>
+								<string key="NSAlternateContents"/>
+								<string type="base64-UTF8" key="NSKeyEquivalent">Gw</string>
+								<int key="NSPeriodicDelay">200</int>
+								<int key="NSPeriodicInterval">25</int>
+							</object>
+							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						</object>
 						<object class="NSImageView" id="810404730">
 							<reference key="NSNextResponder" ref="94713192"/>
 							<int key="NSvFlags">264</int>
@@ -587,7 +612,7 @@
 							<string key="NSFrame">{{157, 239}, {64, 64}}</string>
 							<reference key="NSSuperview" ref="94713192"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="123848939"/>
+							<reference key="NSNextKeyView" ref="970551096"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="276380854">
@@ -736,7 +761,7 @@
 											<string key="NSFrame">{{13, 10}, {353, 30}}</string>
 											<reference key="NSSuperview" ref="701179940"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
+											<reference key="NSNextKeyView" ref="100370770"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="615417234">
@@ -1233,6 +1258,14 @@
 					</object>
 					<int key="connectionID">1004</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">orderOut:</string>
+						<reference key="source" ref="753612579"/>
+						<reference key="destination" ref="100370770"/>
+					</object>
+					<int key="connectionID">1200</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -1344,6 +1377,7 @@
 							<reference ref="94713192"/>
 						</array>
 						<reference key="parent" ref="0"/>
+						<string key="objectName">About SSH Proxy Window</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">823</int>
@@ -1353,6 +1387,7 @@
 							<reference ref="689992370"/>
 							<reference ref="810404730"/>
 							<reference ref="123848939"/>
+							<reference ref="100370770"/>
 						</array>
 						<reference key="parent" ref="753612579"/>
 					</object>
@@ -1363,7 +1398,7 @@
 							<reference ref="539938308"/>
 						</array>
 						<reference key="parent" ref="94713192"/>
-						<string key="objectName">Close Button</string>
+						<string key="objectName">Close Button (Hide)</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">829</int>
@@ -1801,6 +1836,20 @@
 						<reference key="object" ref="8831353"/>
 						<reference key="parent" ref="120350161"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1198</int>
+						<reference key="object" ref="100370770"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="999371322"/>
+						</array>
+						<reference key="parent" ref="94713192"/>
+						<string key="objectName">Close Button (Hide, ESC)</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1199</int>
+						<reference key="object" ref="999371322"/>
+						<reference key="parent" ref="100370770"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1861,6 +1910,8 @@
 				<string key="1193.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1194.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1195.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1198.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1199.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="371.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="795.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="796.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1897,7 +1948,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1197</int>
+			<int key="maxID">1200</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
