@@ -573,7 +573,7 @@
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
-						<object class="NSButton" id="100370770">
+						<object class="NSButton" id="656893209">
 							<reference key="NSNextResponder" ref="94713192"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{-183, -209}, {0, 32}}</string>
@@ -582,13 +582,13 @@
 							<reference key="NSNextKeyView" ref="123848939"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="999371322">
+							<object class="NSButtonCell" key="NSCell" id="852592488">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents">Cancel</string>
 								<reference key="NSSupport" ref="1068448359"/>
 								<string key="NSCellIdentifier">_NS:9</string>
-								<reference key="NSControlView" ref="100370770"/>
+								<reference key="NSControlView" ref="656893209"/>
 								<int key="NSButtonFlags">-2038251520</int>
 								<int key="NSButtonFlags2">129</int>
 								<string key="NSAlternateContents"/>
@@ -692,7 +692,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="753651638">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">138413056</int>
-												<string key="NSContents">Version: 13.04</string>
+												<string key="NSContents">Version: 13.06</string>
 												<object class="NSFont" key="NSSupport" id="26">
 													<string key="NSName">LucidaGrande</string>
 													<double key="NSSize">11</double>
@@ -725,7 +725,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="691318586">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">138413056</int>
-												<string key="NSContents">Release Date: 2013-04-16</string>
+												<string key="NSContents">Release Date: 2013-06-1</string>
 												<reference key="NSSupport" ref="26"/>
 												<string key="NSCellIdentifier">_NS:1535</string>
 												<reference key="NSControlView" ref="436886593"/>
@@ -761,7 +761,7 @@
 											<string key="NSFrame">{{13, 10}, {353, 30}}</string>
 											<reference key="NSSuperview" ref="701179940"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="100370770"/>
+											<reference key="NSNextKeyView" ref="656893209"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="615417234">
@@ -1262,7 +1262,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">orderOut:</string>
 						<reference key="source" ref="753612579"/>
-						<reference key="destination" ref="100370770"/>
+						<reference key="destination" ref="656893209"/>
 					</object>
 					<int key="connectionID">1200</int>
 				</object>
@@ -1387,7 +1387,7 @@
 							<reference ref="689992370"/>
 							<reference ref="810404730"/>
 							<reference ref="123848939"/>
-							<reference ref="100370770"/>
+							<reference ref="656893209"/>
 						</array>
 						<reference key="parent" ref="753612579"/>
 					</object>
@@ -1838,17 +1838,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1198</int>
-						<reference key="object" ref="100370770"/>
+						<reference key="object" ref="656893209"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="999371322"/>
+							<reference ref="852592488"/>
 						</array>
 						<reference key="parent" ref="94713192"/>
 						<string key="objectName">Close Button (Hide, ESC)</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1199</int>
-						<reference key="object" ref="999371322"/>
-						<reference key="parent" ref="100370770"/>
+						<reference key="object" ref="852592488"/>
+						<reference key="parent" ref="656893209"/>
 					</object>
 				</array>
 			</object>
