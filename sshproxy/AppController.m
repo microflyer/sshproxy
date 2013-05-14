@@ -50,12 +50,16 @@
     [statusItem setImage:offStatusImage];
     //    [statusItem setAlternateImage:statusHighlightImage];
     
-    //Tells the NSStatusItem what menu to load
-    [statusItem setMenu:statusMenu];
+    //Tells the NSStatusItem what action to active
+    [statusItem setAction:@selector(statusItemClicked)];
     //Sets the tooptip for our item
     [statusItem setToolTip:@"SSH Proxy"];
     //Enables highlighting
     [statusItem setHighlightMode:YES];
+}
+
+- (void)statusItemClicked {
+    [statusItem popUpStatusItemMenu:statusMenu];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification

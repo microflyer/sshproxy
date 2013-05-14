@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "GeneralPreferencesViewController.h"
 
-@interface AppController : NSObject <NSApplicationDelegate> {
+@interface AppController : NSObject <NSApplicationDelegate, NSMenuDelegate> {
     /* Our outlets which allow us to access the interface */
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem* statusMenuItem;
