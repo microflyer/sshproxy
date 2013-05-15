@@ -51,6 +51,7 @@
 		4AD3FE0816A56EF400378F77 /* SSH_ProxyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3FE0716A56EF400378F77 /* SSH_ProxyTests.m */; };
 		4AE2C1711742151D00D0C57D /* ServersPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE2C1701742151D00D0C57D /* ServersPreferencesView.xib */; };
 		4AE2C1741742154100D0C57D /* ServersPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2C1731742154100D0C57D /* ServersPreferencesViewController.m */; };
+		4AE2C1771743214000D0C57D /* SSHHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2C1761743214000D0C57D /* SSHHelper.m */; };
 		4AEC465916A6A35E008BD118 /* GeneralPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEC465816A6A35E008BD118 /* GeneralPreferencesView.xib */; };
 		4AEC465C16A6A3F5008BD118 /* GeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEC465B16A6A3F5008BD118 /* GeneralPreferencesViewController.m */; };
 /* End PBXBuildFile section */
@@ -182,6 +183,8 @@
 		4AE2C1701742151D00D0C57D /* ServersPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServersPreferencesView.xib; sourceTree = "<group>"; };
 		4AE2C1721742154100D0C57D /* ServersPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServersPreferencesViewController.h; sourceTree = "<group>"; };
 		4AE2C1731742154100D0C57D /* ServersPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServersPreferencesViewController.m; sourceTree = "<group>"; };
+		4AE2C1751743214000D0C57D /* SSHHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSHHelper.h; sourceTree = "<group>"; };
+		4AE2C1761743214000D0C57D /* SSHHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSHHelper.m; sourceTree = "<group>"; };
 		4AEC465816A6A35E008BD118 /* GeneralPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralPreferencesView.xib; sourceTree = "<group>"; };
 		4AEC465A16A6A3F5008BD118 /* GeneralPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GeneralPreferencesViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AEC465B16A6A3F5008BD118 /* GeneralPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = GeneralPreferencesViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -369,6 +372,8 @@
 				4A03F73D16A695F0009BCD79 /* StatusMenu.xib */,
 				4A03F73716A69519009BCD79 /* AppController.h */,
 				4A03F73816A69519009BCD79 /* AppController.m */,
+				4AE2C1751743214000D0C57D /* SSHHelper.h */,
+				4AE2C1761743214000D0C57D /* SSHHelper.m */,
 				4A1BE49C16A68F30000E56D7 /* sshproxy.entitlements */,
 				4AD3FDE416A56EF400378F77 /* Supporting Files */,
 				4AEC465816A6A35E008BD118 /* GeneralPreferencesView.xib */,
@@ -636,6 +641,7 @@
 				4AA6471416BD006700DE5CAD /* MASPreferencesWindowController.m in Sources */,
 				4A37A086171AEC6300605BE1 /* CharmTextField.m in Sources */,
 				4AE2C1741742154100D0C57D /* ServersPreferencesViewController.m in Sources */,
+				4AE2C1771743214000D0C57D /* SSHHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

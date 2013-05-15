@@ -9,6 +9,7 @@
 #import "GeneralPreferencesViewController.h"
 #import "ServersPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
+#import "SSHHelper.h"
 #import <ServiceManagement/ServiceManagement.h>
 
 @implementation AppController
@@ -60,7 +61,7 @@
 
 - (void)statusItemClicked {
     NSMenu* menu = [statusMenu copy];
-    menu.minimumWidth = 250.0;
+    menu.minimumWidth = 256.0;
     
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     NSArray* servers = [settings arrayForKey:@"servers"];
@@ -115,68 +116,6 @@
     proxyStatus = SSHPROXY_ON;
     
     [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 0.0];
-}
-
-// for ProxyCommand
--(NSString*) getProxyCommandStr
-{
-    NSString *connectPath = [NSBundle pathForResource:@"connect" ofType:@""
-                                          inDirectory:[[NSBundle mainBundle] bundlePath]];
-    
-    BOOL proxyCommand = [[NSUserDefaults standardUserDefaults] boolForKey:@"proxy_command"];
-    int proxyCommandType = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"proxy_command_type"];
-    NSString* proxyCommandHost = (NSString*)[[NSUserDefaults standardUserDefaults] stringForKey:@"proxy_command_host"];
-    int proxyCommandPort = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"proxy_command_port"];
-    
-    NSString* proxyCommandStr = nil;
-    if (proxyCommand){
-        if (proxyCommandHost) {
-            NSString* proxyType = @"-S";
-            
-            switch (proxyCommandType) {
-                case 0:
-                    proxyType = @"-5 -S";
-                    break;
-                case 1:
-                    proxyType = @"-4 -S";
-                    break;
-                case 2:
-                    proxyType = @"-H";
-                    break;
-            }
-            
-            if (proxyCommandPort<=0 || proxyCommandPort>65535) {
-                proxyCommandPort = 1080;
-            }
-            
-            proxyCommandStr = [NSString stringWithFormat:@"-oProxyCommand=\"%@\" -d -w 8 %@ %@:%d %@", connectPath, proxyType, proxyCommandHost, proxyCommandPort, @"%h %p"];
-        }
-    }
-    
-    return proxyCommandStr;
-}
-
-// for ProxyCommand Env
--(NSMutableDictionary*) getProxyCommandEnv
-{
-    NSMutableDictionary* env = [NSMutableDictionary dictionary];
-    
-    BOOL proxyCommand = [[NSUserDefaults standardUserDefaults] boolForKey:@"proxy_command"];
-    BOOL proxyCommandAuth = [[NSUserDefaults standardUserDefaults] boolForKey:@"proxy_command_auth"];
-    NSString* proxyCommandUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"proxy_command_username"];
-    NSString* proxyCommandPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"proxy_command_password"];
-    
-    if (proxyCommand && proxyCommandAuth) {
-        if (proxyCommandUsername) {
-            [env setValue:@"YES" forKey:@"HTTP_PROXY_FORCE_AUTH"];
-            [env setValue:proxyCommandUsername forKey:@"CONNECT_USER"];
-            if (proxyCommandPassword) {
-                [env setValue:proxyCommandPassword forKey:@"CONNECT_PASSWORD"];
-            }
-        }
-    }
-    
-    return env;
 }
 
 -(IBAction)_turnOnProxy:(id)sender
@@ -246,7 +185,7 @@
                                 userHome, @"SSHPROXY_USER_HOME",
                                 @"1",@"INTERACTION",
                                 nil];
-    [env addEntriesFromDictionary:[self getProxyCommandEnv]];
+    [env addEntriesFromDictionary:[SSHHelper getProxyCommandEnv]];
     
     BOOL enableCompression = [[NSUserDefaults standardUserDefaults] boolForKey:@"enable_compression"];
     BOOL shareSocks = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_socks"];
@@ -277,7 +216,7 @@
                                  @"-oLogLevel=DEBUG",
                                  @"-oPreferredAuthentications=password",
                                  nil];
-    NSString *proxyCommandStr = [self getProxyCommandStr];
+    NSString *proxyCommandStr = [SSHHelper getProxyCommandStr];
     
     if (proxyCommandStr) {
         [arguments addObject:proxyCommandStr];
@@ -333,6 +272,17 @@
     proxyStatus = SSHPROXY_CONNECTED;
 }
 
+- (void)reconnectIfNeed:(NSString*) state
+{
+    if (proxyStatus==SSHPROXY_CONNECTED) {
+        [statusItem setImage:inStatusImage];
+        [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Reconnecting - %@", state]];
+        [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
+    } else {
+        [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Off - %@", state]];
+    }
+}
+
 - (void)dataReady:(NSNotification *)n
 {
     NSData *d;
@@ -358,61 +308,21 @@
         } else if ([taskOutput rangeOfString:@"Permission denied (publickey,password)"].location != NSNotFound) {
             [statusMenuItem setTitle:@"Proxy: Off - incorrect password"];
             return;
-        } else if ([taskOutput rangeOfString:@"ssh: Could not resolve hostname"].location != NSNotFound) {
-            if (proxyStatus==SSHPROXY_CONNECTED) {
-                [statusItem setImage:inStatusImage];
-                [statusMenuItem setTitle:@"Proxy: Reconnecting - could not resolve hostname"];
-                [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
-            } else {
-                [statusMenuItem setTitle:@"Proxy: Off - could not resolve hostname"];
-            }
-        } else if ([taskOutput rangeOfString:@"Connection refused"].location != NSNotFound) {
-            if (proxyStatus==SSHPROXY_CONNECTED) {
-                [statusItem setImage:inStatusImage];
-                [statusMenuItem setTitle:@"Proxy: Reconnecting - connection refused"];
-                [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
-            } else {
-                [statusMenuItem setTitle:@"Proxy: Off - connection refused"];
-            }
-        } else if ([taskOutput rangeOfString:@"Timeout,"].location != NSNotFound) {
-            if (proxyStatus==SSHPROXY_CONNECTED) {
-                [statusItem setImage:inStatusImage];
-                [statusMenuItem setTitle:@"Proxy: Reconnecting - timeout, server not responding"];
-                [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
-            } else {
-                [statusMenuItem setTitle:@"Proxy: Off - timeout, server not responding"];
-            }
-        } else if ([taskOutput rangeOfString:@"timed out"].location != NSNotFound) {
-            if (proxyStatus==SSHPROXY_CONNECTED) {
-                [statusItem setImage:inStatusImage];
-                [statusMenuItem setTitle:@"Proxy: Reconnecting - connection timed out"];
-                [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
-            } else {
-                [statusMenuItem setTitle:@"Proxy: Off - connection timed out"];
-            }
-        } else if ([taskOutput rangeOfString:@"Write failed: Broken pipe"].location != NSNotFound) {
-            if (proxyStatus==SSHPROXY_CONNECTED) {
-                [statusItem setImage:inStatusImage];
-                [statusMenuItem setTitle:@"Proxy: Reconnecting - disconnected from remote proxy server"];
-                [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
-            } else {
-                [statusMenuItem setTitle:@"Proxy: Off - disconnected from  remote proxy server"];
-            }
-        } else if ([taskOutput rangeOfString:@"Connection closed by remote host"].location != NSNotFound) {
-            if (proxyStatus==SSHPROXY_CONNECTED) {
-                [statusItem setImage:inStatusImage];
-                [statusMenuItem setTitle:@"Proxy: Reconnecting - failed to connect remote proxy server"];
-                [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
-            } else {
-                [statusMenuItem setTitle:@"Proxy: Off - failed to connect remote proxy server"];
-            }
-        }  else {
-            if (proxyStatus==SSHPROXY_CONNECTED) {
-                [statusItem setImage:inStatusImage];
-                [statusMenuItem setTitle:@"Proxy: Reconnecting - unknown error"];
-                [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
-            } else {
-                [statusMenuItem setTitle:@"Proxy: Off"];
+        } else {
+            NSArray* errors = @[
+                                @[@"ssh: Could not resolve hostname"   , @"could not resolve hostname"],
+                                @[@"Connection refused"                , @"connection refused"],
+                                @[@"Timeout,"                          , @"timeout, server not responding"],
+                                @[@"timed out"                         , @"connection timed out"],
+                                @[@"Write failed: Broken pipe"         , @"disconnected from  remote proxy server"],
+                                @[@"Connection closed by remote host"  , @"failed to connect remote proxy server"],
+                                @[@"unknown error"                     , @"unknown error"], // TODO: has bug when manually Turn Off
+                                ];
+            for (NSArray* error in errors) {
+                if ( ([taskOutput rangeOfString:error[0]].location != NSNotFound) || [error[0]isEqual:@"unknown error"]) {
+                    [self reconnectIfNeed:error[1]];
+                    break;
+                }
             }
         }
         
