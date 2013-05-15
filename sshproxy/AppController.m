@@ -59,7 +59,30 @@
 }
 
 - (void)statusItemClicked {
-    [statusItem popUpStatusItemMenu:statusMenu];
+    NSMenu* menu = [statusMenu copy];
+    menu.minimumWidth = 250.0;
+    
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    NSArray* servers = [settings arrayForKey:@"servers"];
+    
+    if (servers && servers.count>0) {
+        [menu insertItemWithTitle:@"Servers:" action:nil keyEquivalent:@"" atIndex:4];
+        
+        int i = 1;
+        for (NSDictionary* server in servers) {
+            NSMenuItem* item = [NSMenuItem alloc];
+            item.title = [NSString stringWithFormat:@"%@@%@", (NSString *)[server valueForKey:@"login_name"], (NSString *)[server valueForKey:@"remote_host"]];
+            item.action = @selector(turnOnProxy:);
+            item.indentationLevel = 1;
+            
+            [menu insertItem:item atIndex:4+i];
+            i++;
+        }
+        
+        [menu insertItem:[NSMenuItem separatorItem] atIndex:4+i];
+    }
+    
+    [statusItem popUpStatusItemMenu:menu];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
