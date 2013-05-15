@@ -17,4 +17,9 @@
 
 + (NSMutableArray*) getConnectArgs;
 
++ (NSDictionary*) getActivatedServer;
++ (NSInteger) getActivatedServerIndex;
+
++ (void) setActivatedServer:(int) index;
+
 @end

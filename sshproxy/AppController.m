@@ -65,6 +65,7 @@
     menu.minimumWidth = 256.0;
     
     NSArray* servers = [[NSUserDefaults standardUserDefaults] arrayForKey:@"servers"];
+    NSInteger activatedServerIndex = [SSHHelper getActivatedServerIndex];
     
     if (servers && servers.count>0) {
 //        [menu insertItemWithTitle:@"Servers:" action:nil keyEquivalent:@"" atIndex:4];
@@ -72,11 +73,15 @@
         int i = 0;
         for (NSDictionary* server in servers) {
             NSMenuItem* item = [NSMenuItem alloc];
-            item.title = [NSString stringWithFormat:@"%@@%@", (NSString *)[server valueForKey:@"login_name"], (NSString *)[server valueForKey:@"remote_host"]];
+            item.title = [NSString stringWithFormat:@" %@@%@", (NSString *)[server valueForKey:@"login_name"], (NSString *)[server valueForKey:@"remote_host"]];
             item.action = @selector(switchServer:);
             item.indentationLevel = 1;
             
             item.representedObject = [NSNumber numberWithInt:i];
+            
+            if (i==activatedServerIndex) {
+                [item setState:NSOnState];
+            }
             
             [menu insertItem:item atIndex:4+i];
             i++;
@@ -94,11 +99,10 @@
     NSMenuItem* menuItem = (NSMenuItem*)sender;
     
     int index = [(NSNumber*)menuItem.representedObject intValue];
+    [SSHHelper setActivatedServer:index];
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setInteger:index forKey:@"activated_server"];
-    [prefs synchronize];
-    
+    [self performSelector: @selector(turnOffProxy:) withObject:self afterDelay: 0.0];
+    [task waitUntilExit];
     [self performSelector: @selector(turnOnProxy:) withObject:self afterDelay: 0.0];
 }
 
@@ -128,10 +132,16 @@
 
 -(IBAction)_turnOnProxy:(id)sender
 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSArray* servers = [prefs arrayForKey:@"servers"];
+    NSDictionary* server = [SSHHelper getActivatedServer];
     
-    NSString* remoteHost = [prefs stringForKey:@"remote_host"];
+    NSString* remoteHost = (NSString *)[server valueForKey:@"remote_host"];
+    NSString* loginName = (NSString *)[server valueForKey:@"login_name"];
+    int remotePort = [(NSNumber*)[server valueForKey:@"remote_port"] intValue];
+    int localPort = [(NSNumber*)[server valueForKey:@"local_port"] intValue];
+    BOOL enableCompression = [(NSNumber*)[server valueForKey:@"enable_compression"] boolValue];
+    BOOL shareSocks = [(NSNumber*)[server valueForKey:@"share_socks"] boolValue];
+    
+    
     // open preferences window if remoteHost is empty
     if (!remoteHost) {
         [self performSelector: @selector(openPreferences:) withObject:self afterDelay: 0.0];
@@ -139,23 +149,19 @@
     }
     
     // get perferences
-    //    NSString* remoteHost = [prefs stringForKey:@"remote_host"];
     if (!remoteHost) {
         remoteHost = @"";
     }
     
     
-    NSString* loginName = [prefs stringForKey:@"login_name"];
     if (!loginName) {
         loginName = @"";
     }
     
-    int remotePort = (int)[prefs integerForKey:@"remote_port"];
     if (remotePort<=0 || remotePort>65535) {
         remotePort = 22;
     }
     
-    int localPort = (int)[prefs integerForKey:@"local_port"];
     if (localPort<=0 || localPort>65535) {
         localPort = 7070;
     }
@@ -195,9 +201,6 @@
                                 @"1",@"INTERACTION",
                                 nil];
     [env addEntriesFromDictionary:[SSHHelper getProxyCommandEnv]];
-    
-    BOOL enableCompression = [prefs boolForKey:@"enable_compression"];
-    BOOL shareSocks = [prefs boolForKey:@"share_socks"];
     
     NSMutableString* advancedOptions = [NSMutableString stringWithString:@"-"];
     if (shareSocks) {

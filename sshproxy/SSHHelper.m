@@ -99,4 +99,35 @@
     return proxyCommandStr;
 }
 
++ (NSInteger) getActivatedServerIndex
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    NSArray* servers = [prefs arrayForKey:@"servers"];
+    NSInteger index = [prefs integerForKey:@"activated_server"];
+    
+    if (index<0 || index>=servers.count) {
+        index = 0;
+    }
+    
+    return index;
+}
+
++ (NSDictionary*) getActivatedServer
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    NSArray* servers = [prefs arrayForKey:@"servers"];
+    NSInteger index = [SSHHelper getActivatedServerIndex];
+    
+    return servers[index];
+}
+
++ (void) setActivatedServer:(int) index
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setInteger:index forKey:@"activated_server"];
+    [prefs synchronize];
+}
+
 @end
