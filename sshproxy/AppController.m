@@ -123,16 +123,22 @@
     }
 }
 
--(IBAction)turnOnProxy:(id)sender
+- (IBAction)turnOnProxy:(id)sender
 {
     proxyStatus = SSHPROXY_ON;
     
     [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 0.0];
 }
 
--(IBAction)_turnOnProxy:(id)sender
+- (IBAction)_turnOnProxy:(id)sender
 {
     NSDictionary* server = [SSHHelper getActivatedServer];
+    
+    // open preferences window if remoteHost is empty
+    if (!server) {
+        [self openServersPreferences];
+        return;
+    }
     
     NSString* remoteHost = (NSString *)[server valueForKey:@"remote_host"];
     NSString* loginName = (NSString *)[server valueForKey:@"login_name"];
@@ -140,13 +146,6 @@
     int localPort = [(NSNumber*)[server valueForKey:@"local_port"] intValue];
     BOOL enableCompression = [(NSNumber*)[server valueForKey:@"enable_compression"] boolValue];
     BOOL shareSocks = [(NSNumber*)[server valueForKey:@"share_socks"] boolValue];
-    
-    
-    // open preferences window if remoteHost is empty
-    if (!remoteHost) {
-        [self performSelector: @selector(openPreferences:) withObject:self afterDelay: 0.0];
-        return;
-    }
     
     // get perferences
     if (!remoteHost) {
@@ -390,7 +389,8 @@
     return _preferencesWindowController;
 }
 
--(IBAction)openPreferences:(id)sender {
+- (IBAction)openPreferences:(id)sender
+{
     if(_preferencesWindowController) {
         [_preferencesWindowController close];
         _preferencesWindowController = nil;
@@ -404,7 +404,15 @@
     [self.preferencesWindowController showWindow:nil];
 }
 
--(IBAction)openAboutWindow:(id)sender
+
+- (void)openServersPreferences
+{
+    [self performSelector: @selector(openPreferences:) withObject:self afterDelay: 0.0];
+    
+    [self.preferencesWindowController selectControllerAtIndex:1];
+}
+
+- (IBAction)openAboutWindow:(id)sender
 {
     [NSApp activateIgnoringOtherApps:YES];
     

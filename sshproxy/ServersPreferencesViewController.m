@@ -52,6 +52,8 @@
     
     [remotePortStepper setIntegerValue:remotePort];
     
+    
+    // TODO: will called multiple times
     if ([serversTableView numberOfRows]<=0) {
         [self performSelector: @selector(addServer:) withObject:self afterDelay: 0.0];
     }
@@ -62,7 +64,7 @@
 	[remotePortTextField setIntValue: [remotePortStepper intValue]];
 }
 
-- (IBAction) showTheSheet:(id)sender
+- (IBAction)showTheSheet:(id)sender
 {
     [NSApp beginSheet:advancedPanel
        modalForWindow:self.view.window

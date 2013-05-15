@@ -118,8 +118,12 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     NSArray* servers = [prefs arrayForKey:@"servers"];
-    NSInteger index = [SSHHelper getActivatedServerIndex];
     
+    if ( [servers count]<=0 ){
+        return nil;
+    }
+    
+    NSInteger index = [SSHHelper getActivatedServerIndex];
     return servers[index];
 }
 

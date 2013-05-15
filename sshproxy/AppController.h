@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "GeneralPreferencesViewController.h"
+#import "MASPreferencesWindowController.h"
 
 @interface AppController : NSObject <NSApplicationDelegate, NSMenuDelegate> {
     /* Our outlets which allow us to access the interface */
@@ -31,10 +32,10 @@
     
     int proxyStatus;
     
-    NSWindowController *_preferencesWindowController;
+    MASPreferencesWindowController *_preferencesWindowController;
 }
 
-@property (nonatomic, readonly) NSWindowController *preferencesWindowController;
+@property (nonatomic, readonly) MASPreferencesWindowController *preferencesWindowController;
 
 /* Our IBAction which will call the helloWorld method when our connected Menu Item is pressed */
 
