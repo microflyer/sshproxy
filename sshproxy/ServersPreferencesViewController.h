@@ -16,19 +16,20 @@
     
     IBOutlet NSTextField* loginNameTextField;
     IBOutlet NSPanel* advancedPanel;
+    IBOutlet NSTableView* serversTableView;
 }
 
 
--(IBAction)remoteStepperAction:(id)sender;
+- (IBAction) remoteStepperAction:(id)sender;
 
--(IBAction)closePreferencesWindow:(id)sender;
+- (IBAction) closePreferencesWindow:(id)sender;
 
--(IBAction)addServer:(id)sender;
+- (IBAction) duplicateServer:(id)sender;
+- (IBAction) addServer:(id)sender;
 
--(IBAction)showTheSheet:(id)sender;
--(IBAction)endTheSheet:(id)sender;
+- (IBAction) showTheSheet:(id)sender;
+- (IBAction) endTheSheet:(id)sender;
 
-@property IBOutlet NSTableView* serversTableView;
 @property IBOutlet NSArrayController* serverArrayController;
 
 @end

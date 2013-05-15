@@ -34,7 +34,7 @@
     return NSLocalizedString(@"Servers", @"Toolbar item name for the Servers preference pane");
 }
 
--(void)awakeFromNib
+- (void)awakeFromNib
 {
     CharmNumberFormatter *formatter = [[CharmNumberFormatter alloc] init];
     [remotePortTextField setFormatter:formatter];
@@ -51,13 +51,19 @@
     }
     
     [remotePortStepper setIntegerValue:remotePort];
+    
+    if ([serversTableView numberOfRows]<=0) {
+        [self performSelector: @selector(addServer:) withObject:self afterDelay: 0.0];
+    }
 }
 
-- (IBAction)remoteStepperAction:(id)sender {
+- (IBAction)remoteStepperAction:(id)sender
+{
 	[remotePortTextField setIntValue: [remotePortStepper intValue]];
 }
 
-- (IBAction) showTheSheet:(id)sender {
+- (IBAction) showTheSheet:(id)sender
+{
     [NSApp beginSheet:advancedPanel
        modalForWindow:self.view.window
         modalDelegate:self
@@ -65,14 +71,27 @@
           contextInfo:nil];
 }
 
--(IBAction)endTheSheet:(id)sender {
+- (IBAction)endTheSheet:(id)sender
+{
     [NSApp endSheet:advancedPanel];
     [advancedPanel orderOut:sender];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(IBAction)addServer:(id)sender {
+- (void)_addServer:(NSDictionary*)server
+{
+    [self.serverArrayController addObject:server];
+    
+    NSInteger index = [serversTableView numberOfRows]-1;
+    [serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+    
+    [remoteHostTextField becomeFirstResponder];
+    [serversTableView scrollRowToVisible:index];
+}
+
+- (IBAction)addServer:(id)sender
+{
     NSMutableDictionary* defaultServer = [[NSMutableDictionary alloc] init];
     
     [defaultServer setObject:@"example.com" forKey:@"remote_host"];
@@ -81,10 +100,16 @@
     [defaultServer setObject:[NSNumber numberWithBool:NO] forKey:@"enable_compression"];
     [defaultServer setObject:[NSNumber numberWithBool:NO] forKey:@"share_socks"];
     
-    [self.serverArrayController addObject:defaultServer];
+    [self _addServer:defaultServer];
 }
 
--(IBAction)closePreferencesWindow:(id)sender {
+- (IBAction)duplicateServer:(id)sender
+{
+    NSDictionary* server = (NSDictionary*)[self.serverArrayController selectedObjects][0];
+    [self _addServer:server];
+}
+
+- (IBAction)closePreferencesWindow:(id)sender {
     [self.view.window orderOut:nil];
 }
 
