@@ -11,8 +11,10 @@
 @interface SSHHelper : NSObject
 
 // for ProxyCommand
-+(NSString*) getProxyCommandStr;
++ (NSString*) getProxyCommandStr;
 
-+(NSMutableDictionary*) getProxyCommandEnv;
++ (NSMutableDictionary*) getProxyCommandEnv;
+
++ (NSMutableArray*) getConnectArgs;
 
 @end

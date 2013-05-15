@@ -11,9 +11,34 @@
 @implementation SSHHelper
 
 
++ (NSMutableArray*) getConnectArgs
+{
+    NSString* userHome = NSHomeDirectory();
+    NSString* knownHostFile= [userHome stringByAppendingPathComponent:@".sshproxy_known_hosts"];
+    NSString* identityFile= [userHome stringByAppendingPathComponent:@".sshproxy_identity"];
+    //    NSString* configFile= [userHome stringByAppendingPathComponent:@".sshproxy_config"];
+    
+    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:
+                                 [NSString stringWithFormat:@"-oUserKnownHostsFile=\"%@\"", knownHostFile],
+                                 [NSString stringWithFormat:@"-oGlobalKnownHostsFile=\"%@\"", knownHostFile],
+                                 [NSString stringWithFormat:@"-oIdentityFile=\"%@\"", identityFile],
+                                 // TODO:
+                                 //                        [NSString stringWithFormat:@"-F \"%@\"", configFile],
+                                 @"-oIdentitiesOnly=yes",
+                                 @"-oPubkeyAuthentication=no",
+                                 @"-T", @"-2", @"-a",
+                                 @"-oConnectTimeout=8", @"-oConnectionAttempts=3",
+                                 @"-oServerAliveInterval=8", @"-oServerAliveCountMax=1",
+                                 @"-oStrictHostKeyChecking=no", @"-oExitOnForwardFailure=yes",
+                                 @"-oLogLevel=DEBUG",
+                                 @"-oPreferredAuthentications=password",
+                                 nil];
+    
+    return arguments;
+}
 
 // for ProxyCommand Env
-+(NSMutableDictionary*) getProxyCommandEnv
++ (NSMutableDictionary*) getProxyCommandEnv
 {
     NSMutableDictionary* env = [NSMutableDictionary dictionary];
     
@@ -36,7 +61,7 @@
 }
 
 // for ProxyCommand
-+(NSString*) getProxyCommandStr
++ (NSString*) getProxyCommandStr
 {
     NSString *connectPath = [NSBundle pathForResource:@"connect" ofType:@""
                                           inDirectory:[[NSBundle mainBundle] bundlePath]];

@@ -148,7 +148,7 @@
         localPort = 7070;
     }
     
-    NSString* connectingString = [NSString stringWithFormat:@"Proxy: Connecting to \"%@@%@:%d\" ...", loginName, remoteHost, remotePort];
+    NSString* connectingString = [NSString stringWithFormat:@"Proxy: Connecting ..."];
     [statusItem setImage:inStatusImage];
     [statusMenuItem setTitle:connectingString];
     
@@ -167,9 +167,6 @@
     
     task = [[NSTask alloc] init];
     NSString* userHome = NSHomeDirectory();
-    NSString* knownHostFile= [userHome stringByAppendingPathComponent:@".sshproxy_known_hosts"];
-    NSString* identityFile= [userHome stringByAppendingPathComponent:@".sshproxy_identity"];
-    //    NSString* configFile= [userHome stringByAppendingPathComponent:@".sshproxy_config"];
     
     // Get the path of our Askpass program, which we've included as part of the main application bundle
     NSString *askPassPath = [NSBundle pathForResource:@"SSH Proxy - Ask Password" ofType:@""
@@ -201,21 +198,7 @@
     
     //    DLog(@"Environment dict %@",env);
     
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:
-                                 [NSString stringWithFormat:@"-oUserKnownHostsFile=\"%@\"", knownHostFile],
-                                 [NSString stringWithFormat:@"-oGlobalKnownHostsFile=\"%@\"", knownHostFile],
-                                 [NSString stringWithFormat:@"-oIdentityFile=\"%@\"", identityFile],
-                                 // TODO:
-                                 //                        [NSString stringWithFormat:@"-F \"%@\"", configFile],
-                                 @"-oIdentitiesOnly=yes",
-                                 @"-oPubkeyAuthentication=no",
-                                 @"-T", @"-2", @"-a",
-                                 @"-oConnectTimeout=8", @"-oConnectionAttempts=3",
-                                 @"-oServerAliveInterval=8", @"-oServerAliveCountMax=1",
-                                 @"-oStrictHostKeyChecking=no", @"-oExitOnForwardFailure=yes",
-                                 @"-oLogLevel=DEBUG",
-                                 @"-oPreferredAuthentications=password",
-                                 nil];
+    NSMutableArray *arguments = [SSHHelper getConnectArgs];
     NSString *proxyCommandStr = [SSHHelper getProxyCommandStr];
     
     if (proxyCommandStr) {
@@ -223,12 +206,13 @@
     }
     
     [arguments addObjectsFromArray:@[
-     advancedOptions,
-     [NSString stringWithFormat:@"%d", localPort],
-     [NSString stringWithFormat:@"%@@%@", loginName, remoteHost],
-     @"-p",
-     [NSString stringWithFormat:@"%d", remotePort]
-     ]];
+                                     advancedOptions,
+                                     [NSString stringWithFormat:@"%d", localPort],
+                                     [NSString stringWithFormat:@"%@@%@", loginName, remoteHost],
+                                     @"-p",
+                                     [NSString stringWithFormat:@"%d", remotePort]
+                                ]
+     ];
     
     [task setEnvironment:env];
     [task setArguments:arguments];
