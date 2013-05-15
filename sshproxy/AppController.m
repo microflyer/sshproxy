@@ -59,22 +59,24 @@
     [statusItem setHighlightMode:YES];
 }
 
-- (void)statusItemClicked {
+- (void)statusItemClicked
+{
     NSMenu* menu = [statusMenu copy];
     menu.minimumWidth = 256.0;
     
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    NSArray* servers = [settings arrayForKey:@"servers"];
+    NSArray* servers = [[NSUserDefaults standardUserDefaults] arrayForKey:@"servers"];
     
     if (servers && servers.count>0) {
-        [menu insertItemWithTitle:@"Servers:" action:nil keyEquivalent:@"" atIndex:4];
+//        [menu insertItemWithTitle:@"Servers:" action:nil keyEquivalent:@"" atIndex:4];
         
-        int i = 1;
+        int i = 0;
         for (NSDictionary* server in servers) {
             NSMenuItem* item = [NSMenuItem alloc];
             item.title = [NSString stringWithFormat:@"%@@%@", (NSString *)[server valueForKey:@"login_name"], (NSString *)[server valueForKey:@"remote_host"]];
-            item.action = @selector(turnOnProxy:);
+            item.action = @selector(switchServer:);
             item.indentationLevel = 1;
+            
+            item.representedObject = [NSNumber numberWithInt:i];
             
             [menu insertItem:item atIndex:4+i];
             i++;
@@ -84,6 +86,20 @@
     }
     
     [statusItem popUpStatusItemMenu:menu];
+}
+
+
+- (void)switchServer:(id)sender
+{
+    NSMenuItem* menuItem = (NSMenuItem*)sender;
+    
+    int index = [(NSNumber*)menuItem.representedObject intValue];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setInteger:index forKey:@"activated_server"];
+    [prefs synchronize];
+    
+    [self performSelector: @selector(turnOnProxy:) withObject:self afterDelay: 0.0];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -103,14 +119,6 @@
     }
 }
 
-- (void) dealloc
-{
-    //Releases the 2 images we loaded into memory
-    //    [statusImage release];
-    //    [statusHighlightImage release];
-    //    [super dealloc];
-}
-
 -(IBAction)turnOnProxy:(id)sender
 {
     proxyStatus = SSHPROXY_ON;
@@ -120,7 +128,10 @@
 
 -(IBAction)_turnOnProxy:(id)sender
 {
-    NSString* remoteHost = [[NSUserDefaults standardUserDefaults] stringForKey:@"remote_host"];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSArray* servers = [prefs arrayForKey:@"servers"];
+    
+    NSString* remoteHost = [prefs stringForKey:@"remote_host"];
     // open preferences window if remoteHost is empty
     if (!remoteHost) {
         [self performSelector: @selector(openPreferences:) withObject:self afterDelay: 0.0];
@@ -128,22 +139,23 @@
     }
     
     // get perferences
-    //    NSString* remoteHost = [[NSUserDefaults standardUserDefaults] stringForKey:@"remote_host"];
+    //    NSString* remoteHost = [prefs stringForKey:@"remote_host"];
     if (!remoteHost) {
         remoteHost = @"";
     }
     
-    NSString* loginName = [[NSUserDefaults standardUserDefaults] stringForKey:@"login_name"];
+    
+    NSString* loginName = [prefs stringForKey:@"login_name"];
     if (!loginName) {
         loginName = @"";
     }
     
-    int remotePort = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"remote_port"];
+    int remotePort = (int)[prefs integerForKey:@"remote_port"];
     if (remotePort<=0 || remotePort>65535) {
         remotePort = 22;
     }
     
-    int localPort = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"local_port"];
+    int localPort = (int)[prefs integerForKey:@"local_port"];
     if (localPort<=0 || localPort>65535) {
         localPort = 7070;
     }
@@ -184,8 +196,8 @@
                                 nil];
     [env addEntriesFromDictionary:[SSHHelper getProxyCommandEnv]];
     
-    BOOL enableCompression = [[NSUserDefaults standardUserDefaults] boolForKey:@"enable_compression"];
-    BOOL shareSocks = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_socks"];
+    BOOL enableCompression = [prefs boolForKey:@"enable_compression"];
+    BOOL shareSocks = [prefs boolForKey:@"share_socks"];
     
     NSMutableString* advancedOptions = [NSMutableString stringWithString:@"-"];
     if (shareSocks) {
