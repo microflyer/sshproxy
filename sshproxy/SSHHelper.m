@@ -38,14 +38,15 @@
 }
 
 // for ProxyCommand Env
-+ (NSMutableDictionary*) getProxyCommandEnv
++ (NSDictionary*) getProxyCommandEnv:(NSDictionary*) server
 {
     NSMutableDictionary* env = [NSMutableDictionary dictionary];
     
-    BOOL proxyCommand = [[NSUserDefaults standardUserDefaults] boolForKey:@"proxy_command"];
-    BOOL proxyCommandAuth = [[NSUserDefaults standardUserDefaults] boolForKey:@"proxy_command_auth"];
-    NSString* proxyCommandUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"proxy_command_username"];
-    NSString* proxyCommandPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"proxy_command_password"];
+    BOOL proxyCommand = [(NSNumber *)[server valueForKey:@"proxy_command"] boolValue];
+    BOOL proxyCommandAuth = [(NSNumber *)[server valueForKey:@"proxy_command_auth"] boolValue];
+    
+    NSString* proxyCommandUsername = (NSString *)[server valueForKey:@"proxy_command_username"];
+    NSString* proxyCommandPassword = (NSString *)[server valueForKey:@"proxy_command_password"];
     
     if (proxyCommand && proxyCommandAuth) {
         if (proxyCommandUsername) {
@@ -61,15 +62,15 @@
 }
 
 // for ProxyCommand
-+ (NSString*) getProxyCommandStr
++ (NSString*)getProxyCommandStr:(NSDictionary*) server
 {
     NSString *connectPath = [NSBundle pathForResource:@"connect" ofType:@""
                                           inDirectory:[[NSBundle mainBundle] bundlePath]];
     
-    BOOL proxyCommand = [[NSUserDefaults standardUserDefaults] boolForKey:@"proxy_command"];
-    int proxyCommandType = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"proxy_command_type"];
-    NSString* proxyCommandHost = (NSString*)[[NSUserDefaults standardUserDefaults] stringForKey:@"proxy_command_host"];
-    int proxyCommandPort = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"proxy_command_port"];
+    BOOL proxyCommand = [(NSNumber *)[server valueForKey:@"proxy_command"] boolValue];
+    int proxyCommandType = [(NSNumber *)[server valueForKey:@"proxy_command_type"] intValue];
+    NSString* proxyCommandHost = (NSString *)[server valueForKey:@"proxy_command_host"];
+    int proxyCommandPort = [(NSNumber *)[server valueForKey:@"proxy_command_port"] intValue];
     
     NSString* proxyCommandStr = nil;
     if (proxyCommand){

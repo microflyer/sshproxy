@@ -199,7 +199,7 @@
                                 userHome, @"SSHPROXY_USER_HOME",
                                 @"1",@"INTERACTION",
                                 nil];
-    [env addEntriesFromDictionary:[SSHHelper getProxyCommandEnv]];
+    [env addEntriesFromDictionary:[SSHHelper getProxyCommandEnv:server]];
     
     NSMutableString* advancedOptions = [NSMutableString stringWithString:@"-"];
     if (shareSocks) {
@@ -213,7 +213,7 @@
     //    DLog(@"Environment dict %@",env);
     
     NSMutableArray *arguments = [SSHHelper getConnectArgs];
-    NSString *proxyCommandStr = [SSHHelper getProxyCommandStr];
+    NSString *proxyCommandStr = [SSHHelper getProxyCommandStr:server];
     
     if (proxyCommandStr) {
         [arguments addObject:proxyCommandStr];
