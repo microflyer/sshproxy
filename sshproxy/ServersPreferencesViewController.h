@@ -20,15 +20,16 @@
 }
 
 
-- (IBAction) remoteStepperAction:(id)sender;
+- (IBAction)remoteStepperAction:(id)sender;
 
-- (IBAction) closePreferencesWindow:(id)sender;
+- (IBAction)closePreferencesWindow:(id)sender;
 
-- (IBAction) duplicateServer:(id)sender;
-- (IBAction) addServer:(id)sender;
+- (IBAction)duplicateServer:(id)sender;
+- (IBAction)removeServer:(id)sender;
+- (IBAction)addServer:(id)sender;
 
-- (IBAction) showTheSheet:(id)sender;
-- (IBAction) endTheSheet:(id)sender;
+- (IBAction)showTheSheet:(id)sender;
+- (IBAction)endTheSheet:(id)sender;
 
 @property IBOutlet NSArrayController* serverArrayController;
 

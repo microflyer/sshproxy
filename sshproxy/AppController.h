@@ -41,8 +41,6 @@
 
 - (IBAction)turnOnProxy:(id)sender;
 
-- (IBAction)_turnOnProxy:(id)sender;
-
 - (IBAction)turnOffProxy:(id)sender;
 
 - (IBAction)openPreferences:(id)sender;

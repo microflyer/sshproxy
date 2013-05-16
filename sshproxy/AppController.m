@@ -404,12 +404,10 @@
     [self.preferencesWindowController showWindow:nil];
 }
 
-
 - (void)openServersPreferences
 {
-    [self performSelector: @selector(openPreferences:) withObject:self afterDelay: 0.0];
-    
     [self.preferencesWindowController selectControllerAtIndex:1];
+    [self performSelector: @selector(openPreferences:) withObject:self afterDelay: 0.0];
 }
 
 - (IBAction)openAboutWindow:(id)sender

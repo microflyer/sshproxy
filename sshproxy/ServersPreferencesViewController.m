@@ -55,7 +55,7 @@
     
     // TODO: will called multiple times
     if ([serversTableView numberOfRows]<=0) {
-        [self performSelector: @selector(addServer:) withObject:self afterDelay: 0.0];
+        [self performSelector: @selector(addServer:) withObject:self afterDelay: 0.0f];
     }
 }
 
@@ -89,6 +89,21 @@
     [serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     
     [remoteHostTextField becomeFirstResponder];
+    [serversTableView scrollRowToVisible:index];
+}
+
+- (IBAction)removeServer:(id)sender
+{
+    NSInteger count = [serversTableView numberOfRows];
+    
+    NSUInteger index = [self.serverArrayController selectionIndex];
+    [self.serverArrayController removeObjectAtArrangedObjectIndex:index];
+    
+    if (index==(count-1)) {
+        index = index -1;
+    }
+    
+    [serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     [serversTableView scrollRowToVisible:index];
 }
 
