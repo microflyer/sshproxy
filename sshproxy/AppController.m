@@ -135,6 +135,11 @@
 
 - (IBAction)_turnOnProxy:(id)sender
 {
+    if (task) {
+        // task already running, do noting
+        return;
+    }
+    
     NSDictionary* server = [SSHHelper getActivatedServer];
     
     // open preferences window if remoteHost is empty
@@ -179,11 +184,6 @@
     
     [turnOffMenuItem setHidden:NO];
     [turnOffMenuItem setEnabled:YES];
-    
-    if (task) {
-        // task already running, do noting
-        return;
-    }
     
     task = [[NSTask alloc] init];
     NSString* userHome = NSHomeDirectory();

@@ -27,7 +27,7 @@
                                  @"-oIdentitiesOnly=yes",
                                  @"-oPubkeyAuthentication=no",
                                  @"-T", @"-2", @"-a",
-                                 @"-oConnectTimeout=8", @"-oConnectionAttempts=3",
+                                 @"-oConnectTimeout=8", @"-oConnectionAttempts=1",
                                  @"-oServerAliveInterval=8", @"-oServerAliveCountMax=1",
                                  @"-oStrictHostKeyChecking=no", @"-oExitOnForwardFailure=yes",
                                  @"-oLogLevel=DEBUG",
