@@ -268,9 +268,9 @@
 }
 
 - (void)set2connected {
+    proxyStatus = SSHPROXY_CONNECTED;
     [statusItem setImage:onStatusImage];
     [statusMenuItem setTitle:@"Proxy: On"];
-    proxyStatus = SSHPROXY_CONNECTED;
 }
 
 - (void)reconnectIfNeed:(NSString*) state
@@ -289,13 +289,17 @@
     NSFileHandle *fh = [n object];
     NSData *data = [fh availableData];
     
-    if (task) {
-        NSString *s = [[NSString alloc] initWithData:data
-                                            encoding:NSUTF8StringEncoding];
-        
-        taskOutput = [taskOutput stringByAppendingString:s];
-        DLog(@"%@",s);
-    }
+    // only receive data when proxy 
+    NSString *s = [[NSString alloc] initWithData:data
+                                        encoding:NSUTF8StringEncoding];
+    
+    // truncate task output to reduce memory consume
+    NSInteger fromIndex = [taskOutput length]-256;
+    fromIndex = fromIndex > 0 ? fromIndex : 0;
+    
+    taskOutput = [taskOutput substringFromIndex:fromIndex];
+    taskOutput = [taskOutput stringByAppendingString:s];
+    DLog(@"%@",s);
     
     // If the task is running, start reading again
     if (task) {
@@ -319,7 +323,7 @@
                                 @[@"timed out"                         , @"connection timed out"],
                                 @[@"Write failed: Broken pipe"         , @"disconnected from  remote proxy server"],
                                 @[@"Connection closed by remote host"  , @"failed to connect remote proxy server"],
-                                @[@"unknown error"                     , @"unknown error"], // TODO: has bug when manually Turn Off
+                                @[@"unknown error"                     , @"unknown error"],
                                 ];
             for (NSArray* error in errors) {
                 if ( ([taskOutput rangeOfString:error[0]].location != NSNotFound) || [error[0]isEqual:@"unknown error"]) {
@@ -332,8 +336,9 @@
 }
 // When the process is done, we should do some cleanup:
 - (void)taskTerminated:(NSNotification *)note {
-    [statusItem setImage:offStatusImage];
     task = nil;
+    
+    [statusItem setImage:offStatusImage];
     
     // ensure
     [turnOffMenuItem setHidden:YES];
@@ -347,6 +352,9 @@
 
 -(IBAction)turnOffProxy:(id)sender{
     proxyStatus = SSHPROXY_OFF;
+    task = nil;
+    
+    [statusMenuItem setTitle:@"Proxy: Off"];
     
     DLog(@"Turn off proxy: %@", taskOutput);
     
@@ -367,7 +375,6 @@
     }
     
     [task interrupt];
-    [statusMenuItem setTitle:@"Proxy: Off"];
 }
 
 
