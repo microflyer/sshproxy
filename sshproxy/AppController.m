@@ -245,11 +245,13 @@
     taskOutput = [[NSString alloc] init];
     
     NSFileHandle *fh = [pipe fileHandleForReading];
+    [fh waitForDataInBackgroundAndNotify];
+    
     NSNotificationCenter *nc;
     nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver:self];
     [nc addObserver:self
-           selector:@selector(dataReady:) name:NSFileHandleReadCompletionNotification
+           selector:@selector(dataReady:) name:NSFileHandleDataAvailableNotification
              object:fh];
     [nc addObserver:self
            selector:@selector(taskTerminated:) name:NSTaskDidTerminateNotification
@@ -260,8 +262,6 @@
     [[NSFileManager defaultManager] removeItemAtPath:lockFile error:nil];
     
     [task launch];
-    
-    [fh readInBackgroundAndNotify];
 }
 
 - (void)set2connected {
@@ -283,22 +283,21 @@
 
 - (void)dataReady:(NSNotification *)n
 {
-    NSData *d;
-    d = [[n userInfo] valueForKey:NSFileHandleNotificationDataItem];
-    //    DLog(@"dataReady:% ld bytes", [d length]);
-    if ([d length]) {
-        NSString *s = [[NSString alloc] initWithData:d
-                                            encoding:NSUTF8StringEncoding];
-        
-        taskOutput = [taskOutput stringByAppendingString:s];
-    }
+    NSFileHandle *fh = [n object];
+    NSData *data = [fh availableData];
+    
+    NSString *s = [[NSString alloc] initWithData:data
+                                        encoding:NSUTF8StringEncoding];
+    
+    taskOutput = [taskOutput stringByAppendingString:s];
+    DLog(@"%@",s);
+    
     // If the task is running, start reading again
     if (task) {
         if ( ([taskOutput rangeOfString:@"Authenticated to"].location != NSNotFound) ||
             ([taskOutput rangeOfString:@"Authentication succeeded"].location != NSNotFound) ){
             [self set2connected];
         }
-        [[pipe fileHandleForReading] readInBackgroundAndNotify];
     } else {
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
             [statusMenuItem setTitle:@"Proxy: Off - port already in use"];
@@ -323,16 +322,14 @@
                 }
             }
         }
-        
-        // clear taskOutput buffer
-        taskOutput = [[NSString alloc] init];
     }
+    
+    [fh waitForDataInBackgroundAndNotify];
 }
 // When the process is done, we should do some cleanup:
 - (void)taskTerminated:(NSNotification *)note {
     [statusItem setImage:offStatusImage];
     //    [statusMenuItem setTitle:@"Proxy: Off"];
-    DLog(@"taskTerminated: %@", taskOutput);
     task = nil;
     
     // ensure
