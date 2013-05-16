@@ -681,7 +681,7 @@
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSWindowTemplate" id="901766728">
-				<int key="NSWindowStyleMask">31</int>
+				<int key="NSWindowStyleMask">23</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{481, 393}, {463, 336}}</string>
 				<int key="NSWTFlags">-1537735680</int>
@@ -1192,7 +1192,7 @@
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
-				<bool key="NSWindowIsRestorable">YES</bool>
+				<bool key="NSWindowIsRestorable">NO</bool>
 			</object>
 			<object class="NSArrayController" id="577821051">
 				<bool key="NSEditable">YES</bool>
@@ -1638,26 +1638,10 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.proxy_command_password</string>
-						<reference key="source" ref="99977160"/>
-						<reference key="destination" ref="577821051"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="99977160"/>
-							<reference key="NSDestination" ref="577821051"/>
-							<string key="NSLabel">value: selection.proxy_command_password</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.proxy_command_password</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">327</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: selection.proxy_command_auth</string>
 						<reference key="source" ref="99977160"/>
 						<reference key="destination" ref="577821051"/>
-						<object class="NSNibBindingConnector" key="connector" id="378288875">
+						<object class="NSNibBindingConnector" key="connector" id="1058276752">
 							<reference key="NSSource" ref="99977160"/>
 							<reference key="NSDestination" ref="577821051"/>
 							<string key="NSLabel">enabled: selection.proxy_command_auth</string>
@@ -1685,11 +1669,31 @@
 								<integer value="-1" key="NSNotApplicablePlaceholder"/>
 								<integer value="-1" key="NSNullPlaceholder"/>
 							</dictionary>
-							<reference key="NSPreviousConnector" ref="378288875"/>
+							<reference key="NSPreviousConnector" ref="1058276752"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
 					<int key="connectionID">357</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.proxy_command_password</string>
+						<reference key="source" ref="99977160"/>
+						<reference key="destination" ref="577821051"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="99977160"/>
+							<reference key="NSDestination" ref="577821051"/>
+							<string key="NSLabel">value: selection.proxy_command_password</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.proxy_command_password</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
+								<boolean value="YES" key="NSValidatesImmediately"/>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">365</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1748,7 +1752,7 @@
 						<string key="label">enabled: selection.proxy_command_auth</string>
 						<reference key="source" ref="227259583"/>
 						<reference key="destination" ref="577821051"/>
-						<object class="NSNibBindingConnector" key="connector" id="705317862">
+						<object class="NSNibBindingConnector" key="connector" id="288834424">
 							<reference key="NSSource" ref="227259583"/>
 							<reference key="NSDestination" ref="577821051"/>
 							<string key="NSLabel">enabled: selection.proxy_command_auth</string>
@@ -1776,7 +1780,7 @@
 								<integer value="-1" key="NSNotApplicablePlaceholder"/>
 								<integer value="-1" key="NSNullPlaceholder"/>
 							</dictionary>
-							<reference key="NSPreviousConnector" ref="705317862"/>
+							<reference key="NSPreviousConnector" ref="288834424"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -1787,7 +1791,7 @@
 						<string key="label">enabled: selection.proxy_command_auth</string>
 						<reference key="source" ref="1044508580"/>
 						<reference key="destination" ref="577821051"/>
-						<object class="NSNibBindingConnector" key="connector" id="1029727786">
+						<object class="NSNibBindingConnector" key="connector" id="239762479">
 							<reference key="NSSource" ref="1044508580"/>
 							<reference key="NSDestination" ref="577821051"/>
 							<string key="NSLabel">enabled: selection.proxy_command_auth</string>
@@ -1815,7 +1819,7 @@
 								<integer value="-1" key="NSNotApplicablePlaceholder"/>
 								<integer value="-1" key="NSNullPlaceholder"/>
 							</dictionary>
-							<reference key="NSPreviousConnector" ref="1029727786"/>
+							<reference key="NSPreviousConnector" ref="239762479"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -1855,28 +1859,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.proxy_command_port</string>
-						<reference key="source" ref="341656362"/>
-						<reference key="destination" ref="577821051"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="341656362"/>
-							<reference key="NSDestination" ref="577821051"/>
-							<string key="NSLabel">value: selection.proxy_command_port</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.proxy_command_port</string>
-							<dictionary key="NSOptions">
-								<integer value="1080" key="NSMultipleValuesPlaceholder"/>
-								<integer value="1080" key="NSNoSelectionPlaceholder"/>
-								<integer value="1080" key="NSNotApplicablePlaceholder"/>
-								<integer value="1080" key="NSNullPlaceholder"/>
-							</dictionary>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">325</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: selection.proxy_command</string>
 						<reference key="source" ref="341656362"/>
 						<reference key="destination" ref="577821051"/>
@@ -1890,6 +1872,30 @@
 						</object>
 					</object>
 					<int key="connectionID">332</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.proxy_command_port</string>
+						<reference key="source" ref="341656362"/>
+						<reference key="destination" ref="577821051"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="341656362"/>
+							<reference key="NSDestination" ref="577821051"/>
+							<string key="NSLabel">value: selection.proxy_command_port</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.proxy_command_port</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
+								<integer value="1080" key="NSMultipleValuesPlaceholder"/>
+								<integer value="1080" key="NSNoSelectionPlaceholder"/>
+								<integer value="1080" key="NSNotApplicablePlaceholder"/>
+								<integer value="1080" key="NSNullPlaceholder"/>
+								<boolean value="YES" key="NSValidatesImmediately"/>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">371</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1929,22 +1935,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.proxy_command_host</string>
-						<reference key="source" ref="188475185"/>
-						<reference key="destination" ref="577821051"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="188475185"/>
-							<reference key="NSDestination" ref="577821051"/>
-							<string key="NSLabel">value: selection.proxy_command_host</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.proxy_command_host</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">319</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: selection.proxy_command</string>
 						<reference key="source" ref="188475185"/>
 						<reference key="destination" ref="577821051"/>
@@ -1961,26 +1951,30 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.proxy_command_username</string>
-						<reference key="source" ref="653513423"/>
+						<string key="label">value: selection.proxy_command_host</string>
+						<reference key="source" ref="188475185"/>
 						<reference key="destination" ref="577821051"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="653513423"/>
+							<reference key="NSSource" ref="188475185"/>
 							<reference key="NSDestination" ref="577821051"/>
-							<string key="NSLabel">value: selection.proxy_command_username</string>
+							<string key="NSLabel">value: selection.proxy_command_host</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.proxy_command_username</string>
+							<string key="NSKeyPath">selection.proxy_command_host</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
+								<boolean value="YES" key="NSValidatesImmediately"/>
+							</dictionary>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">326</int>
+					<int key="connectionID">369</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: selection.proxy_command_auth</string>
 						<reference key="source" ref="653513423"/>
 						<reference key="destination" ref="577821051"/>
-						<object class="NSNibBindingConnector" key="connector" id="863408511">
+						<object class="NSNibBindingConnector" key="connector" id="799893689">
 							<reference key="NSSource" ref="653513423"/>
 							<reference key="NSDestination" ref="577821051"/>
 							<string key="NSLabel">enabled: selection.proxy_command_auth</string>
@@ -2008,11 +2002,31 @@
 								<integer value="-1" key="NSNotApplicablePlaceholder"/>
 								<integer value="-1" key="NSNullPlaceholder"/>
 							</dictionary>
-							<reference key="NSPreviousConnector" ref="863408511"/>
+							<reference key="NSPreviousConnector" ref="799893689"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
 					<int key="connectionID">356</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.proxy_command_username</string>
+						<reference key="source" ref="653513423"/>
+						<reference key="destination" ref="577821051"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="653513423"/>
+							<reference key="NSDestination" ref="577821051"/>
+							<string key="NSLabel">value: selection.proxy_command_username</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.proxy_command_username</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
+								<boolean value="YES" key="NSValidatesImmediately"/>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">367</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -2817,7 +2831,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">363</int>
+			<int key="maxID">371</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
