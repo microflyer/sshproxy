@@ -280,7 +280,11 @@
         [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Reconnecting - %@", state]];
         [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
     } else {
-        [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Off - %@", state]];
+        if (proxyStatus==SSHPROXY_OFF) {
+            [statusMenuItem setTitle:@"Proxy: Off"];
+        } else {
+            [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Off - %@", state]];
+        }
     }
 }
 
@@ -352,9 +356,6 @@
 
 -(IBAction)turnOffProxy:(id)sender{
     proxyStatus = SSHPROXY_OFF;
-    task = nil;
-    
-    [statusMenuItem setTitle:@"Proxy: Off"];
     
     DLog(@"Turn off proxy: %@", taskOutput);
     
