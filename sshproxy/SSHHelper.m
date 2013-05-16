@@ -144,7 +144,8 @@
     
     NSString* remoteHost = [prefs stringForKey:@"remote_host"];
     if (!remoteHost) {
-        remoteHost = @"";
+        // do not need upgrade
+        return;
     }
     
     NSString* loginName = [prefs stringForKey:@"login_name"];
@@ -194,6 +195,24 @@
     if (proxyCommandPassword) [server setObject:proxyCommandPassword forKey:@"proxy_command_password"];
     
     [serverArrayController addObject:server];
+    
+    // remove old preferences
+    
+    [prefs removeObjectForKey:@"remote_host"];
+    [prefs removeObjectForKey:@"remote_port"];
+    [prefs removeObjectForKey:@"login_name"];
+    
+    [prefs removeObjectForKey:@"enable_compression"];
+    [prefs removeObjectForKey:@"share_socks"];
+    
+    [prefs removeObjectForKey:@"proxy_command"];
+    [prefs removeObjectForKey:@"proxy_command_type"];
+    [prefs removeObjectForKey:@"proxy_command_host"];
+    [prefs removeObjectForKey:@"proxy_command_port"];
+    
+    [prefs removeObjectForKey:@"proxy_command_auth"];
+    [prefs removeObjectForKey:@"proxy_command_username"];
+    [prefs removeObjectForKey:@"proxy_command_password"];
     
     [prefs synchronize];
 }
