@@ -289,19 +289,21 @@
     NSFileHandle *fh = [n object];
     NSData *data = [fh availableData];
     
-    NSString *s = [[NSString alloc] initWithData:data
-                                        encoding:NSUTF8StringEncoding];
-    
-    taskOutput = [taskOutput stringByAppendingString:s];
-    DLog(@"%@",s);
+    if (task) {
+        NSString *s = [[NSString alloc] initWithData:data
+                                            encoding:NSUTF8StringEncoding];
+        
+        taskOutput = [taskOutput stringByAppendingString:s];
+        DLog(@"%@",s);
+    }
     
     // If the task is running, start reading again
     if (task) {
         if ( [taskOutput rangeOfString:@"Entering interactive session"].location != NSNotFound){
             [self set2connected];
-        } else {
-            [fh waitForDataInBackgroundAndNotify];
         }
+        
+        [fh waitForDataInBackgroundAndNotify];
     } else {
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
             [statusMenuItem setTitle:@"Proxy: Off - port already in use"];
