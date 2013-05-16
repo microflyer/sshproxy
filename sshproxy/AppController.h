@@ -39,17 +39,19 @@
 
 /* Our IBAction which will call the helloWorld method when our connected Menu Item is pressed */
 
--(IBAction)turnOnProxy:(id)sender;
+- (IBAction)turnOnProxy:(id)sender;
 
--(IBAction)_turnOnProxy:(id)sender;
+- (IBAction)_turnOnProxy:(id)sender;
 
--(IBAction)turnOffProxy:(id)sender;
+- (IBAction)turnOffProxy:(id)sender;
 
--(IBAction)openPreferences:(id)sender;
--(IBAction)openAboutWindow:(id)sender;
+- (IBAction)openPreferences:(id)sender;
 
--(IBAction)openSendFeedback:(id)sender;
--(IBAction)openMacAppStore:(id)sender;
+- (IBAction)openHelpURL:(id)sender;
+- (IBAction)openAboutWindow:(id)sender;
+
+- (IBAction)openSendFeedback:(id)sender;
+- (IBAction)openMacAppStore:(id)sender;
 
 enum {
     SSHPROXY_OFF = 0,

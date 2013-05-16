@@ -441,6 +441,12 @@
      [NSURL URLWithString:@"macappstore://itunes.apple.com/app/ssh-proxy/id597790822?mt=12"]];
 }
 
+- (IBAction)openHelpURL:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL:
+     [NSURL URLWithString:@"https://github.com/brantyoung/sshproxy/wiki"]];
+}
+
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
     [task interrupt];
     return NSTerminateNow;

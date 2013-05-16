@@ -511,6 +511,14 @@
 						<reference key="NSOnImage" ref="892822162"/>
 						<reference key="NSMixedImage" ref="545007805"/>
 					</object>
+					<object class="NSMenuItem" id="629559198">
+						<reference key="NSMenu" ref="806075472"/>
+						<string key="NSTitle">Help</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="892822162"/>
+						<reference key="NSMixedImage" ref="545007805"/>
+					</object>
 					<object class="NSMenuItem" id="409013594">
 						<reference key="NSMenu" ref="806075472"/>
 						<string key="NSTitle">About SSH Proxy</string>
@@ -558,7 +566,6 @@
 							<string key="NSFrame">{{-372, -359}, {0, 32}}</string>
 							<reference key="NSSuperview" ref="94713192"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="539938308">
@@ -1276,6 +1283,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">openHelpURL:</string>
+						<reference key="source" ref="135814413"/>
+						<reference key="destination" ref="629559198"/>
+					</object>
+					<int key="connectionID">1205</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">orderOut:</string>
 						<reference key="source" ref="753612579"/>
 						<reference key="destination" ref="123848939"/>
@@ -1336,6 +1351,7 @@
 							<reference ref="409013594"/>
 							<reference ref="859877446"/>
 							<reference ref="835806103"/>
+							<reference ref="629559198"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">StatusMenu</string>
@@ -1362,7 +1378,7 @@
 						<int key="objectID">799</int>
 						<reference key="object" ref="732795851"/>
 						<reference key="parent" ref="806075472"/>
-						<string key="objectName">Preferences Item</string>
+						<string key="objectName">Add Server Item</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">800</int>
@@ -1881,6 +1897,11 @@
 						<reference key="parent" ref="806075472"/>
 						<string key="objectName">Preferences Item</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1204</int>
+						<reference key="object" ref="629559198"/>
+						<reference key="parent" ref="806075472"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1944,6 +1965,7 @@
 				<string key="1198.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1199.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1201.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1204.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="371.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="795.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="796.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1980,7 +2002,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1203</int>
+			<int key="maxID">1205</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1990,6 +2012,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="_turnOnProxy:">id</string>
 						<string key="openAboutWindow:">id</string>
+						<string key="openHelpURL:">id</string>
 						<string key="openMacAppStore:">id</string>
 						<string key="openPreferences:">id</string>
 						<string key="openSendFeedback:">id</string>
@@ -2003,6 +2026,10 @@
 						</object>
 						<object class="IBActionInfo" key="openAboutWindow:">
 							<string key="name">openAboutWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="openHelpURL:">
+							<string key="name">openHelpURL:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="openMacAppStore:">
