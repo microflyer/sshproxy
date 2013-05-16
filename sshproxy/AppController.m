@@ -35,17 +35,17 @@
     NSBundle *bundle = [NSBundle mainBundle];
     
     //Allocates and loads the images into the application which will be used for our NSStatusItem
-    offStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"red-hard-drive-network_64x64" ofType:@"png"]];
-    [offStatusImage setSize:NSMakeSize(20,20)];
+    offStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-disconnected_18" ofType:@"png"]];
+//    [offStatusImage setSize:NSMakeSize(20,20)];
     
-    onStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"green-hard-drive-network_64x64" ofType:@"png"]];
-    [onStatusImage setSize:NSMakeSize(20,20)];
+    onStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-connected_18" ofType:@"png"]];
+//    [onStatusImage setSize:NSMakeSize(20,20)];
     
-    inStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"yellow-hard-drive-network_64x64" ofType:@"png"]];
-    [inStatusImage setSize:NSMakeSize(20,20)];
+    inStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-connecting_18" ofType:@"png"]];
+//    [inStatusImage setSize:NSMakeSize(20,20)];
     
-    statusHighlightImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"red-hard-drive-network_64x64" ofType:@"png"]];
-    [statusHighlightImage setSize:NSMakeSize(20,20)];
+    statusHighlightImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-disconnected_18" ofType:@"png"]];
+//    [statusHighlightImage setSize:NSMakeSize(20,20)];
     
     //Sets the images in our NSStatusItem
     [statusItem setImage:offStatusImage];
@@ -104,8 +104,8 @@
     int index = [(NSNumber*)menuItem.representedObject intValue];
     [SSHHelper setActivatedServer:index];
     
-    [self performSelector: @selector(_turnOffProxy:) withObject:self afterDelay: 0.0];
-    [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 0.0];
+    [self _turnOffProxy];
+    [self _turnOnProxy];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -129,10 +129,10 @@
 {
     proxyStatus = SSHPROXY_ON;
     
-    [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 0.0];
+    [self _turnOnProxy];
 }
 
-- (void)_turnOnProxy:(id)sender
+- (void)_turnOnProxy
 {
     if (task) {
         // task already running, do noting
@@ -277,7 +277,7 @@
     if (proxyStatus==SSHPROXY_CONNECTED) {
         [statusItem setImage:inStatusImage];
         [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Reconnecting - %@", state]];
-        [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 3.0];
+        [self performSelector: @selector(_turnOnProxy:) withObject:nil afterDelay: 3.0];
     } else {
         if (proxyStatus==SSHPROXY_OFF) {
             [statusMenuItem setTitle:@"Proxy: Off"];
@@ -311,7 +311,7 @@
         }
         
         [fh waitForDataInBackgroundAndNotify];
-    } else {
+    } else {        
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
             [statusMenuItem setTitle:@"Proxy: Off - port already in use"];
             return;
@@ -338,7 +338,10 @@
     }
 }
 // When the process is done, we should do some cleanup:
-- (void)taskTerminated:(NSNotification *)note {
+- (void)taskTerminated:(NSNotification *)note
+{
+    task = nil;
+
     [statusItem setImage:offStatusImage];
     
     // ensure
@@ -351,26 +354,19 @@
 }
 
 
--(IBAction)turnOffProxy:(id)sender{
+- (IBAction)turnOffProxy:(id)sender
+{
     proxyStatus = SSHPROXY_OFF;
-    [self performSelector: @selector(_turnOffProxy:) withObject:self afterDelay: 0.0];
+    [self _turnOffProxy];
 }
 
 
-- (void)_turnOffProxy:(id)sender
+- (void)_turnOffProxy
 {
     DLog(@"Turn off proxy: %@", taskOutput);
     
     // clear taskOutput buffer
     taskOutput = [[NSString alloc] init];
-    
-    // TODO: CATCH TASK EXCEPTION
-    
-    [turnOffMenuItem setHidden:YES];
-    [turnOffMenuItem setEnabled:NO];
-    
-    [turnOnMenuItem setHidden:NO];
-    [turnOnMenuItem setEnabled:YES];
     
     if (!task) {
         // dead task , do noting
