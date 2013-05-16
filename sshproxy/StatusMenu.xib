@@ -11,6 +11,7 @@
 			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
+			<string>NSArrayController</string>
 			<string>NSBox</string>
 			<string>NSButton</string>
 			<string>NSButtonCell</string>
@@ -21,6 +22,7 @@
 			<string>NSMenuItem</string>
 			<string>NSTextField</string>
 			<string>NSTextFieldCell</string>
+			<string>NSUserDefaultsController</string>
 			<string>NSView</string>
 			<string>NSWindowTemplate</string>
 		</array>
@@ -514,7 +516,7 @@
 						<reference key="NSOnImage" ref="892822162"/>
 						<reference key="NSMixedImage" ref="545007805"/>
 					</object>
-					<object class="NSMenuItem" id="683280799">
+					<object class="NSMenuItem" id="1025946836">
 						<reference key="NSMenu" ref="806075472"/>
 						<string key="NSTitle">Help</string>
 						<string key="NSKeyEquiv"/>
@@ -569,6 +571,7 @@
 							<string key="NSFrame">{{-372, -359}, {0, 32}}</string>
 							<reference key="NSSuperview" ref="94713192"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="539938308">
@@ -710,7 +713,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="753651638">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">138413056</int>
-												<string key="NSContents">Version: 13.06</string>
+												<string key="NSContents">Version: 13.05</string>
 												<object class="NSFont" key="NSSupport" id="26">
 													<string key="NSName">LucidaGrande</string>
 													<double key="NSSize">11</double>
@@ -743,7 +746,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="691318586">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">138413056</int>
-												<string key="NSContents">Release Date: 2013-06-1</string>
+												<string key="NSContents">Release Date: 2013-05-20</string>
 												<reference key="NSSupport" ref="26"/>
 												<string key="NSCellIdentifier">_NS:1535</string>
 												<reference key="NSControlView" ref="436886593"/>
@@ -904,6 +907,17 @@
 			</object>
 			<object class="NSCustomObject" id="903638069">
 				<string key="NSClassName">NSFontManager</string>
+			</object>
+			<object class="NSArrayController" id="1004449301">
+				<bool key="NSEditable">YES</bool>
+				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
+				<bool key="NSAvoidsEmptySelection">YES</bool>
+				<bool key="NSSelectsInsertedObjects">YES</bool>
+				<bool key="NSFilterRestrictsInsertion">YES</bool>
+				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
+			</object>
+			<object class="NSUserDefaultsController" id="356188136">
+				<bool key="NSSharedInstance">YES</bool>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -1280,7 +1294,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">openHelpURL:</string>
 						<reference key="source" ref="135814413"/>
-						<reference key="destination" ref="683280799"/>
+						<reference key="destination" ref="1025946836"/>
 					</object>
 					<int key="connectionID">1205</int>
 				</object>
@@ -1291,6 +1305,14 @@
 						<reference key="destination" ref="732795851"/>
 					</object>
 					<int key="connectionID">1206</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">serverArrayController</string>
+						<reference key="source" ref="135814413"/>
+						<reference key="destination" ref="1004449301"/>
+					</object>
+					<int key="connectionID">1223</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1307,6 +1329,26 @@
 						<reference key="destination" ref="620789040"/>
 					</object>
 					<int key="connectionID">1200</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentArray: values.servers</string>
+						<reference key="source" ref="1004449301"/>
+						<reference key="destination" ref="356188136"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="1004449301"/>
+							<reference key="NSDestination" ref="356188136"/>
+							<string key="NSLabel">contentArray: values.servers</string>
+							<string key="NSBinding">contentArray</string>
+							<string key="NSKeyPath">values.servers</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSDeletesObjectsOnRemove"/>
+								<boolean value="YES" key="NSHandlesContentAsCompoundValue"/>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1222</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1354,7 +1396,7 @@
 							<reference ref="409013594"/>
 							<reference ref="859877446"/>
 							<reference ref="835806103"/>
-							<reference ref="683280799"/>
+							<reference ref="1025946836"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">StatusMenu</string>
@@ -1597,7 +1639,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1204</int>
-						<reference key="object" ref="683280799"/>
+						<reference key="object" ref="1025946836"/>
 						<reference key="parent" ref="806075472"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -1905,6 +1947,17 @@
 						<reference key="object" ref="298591523"/>
 						<reference key="parent" ref="9776583"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1220</int>
+						<reference key="object" ref="1004449301"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">SSH Servers Array Controller</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1221</int>
+						<reference key="object" ref="356188136"/>
+						<reference key="parent" ref="0"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1969,6 +2022,8 @@
 				<string key="1199.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1201.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1204.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1220.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1221.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="371.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="795.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="796.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2005,7 +2060,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1218</int>
+			<int key="maxID">1223</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2013,7 +2068,6 @@
 					<string key="className">AppController</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="addSSHServer:">id</string>
 						<string key="openAboutWindow:">id</string>
 						<string key="openHelpURL:">id</string>
 						<string key="openMacAppStore:">id</string>
@@ -2023,10 +2077,6 @@
 						<string key="turnOnProxy:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="addSSHServer:">
-							<string key="name">addSSHServer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="openAboutWindow:">
 							<string key="name">openAboutWindow:</string>
 							<string key="candidateClassName">id</string>
@@ -2059,6 +2109,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="aboutWindow">NSWindow</string>
 						<string key="mainMenu">NSMenu</string>
+						<string key="serverArrayController">NSArrayController</string>
 						<string key="statusMenu">NSMenu</string>
 						<string key="statusMenuItem">NSMenuItem</string>
 						<string key="turnOffMenuItem">NSMenuItem</string>
@@ -2072,6 +2123,10 @@
 						<object class="IBToOneOutletInfo" key="mainMenu">
 							<string key="name">mainMenu</string>
 							<string key="candidateClassName">NSMenu</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="serverArrayController">
+							<string key="name">serverArrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="statusMenu">
 							<string key="name">statusMenu</string>

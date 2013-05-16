@@ -21,4 +21,7 @@
 
 + (void)setActivatedServer:(int) index;
 
+// code that upgrade user preferences from 13.04 to 13.05
++ (void)upgrade1:(NSArrayController*) serverArrayController;
+
 @end

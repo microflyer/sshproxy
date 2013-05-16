@@ -90,6 +90,8 @@
     
     [remoteHostTextField becomeFirstResponder];
     [serversTableView scrollRowToVisible:index];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)removeServer:(id)sender
@@ -105,6 +107,8 @@
     
     [serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     [serversTableView scrollRowToVisible:index];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)addServer:(id)sender
@@ -128,6 +132,8 @@
 
 - (IBAction)closePreferencesWindow:(id)sender {
     [self.view.window orderOut:nil];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

@@ -57,6 +57,9 @@
     [statusItem setToolTip:@"SSH Proxy"];
     //Enables highlighting
     [statusItem setHighlightMode:YES];
+    
+    // upgrade user preferences from 13.04 to 13.05
+    [SSHHelper upgrade1:serverArrayController];
 }
 
 - (void)statusItemClicked

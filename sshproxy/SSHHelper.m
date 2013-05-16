@@ -135,4 +135,67 @@
     [prefs synchronize];
 }
 
+// code that upgrade user preferences from 13.04 to 13.05
++ (void)upgrade1:(NSArrayController*) serverArrayController
+{
+    // fetch preferences that need upgrade
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    NSString* remoteHost = [prefs stringForKey:@"remote_host"];
+    if (!remoteHost) {
+        remoteHost = @"";
+    }
+    
+    NSString* loginName = [prefs stringForKey:@"login_name"];
+    if (!loginName) {
+        loginName = @"";
+    }
+    
+    int remotePort = (int)[prefs integerForKey:@"remote_port"];
+    if (remotePort<=0 || remotePort>65535) {
+        remotePort = 22;
+    }
+    
+    BOOL enableCompression = [prefs boolForKey:@"enable_compression"];
+    BOOL shareSocks = [prefs boolForKey:@"share_socks"];
+    
+    BOOL proxyCommand = [prefs boolForKey:@"proxy_command"];
+    int proxyCommandType = (int)[prefs integerForKey:@"proxy_command_type"];
+    NSString* proxyCommandHost = (NSString*)[prefs stringForKey:@"proxy_command_host"];
+    int proxyCommandPort = (int)[prefs integerForKey:@"proxy_command_port"];
+    
+    if (proxyCommandPort<=0 || proxyCommandPort>65535) {
+        proxyCommandPort = 1080;
+    }
+    
+    BOOL proxyCommandAuth = [prefs boolForKey:@"proxy_command_auth"];
+    NSString* proxyCommandUsername = [prefs stringForKey:@"proxy_command_username"];
+    NSString* proxyCommandPassword = [prefs stringForKey:@"proxy_command_password"];
+    
+    // upgrade
+    
+    NSMutableDictionary* server = [[NSMutableDictionary alloc] init];
+    
+    [server setObject:remoteHost forKey:@"remote_host"];
+    [server setObject:[NSNumber numberWithInt:remotePort] forKey:@"remote_port"];
+    [server setObject:loginName forKey:@"login_name"];
+    [server setObject:[NSNumber numberWithBool:enableCompression] forKey:@"enable_compression"];
+    [server setObject:[NSNumber numberWithBool:shareSocks] forKey:@"share_socks"];
+    
+    [server setObject:[NSNumber numberWithBool:proxyCommand] forKey:@"proxy_command"];
+    [server setObject:[NSNumber numberWithBool:proxyCommandType] forKey:@"proxy_command_type"];
+    if (proxyCommandHost) [server setObject:proxyCommandHost forKey:@"proxy_command_host"];
+    [server setObject:[NSNumber numberWithInt:proxyCommandPort] forKey:@"proxy_command_port"];
+    
+    
+    [server setObject:[NSNumber numberWithBool:proxyCommandAuth] forKey:@"proxy_command_auth"];
+    if (proxyCommandUsername) [server setObject:proxyCommandUsername forKey:@"proxy_command_username"];
+    if (proxyCommandPassword) [server setObject:proxyCommandPassword forKey:@"proxy_command_password"];
+    
+    [serverArrayController addObject:server];
+    
+    [prefs synchronize];
+}
+
 @end

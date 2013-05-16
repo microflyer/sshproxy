@@ -33,6 +33,8 @@
     int proxyStatus;
     
     MASPreferencesWindowController *_preferencesWindowController;
+    
+    IBOutlet NSArrayController* serverArrayController;
 }
 
 @property (nonatomic, readonly) MASPreferencesWindowController *preferencesWindowController;
