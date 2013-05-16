@@ -294,9 +294,10 @@
     
     // If the task is running, start reading again
     if (task) {
-        if ( ([taskOutput rangeOfString:@"Authenticated to"].location != NSNotFound) ||
-            ([taskOutput rangeOfString:@"Authentication succeeded"].location != NSNotFound) ){
+        if ( [taskOutput rangeOfString:@"Entering interactive session"].location != NSNotFound){
             [self set2connected];
+        } else {
+            [fh waitForDataInBackgroundAndNotify];
         }
     } else {
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
@@ -323,13 +324,10 @@
             }
         }
     }
-    
-    [fh waitForDataInBackgroundAndNotify];
 }
 // When the process is done, we should do some cleanup:
 - (void)taskTerminated:(NSNotification *)note {
     [statusItem setImage:offStatusImage];
-    //    [statusMenuItem setTitle:@"Proxy: Off"];
     task = nil;
     
     // ensure
@@ -364,6 +362,7 @@
     }
     
     [task interrupt];
+    [statusMenuItem setTitle:@"Proxy: Off"];
 }
 
 
