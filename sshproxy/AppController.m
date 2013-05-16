@@ -104,9 +104,8 @@
     int index = [(NSNumber*)menuItem.representedObject intValue];
     [SSHHelper setActivatedServer:index];
     
-    [self performSelector: @selector(turnOffProxy:) withObject:self afterDelay: 0.0];
-    [task waitUntilExit];
-    [self performSelector: @selector(turnOnProxy:) withObject:self afterDelay: 0.0];
+    [self performSelector: @selector(_turnOffProxy:) withObject:self afterDelay: 0.0];
+    [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 0.0];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -133,7 +132,7 @@
     [self performSelector: @selector(_turnOnProxy:) withObject:self afterDelay: 0.0];
 }
 
-- (IBAction)_turnOnProxy:(id)sender
+- (void)_turnOnProxy:(id)sender
 {
     if (task) {
         // task already running, do noting
@@ -340,8 +339,6 @@
 }
 // When the process is done, we should do some cleanup:
 - (void)taskTerminated:(NSNotification *)note {
-    task = nil;
-    
     [statusItem setImage:offStatusImage];
     
     // ensure
@@ -356,7 +353,12 @@
 
 -(IBAction)turnOffProxy:(id)sender{
     proxyStatus = SSHPROXY_OFF;
-    
+    [self performSelector: @selector(_turnOffProxy:) withObject:self afterDelay: 0.0];
+}
+
+
+- (void)_turnOffProxy:(id)sender
+{
     DLog(@"Turn off proxy: %@", taskOutput);
     
     // clear taskOutput buffer
@@ -376,6 +378,8 @@
     }
     
     [task interrupt];
+    [task waitUntilExit];
+    task = nil;
 }
 
 

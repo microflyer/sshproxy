@@ -1299,14 +1299,6 @@
 					<int key="connectionID">1205</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">addSSHServer:</string>
-						<reference key="source" ref="135814413"/>
-						<reference key="destination" ref="732795851"/>
-					</object>
-					<int key="connectionID">1206</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">serverArrayController</string>
 						<reference key="source" ref="135814413"/>
@@ -2068,6 +2060,7 @@
 					<string key="className">AppController</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="_turnOnProxy:">id</string>
 						<string key="openAboutWindow:">id</string>
 						<string key="openHelpURL:">id</string>
 						<string key="openMacAppStore:">id</string>
@@ -2077,6 +2070,10 @@
 						<string key="turnOnProxy:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="_turnOnProxy:">
+							<string key="name">_turnOnProxy:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="openAboutWindow:">
 							<string key="name">openAboutWindow:</string>
 							<string key="candidateClassName">id</string>
