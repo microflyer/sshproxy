@@ -35,16 +35,16 @@
     NSBundle *bundle = [NSBundle mainBundle];
     
     //Allocates and loads the images into the application which will be used for our NSStatusItem
-    offStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-disconnected_18" ofType:@"png"]];
+    offStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-disconnected_20" ofType:@"png"]];
 //    [offStatusImage setSize:NSMakeSize(20,20)];
     
-    onStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-connected_18" ofType:@"png"]];
+    onStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-connected_20" ofType:@"png"]];
 //    [onStatusImage setSize:NSMakeSize(20,20)];
     
-    inStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-connecting_18" ofType:@"png"]];
+    inStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-connecting_20" ofType:@"png"]];
 //    [inStatusImage setSize:NSMakeSize(20,20)];
     
-    statusHighlightImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-disconnected_18" ofType:@"png"]];
+    statusHighlightImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-disconnected_20" ofType:@"png"]];
 //    [statusHighlightImage setSize:NSMakeSize(20,20)];
     
     //Sets the images in our NSStatusItem
@@ -266,18 +266,31 @@
     [task launch];
 }
 
-- (void)set2connected {
+- (void)set2connected
+{
     proxyStatus = SSHPROXY_CONNECTED;
     [statusItem setImage:onStatusImage];
     [statusMenuItem setTitle:@"Proxy: On"];
 }
 
+- (void)set2reconnect:(NSString*) state
+{
+    [statusItem setImage:inStatusImage];
+    [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Reconnecting - %@", state]];
+    
+    // ensure
+    [turnOffMenuItem setHidden:NO];
+    [turnOffMenuItem setEnabled:YES];
+    
+    [turnOnMenuItem setHidden:YES];
+    [turnOnMenuItem setEnabled:NO];
+}
+
 - (void)reconnectIfNeed:(NSString*) state
 {
     if (proxyStatus==SSHPROXY_CONNECTED) {
-        [statusItem setImage:inStatusImage];
-        [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Reconnecting - %@", state]];
-        [self performSelector: @selector(_turnOnProxy:) withObject:nil afterDelay: 3.0];
+        [self set2reconnect:state];
+        [self performSelector: @selector(_turnOnProxy) withObject:nil afterDelay: 3.0];
     } else {
         if (proxyStatus==SSHPROXY_OFF) {
             [statusMenuItem setTitle:@"Proxy: Off"];
@@ -374,7 +387,7 @@
     }
     
     [task interrupt];
-    [task waitUntilExit];
+//    [task waitUntilExit];
     task = nil;
 }
 
