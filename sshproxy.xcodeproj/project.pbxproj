@@ -10,8 +10,6 @@
 		4A021B3F16B801CD00F98FBC /* askpass.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4A021B3E16B801CD00F98FBC /* askpass.entitlements */; };
 		4A03F73916A69519009BCD79 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A03F73816A69519009BCD79 /* AppController.m */; };
 		4A03F73E16A695F0009BCD79 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A03F73D16A695F0009BCD79 /* StatusMenu.xib */; };
-		4A1841D416AD3D0A00CB5D2B /* black-hard-drive-network_64x64.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4A1841D316AD3D0A00CB5D2B /* black-hard-drive-network_64x64.icns */; };
-		4A1841D616AD3E0200CB5D2B /* blue-hard-drive-network_64x64.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4A1841D516AD3E0200CB5D2B /* blue-hard-drive-network_64x64.icns */; };
 		4A1BE47C16A5BAA0000E56D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1BE47B16A5BAA0000E56D7 /* Foundation.framework */; };
 		4A1BE49D16A68F30000E56D7 /* sshproxy.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4A1BE49C16A68F30000E56D7 /* sshproxy.entitlements */; };
 		4A1E89041701F09F007DF2A0 /* logo.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 4A1E89031701F09F007DF2A0 /* logo.iconset */; };
@@ -27,10 +25,6 @@
 		4A42311B1719AB5100ABD4F6 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A42311A1719AB5100ABD4F6 /* libresolv.dylib */; };
 		4A44D67E16A8368900EB44A8 /* SSH Proxy - Ask Password in Resources */ = {isa = PBXBuildFile; fileRef = 4A1BE47916A5BAA0000E56D7 /* SSH Proxy - Ask Password */; };
 		4A44D68216A837CB00EB44A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A44D67F16A8379C00EB44A8 /* main.m */; };
-		4A44D69116AD194C00EB44A8 /* black-hard-drive-network_64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A44D68E16AD194B00EB44A8 /* black-hard-drive-network_64x64.png */; };
-		4A44D69216AD194C00EB44A8 /* red-hard-drive-network_64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A44D68F16AD194B00EB44A8 /* red-hard-drive-network_64x64.png */; };
-		4A44D69316AD194C00EB44A8 /* yellow-hard-drive-network_64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A44D69016AD194C00EB44A8 /* yellow-hard-drive-network_64x64.png */; };
-		4A44D69516AD1D6E00EB44A8 /* green-hard-drive-network_64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A44D69416AD1D6E00EB44A8 /* green-hard-drive-network_64x64.png */; };
 		4A7B733016E6F184005D9965 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A7B732F16E6F184005D9965 /* MainMenu.xib */; };
 		4AA6471316BD006700DE5CAD /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA6470E16BD006700DE5CAD /* MASPreferencesWindow.xib */; };
 		4AA6471416BD006700DE5CAD /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6471016BD006700DE5CAD /* MASPreferencesWindowController.m */; };
@@ -49,6 +43,20 @@
 		4AD3FDFD16A56EF400378F77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD3FDDD16A56EF400378F77 /* Cocoa.framework */; };
 		4AD3FE0516A56EF400378F77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AD3FE0316A56EF400378F77 /* InfoPlist.strings */; };
 		4AD3FE0816A56EF400378F77 /* SSH_ProxyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3FE0716A56EF400378F77 /* SSH_ProxyTests.m */; };
+		4ADB925F17476F700064D82D /* MIT-License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB925C17476F700064D82D /* MIT-License.rtf */; };
+		4ADB926017476F700064D82D /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADB925E17476F700064D82D /* RSVerticallyCenteredTextFieldCell.m */; };
+		4ADB92AE1747C7E80064D82D /* connected-inverse.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92A21747C7E80064D82D /* connected-inverse.png */; };
+		4ADB92AF1747C7E80064D82D /* connected-inverse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92A31747C7E80064D82D /* connected-inverse@2x.png */; };
+		4ADB92B01747C7E80064D82D /* connected.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92A41747C7E80064D82D /* connected.png */; };
+		4ADB92B11747C7E80064D82D /* connected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92A51747C7E80064D82D /* connected@2x.png */; };
+		4ADB92B21747C7E80064D82D /* connecting-inverse.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92A61747C7E80064D82D /* connecting-inverse.png */; };
+		4ADB92B31747C7E80064D82D /* connecting-inverse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92A71747C7E80064D82D /* connecting-inverse@2x.png */; };
+		4ADB92B41747C7E80064D82D /* connecting.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92A81747C7E80064D82D /* connecting.png */; };
+		4ADB92B51747C7E80064D82D /* connecting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92A91747C7E80064D82D /* connecting@2x.png */; };
+		4ADB92B61747C7E80064D82D /* disconnected-inverse.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92AA1747C7E80064D82D /* disconnected-inverse.png */; };
+		4ADB92B71747C7E80064D82D /* disconnected-inverse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92AB1747C7E80064D82D /* disconnected-inverse@2x.png */; };
+		4ADB92B81747C7E80064D82D /* disconnected.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92AC1747C7E80064D82D /* disconnected.png */; };
+		4ADB92B91747C7E80064D82D /* disconnected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92AD1747C7E80064D82D /* disconnected@2x.png */; };
 		4AE2C1711742151D00D0C57D /* ServersPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE2C1701742151D00D0C57D /* ServersPreferencesView.xib */; };
 		4AE2C1741742154100D0C57D /* ServersPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2C1731742154100D0C57D /* ServersPreferencesViewController.m */; };
 		4AE2C1771743214000D0C57D /* SSHHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2C1761743214000D0C57D /* SSHHelper.m */; };
@@ -125,8 +133,6 @@
 		4A03F73716A69519009BCD79 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A03F73816A69519009BCD79 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A03F73D16A695F0009BCD79 /* StatusMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusMenu.xib; sourceTree = "<group>"; };
-		4A1841D316AD3D0A00CB5D2B /* black-hard-drive-network_64x64.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "black-hard-drive-network_64x64.icns"; sourceTree = "<group>"; };
-		4A1841D516AD3E0200CB5D2B /* blue-hard-drive-network_64x64.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "blue-hard-drive-network_64x64.icns"; sourceTree = "<group>"; };
 		4A1BE47916A5BAA0000E56D7 /* SSH Proxy - Ask Password */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "SSH Proxy - Ask Password"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A1BE47B16A5BAA0000E56D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4A1BE49C16A68F30000E56D7 /* sshproxy.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sshproxy.entitlements; sourceTree = "<group>"; };
@@ -145,10 +151,6 @@
 		4A42311C1719AB8100ABD4F6 /* connect.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = connect.entitlements; sourceTree = "<group>"; };
 		4A44D67F16A8379C00EB44A8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = askpass/main.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A44D68116A837A800EB44A8 /* askpass-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "askpass-Prefix.pch"; path = "askpass/askpass-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		4A44D68E16AD194B00EB44A8 /* black-hard-drive-network_64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black-hard-drive-network_64x64.png"; sourceTree = "<group>"; };
-		4A44D68F16AD194B00EB44A8 /* red-hard-drive-network_64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-hard-drive-network_64x64.png"; sourceTree = "<group>"; };
-		4A44D69016AD194C00EB44A8 /* yellow-hard-drive-network_64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow-hard-drive-network_64x64.png"; sourceTree = "<group>"; };
-		4A44D69416AD1D6E00EB44A8 /* green-hard-drive-network_64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-hard-drive-network_64x64.png"; sourceTree = "<group>"; };
 		4A7B732F16E6F184005D9965 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		4AA6470D16BD006700DE5CAD /* MASPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
 		4AA6470E16BD006700DE5CAD /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
@@ -180,6 +182,21 @@
 		4AD3FE0416A56EF400378F77 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4AD3FE0616A56EF400378F77 /* SSH_ProxyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SSH_ProxyTests.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AD3FE0716A56EF400378F77 /* SSH_ProxyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSH_ProxyTests.m; sourceTree = "<group>"; };
+		4ADB925C17476F700064D82D /* MIT-License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "MIT-License.rtf"; sourceTree = "<group>"; };
+		4ADB925D17476F700064D82D /* RSVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
+		4ADB925E17476F700064D82D /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
+		4ADB92A21747C7E80064D82D /* connected-inverse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connected-inverse.png"; sourceTree = "<group>"; };
+		4ADB92A31747C7E80064D82D /* connected-inverse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connected-inverse@2x.png"; sourceTree = "<group>"; };
+		4ADB92A41747C7E80064D82D /* connected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connected.png; sourceTree = "<group>"; };
+		4ADB92A51747C7E80064D82D /* connected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connected@2x.png"; sourceTree = "<group>"; };
+		4ADB92A61747C7E80064D82D /* connecting-inverse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connecting-inverse.png"; sourceTree = "<group>"; };
+		4ADB92A71747C7E80064D82D /* connecting-inverse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connecting-inverse@2x.png"; sourceTree = "<group>"; };
+		4ADB92A81747C7E80064D82D /* connecting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connecting.png; sourceTree = "<group>"; };
+		4ADB92A91747C7E80064D82D /* connecting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connecting@2x.png"; sourceTree = "<group>"; };
+		4ADB92AA1747C7E80064D82D /* disconnected-inverse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disconnected-inverse.png"; sourceTree = "<group>"; };
+		4ADB92AB1747C7E80064D82D /* disconnected-inverse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disconnected-inverse@2x.png"; sourceTree = "<group>"; };
+		4ADB92AC1747C7E80064D82D /* disconnected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disconnected.png; sourceTree = "<group>"; };
+		4ADB92AD1747C7E80064D82D /* disconnected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disconnected@2x.png"; sourceTree = "<group>"; };
 		4AE2C1701742151D00D0C57D /* ServersPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServersPreferencesView.xib; sourceTree = "<group>"; };
 		4AE2C1721742154100D0C57D /* ServersPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServersPreferencesViewController.h; sourceTree = "<group>"; };
 		4AE2C1731742154100D0C57D /* ServersPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServersPreferencesViewController.m; sourceTree = "<group>"; };
@@ -308,14 +325,10 @@
 		4AD3FDCE16A56EF400378F77 = {
 			isa = PBXGroup;
 			children = (
+				4ADB92A11747C7E80064D82D /* icons */,
 				4A1E89031701F09F007DF2A0 /* logo.iconset */,
+				4ADB925B17476F700064D82D /* RSVerticallyCenteredTextFieldCell */,
 				4AA6470B16BD006700DE5CAD /* MASPreferences */,
-				4A1841D516AD3E0200CB5D2B /* blue-hard-drive-network_64x64.icns */,
-				4A1841D316AD3D0A00CB5D2B /* black-hard-drive-network_64x64.icns */,
-				4A44D69416AD1D6E00EB44A8 /* green-hard-drive-network_64x64.png */,
-				4A44D68E16AD194B00EB44A8 /* black-hard-drive-network_64x64.png */,
-				4A44D68F16AD194B00EB44A8 /* red-hard-drive-network_64x64.png */,
-				4A44D69016AD194C00EB44A8 /* yellow-hard-drive-network_64x64.png */,
 				4AD3FDE316A56EF400378F77 /* sshproxy */,
 				4A1BE47D16A5BAA0000E56D7 /* askpass */,
 				4A42310A1719A96800ABD4F6 /* connect */,
@@ -415,6 +428,35 @@
 				4AD3FE0316A56EF400378F77 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4ADB925B17476F700064D82D /* RSVerticallyCenteredTextFieldCell */ = {
+			isa = PBXGroup;
+			children = (
+				4ADB925C17476F700064D82D /* MIT-License.rtf */,
+				4ADB925D17476F700064D82D /* RSVerticallyCenteredTextFieldCell.h */,
+				4ADB925E17476F700064D82D /* RSVerticallyCenteredTextFieldCell.m */,
+			);
+			path = RSVerticallyCenteredTextFieldCell;
+			sourceTree = "<group>";
+		};
+		4ADB92A11747C7E80064D82D /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				4ADB92A21747C7E80064D82D /* connected-inverse.png */,
+				4ADB92A31747C7E80064D82D /* connected-inverse@2x.png */,
+				4ADB92A41747C7E80064D82D /* connected.png */,
+				4ADB92A51747C7E80064D82D /* connected@2x.png */,
+				4ADB92A61747C7E80064D82D /* connecting-inverse.png */,
+				4ADB92A71747C7E80064D82D /* connecting-inverse@2x.png */,
+				4ADB92A81747C7E80064D82D /* connecting.png */,
+				4ADB92A91747C7E80064D82D /* connecting@2x.png */,
+				4ADB92AA1747C7E80064D82D /* disconnected-inverse.png */,
+				4ADB92AB1747C7E80064D82D /* disconnected-inverse@2x.png */,
+				4ADB92AC1747C7E80064D82D /* disconnected.png */,
+				4ADB92AD1747C7E80064D82D /* disconnected@2x.png */,
+			);
+			path = icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -563,17 +605,24 @@
 				4A1BE49D16A68F30000E56D7 /* sshproxy.entitlements in Resources */,
 				4A03F73E16A695F0009BCD79 /* StatusMenu.xib in Resources */,
 				4AEC465916A6A35E008BD118 /* GeneralPreferencesView.xib in Resources */,
-				4A44D69116AD194C00EB44A8 /* black-hard-drive-network_64x64.png in Resources */,
-				4A44D69216AD194C00EB44A8 /* red-hard-drive-network_64x64.png in Resources */,
-				4A44D69316AD194C00EB44A8 /* yellow-hard-drive-network_64x64.png in Resources */,
-				4A44D69516AD1D6E00EB44A8 /* green-hard-drive-network_64x64.png in Resources */,
-				4A1841D416AD3D0A00CB5D2B /* black-hard-drive-network_64x64.icns in Resources */,
-				4A1841D616AD3E0200CB5D2B /* blue-hard-drive-network_64x64.icns in Resources */,
 				4A021B3F16B801CD00F98FBC /* askpass.entitlements in Resources */,
 				4AA6471316BD006700DE5CAD /* MASPreferencesWindow.xib in Resources */,
 				4AA6471516BD006700DE5CAD /* README.md in Resources */,
 				4A1E89041701F09F007DF2A0 /* logo.iconset in Resources */,
 				4AE2C1711742151D00D0C57D /* ServersPreferencesView.xib in Resources */,
+				4ADB925F17476F700064D82D /* MIT-License.rtf in Resources */,
+				4ADB92AE1747C7E80064D82D /* connected-inverse.png in Resources */,
+				4ADB92AF1747C7E80064D82D /* connected-inverse@2x.png in Resources */,
+				4ADB92B01747C7E80064D82D /* connected.png in Resources */,
+				4ADB92B11747C7E80064D82D /* connected@2x.png in Resources */,
+				4ADB92B21747C7E80064D82D /* connecting-inverse.png in Resources */,
+				4ADB92B31747C7E80064D82D /* connecting-inverse@2x.png in Resources */,
+				4ADB92B41747C7E80064D82D /* connecting.png in Resources */,
+				4ADB92B51747C7E80064D82D /* connecting@2x.png in Resources */,
+				4ADB92B61747C7E80064D82D /* disconnected-inverse.png in Resources */,
+				4ADB92B71747C7E80064D82D /* disconnected-inverse@2x.png in Resources */,
+				4ADB92B81747C7E80064D82D /* disconnected.png in Resources */,
+				4ADB92B91747C7E80064D82D /* disconnected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,6 +691,7 @@
 				4A37A086171AEC6300605BE1 /* CharmTextField.m in Sources */,
 				4AE2C1741742154100D0C57D /* ServersPreferencesViewController.m in Sources */,
 				4AE2C1771743214000D0C57D /* SSHHelper.m in Sources */,
+				4ADB926017476F700064D82D /* RSVerticallyCenteredTextFieldCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

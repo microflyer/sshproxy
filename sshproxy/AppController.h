@@ -22,9 +22,11 @@
     /* The other stuff :P */
     NSStatusItem *statusItem;
     NSImage *offStatusImage;
-    NSImage *statusHighlightImage;
+    NSImage *offStatusInverseImage;
     NSImage *onStatusImage;
+    NSImage *onStatusInverseImage;
     NSImage *inStatusImage;
+    NSImage *inStatusInverseImage;
     
     NSTask *task;
     NSPipe *pipe;

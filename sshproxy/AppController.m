@@ -31,25 +31,18 @@
     //Create the NSStatusBar and set its length
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     
-    //Used to detect where our files are
-    NSBundle *bundle = [NSBundle mainBundle];
-    
     //Allocates and loads the images into the application which will be used for our NSStatusItem
-    offStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-disconnected_20" ofType:@"png"]];
-//    [offStatusImage setSize:NSMakeSize(20,20)];
+    offStatusImage = [NSImage imageNamed:@"disconnected"];
+    onStatusImage = [NSImage imageNamed:@"connected"];
+    inStatusImage = [NSImage imageNamed:@"connecting"];
     
-    onStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-connected_20" ofType:@"png"]];
-//    [onStatusImage setSize:NSMakeSize(20,20)];
-    
-    inStatusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-connecting_20" ofType:@"png"]];
-//    [inStatusImage setSize:NSMakeSize(20,20)];
-    
-    statusHighlightImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"status-disconnected_20" ofType:@"png"]];
-//    [statusHighlightImage setSize:NSMakeSize(20,20)];
+    offStatusInverseImage = [NSImage imageNamed:@"disconnected-inverse"];
+    onStatusInverseImage = [NSImage imageNamed:@"connected-inverse"];
+    inStatusInverseImage = [NSImage imageNamed:@"connecting-inverse"];
     
     //Sets the images in our NSStatusItem
     [statusItem setImage:offStatusImage];
-    //    [statusItem setAlternateImage:statusHighlightImage];
+    [statusItem setAlternateImage:offStatusInverseImage];
     
     //Tells the NSStatusItem what action to active
     [statusItem setAction:@selector(statusItemClicked)];
@@ -174,6 +167,7 @@
     
     NSString* connectingString = [NSString stringWithFormat:@"Proxy: Connecting ..."];
     [statusItem setImage:inStatusImage];
+    [statusItem setAlternateImage:inStatusInverseImage];
     [statusMenuItem setTitle:connectingString];
     
     // TODO: CATCH TASK EXCEPTION
@@ -270,12 +264,14 @@
 {
     proxyStatus = SSHPROXY_CONNECTED;
     [statusItem setImage:onStatusImage];
+    [statusItem setAlternateImage:onStatusInverseImage];
     [statusMenuItem setTitle:@"Proxy: On"];
 }
 
 - (void)set2reconnect:(NSString*) state
 {
     [statusItem setImage:inStatusImage];
+    [statusItem setAlternateImage:inStatusInverseImage];
     [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Reconnecting - %@", state]];
     
     // ensure
@@ -356,6 +352,7 @@
     task = nil;
 
     [statusItem setImage:offStatusImage];
+    [statusItem setAlternateImage:offStatusInverseImage];
     
     // ensure
     [turnOffMenuItem setHidden:YES];
