@@ -57,6 +57,7 @@
 		4ADB92B71747C7E80064D82D /* disconnected-inverse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92AB1747C7E80064D82D /* disconnected-inverse@2x.png */; };
 		4ADB92B81747C7E80064D82D /* disconnected.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92AC1747C7E80064D82D /* disconnected.png */; };
 		4ADB92B91747C7E80064D82D /* disconnected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92AD1747C7E80064D82D /* disconnected@2x.png */; };
+		4ADB92BE1748A0440064D82D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB92BD1748A0440064D82D /* README.md */; };
 		4AE2C1711742151D00D0C57D /* ServersPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE2C1701742151D00D0C57D /* ServersPreferencesView.xib */; };
 		4AE2C1741742154100D0C57D /* ServersPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2C1731742154100D0C57D /* ServersPreferencesViewController.m */; };
 		4AE2C1771743214000D0C57D /* SSHHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2C1761743214000D0C57D /* SSHHelper.m */; };
@@ -197,6 +198,7 @@
 		4ADB92AB1747C7E80064D82D /* disconnected-inverse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disconnected-inverse@2x.png"; sourceTree = "<group>"; };
 		4ADB92AC1747C7E80064D82D /* disconnected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disconnected.png; sourceTree = "<group>"; };
 		4ADB92AD1747C7E80064D82D /* disconnected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disconnected@2x.png"; sourceTree = "<group>"; };
+		4ADB92BD1748A0440064D82D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		4AE2C1701742151D00D0C57D /* ServersPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServersPreferencesView.xib; sourceTree = "<group>"; };
 		4AE2C1721742154100D0C57D /* ServersPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServersPreferencesViewController.h; sourceTree = "<group>"; };
 		4AE2C1731742154100D0C57D /* ServersPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServersPreferencesViewController.m; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 		4AD3FDCE16A56EF400378F77 = {
 			isa = PBXGroup;
 			children = (
+				4ADB92BD1748A0440064D82D /* README.md */,
 				4ADB92A11747C7E80064D82D /* icons */,
 				4A1E89031701F09F007DF2A0 /* logo.iconset */,
 				4ADB925B17476F700064D82D /* RSVerticallyCenteredTextFieldCell */,
@@ -623,6 +626,7 @@
 				4ADB92B71747C7E80064D82D /* disconnected-inverse@2x.png in Resources */,
 				4ADB92B81747C7E80064D82D /* disconnected.png in Resources */,
 				4ADB92B91747C7E80064D82D /* disconnected@2x.png in Resources */,
+				4ADB92BE1748A0440064D82D /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

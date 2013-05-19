@@ -11,6 +11,7 @@ SSH Proxy is able to remember the SSH login password and save it to OS X's keych
 
 ## Key Features
 
+- Fast switch between multiple SSH accounts
 - Support for SOCKS v5
 - Remember SSH login password, and save to OS X Keychain
 - Auto launch when log in OS X
@@ -21,4 +22,5 @@ SSH Proxy is able to remember the SSH login password and save it to OS X's keych
 
 ## Feature Wishlist
 
-- Switching between multiple SSH accounts
+- [DONE] Switching between multiple SSH accounts
+- [DONE] Grayscale status item icons
