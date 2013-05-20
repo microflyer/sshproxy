@@ -14,7 +14,8 @@
 + (NSMutableArray*) getConnectArgs
 {
     NSString* userHome = NSHomeDirectory();
-    NSString* knownHostFile= [userHome stringByAppendingPathComponent:@".sshproxy_known_hosts"];
+    NSString* knownHostFile = @"/dev/null";
+//    NSString* knownHostFile= [userHome stringByAppendingPathComponent:@".sshproxy_known_hosts"];
     NSString* identityFile= [userHome stringByAppendingPathComponent:@".sshproxy_identity"];
     //    NSString* configFile= [userHome stringByAppendingPathComponent:@".sshproxy_config"];
     
