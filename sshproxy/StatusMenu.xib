@@ -713,7 +713,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="753651638">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">138413056</int>
-												<string key="NSContents">Version: 13.05</string>
+												<string key="NSContents">Version: 13.06</string>
 												<object class="NSFont" key="NSSupport" id="26">
 													<string key="NSName">LucidaGrande</string>
 													<double key="NSSize">11</double>
@@ -2060,7 +2060,6 @@
 					<string key="className">AppController</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="_turnOnProxy:">id</string>
 						<string key="openAboutWindow:">id</string>
 						<string key="openHelpURL:">id</string>
 						<string key="openMacAppStore:">id</string>
@@ -2070,10 +2069,6 @@
 						<string key="turnOnProxy:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="_turnOnProxy:">
-							<string key="name">_turnOnProxy:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="openAboutWindow:">
 							<string key="name">openAboutWindow:</string>
 							<string key="candidateClassName">id</string>

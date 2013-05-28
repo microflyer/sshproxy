@@ -143,7 +143,7 @@
     NSString* remoteHost = (NSString *)[server valueForKey:@"remote_host"];
     NSString* loginName = (NSString *)[server valueForKey:@"login_name"];
     int remotePort = [(NSNumber*)[server valueForKey:@"remote_port"] intValue];
-    int localPort = [(NSNumber*)[server valueForKey:@"local_port"] intValue];
+    NSInteger localPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"local_port"];
     BOOL enableCompression = [(NSNumber*)[server valueForKey:@"enable_compression"] boolValue];
     BOOL shareSocks = [(NSNumber*)[server valueForKey:@"share_socks"] boolValue];
     
