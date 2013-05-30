@@ -39,20 +39,6 @@
     CharmNumberFormatter *formatter = [[CharmNumberFormatter alloc] init];
     [remotePortTextField setFormatter:formatter];
     
-    NSInteger remotePort = [[NSUserDefaults standardUserDefaults] integerForKey:@"remote_port"];
-    if (remotePort<=0 || remotePort>65535) {
-        remotePort = 22;
-    }
-    [remotePortTextField setIntegerValue:remotePort];
-    
-    NSInteger localPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"local_port"];
-    if (localPort<=0 || localPort>65535) {
-        localPort = 7070;
-    }
-    
-    [remotePortStepper setIntegerValue:remotePort];
-    
-    
     // TODO: will called multiple times
     if ([serversTableView numberOfRows]<=0) {
         [self performSelector: @selector(addServer:) withObject:self afterDelay: 0.0f];
