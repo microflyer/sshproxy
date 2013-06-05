@@ -5,12 +5,12 @@
 //  Created by Brant Young on 16/1/13.
 //  Copyright (c) 2013 Codinn Studio. All rights reserved.
 //
+#import <ServiceManagement/ServiceManagement.h>
 #import "AppController.h"
 #import "GeneralPreferencesViewController.h"
 #import "ServersPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
 #import "SSHHelper.h"
-#import <ServiceManagement/ServiceManagement.h>
 
 @implementation AppController
 
@@ -311,7 +311,7 @@
     
     taskOutput = [taskOutput substringFromIndex:fromIndex];
     taskOutput = [taskOutput stringByAppendingString:s];
-    DLog(@"%@",s);
+    DDLogInfo(@"%@",s);
     
     // If the task is running, start reading again
     if (task) {
@@ -373,7 +373,7 @@
 
 - (void)_turnOffProxy
 {
-    DLog(@"Turn off proxy: %@", taskOutput);
+    DDLogInfo(@"Turn off proxy: %@", taskOutput);
     
     // clear taskOutput buffer
     taskOutput = [[NSString alloc] init];
@@ -447,7 +447,7 @@
                                   [encodedTo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                   [encodedSubject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                   [encodedBody stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    DLog(@"%@", encodedURLString);
+    DDLogVerbose(@"%@", encodedURLString);
     NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
     [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
 }

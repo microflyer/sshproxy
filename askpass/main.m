@@ -27,8 +27,6 @@ int main() {
     int hostport = [[dict valueForKey:@"SSHPROXY_REMOTE_PORT"] intValue];
     NSString* userhome = [dict valueForKey:@"SSHPROXY_USER_HOME"];
     
-//	NSLog(@"%@",dict);
-    
 	// The arguments array should contain three elements. The second element is a string which we can use to determine the context in which this program was invoked. This string is either a message prompting for a yes/no or a message prompting for a password. We check it and supply the right response.
 	NSArray *argumentsArray = [[NSProcessInfo processInfo] arguments];
 	if ( [argumentsArray count] >= 2 ){
