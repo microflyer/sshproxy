@@ -36,7 +36,7 @@
     
     NSString* headerString = [NSString stringWithFormat:@"SSH Proxy connecting to the SSH server “%@”.",
                               hostString];
-                              
+    
 	
 	NSDictionary *panelDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                headerString,kCFUserNotificationAlertHeaderKey,
@@ -65,7 +65,7 @@
 	error = CFUserNotificationReceiveResponse(passwordDialog,
 											  0,
 											  &responseFlags);
-
+    
 	if (error){
 		CFRelease(passwordDialog);
 		[returnArray replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:error]];
@@ -77,7 +77,7 @@
 	if (button == kCFUserNotificationAlternateResponse) {
 		CFRelease(passwordDialog);
 		[returnArray replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:1]];
-		return returnArray;		
+		return returnArray;
 	}
 	
 	if ( responseFlags & CFUserNotificationCheckBoxChecked(0) ){
@@ -90,7 +90,7 @@
 	
 	[returnArray replaceObjectAtIndex:0 withObject:(__bridge NSString*)passwordRef];
 	CFRelease(passwordDialog); // Note that this will release the passwordRef as well
-	return returnArray;	
+	return returnArray;
 }
 
 
@@ -100,10 +100,10 @@
 		return nil;
 	}
 	
-	UInt32 passwordLen=0; 
+	UInt32 passwordLen=0;
 	void *passwordData = NULL;
 	SecKeychainItemRef itemRef = NULL;
-		
+    
 	// Look for a password in the keychain
 	OSStatus findKeychainItemStatus = [PasswordHelper getPasswordKeychain:&passwordData length:&passwordLen itemRef:&itemRef host:hostnameStr port:hostport user:usernameStr];
 	
@@ -129,7 +129,7 @@
 	
 	// Look for a password in the keychain
 	SecKeychainItemRef itemRef = nil;
-	UInt32 passwordLen = 0; 
+	UInt32 passwordLen = 0;
 	void *passwordData = NULL;
 	
 	OSStatus findKeychainItemStatus;
@@ -150,7 +150,7 @@
 
 #pragma mark simple wrappers for keychain access functions
 
-//! Add an internet password to the default keychain. 
+//! Add an internet password to the default keychain.
 + (OSStatus) storePasswordKeychain:(NSString*) passwordStr
 							  host:(NSString*) hostnameStr
                               port:(int) hostport
@@ -183,9 +183,9 @@
 }
 
 //! Get password from the keychain. If this succeeds it allocates password data and must therefore be followed by a call to SecKeychainItemFreeContent
-+ (OSStatus) getPasswordKeychain:(void*)passwordData 
-						  length:(UInt32*) passwordLength 
-						 itemRef:(SecKeychainItemRef *)itemRef 
++ (OSStatus) getPasswordKeychain2:(void*)passwordData
+						  length:(UInt32*) passwordLength
+						 itemRef:(SecKeychainItemRef *)itemRef
 							host:(NSString*) hostnameStr
                             port:(int) hostport
 							user:(NSString*) usernameStr
@@ -195,15 +195,15 @@
 	UInt32 usernameLength = (UInt32)[usernameStr length];
 	const char* username=[usernameStr UTF8String];
 	
-	return SecKeychainFindInternetPassword(NULL, 
-										   hostnameLength, 
-										   hostname, 
-										   0, 
+	return SecKeychainFindInternetPassword(NULL,
+										   hostnameLength,
+										   hostname,
+										   0,
 										   NULL,
-										   usernameLength, 
-										   username, 
-										   strlen(""), 
-										   "", 
+										   usernameLength,
+										   username,
+										   strlen(""),
+										   "",
 										   hostport,
 										   kSecProtocolTypeSSH,
 										   kSecAuthenticationTypeDefault,
@@ -214,14 +214,59 @@
 }
 
 
-//! Cocoa wrapper for SecKeychainItemModifyAttributesAndData 
-+ (OSStatus) changePasswordKeychain:(SecKeychainItemRef)itemRef password:(NSString*) newPassword 
+//! Get password from the keychain. If this succeeds it allocates password data and must therefore be followed by a call to SecKeychainItemFreeContent
++ (OSStatus) getPasswordKeychain:(void*)passwordData
+						  length:(UInt32*) passwordLength
+						 itemRef:(SecKeychainItemRef *)itemRef
+							host:(NSString*) hostnameStr
+                            port:(int) hostport
+							user:(NSString*) usernameStr
+{
+    NSMutableDictionary *query = [[NSMutableDictionary alloc] init];
+    
+    [query setObject:(id)kSecClassInternetPassword forKey:(id)kSecClass];
+    
+    // A keychain item of class Internet password must have the union of all of the following attributes unique.
+    // otherwise it will be considered a duplicate item:
+    //      kSecAttrAccount
+    //      kSecAttrSecurityDomain
+    //      kSecAttrServer
+    //      kSecAttrProtocol
+    //      kSecAttrAuthenticationType
+    //      kSecAttrPort
+    //      kSecAttrPath
+    
+    // The label attribute is shown as "Name" in Keychain Access.
+//    [query setObject:hostnameStr forKey:(id)kSecAttrLabel];
+    [query setObject:hostnameStr forKey:(id)kSecAttrServer];
+    [query setObject:[NSNumber numberWithInt:hostport] forKey:(id)kSecAttrPort];
+    [query setObject:usernameStr forKey:(id)kSecAttrAccount];
+    [query setObject:kSecAttrProtocolSSH forKey:(id)kSecAttrProtocol];
+    
+    // Use the proper search constants, return only the attributes of the first match.
+    [query setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
+    [query setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
+    [query setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
+    
+    CFDictionaryRef resultData = NULL;
+    OSStatus result = SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&resultData);
+    
+    NSDictionary *outDictionary = (__bridge_transfer NSDictionary *)resultData;
+
+    NSLog(@"<===== %@ =====>", outDictionary);
+    
+    return result;
+}
+
+
+//! Cocoa wrapper for SecKeychainItemModifyAttributesAndData
++ (OSStatus) changePasswordKeychain:(SecKeychainItemRef)itemRef password:(NSString*) newPassword
 {
 	if ( !newPassword )
 		newPassword=@"";
-		
-	void* cnewpassword=(void*)[newPassword UTF8String]; 
-		UInt32 passwordLength = (UInt32)strlen(cnewpassword);
+    
+	void* cnewpassword=(void*)[newPassword UTF8String];
+    UInt32 passwordLength = (UInt32)strlen(cnewpassword);
 	
 	
 	return SecKeychainItemModifyAttributesAndData(itemRef, 
