@@ -8,6 +8,7 @@
 
 #import "ServersPreferencesViewController.h"
 #import "CharmNumberFormatter.h"
+#import "SSHHelper.h"
 
 @implementation ServersPreferencesViewController
 
@@ -42,6 +43,9 @@
     // TODO: will called multiple times
     if ([serversTableView numberOfRows]<=0) {
         [self performSelector: @selector(addServer:) withObject:self afterDelay: 0.0f];
+    } else {
+        NSInteger index = [SSHHelper getActivatedServerIndex];
+        [serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     }
 }
 
