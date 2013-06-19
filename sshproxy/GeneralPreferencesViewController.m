@@ -12,6 +12,8 @@
 
 @implementation GeneralPreferencesViewController
 
+@synthesize isDirty;
+
 #pragma mark -
 #pragma mark MASPreferencesViewController
 
@@ -47,10 +49,20 @@
     [localPortTextField setIntegerValue:localPort];
     
     [localPortStepper setIntegerValue:localPort];
+    
+    self.isDirty = NO;
+    
+    [self addObserver:self forKeyPath:@"isDirty" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (IBAction)localStepperAction:(id)sender {
 	[localPortTextField setIntValue: [localPortStepper intValue]];
+    self.isDirty = userDefaultsController.hasUnappliedChanges;
+}
+
+- (IBAction)toggleAutoTurnOnProxy:(id)sender
+{
+    self.isDirty = userDefaultsController.hasUnappliedChanges;
 }
 
 -(IBAction)toggleLaunchAtLogin:(id)sender
@@ -78,11 +90,39 @@
             [alert runModal];
         }
     }
+    self.isDirty = userDefaultsController.hasUnappliedChanges;
 }
 
--(IBAction)closePreferencesWindow:(id)sender {
+-(IBAction)closePreferencesWindow:(id)sender
+{
     [self.view.window orderOut:nil];
 }
 
+- (IBAction)applyChanges:(id)sender
+{
+    [userDefaultsController save:self];
+    self.isDirty = NO;
+}
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"isDirty"];
+}
+
+- (BOOL)isDirty
+{
+    return isDirty;
+}
+- (void)setIsDirty:(BOOL)dirty
+{
+    isDirty = dirty;
+}
+
+- (void)controlTextDidChange:(NSNotification *)aNotification
+{
+    self.isDirty = userDefaultsController.hasUnappliedChanges;
+    
+    [super controlTextDidChange:aNotification];
+}
 
 @end

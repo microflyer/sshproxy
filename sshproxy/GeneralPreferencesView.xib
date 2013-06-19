@@ -43,16 +43,16 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">264</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="NSButton" id="312699751">
+					<object class="NSButton" id="443554442">
 						<reference key="NSNextResponder" ref="695629890"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{355, 13}, {82, 32}}</string>
 						<reference key="NSSuperview" ref="695629890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="723105118"/>
+						<reference key="NSNextKeyView" ref="634896038"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="754939525">
+						<object class="NSButtonCell" key="NSCell" id="153713433">
 							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">134217728</int>
 							<string key="NSContents">Revert</string>
@@ -62,7 +62,7 @@
 								<int key="NSfFlags">1044</int>
 							</object>
 							<string key="NSCellIdentifier">_NS:9</string>
-							<reference key="NSControlView" ref="312699751"/>
+							<reference key="NSControlView" ref="443554442"/>
 							<int key="NSButtonFlags">-2038284288</int>
 							<int key="NSButtonFlags2">129</int>
 							<string key="NSAlternateContents"/>
@@ -72,7 +72,7 @@
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
-					<object class="NSButton" id="723105118">
+					<object class="NSButton" id="634896038">
 						<reference key="NSNextResponder" ref="695629890"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{437, 13}, {82, 32}}</string>
@@ -81,13 +81,13 @@
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="1045980706">
+						<object class="NSButtonCell" key="NSCell" id="215745165">
 							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">134217728</int>
 							<string key="NSContents">Apply</string>
 							<reference key="NSSupport" ref="417688105"/>
 							<string key="NSCellIdentifier">_NS:9</string>
-							<reference key="NSControlView" ref="723105118"/>
+							<reference key="NSControlView" ref="634896038"/>
 							<int key="NSButtonFlags">-2038284288</int>
 							<int key="NSButtonFlags2">129</int>
 							<string key="NSAlternateContents"/>
@@ -270,7 +270,7 @@
 								<string key="NSReuseIdentifierKey">_NS:11</string>
 							</object>
 						</array>
-						<string key="NSFrame">{{17, 81}, {499, 108}}</string>
+						<string key="NSFrame">{{17, 94}, {499, 108}}</string>
 						<reference key="NSSuperview" ref="695629890"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="796524566"/>
@@ -301,10 +301,10 @@
 						<reference key="NSNextResponder" ref="695629890"/>
 						<int key="NSvFlags">268</int>
 						<array class="NSMutableArray" key="NSSubviews"/>
-						<string key="NSFrame">{{18, 48}, {309, 18}}</string>
+						<string key="NSFrame">{{18, 61}, {309, 18}}</string>
 						<reference key="NSSuperview" ref="695629890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="312699751"/>
+						<reference key="NSNextKeyView" ref="443554442"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="542814019">
@@ -326,16 +326,14 @@
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
 				</array>
-				<string key="NSFrameSize">{533, 209}</string>
+				<string key="NSFrameSize">{533, 222}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="841270661"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="NSClassName">NSView</string>
 			</object>
-			<object class="NSUserDefaultsController" id="235910576">
-				<bool key="NSSharedInstance">YES</bool>
-			</object>
+			<object class="NSUserDefaultsController" id="619595049"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -404,29 +402,69 @@
 					<int key="connectionID">2412</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">revertButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="443554442"/>
+					</object>
+					<int key="connectionID">2456</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">applyButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="634896038"/>
+					</object>
+					<int key="connectionID">2457</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">applyChanges:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="634896038"/>
+					</object>
+					<int key="connectionID">2488</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">userDefaultsController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="619595049"/>
+					</object>
+					<int key="connectionID">2500</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleAutoTurnOnProxy:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="790325195"/>
+					</object>
+					<int key="connectionID">2516</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.auto_launch</string>
 						<reference key="source" ref="559997738"/>
-						<reference key="destination" ref="235910576"/>
+						<reference key="destination" ref="619595049"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="559997738"/>
-							<reference key="NSDestination" ref="235910576"/>
+							<reference key="NSDestination" ref="619595049"/>
 							<string key="NSLabel">value: values.auto_launch</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">values.auto_launch</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">2399</int>
+					<int key="connectionID">2499</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.disable_autoconnect</string>
 						<reference key="source" ref="790325195"/>
-						<reference key="destination" ref="235910576"/>
+						<reference key="destination" ref="619595049"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="790325195"/>
-							<reference key="NSDestination" ref="235910576"/>
+							<reference key="NSDestination" ref="619595049"/>
 							<string key="NSLabel">value: values.disable_autoconnect</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">values.disable_autoconnect</string>
@@ -437,16 +475,16 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">2402</int>
+					<int key="connectionID">2496</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.local_port</string>
 						<reference key="source" ref="756671711"/>
-						<reference key="destination" ref="235910576"/>
+						<reference key="destination" ref="619595049"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="756671711"/>
-							<reference key="NSDestination" ref="235910576"/>
+							<reference key="NSDestination" ref="619595049"/>
 							<string key="NSLabel">value: values.local_port</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">values.local_port</string>
@@ -461,23 +499,63 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">2406</int>
+					<int key="connectionID">2491</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="756671711"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">2512</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.local_port</string>
 						<reference key="source" ref="392047568"/>
-						<reference key="destination" ref="235910576"/>
+						<reference key="destination" ref="619595049"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="392047568"/>
-							<reference key="NSDestination" ref="235910576"/>
+							<reference key="NSDestination" ref="619595049"/>
 							<string key="NSLabel">value: values.local_port</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">values.local_port</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">2409</int>
+					<int key="connectionID">2493</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: isDirty</string>
+						<reference key="source" ref="634896038"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="634896038"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">enabled: isDirty</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">isDirty</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">2515</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: isDirty</string>
+						<reference key="source" ref="443554442"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="443554442"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">enabled: isDirty</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">isDirty</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">2502</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -512,8 +590,8 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="841270661"/>
 							<reference ref="559997738"/>
-							<reference ref="723105118"/>
-							<reference ref="312699751"/>
+							<reference ref="443554442"/>
+							<reference ref="634896038"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">General Preferences View</string>
@@ -532,19 +610,14 @@
 						<reference key="parent" ref="559997738"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">2396</int>
-						<reference key="object" ref="235910576"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">2403</int>
 						<reference key="object" ref="841270661"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="756671711"/>
 							<reference ref="940340606"/>
 							<reference ref="790325195"/>
 							<reference ref="392047568"/>
 							<reference ref="915024191"/>
+							<reference ref="756671711"/>
 						</array>
 						<reference key="parent" ref="695629890"/>
 					</object>
@@ -617,29 +690,34 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2413</int>
-						<reference key="object" ref="723105118"/>
+						<reference key="object" ref="634896038"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="1045980706"/>
+							<reference ref="215745165"/>
 						</array>
 						<reference key="parent" ref="695629890"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2414</int>
-						<reference key="object" ref="312699751"/>
+						<reference key="object" ref="443554442"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="754939525"/>
+							<reference ref="153713433"/>
 						</array>
 						<reference key="parent" ref="695629890"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2415</int>
-						<reference key="object" ref="754939525"/>
-						<reference key="parent" ref="312699751"/>
+						<reference key="object" ref="153713433"/>
+						<reference key="parent" ref="443554442"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2416</int>
-						<reference key="object" ref="1045980706"/>
-						<reference key="parent" ref="723105118"/>
+						<reference key="object" ref="215745165"/>
+						<reference key="parent" ref="634896038"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">2489</int>
+						<reference key="object" ref="619595049"/>
+						<reference key="parent" ref="0"/>
 					</object>
 				</array>
 			</object>
@@ -658,7 +736,6 @@
 				<string key="1872.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1881.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="2178.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="2396.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="2403.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="2410.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="2411.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -666,12 +743,13 @@
 				<string key="2414.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="2415.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="2416.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="2489.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">2417</int>
+			<int key="maxID">2516</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -679,11 +757,17 @@
 					<string key="className">GeneralPreferencesViewController</string>
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="applyChanges:">id</string>
 						<string key="closePreferencesWindow:">id</string>
 						<string key="localStepperAction:">id</string>
+						<string key="toggleAutoTurnOnProxy:">id</string>
 						<string key="toggleLaunchAtLogin:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="applyChanges:">
+							<string key="name">applyChanges:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="closePreferencesWindow:">
 							<string key="name">closePreferencesWindow:</string>
 							<string key="candidateClassName">id</string>
@@ -692,18 +776,29 @@
 							<string key="name">localStepperAction:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="toggleAutoTurnOnProxy:">
+							<string key="name">toggleAutoTurnOnProxy:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="toggleLaunchAtLogin:">
 							<string key="name">toggleLaunchAtLogin:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="applyButton">NSButton</string>
 						<string key="autoConnectButton">NSButton</string>
 						<string key="localPortStepper">NSStepper</string>
 						<string key="localPortTextField">NSTextField</string>
+						<string key="revertButton">NSButton</string>
 						<string key="startAtLoginButton">NSButton</string>
+						<string key="userDefaultsController">NSUserDefaultsController</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="applyButton">
+							<string key="name">applyButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="autoConnectButton">
 							<string key="name">autoConnectButton</string>
 							<string key="candidateClassName">NSButton</string>
@@ -716,9 +811,17 @@
 							<string key="name">localPortTextField</string>
 							<string key="candidateClassName">NSTextField</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="revertButton">
+							<string key="name">revertButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="startAtLoginButton">
 							<string key="name">startAtLoginButton</string>
 							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="userDefaultsController">
+							<string key="name">userDefaultsController</string>
+							<string key="candidateClassName">NSUserDefaultsController</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

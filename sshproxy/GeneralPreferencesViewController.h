@@ -16,12 +16,22 @@
     IBOutlet NSButton* autoConnectButton;
     
     IBOutlet NSButton* startAtLoginButton;
+    IBOutlet NSButton* revertButton;
+    IBOutlet NSButton* applyButton;
+    
+    IBOutlet NSUserDefaultsController *userDefaultsController;
 }
 
--(IBAction)localStepperAction:(id)sender;
+- (IBAction)localStepperAction:(id)sender;
 
--(IBAction)toggleLaunchAtLogin:(id)sender;
+- (IBAction)toggleAutoTurnOnProxy:(id)sender;
 
--(IBAction)closePreferencesWindow:(id)sender;
+- (IBAction)toggleLaunchAtLogin:(id)sender;
+
+- (IBAction)closePreferencesWindow:(id)sender;
+
+- (IBAction)applyChanges:(id)sender;
+
+@property (nonatomic, readwrite) BOOL isDirty;
 
 @end
