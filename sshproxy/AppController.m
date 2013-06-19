@@ -234,7 +234,7 @@
     
     [arguments addObjectsFromArray:@[
                                      advancedOptions,
-                                     [NSString stringWithFormat:@"%d", localPort],
+                                     [NSString stringWithFormat:@"%ld", (long)localPort],
                                      [NSString stringWithFormat:@"%@@%@", loginName, remoteHost],
                                      @"-p",
                                      [NSString stringWithFormat:@"%d", remotePort]

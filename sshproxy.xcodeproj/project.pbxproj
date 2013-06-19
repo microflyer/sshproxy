@@ -376,9 +376,9 @@
 		4AD3FDCE16A56EF400378F77 = {
 			isa = PBXGroup;
 			children = (
-				4A2FAD0F17715555004C8F7B /* EMKeychain */,
 				4ADB92A11747C7E80064D82D /* icons */,
 				4A1E89031701F09F007DF2A0 /* logo.iconset */,
+				4A2FAD0F17715555004C8F7B /* EMKeychain */,
 				4ADB925B17476F700064D82D /* RSVerticallyCenteredTextFieldCell */,
 				4AA6470B16BD006700DE5CAD /* MASPreferences */,
 				4A2A393B175EC85D002BF361 /* Lumberjack */,
