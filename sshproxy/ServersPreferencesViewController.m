@@ -9,8 +9,11 @@
 #import "ServersPreferencesViewController.h"
 #import "CharmNumberFormatter.h"
 #import "SSHHelper.h"
+#import "PasswordHelpViewController.h"
 
 @implementation ServersPreferencesViewController
+
+@synthesize passwordHelpPopoverController;
 
 #pragma mark -
 #pragma mark MASPreferencesViewController
@@ -73,28 +76,15 @@
 
 
 
-- (IBAction)showPasswordSheet:(id)sender
+- (IBAction)togglePasswordHelpPopover:(id)sender
 {
-    [NSApp beginSheet:passwordPanel
-       modalForWindow:self.view.window
-        modalDelegate:self
-       didEndSelector:nil
-          contextInfo:nil];
+    if (self.passwordHelpPopoverController.popoverIsVisible) {
+        [self.passwordHelpPopoverController closePopover:nil];
+    } else {
+        [self.passwordHelpPopoverController presentPopoverFromRect:[sender bounds] inView:sender preferredArrowDirection:INPopoverArrowDirectionLeft anchorsToPositionView:YES];
+    }
 }
 
-- (IBAction)endPasswordSheet:(id)sender
-{
-    [NSApp endSheet:passwordPanel];
-    [passwordPanel orderOut:sender];
-    
-}
-
-- (IBAction)savePasswordToKeychain:(id)sender
-{
-    [NSApp endSheet:passwordPanel];
-    [passwordPanel orderOut:sender];
-    
-}
 
 - (void)_addServer:(NSDictionary*)server
 {
@@ -150,5 +140,17 @@
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+- (INPopoverController *)passwordHelpPopoverController
+{
+    if (!passwordHelpPopoverController) {
+        PasswordHelpViewController *viewController = [[PasswordHelpViewController alloc] initWithNibName:@"PasswordHelpView" bundle:nil];
+    
+        passwordHelpPopoverController = [[INPopoverController alloc] initWithContentViewController:viewController];
+    }
+    
+    return passwordHelpPopoverController;
+}
+
 
 @end

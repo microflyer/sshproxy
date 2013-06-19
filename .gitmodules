@@ -7,3 +7,6 @@
 [submodule "EMKeychain"]
 	path = EMKeychain
 	url = https://github.com/brantyoung/EMKeychain
+[submodule "INPopoverController"]
+	path = INPopoverController
+	url = https://github.com/indragiek/INPopoverController

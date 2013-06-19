@@ -18,8 +18,6 @@
 int main() {
 	// Get basic information from environment variables that were set along with the NSTask itself. We need this info in order to get the correct password from the security keychain
 	NSDictionary *dict = [[NSProcessInfo processInfo] environment];
-	NSString *loginname = [dict valueForKey:@"SSHPROXY_LOGIN_NAME"];
-	NSString *remotehost = [dict valueForKey:@"SSHPROXY_REMOTE_HOST"];
     NSString* password = [dict valueForKey:@"SSH_ASKPASS_PASSWORD"];
     
 	// The arguments array should contain three elements. The second element is a string which we can use to determine the context in which this program was invoked. This string is either a message prompting for a yes/no or a message prompting for a password. We check it and supply the right response.
@@ -34,7 +32,7 @@ int main() {
 		}
 	}
 	
-	if ( loginname!=nil && remotehost!=nil ){
+	if ( password ){
 		void *pword=(void*)[password UTF8String];
 		printf("%s",(char*)pword);
 		return 0;

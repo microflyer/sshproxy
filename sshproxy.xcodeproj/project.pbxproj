@@ -20,8 +20,10 @@
 		4A2A3951175EC85D002BF361 /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A3948175EC85D002BF361 /* ContextFilterLogFormatter.m */; };
 		4A2A3952175EC85D002BF361 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A394A175EC85D002BF361 /* DispatchQueueLogFormatter.m */; };
 		4A2A3953175EC85D002BF361 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A394B175EC85D002BF361 /* README.txt */; };
-		4A2FAD051770B1F7004C8F7B /* PasswordHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FAD041770B1F7004C8F7B /* PasswordHelper.m */; };
 		4A2FAD0D1770B89F004C8F7B /* EMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FAD0C1770B89F004C8F7B /* EMKeychain.m */; };
+		4A2FAD191771AFCA004C8F7B /* INPopoverController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2FAD161771AFAE004C8F7B /* INPopoverController.framework */; };
+		4A2FAD1B1771B0B0004C8F7B /* PasswordHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FAD1A1771B0B0004C8F7B /* PasswordHelpView.xib */; };
+		4A2FAD1F1771E5D4004C8F7B /* PasswordHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FAD1E1771E5D3004C8F7B /* PasswordHelpViewController.m */; };
 		4A37A086171AEC6300605BE1 /* CharmTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A37A085171AEC6300605BE1 /* CharmTextField.m */; };
 		4A41067A16BE7F4600D46D91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067916BE7F4600D46D91 /* Security.framework */; };
 		4A41067C16BE7FB000D46D91 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067B16BE7FB000D46D91 /* ServiceManagement.framework */; };
@@ -77,6 +79,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4A1BE47816A5BAA0000E56D7;
 			remoteInfo = authenticator;
+		};
+		4A2FAD151771AFAE004C8F7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A2FAD111771AFAE004C8F7B /* INPopoverController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 98BA8937143EA04A006F744E;
+			remoteInfo = INPopoverController;
+		};
+		4A2FAD171771AFC4004C8F7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A2FAD111771AFAE004C8F7B /* INPopoverController.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 98BA8936143EA04A006F744E;
+			remoteInfo = INPopoverController;
 		};
 		4A4231181719AADD00ABD4F6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -156,10 +172,12 @@
 		4A2A3949175EC85D002BF361 /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
 		4A2A394A175EC85D002BF361 /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
 		4A2A394B175EC85D002BF361 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		4A2FAD031770B1F7004C8F7B /* PasswordHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordHelper.h; path = askpass/PasswordHelper.h; sourceTree = SOURCE_ROOT; };
-		4A2FAD041770B1F7004C8F7B /* PasswordHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordHelper.m; path = askpass/PasswordHelper.m; sourceTree = SOURCE_ROOT; };
 		4A2FAD0B1770B89F004C8F7B /* EMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EMKeychain.h; path = EMKeychain/EMKeychain.h; sourceTree = "<group>"; };
 		4A2FAD0C1770B89F004C8F7B /* EMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EMKeychain.m; path = EMKeychain/EMKeychain.m; sourceTree = "<group>"; };
+		4A2FAD111771AFAE004C8F7B /* INPopoverController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = INPopoverController.xcodeproj; path = INPopoverController/INPopoverController.xcodeproj; sourceTree = "<group>"; };
+		4A2FAD1A1771B0B0004C8F7B /* PasswordHelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordHelpView.xib; sourceTree = "<group>"; };
+		4A2FAD1D1771E5D3004C8F7B /* PasswordHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordHelpViewController.h; sourceTree = "<group>"; };
+		4A2FAD1E1771E5D3004C8F7B /* PasswordHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordHelpViewController.m; sourceTree = "<group>"; };
 		4A37A084171AEC6300605BE1 /* CharmTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharmTextField.h; sourceTree = "<group>"; };
 		4A37A085171AEC6300605BE1 /* CharmTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharmTextField.m; sourceTree = "<group>"; };
 		4A41067916BE7F4600D46D91 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -256,6 +274,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A2FAD191771AFCA004C8F7B /* INPopoverController.framework in Frameworks */,
 				4A41067D16BE7FD000D46D91 /* Security.framework in Frameworks */,
 				4A41067C16BE7FB000D46D91 /* ServiceManagement.framework in Frameworks */,
 				4AD3FDDE16A56EF400378F77 /* Cocoa.framework in Frameworks */,
@@ -329,6 +348,14 @@
 			name = EMKeychain;
 			sourceTree = "<group>";
 		};
+		4A2FAD121771AFAE004C8F7B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4A2FAD161771AFAE004C8F7B /* INPopoverController.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4A42310A1719A96800ABD4F6 /* connect */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +405,7 @@
 			children = (
 				4ADB92A11747C7E80064D82D /* icons */,
 				4A1E89031701F09F007DF2A0 /* logo.iconset */,
+				4A2FAD111771AFAE004C8F7B /* INPopoverController.xcodeproj */,
 				4A2FAD0F17715555004C8F7B /* EMKeychain */,
 				4ADB925B17476F700064D82D /* RSVerticallyCenteredTextFieldCell */,
 				4AA6470B16BD006700DE5CAD /* MASPreferences */,
@@ -431,8 +459,6 @@
 		4AD3FDE316A56EF400378F77 /* sshproxy */ = {
 			isa = PBXGroup;
 			children = (
-				4A2FAD031770B1F7004C8F7B /* PasswordHelper.h */,
-				4A2FAD041770B1F7004C8F7B /* PasswordHelper.m */,
 				4A37A084171AEC6300605BE1 /* CharmTextField.h */,
 				4A37A085171AEC6300605BE1 /* CharmTextField.m */,
 				4A1F18AB16A7E65A00F39F74 /* CharmNumberFormatter.h */,
@@ -450,6 +476,9 @@
 				4AE2C1701742151D00D0C57D /* ServersPreferencesView.xib */,
 				4AE2C1721742154100D0C57D /* ServersPreferencesViewController.h */,
 				4AE2C1731742154100D0C57D /* ServersPreferencesViewController.m */,
+				4A2FAD1A1771B0B0004C8F7B /* PasswordHelpView.xib */,
+				4A2FAD1D1771E5D3004C8F7B /* PasswordHelpViewController.h */,
+				4A2FAD1E1771E5D3004C8F7B /* PasswordHelpViewController.m */,
 			);
 			path = sshproxy;
 			sourceTree = "<group>";
@@ -580,6 +609,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4A2FAD181771AFC4004C8F7B /* PBXTargetDependency */,
 				4A4231191719AADD00ABD4F6 /* PBXTargetDependency */,
 				4AA6473516BE3FDC00DE5CAD /* PBXTargetDependency */,
 				4A1BE49F16A69049000E56D7 /* PBXTargetDependency */,
@@ -628,6 +658,12 @@
 			mainGroup = 4AD3FDCE16A56EF400378F77;
 			productRefGroup = 4AD3FDDA16A56EF400378F77 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4A2FAD121771AFAE004C8F7B /* Products */;
+					ProjectRef = 4A2FAD111771AFAE004C8F7B /* INPopoverController.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4AD3FDD816A56EF400378F77 /* sshproxy */,
@@ -638,6 +674,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4A2FAD161771AFAE004C8F7B /* INPopoverController.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = INPopoverController.framework;
+			remoteRef = 4A2FAD151771AFAE004C8F7B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4AA6471816BE3DB900DE5CAD /* Resources */ = {
@@ -679,6 +725,7 @@
 				4ADB92B81747C7E80064D82D /* disconnected.png in Resources */,
 				4ADB92B91747C7E80064D82D /* disconnected@2x.png in Resources */,
 				4A2A3953175EC85D002BF361 /* README.txt in Resources */,
+				4A2FAD1B1771B0B0004C8F7B /* PasswordHelpView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,8 +799,8 @@
 				4A2A3950175EC85D002BF361 /* DDTTYLogger.m in Sources */,
 				4A2A3951175EC85D002BF361 /* ContextFilterLogFormatter.m in Sources */,
 				4A2A3952175EC85D002BF361 /* DispatchQueueLogFormatter.m in Sources */,
-				4A2FAD051770B1F7004C8F7B /* PasswordHelper.m in Sources */,
 				4A2FAD0D1770B89F004C8F7B /* EMKeychain.m in Sources */,
+				4A2FAD1F1771E5D4004C8F7B /* PasswordHelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,6 +819,11 @@
 			isa = PBXTargetDependency;
 			target = 4A1BE47816A5BAA0000E56D7 /* askpass */;
 			targetProxy = 4A1BE49E16A69049000E56D7 /* PBXContainerItemProxy */;
+		};
+		4A2FAD181771AFC4004C8F7B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = INPopoverController;
+			targetProxy = 4A2FAD171771AFC4004C8F7B /* PBXContainerItemProxy */;
 		};
 		4A4231191719AADD00ABD4F6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

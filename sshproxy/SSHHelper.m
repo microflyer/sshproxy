@@ -7,6 +7,7 @@
 //
 
 #import "SSHHelper.h"
+#import "EMKeychain.h"
 
 @implementation SSHHelper
 
@@ -215,6 +216,60 @@
     [prefs removeObjectForKey:@"proxy_command_password"];
     
     [prefs synchronize];
+}
+
+
+#pragma mark -
+#pragma mark Password Helper
+
+//! Simply looks for the keychain entry corresponding to a username and hostname and returns it. Returns nil if the password is not found
++ (NSString*) passwordForHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
+{
+	if ( hostName == nil || userName == nil ){
+		return nil;
+	}
+	
+	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:hostName withUsername:userName path:nil port:hostPort protocol:kSecProtocolTypeSSH];
+    
+    return keychainItem ? keychainItem.password : nil;
+}
+
+
+
+/*! Set the password into the keychain for a specific user and host. If the username/hostname combo already has an entry in the keychain then change it. If not then add a new entry */
++ (BOOL) setPassword:(NSString*)newPassword forHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
+{
+	if ( hostName == nil || userName == nil ) {
+		return NO;
+	}
+	
+	// Look for a password in the keychain
+    EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:hostName withUsername:userName path:nil port:hostPort protocol:kSecProtocolTypeSSH];
+    
+    if (!keychainItem) {
+        keychainItem = [EMInternetKeychainItem addInternetKeychainItemForServer:hostName withUsername:userName password:newPassword path:nil port:hostPort protocol:kSecProtocolTypeSSH];
+        return NO;
+    }
+    
+    keychainItem.password = newPassword;
+    return YES;
+}
+
++ (BOOL) deletePasswordForHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
+{
+	if ( hostName == nil || userName == nil ) {
+		return NO;
+	}
+    
+	// Look for a password in the keychain
+    EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:hostName withUsername:userName path:nil port:hostPort protocol:kSecProtocolTypeSSH];
+    
+    if (!keychainItem) {
+        return NO;
+    }
+    
+    [EMInternetKeychainItem removeKeychainItem:keychainItem];
+    return YES;
 }
 
 @end
