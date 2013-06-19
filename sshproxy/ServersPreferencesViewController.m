@@ -71,6 +71,31 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+
+
+- (IBAction)showPasswordSheet:(id)sender
+{
+    [NSApp beginSheet:passwordPanel
+       modalForWindow:self.view.window
+        modalDelegate:self
+       didEndSelector:nil
+          contextInfo:nil];
+}
+
+- (IBAction)endPasswordSheet:(id)sender
+{
+    [NSApp endSheet:passwordPanel];
+    [passwordPanel orderOut:sender];
+    
+}
+
+- (IBAction)savePasswordToKeychain:(id)sender
+{
+    [NSApp endSheet:passwordPanel];
+    [passwordPanel orderOut:sender];
+    
+}
+
 - (void)_addServer:(NSDictionary*)server
 {
     [self.serverArrayController addObject:server];

@@ -16,6 +16,7 @@
     
     IBOutlet NSTextField* loginNameTextField;
     IBOutlet NSPanel* advancedPanel;
+    IBOutlet NSPanel* passwordPanel;
     IBOutlet NSTableView* serversTableView;
 }
 
@@ -30,6 +31,10 @@
 
 - (IBAction)showTheSheet:(id)sender;
 - (IBAction)endTheSheet:(id)sender;
+
+- (IBAction)showPasswordSheet:(id)sender;
+- (IBAction)endPasswordSheet:(id)sender;
+- (IBAction)savePasswordToKeychain:(id)sender;
 
 @property IBOutlet NSArrayController* serverArrayController;
 
