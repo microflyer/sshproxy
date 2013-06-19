@@ -31,7 +31,7 @@
                                  @"-oConnectTimeout=8", @"-oConnectionAttempts=1",
                                  @"-oServerAliveInterval=8", @"-oServerAliveCountMax=1",
                                  @"-oStrictHostKeyChecking=no", @"-oExitOnForwardFailure=yes",
-                                 @"-oLogLevel=DEBUG",
+                                 @"-oNumberOfPasswordPrompts=1", @"-oLogLevel=DEBUG",
                                  nil];
     
     return arguments;

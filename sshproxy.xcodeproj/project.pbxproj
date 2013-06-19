@@ -20,13 +20,14 @@
 		4A2A3951175EC85D002BF361 /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A3948175EC85D002BF361 /* ContextFilterLogFormatter.m */; };
 		4A2A3952175EC85D002BF361 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A394A175EC85D002BF361 /* DispatchQueueLogFormatter.m */; };
 		4A2A3953175EC85D002BF361 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A394B175EC85D002BF361 /* README.txt */; };
+		4A2FAD051770B1F7004C8F7B /* PasswordHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FAD041770B1F7004C8F7B /* PasswordHelper.m */; };
+		4A2FAD0D1770B89F004C8F7B /* EMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FAD0C1770B89F004C8F7B /* EMKeychain.m */; };
 		4A37A086171AEC6300605BE1 /* CharmTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A37A085171AEC6300605BE1 /* CharmTextField.m */; };
 		4A41067A16BE7F4600D46D91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067916BE7F4600D46D91 /* Security.framework */; };
 		4A41067C16BE7FB000D46D91 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067B16BE7FB000D46D91 /* ServiceManagement.framework */; };
 		4A41067D16BE7FD000D46D91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067916BE7F4600D46D91 /* Security.framework */; };
 		4A41067E16BE7FE700D46D91 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067B16BE7FB000D46D91 /* ServiceManagement.framework */; };
 		4A42310C1719A96800ABD4F6 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A42310B1719A96800ABD4F6 /* main.c */; };
-		4A4231161719AA3500ABD4F6 /* PasswordHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4231131719A9F400ABD4F6 /* PasswordHelper.m */; };
 		4A4231171719AAD500ABD4F6 /* connect in Resources */ = {isa = PBXBuildFile; fileRef = 4A4231091719A96800ABD4F6 /* connect */; };
 		4A42311B1719AB5100ABD4F6 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A42311A1719AB5100ABD4F6 /* libresolv.dylib */; };
 		4A44D67E16A8368900EB44A8 /* SSH Proxy - Ask Password in Resources */ = {isa = PBXBuildFile; fileRef = 4A1BE47916A5BAA0000E56D7 /* SSH Proxy - Ask Password */; };
@@ -155,14 +156,16 @@
 		4A2A3949175EC85D002BF361 /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
 		4A2A394A175EC85D002BF361 /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
 		4A2A394B175EC85D002BF361 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		4A2FAD031770B1F7004C8F7B /* PasswordHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordHelper.h; path = askpass/PasswordHelper.h; sourceTree = SOURCE_ROOT; };
+		4A2FAD041770B1F7004C8F7B /* PasswordHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordHelper.m; path = askpass/PasswordHelper.m; sourceTree = SOURCE_ROOT; };
+		4A2FAD0B1770B89F004C8F7B /* EMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EMKeychain.h; path = EMKeychain/EMKeychain.h; sourceTree = "<group>"; };
+		4A2FAD0C1770B89F004C8F7B /* EMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EMKeychain.m; path = EMKeychain/EMKeychain.m; sourceTree = "<group>"; };
 		4A37A084171AEC6300605BE1 /* CharmTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharmTextField.h; sourceTree = "<group>"; };
 		4A37A085171AEC6300605BE1 /* CharmTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharmTextField.m; sourceTree = "<group>"; };
 		4A41067916BE7F4600D46D91 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4A41067B16BE7FB000D46D91 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		4A4231091719A96800ABD4F6 /* connect */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = connect; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A42310B1719A96800ABD4F6 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		4A4231121719A9F400ABD4F6 /* PasswordHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordHelper.h; path = askpass/PasswordHelper.h; sourceTree = SOURCE_ROOT; };
-		4A4231131719A9F400ABD4F6 /* PasswordHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordHelper.m; path = askpass/PasswordHelper.m; sourceTree = SOURCE_ROOT; };
 		4A42311A1719AB5100ABD4F6 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		4A42311C1719AB8100ABD4F6 /* connect.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = connect.entitlements; sourceTree = "<group>"; };
 		4A44D67F16A8379C00EB44A8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = askpass/main.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -275,8 +278,6 @@
 			isa = PBXGroup;
 			children = (
 				4A44D67F16A8379C00EB44A8 /* main.m */,
-				4A4231121719A9F400ABD4F6 /* PasswordHelper.h */,
-				4A4231131719A9F400ABD4F6 /* PasswordHelper.m */,
 				4A1BE48016A5BAA0000E56D7 /* Supporting Files */,
 			);
 			name = askpass;
@@ -317,6 +318,15 @@
 				4A2A394B175EC85D002BF361 /* README.txt */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4A2FAD0F17715555004C8F7B /* EMKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				4A2FAD0B1770B89F004C8F7B /* EMKeychain.h */,
+				4A2FAD0C1770B89F004C8F7B /* EMKeychain.m */,
+			);
+			name = EMKeychain;
 			sourceTree = "<group>";
 		};
 		4A42310A1719A96800ABD4F6 /* connect */ = {
@@ -366,6 +376,7 @@
 		4AD3FDCE16A56EF400378F77 = {
 			isa = PBXGroup;
 			children = (
+				4A2FAD0F17715555004C8F7B /* EMKeychain */,
 				4ADB92A11747C7E80064D82D /* icons */,
 				4A1E89031701F09F007DF2A0 /* logo.iconset */,
 				4ADB925B17476F700064D82D /* RSVerticallyCenteredTextFieldCell */,
@@ -420,6 +431,8 @@
 		4AD3FDE316A56EF400378F77 /* sshproxy */ = {
 			isa = PBXGroup;
 			children = (
+				4A2FAD031770B1F7004C8F7B /* PasswordHelper.h */,
+				4A2FAD041770B1F7004C8F7B /* PasswordHelper.m */,
 				4A37A084171AEC6300605BE1 /* CharmTextField.h */,
 				4A37A085171AEC6300605BE1 /* CharmTextField.m */,
 				4A1F18AB16A7E65A00F39F74 /* CharmNumberFormatter.h */,
@@ -700,7 +713,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A4231161719AA3500ABD4F6 /* PasswordHelper.m in Sources */,
 				4A44D68216A837CB00EB44A8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -740,6 +752,8 @@
 				4A2A3950175EC85D002BF361 /* DDTTYLogger.m in Sources */,
 				4A2A3951175EC85D002BF361 /* ContextFilterLogFormatter.m in Sources */,
 				4A2A3952175EC85D002BF361 /* DispatchQueueLogFormatter.m in Sources */,
+				4A2FAD051770B1F7004C8F7B /* PasswordHelper.m in Sources */,
+				4A2FAD0D1770B89F004C8F7B /* EMKeychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,11 +839,9 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = askpass/askpass.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "askpass/askpass-Prefix.pch";
 				PRODUCT_NAME = "SSH Proxy - Ask Password";
-				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -839,11 +851,9 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = askpass/askpass.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "askpass/askpass-Prefix.pch";
 				PRODUCT_NAME = "SSH Proxy - Ask Password";
-				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -857,7 +867,6 @@
 				CODE_SIGN_ENTITLEMENTS = connect/connect.entitlements;
 				GCC_VERSION = "";
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -872,7 +881,6 @@
 				CODE_SIGN_ENTITLEMENTS = connect/connect.entitlements;
 				GCC_VERSION = "";
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -889,7 +897,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sshproxyhelper/sshproxyhelper-Prefix.pch";
 				INFOPLIST_FILE = "sshproxyhelper/sshproxyhelper-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "SSH Proxy Helper";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
@@ -907,7 +914,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sshproxyhelper/sshproxyhelper-Prefix.pch";
 				INFOPLIST_FILE = "sshproxyhelper/sshproxyhelper-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "SSH Proxy Helper";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
@@ -985,7 +991,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sshproxy/sshproxy-Prefix.pch";
 				INFOPLIST_FILE = "sshproxy/sshproxy-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "SSH Proxy";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1003,7 +1008,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sshproxy/sshproxy-Prefix.pch";
 				INFOPLIST_FILE = "sshproxy/sshproxy-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "SSH Proxy";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

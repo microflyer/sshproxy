@@ -11,6 +11,7 @@
 #import "ServersPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
 #import "SSHHelper.h"
+#import "PasswordHelper.h"
 
 @implementation AppController
 
@@ -53,6 +54,8 @@
     
     // upgrade user preferences from 13.04 to 13.05
     [SSHHelper upgrade1:serverArrayController];
+    
+    isPasswordCorrect = YES;
 }
 
 - (void)statusItemClicked
@@ -165,20 +168,6 @@
         localPort = 7070;
     }
     
-    NSString* connectingString = [NSString stringWithFormat:@"Proxy: Connecting ..."];
-    [statusItem setImage:inStatusImage];
-    [statusItem setAlternateImage:inStatusInverseImage];
-    [statusMenuItem setTitle:connectingString];
-    
-    // TODO: CATCH TASK EXCEPTION
-    
-    [turnOnMenuItem setHidden:YES];
-    [turnOnMenuItem setEnabled:NO];
-    
-    [turnOffMenuItem setHidden:NO];
-    [turnOffMenuItem setEnabled:YES];
-    
-    task = [[NSTask alloc] init];
     NSString* userHome = NSHomeDirectory();
     
     // Get the path of our Askpass program, which we've included as part of the main application bundle
@@ -186,12 +175,40 @@
                                           inDirectory:[[NSBundle mainBundle] bundlePath]];
     
     // This creates a dictionary of environment variables (keys) and their values (objects) to be set in the environment where the task will be run. This environment dictionary will then be accessible to our Askpass program.
+    
+    if (!isPasswordCorrect) {
+        isPasswordCorrect = YES;
+        
+        [PasswordHelper deletePasswordForHost:remoteHost port:remotePort user:loginName];
+    }
+    
+    // First try to get the password from the keychain
+    NSString *loginPassword = [PasswordHelper passwordForHost:remoteHost port:remotePort user:loginName];
+    if ( !loginPassword ){
+        // No password was found in the keychain so we should prompt the user for it.
+        NSArray *promptArray = [PasswordHelper promptForPassword:remoteHost port:remotePort user:loginName];
+        NSInteger returnCode = [[promptArray objectAtIndex:1] intValue];
+        if ( returnCode == 0 ){ // Found a valid password entry
+            
+            // Set the password in the keychain if the user requested this.
+            if ( [[promptArray objectAtIndex:2] intValue]==0 ){
+                [PasswordHelper setPassword:[promptArray objectAtIndex:0] forHost:remoteHost port:remotePort user:loginName];
+            }
+            
+            loginPassword = [NSString stringWithUTF8String:[[promptArray objectAtIndex:0]UTF8String]];
+        } else if ( returnCode == 1 ){ // User cancelled so we'll just abort
+            // We return a non zero exit code here which should cause ssh to abort
+            return;
+        }
+    }
+    
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                 loginName, @"SSHPROXY_LOGIN_NAME",
                                 remoteHost, @"SSHPROXY_REMOTE_HOST",
                                 [NSString stringWithFormat:@"%d", remotePort], @"SSHPROXY_REMOTE_PORT",
                                 @":9999", @"DISPLAY",
                                 askPassPath, @"SSH_ASKPASS",
+                                loginPassword, @"SSH_ASKPASS_PASSWORD",
                                 userHome, @"SSHPROXY_USER_HOME",
                                 @"1",@"INTERACTION",
                                 nil];
@@ -223,6 +240,21 @@
                                      [NSString stringWithFormat:@"%d", remotePort]
                                 ]
      ];
+    
+    NSString* connectingString = [NSString stringWithFormat:@"Proxy: Connecting ..."];
+    [statusItem setImage:inStatusImage];
+    [statusItem setAlternateImage:inStatusInverseImage];
+    [statusMenuItem setTitle:connectingString];
+    
+    // TODO: CATCH TASK EXCEPTION
+    
+    [turnOnMenuItem setHidden:YES];
+    [turnOnMenuItem setEnabled:NO];
+    
+    [turnOffMenuItem setHidden:NO];
+    [turnOffMenuItem setEnabled:YES];
+    
+    task = [[NSTask alloc] init];
     
     [task setEnvironment:env];
     [task setArguments:arguments];
@@ -324,8 +356,10 @@
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
             [statusMenuItem setTitle:@"Proxy: Off - port already in use"];
             return;
-        } else if ([taskOutput rangeOfString:@"Permission denied (publickey,password)"].location != NSNotFound) {
+        } else if ([taskOutput rangeOfString:@"Permission denied "].location != NSNotFound) {
             [statusMenuItem setTitle:@"Proxy: Off - incorrect password"];
+            isPasswordCorrect = NO;
+            [self performSelector: @selector(_turnOnProxy) withObject:nil afterDelay: 0.0];
             return;
         } else {
             NSArray* errors = @[

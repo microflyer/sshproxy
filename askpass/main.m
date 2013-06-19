@@ -7,7 +7,6 @@
 //
 
 #include <Cocoa/Cocoa.h>
-#import "PasswordHelper.h"
 
 /*! The ASKPASS program for ssh (and for rsync via ssh).
  
@@ -26,6 +25,7 @@ int main() {
 	NSString *remotehost = [dict valueForKey:@"SSHPROXY_REMOTE_HOST"];
     int hostport = [[dict valueForKey:@"SSHPROXY_REMOTE_PORT"] intValue];
     NSString* userhome = [dict valueForKey:@"SSHPROXY_USER_HOME"];
+    NSString* password = [dict valueForKey:@"SSH_ASKPASS_PASSWORD"];
     
 	// The arguments array should contain three elements. The second element is a string which we can use to determine the context in which this program was invoked. This string is either a message prompting for a yes/no or a message prompting for a password. We check it and supply the right response.
 	NSArray *argumentsArray = [[NSProcessInfo processInfo] arguments];
@@ -40,40 +40,7 @@ int main() {
 	}
 	
 	if ( loginname!=nil && remotehost!=nil ){
-        NSString* lockFile= [userhome stringByAppendingPathComponent:@".sshproxy_askpass_lock"];
-        
-        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:lockFile];
-        
-		// First try to get the password from the keychain
-		NSString *pStr = [PasswordHelper passwordForHost:remotehost port:hostport user:loginname];
-		if ( pStr==nil || fileExists ){
-			// No password was found in the keychain so we should prompt the user for it.
-			NSArray *promptArray = [PasswordHelper promptForPassword:remotehost port:hostport user:loginname];
-			NSInteger returnCode = [[promptArray objectAtIndex:1] intValue];
-			if ( returnCode == 0 ){ // Found a valid password entry
-				
-                // Set the password in the keychain if the user requested this.
-				if ( [[promptArray objectAtIndex:2] intValue]==0 ){
-					[PasswordHelper setPassword:[promptArray objectAtIndex:0] forHost:remotehost port:hostport user:loginname];
-				}
-				
-				void *pword=(void*)[[promptArray objectAtIndex:0] UTF8String];
-				printf("%s",(char*)pword);
-				return 0;
-			} else if ( returnCode == 1 ){ // User cancelled so we'll just abort
-				// We return a non zero exit code here which should cause ssh to abort
-				return 1;
-			}
-		}
-        // create lock file !
-        if (!fileExists) {
-            // [[NSFileManager defaultManager] createFileAtPath:lockFile contents:nil attributes: nil];
-            // use plain c to avoid create unprivileged cache file
-            FILE *fh = fopen([lockFile UTF8String], "w");
-            fclose(fh);
-        }
-        
-		void *pword=(void*)[pStr UTF8String];
+		void *pword=(void*)[password UTF8String];
 		printf("%s",(char*)pword);
 		return 0;
 	}

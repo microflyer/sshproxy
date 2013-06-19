@@ -34,6 +34,8 @@
     
     int proxyStatus;
     
+    BOOL isPasswordCorrect;
+    
     MASPreferencesWindowController *_preferencesWindowController;
     
     IBOutlet NSArrayController* serverArrayController;

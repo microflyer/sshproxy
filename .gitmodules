@@ -4,3 +4,6 @@
 [submodule "CocoaLumberjack"]
 	path = CocoaLumberjack
 	url = https://github.com/robbiehanson/CocoaLumberjack
+[submodule "EMKeychain"]
+	path = EMKeychain
+	url = https://github.com/brantyoung/EMKeychain

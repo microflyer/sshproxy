@@ -13,6 +13,7 @@
 }
 
 + (BOOL) setPassword:(NSString*)newPassword forHost:(NSString*)hostname port:(int) hostport user:(NSString*) username;
++ (BOOL) deletePasswordForHost:(NSString*)hostname port:(int) hostport user:(NSString*) username;
 + (NSString*) passwordForHost:(NSString*)hostname port:(int) hostport user:(NSString*) username;
 + (NSArray *) promptForPassword:(NSString*)hostname port:(int) hostport user:(NSString*) username;
 
