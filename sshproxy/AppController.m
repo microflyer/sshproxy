@@ -421,16 +421,11 @@
 
 - (IBAction)openPreferences:(id)sender
 {
-    if(_preferencesWindowController) {
-        [_preferencesWindowController close];
-        _preferencesWindowController = nil;
-    }
-    
     [NSApp activateIgnoringOtherApps:YES];
     //    [[self.preferencesWindowController window] makeKeyAndOrderFront:nil];
     //    [[self.preferencesWindowController window] setLevel:NSFloatingWindowLevel];
     [[self.preferencesWindowController window] setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
-    [[self.preferencesWindowController window] center];
+//    [[self.preferencesWindowController window] center];
     [self.preferencesWindowController showWindow:nil];
 }
 

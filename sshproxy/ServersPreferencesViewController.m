@@ -135,10 +135,47 @@
 }
 
 - (IBAction)closePreferencesWindow:(id)sender {
-    [self.view.window orderOut:nil];
+    [self.view.window performClose:sender];
+}
+
+- (BOOL)commitEditing
+{
+    BOOL shouldClose = YES;
     
-    // TODO : check if dirty
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+    if (self.isDirty) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"The preference has changes that have not been applied. Would you like to apply them?" defaultButton:@"Apply" alternateButton:@"Don't Apply" otherButton:@"Cancel" informativeTextWithFormat:@""];
+        
+        alert.alertStyle = NSWarningAlertStyle;
+        
+        [alert beginSheetModalForWindow:self.view.window modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        
+        // a simple trick for waiting sheet modal return
+        shouldClose = [NSApp runModalForWindow:alert.window];
+    }
+    
+    return shouldClose;
+}
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    switch (returnCode) {
+        case NSAlertDefaultReturn: // apply
+            [self performSelector: @selector(applyChanges:) withObject:nil afterDelay: 0.0];
+            [NSApp stopModalWithCode:YES];
+            break;
+            
+        case NSAlertOtherReturn: // cancel
+            [NSApp stopModalWithCode:NO];
+            break;
+            
+        case NSAlertAlternateReturn: // don't apply
+            [self performSelector: @selector(revertChanges:) withObject:nil afterDelay: 0.0];
+            [NSApp stopModalWithCode:YES];
+            break;
+            
+        default:
+            [NSApp stopModalWithCode:YES];
+            break;
+    }
 }
 
 - (INPopoverController *)passwordHelpPopoverController
