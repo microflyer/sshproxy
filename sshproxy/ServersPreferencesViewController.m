@@ -14,6 +14,7 @@
 @implementation ServersPreferencesViewController
 
 @synthesize passwordHelpPopoverController;
+@synthesize isDirty;
 
 #pragma mark -
 #pragma mark MASPreferencesViewController
@@ -41,25 +42,28 @@
 - (void)awakeFromNib
 {
     CharmNumberFormatter *formatter = [[CharmNumberFormatter alloc] init];
-    [remotePortTextField setFormatter:formatter];
+    [self.remotePortTextField setFormatter:formatter];
     
     // TODO: will called multiple times
-    if ([serversTableView numberOfRows]<=0) {
+    if ([self.serversTableView numberOfRows]<=0) {
         [self performSelector: @selector(addServer:) withObject:self afterDelay: 0.0f];
     } else {
         NSInteger index = [SSHHelper getActivatedServerIndex];
-        [serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+        [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     }
+    
+    self.isDirty = NO;
 }
 
 - (IBAction)remoteStepperAction:(id)sender
 {
-	[remotePortTextField setIntValue: [remotePortStepper intValue]];
+	self.remotePortTextField.intValue = self.remotePortStepper.intValue;
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
 - (IBAction)showTheSheet:(id)sender
 {
-    [NSApp beginSheet:advancedPanel
+    [NSApp beginSheet:self.advancedPanel
        modalForWindow:self.view.window
         modalDelegate:self
        didEndSelector:nil
@@ -68,12 +72,11 @@
 
 - (IBAction)endTheSheet:(id)sender
 {
-    [NSApp endSheet:advancedPanel];
-    [advancedPanel orderOut:sender];
+    [NSApp endSheet:self.advancedPanel];
+    [self.advancedPanel orderOut:sender];
     
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
-
 
 
 - (IBAction)togglePasswordHelpPopover:(id)sender
@@ -90,18 +93,16 @@
 {
     [self.serverArrayController addObject:server];
     
-    NSInteger index = [serversTableView numberOfRows]-1;
-    [serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+    NSInteger index = [self.serversTableView numberOfRows]-1;
+    [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     
-    [remoteHostTextField becomeFirstResponder];
-    [serversTableView scrollRowToVisible:index];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.remoteHostTextField becomeFirstResponder];
+    [self.serversTableView scrollRowToVisible:index];
 }
 
 - (IBAction)removeServer:(id)sender
 {
-    NSInteger count = [serversTableView numberOfRows];
+    NSInteger count = [self.serversTableView numberOfRows];
     
     NSUInteger index = [self.serverArrayController selectionIndex];
     [self.serverArrayController removeObjectAtArrangedObjectIndex:index];
@@ -110,10 +111,8 @@
         index = index -1;
     }
     
-    [serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
-    [serversTableView scrollRowToVisible:index];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+    [self.serversTableView scrollRowToVisible:index];
 }
 
 - (IBAction)addServer:(id)sender
@@ -138,13 +137,14 @@
 - (IBAction)closePreferencesWindow:(id)sender {
     [self.view.window orderOut:nil];
     
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    // TODO : check if dirty
+//    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (INPopoverController *)passwordHelpPopoverController
 {
     if (!passwordHelpPopoverController) {
-        PasswordHelpViewController *viewController = [[PasswordHelpViewController alloc] initWithNibName:@"PasswordHelpView" bundle:nil];
+        PasswordHelpViewController *viewController = [[PasswordHelpViewController alloc] init];
     
         passwordHelpPopoverController = [[INPopoverController alloc] initWithContentViewController:viewController];
     }
@@ -152,5 +152,22 @@
     return passwordHelpPopoverController;
 }
 
+- (IBAction)applyChanges:(id)sender
+{
+    [self.userDefaultsController save:self];
+    self.isDirty = NO;
+}
+- (IBAction)revertChanges:(id)sender
+{
+    [self.userDefaultsController revert:self];
+    self.isDirty = NO;
+}
+
+- (void)controlTextDidChange:(NSNotification *)aNotification
+{
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
+    
+    [super controlTextDidChange:aNotification];
+}
 
 @end

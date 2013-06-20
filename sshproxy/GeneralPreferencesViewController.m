@@ -111,15 +111,6 @@
 {
 }
 
-- (BOOL)isDirty
-{
-    return isDirty;
-}
-- (void)setIsDirty:(BOOL)dirty
-{
-    isDirty = dirty;
-}
-
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
     self.isDirty = userDefaultsController.hasUnappliedChanges;

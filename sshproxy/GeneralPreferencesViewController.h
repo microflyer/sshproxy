@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "MASPreferencesViewController.h"
 
-@interface GeneralPreferencesViewController : NSViewController <MASPreferencesViewController> {
+@interface GeneralPreferencesViewController : NSViewController <MASPreferencesViewController>
+{
     IBOutlet NSTextField* localPortTextField;
     IBOutlet NSStepper* localPortStepper;
     

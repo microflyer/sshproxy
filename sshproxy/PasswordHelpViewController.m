@@ -14,6 +14,11 @@
 
 @implementation PasswordHelpViewController
 
+- (id)init
+{
+    return [super initWithNibName:@"PasswordHelpView" bundle:nil];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

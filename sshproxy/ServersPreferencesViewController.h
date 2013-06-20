@@ -11,14 +11,6 @@
 #import <INPopoverController/INPopoverController.h>
 
 @interface ServersPreferencesViewController : NSViewController <MASPreferencesViewController> {
-    IBOutlet NSTextField* remoteHostTextField;
-    IBOutlet NSTextField* remotePortTextField;
-    IBOutlet NSStepper* remotePortStepper;
-    
-    IBOutlet NSTextField* loginNameTextField;
-    IBOutlet NSPanel* advancedPanel;
-    IBOutlet NSTableView* serversTableView;
-    IBOutlet NSButton *passwordHelpButton;
 }
 
 
@@ -35,7 +27,23 @@
 
 - (IBAction)togglePasswordHelpPopover:(id)sender;
 
-@property IBOutlet NSArrayController* serverArrayController;
+@property (strong) IBOutlet NSArrayController* serverArrayController;
+@property (strong) IBOutlet NSUserDefaultsController *userDefaultsController;
+
+@property (strong) IBOutlet NSTextField* remoteHostTextField;
+@property (strong) IBOutlet NSTextField* remotePortTextField;
+@property (strong) IBOutlet NSStepper* remotePortStepper;
+
+@property (strong) IBOutlet NSTextField* loginNameTextField;
+@property (strong) IBOutlet NSPanel* advancedPanel;
+@property (strong) IBOutlet NSTableView* serversTableView;
+@property (strong) IBOutlet NSButton *passwordHelpButton;
+
 @property (nonatomic,readonly) INPopoverController *passwordHelpPopoverController;
+
+- (IBAction)applyChanges:(id)sender;
+- (IBAction)revertChanges:(id)sender;
+
+@property (nonatomic, readwrite) BOOL isDirty;
 
 @end
