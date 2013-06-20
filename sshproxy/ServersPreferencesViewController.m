@@ -114,6 +114,8 @@
     
     [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     [self.serversTableView scrollRowToVisible:index];
+    
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
 - (IBAction)addServer:(id)sender
@@ -127,12 +129,14 @@
     [defaultServer setObject:[NSNumber numberWithBool:NO] forKey:@"share_socks"];
     
     [self _addServer:defaultServer];
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
 - (IBAction)duplicateServer:(id)sender
 {
     NSDictionary* server = (NSDictionary*)[self.serverArrayController selectedObjects][0];
     [self _addServer:server];
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
 - (IBAction)closePreferencesWindow:(id)sender {
