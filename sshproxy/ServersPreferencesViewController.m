@@ -203,8 +203,6 @@
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
     self.isDirty = self.userDefaultsController.hasUnappliedChanges;
-    
-    [super controlTextDidChange:aNotification];
 }
 
 @end

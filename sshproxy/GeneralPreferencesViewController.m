@@ -55,12 +55,12 @@
 
 - (IBAction)localStepperAction:(id)sender {
 	self.localPortTextField.intValue = self.localPortStepper.intValue;
-    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)toggleAutoTurnOnProxy:(id)sender
 {
-    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(IBAction)toggleLaunchAtLogin:(id)sender
@@ -154,7 +154,6 @@
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
     self.isDirty = self.userDefaultsController.hasUnappliedChanges;
-    [super controlTextDidChange:aNotification];
 }
 
 @end
