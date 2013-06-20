@@ -231,14 +231,14 @@
 	
 	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:hostName withUsername:userName path:nil port:hostPort protocol:kSecProtocolTypeSSH];
     
-    return keychainItem ? keychainItem.password : nil;
+    return keychainItem ? keychainItem.password : @"";
 }
 
 + (NSString *)passwordForServer:(NSDictionary *)server
 {
-    NSString* remoteHost = (NSString *)[server valueForKey:@"remote_host"];
-    NSString* loginName = (NSString *)[server valueForKey:@"login_name"];
-    int remotePort = [(NSNumber*)[server valueForKey:@"remote_port"] intValue];
+    NSString* remoteHost = [self hostFromServer:server];
+    NSString* loginName = [self userFromServer:server];
+    int remotePort = [self portFromServer:server];
     
     return [SSHHelper passwordForHost:remoteHost port:remotePort user:loginName];
 }
@@ -264,9 +264,9 @@
 }
 + (BOOL) setPassword:(NSString *)newPassword forServer:(NSDictionary *)server
 {
-    NSString* remoteHost = (NSString *)[server valueForKey:@"remote_host"];
-    NSString* loginName = (NSString *)[server valueForKey:@"login_name"];
-    int remotePort = [(NSNumber*)[server valueForKey:@"remote_port"] intValue];
+    NSString* remoteHost = [self hostFromServer:server];
+    NSString* loginName = [self userFromServer:server];
+    int remotePort = [self portFromServer:server];
     
     return [self setPassword:newPassword forHost:remoteHost port:remotePort user:loginName];
 }
@@ -299,6 +299,50 @@
     }
     
     return localPort;
+}
+
+#pragma mark Getters for server parameters
+
++ (NSString *)hostFromServer:(NSDictionary *)server
+{
+    NSString* remoteHost = (NSString *)[server valueForKey:@"remote_host"];
+    
+    if (!remoteHost) {
+        remoteHost = @"";
+    }
+    
+    return remoteHost;
+}
+
++ (int)portFromServer:(NSDictionary *)server
+{
+    int remotePort = [(NSNumber*)[server valueForKey:@"remote_port"] intValue];
+    
+    if (remotePort<=0 || remotePort>65535) {
+        remotePort = 22;
+    }
+    
+    return remotePort;
+}
+
++ (NSString *)userFromServer:(NSDictionary *)server
+{
+    NSString* loginName = (NSString *)[server valueForKey:@"login_name"];
+    
+    if (!loginName) {
+        loginName = @"";
+    }
+    
+    return loginName;
+}
+
++ (BOOL)isEnableCompress:(NSDictionary *)server
+{
+    return [(NSNumber*)[server valueForKey:@"enable_compression"] boolValue];
+}
++ (BOOL)isShareSOCKS:(NSDictionary *)server
+{
+    return [(NSNumber*)[server valueForKey:@"share_socks"] boolValue];
 }
 
 @end

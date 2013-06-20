@@ -239,12 +239,7 @@
         // recover password from keychain
         NSDictionary* server = (NSDictionary*)self.serverArrayController.selectedObjects[0];
         
-        NSString *password = [SSHHelper passwordForServer:server];
-        if (!password) {
-            password = @"";
-        }
-        
-        self.loginPasswordTextField.stringValue = password;
+        self.loginPasswordTextField.stringValue = [SSHHelper passwordForServer:server];
     }
 }
 

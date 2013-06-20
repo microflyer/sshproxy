@@ -86,7 +86,7 @@
         int i = 0;
         for (NSDictionary* server in servers) {
             NSMenuItem* item = [NSMenuItem alloc];
-            item.title = [NSString stringWithFormat:@" %@@%@", (NSString *)[server valueForKey:@"login_name"], (NSString *)[server valueForKey:@"remote_host"]];
+            item.title = [NSString stringWithFormat:@" %@@%@", [SSHHelper userFromServer:server], [SSHHelper hostFromServer:server]];
             item.action = @selector(switchServer:);
             item.indentationLevel = 1;
             
@@ -168,25 +168,12 @@
         return;
     }
     
-    NSString* remoteHost = (NSString *)[server valueForKey:@"remote_host"];
-    NSString* loginName = (NSString *)[server valueForKey:@"login_name"];
-    int remotePort = [(NSNumber*)[server valueForKey:@"remote_port"] intValue];
+    NSString* remoteHost = [SSHHelper hostFromServer:server];
+    NSString* loginName = [SSHHelper userFromServer:server];
+    int remotePort = [SSHHelper portFromServer:server];
     NSInteger localPort = [SSHHelper getLocalPort];
-    BOOL enableCompression = [(NSNumber*)[server valueForKey:@"enable_compression"] boolValue];
-    BOOL shareSocks = [(NSNumber*)[server valueForKey:@"share_socks"] boolValue];
-    
-    // get perferences
-    if (!remoteHost) {
-        remoteHost = @"";
-    }
-    
-    if (!loginName) {
-        loginName = @"";
-    }
-    
-    if (remotePort<=0 || remotePort>65535) {
-        remotePort = 22;
-    }
+    BOOL enableCompression = [SSHHelper isEnableCompress:server];
+    BOOL shareSocks = [SSHHelper isShareSOCKS:server];
     
     // Get the path of our Askpass program, which we've included as part of the main application bundle
     NSString *askPassPath = [NSBundle pathForResource:@"SSH Proxy - Ask Password" ofType:@""
@@ -195,12 +182,7 @@
     // This creates a dictionary of environment variables (keys) and their values (objects) to be set in the environment where the task will be run. This environment dictionary will then be accessible to our Askpass program.
     
     // First try to get the password from the keychain
-    NSString *loginPassword = [SSHHelper passwordForHost:remoteHost port:remotePort user:loginName];
-    
-    if ( !loginPassword ){
-        // No password was found in the keychain use blank password.
-        loginPassword = @"";
-    }
+    NSString *loginPassword = [SSHHelper passwordForServer:server];
     
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                 @":9999", @"DISPLAY",

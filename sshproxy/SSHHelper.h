@@ -29,11 +29,18 @@
 + (void)upgrade1:(NSArrayController *) serverArrayController;
 
 // password helper
-+ (BOOL) setPassword:(NSString *)newPassword forHost:(NSString*)hostname port:(int) hostport user:(NSString*) username;
-+ (BOOL) setPassword:(NSString *)newPassword forServer:(NSDictionary *)server;
++ (BOOL)setPassword:(NSString *)newPassword forHost:(NSString*)hostname port:(int) hostport user:(NSString *) username;
++ (BOOL)setPassword:(NSString *)newPassword forServer:(NSDictionary *)server;
 
-+ (BOOL) deletePasswordForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
-+ (NSString*) passwordForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
-+ (NSString*) passwordForServer:(NSDictionary *)server;
++ (BOOL)deletePasswordForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
++ (NSString *)passwordForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
++ (NSString *)passwordForServer:(NSDictionary *)server;
+
+// getters for server parameters
++ (NSString *)hostFromServer:(NSDictionary *)server;
++ (int)portFromServer:(NSDictionary *)server;
++ (NSString *)userFromServer:(NSDictionary *)server;
++ (BOOL)isEnableCompress:(NSDictionary *)server;
++ (BOOL)isShareSOCKS:(NSDictionary *)server;
 
 @end
