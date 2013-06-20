@@ -50,6 +50,7 @@
     self.localPortTextField.integerValue = localPort;
     self.localPortStepper.integerValue = localPort;
     
+    [self.userDefaultsController save:self];
     self.isDirty = NO;
 }
 
@@ -144,6 +145,9 @@
 - (IBAction)revertChanges:(id)sender
 {
     [self.userDefaultsController revert:self];
+    
+    // save again to prevent dirty settings
+    [self.userDefaultsController save:self];
     self.isDirty = NO;
 }
 

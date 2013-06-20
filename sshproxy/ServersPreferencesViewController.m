@@ -52,6 +52,7 @@
         [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     }
     
+    [self.userDefaultsController save:self];
     self.isDirty = NO;
 }
 
@@ -197,6 +198,9 @@
 - (IBAction)revertChanges:(id)sender
 {
     [self.userDefaultsController revert:self];
+    
+    // save again to prevent dirty settings
+    [self.userDefaultsController save:self];
     self.isDirty = NO;
 }
 
