@@ -188,8 +188,6 @@
         remotePort = 22;
     }
     
-    NSString* userHome = NSHomeDirectory();
-    
     // Get the path of our Askpass program, which we've included as part of the main application bundle
     NSString *askPassPath = [NSBundle pathForResource:@"SSH Proxy - Ask Password" ofType:@""
                                           inDirectory:[[NSBundle mainBundle] bundlePath]];
@@ -205,13 +203,9 @@
     }
     
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                loginName, @"SSHPROXY_LOGIN_NAME",
-                                remoteHost, @"SSHPROXY_REMOTE_HOST",
-                                [NSString stringWithFormat:@"%d", remotePort], @"SSHPROXY_REMOTE_PORT",
                                 @":9999", @"DISPLAY",
                                 askPassPath, @"SSH_ASKPASS",
                                 loginPassword, @"SSH_ASKPASS_PASSWORD",
-                                userHome, @"SSHPROXY_USER_HOME",
                                 @"1",@"INTERACTION",
                                 nil];
     [env addEntriesFromDictionary:[SSHHelper getProxyCommandEnv:server]];

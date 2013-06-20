@@ -11,13 +11,13 @@
 @interface SSHHelper : NSObject
 
 // for ProxyCommand
-+ (NSDictionary*) getProxyCommandEnv:(NSDictionary*) server;
-+ (NSString*)getProxyCommandStr:(NSDictionary*) server;
++ (NSDictionary *) getProxyCommandEnv:(NSDictionary*) server;
++ (NSString *)getProxyCommandStr:(NSDictionary*) server;
 
-+ (NSMutableArray*)getConnectArgs;
++ (NSMutableArray *)getConnectArgs;
 
 // for servers
-+ (NSDictionary*)getActivatedServer;
++ (NSDictionary *)getActivatedServer;
 + (NSInteger)getActivatedServerIndex;
 + (void)setActivatedServer:(int) index;
 
@@ -26,11 +26,14 @@
 
 
 // code that upgrade user preferences from 13.04 to 13.05
-+ (void)upgrade1:(NSArrayController*) serverArrayController;
++ (void)upgrade1:(NSArrayController *) serverArrayController;
 
 // password helper
-+ (BOOL) setPassword:(NSString*)newPassword forHost:(NSString*)hostname port:(int) hostport user:(NSString*) username;
-+ (BOOL) deletePasswordForHost:(NSString*)hostname port:(int) hostport user:(NSString*) username;
-+ (NSString*) passwordForHost:(NSString*)hostname port:(int) hostport user:(NSString*) username;
++ (BOOL) setPassword:(NSString *)newPassword forHost:(NSString*)hostname port:(int) hostport user:(NSString*) username;
++ (BOOL) setPassword:(NSString *)newPassword forServer:(NSDictionary *)server;
+
++ (BOOL) deletePasswordForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
++ (NSString*) passwordForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
++ (NSString*) passwordForServer:(NSDictionary *)server;
 
 @end

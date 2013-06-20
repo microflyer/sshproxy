@@ -223,7 +223,7 @@
 #pragma mark Password Helper
 
 //! Simply looks for the keychain entry corresponding to a username and hostname and returns it. Returns nil if the password is not found
-+ (NSString*) passwordForHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
++ (NSString *)passwordForHost:(NSString *)hostName port:(int) hostPort user:(NSString *) userName
 {
 	if ( hostName == nil || userName == nil ){
 		return nil;
@@ -234,6 +234,14 @@
     return keychainItem ? keychainItem.password : nil;
 }
 
++ (NSString *)passwordForServer:(NSDictionary *)server
+{
+    NSString* remoteHost = (NSString *)[server valueForKey:@"remote_host"];
+    NSString* loginName = (NSString *)[server valueForKey:@"login_name"];
+    int remotePort = [(NSNumber*)[server valueForKey:@"remote_port"] intValue];
+    
+    return [SSHHelper passwordForHost:remoteHost port:remotePort user:loginName];
+}
 
 
 /*! Set the password into the keychain for a specific user and host. If the username/hostname combo already has an entry in the keychain then change it. If not then add a new entry */
@@ -253,6 +261,14 @@
     
     keychainItem.password = newPassword;
     return YES;
+}
++ (BOOL) setPassword:(NSString *)newPassword forServer:(NSDictionary *)server
+{
+    NSString* remoteHost = (NSString *)[server valueForKey:@"remote_host"];
+    NSString* loginName = (NSString *)[server valueForKey:@"login_name"];
+    int remotePort = [(NSNumber*)[server valueForKey:@"remote_port"] intValue];
+    
+    return [self setPassword:newPassword forHost:remoteHost port:remotePort user:loginName];
 }
 
 + (BOOL) deletePasswordForHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName

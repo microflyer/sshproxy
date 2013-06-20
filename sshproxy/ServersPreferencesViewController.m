@@ -40,17 +40,21 @@
     return NSLocalizedString(@"Servers", @"Toolbar item name for the Servers preference pane");
 }
 
-- (void)awakeFromNib
+- (void)loadView
 {
+    [super loadView];
+    
     CharmNumberFormatter *formatter = [[CharmNumberFormatter alloc] init];
     [self.remotePortTextField setFormatter:formatter];
     
-    // TODO: will called multiple times
     if ([self.serversTableView numberOfRows]<=0) {
         [self performSelector: @selector(addServer:) withObject:self afterDelay: 0.0f];
     } else {
         NSInteger index = [SSHHelper getActivatedServerIndex];
         [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+        
+        // invoke tableViewSelectionDidChange
+        [[NSNotificationCenter defaultCenter] postNotificationName:NSTableViewSelectionDidChangeNotification object:self.serversTableView];
     }
     
     [self.userDefaultsController save:self];
@@ -198,7 +202,7 @@
 - (IBAction)applyChanges:(id)sender
 {
     NSInteger index = [SSHHelper getActivatedServerIndex];
-    NSDictionary* server = (NSDictionary*)[self.serverArrayController selectedObjects][index];
+    NSDictionary* server = (NSDictionary*)[self.serverArrayController arrangedObjects][index];
     BOOL isProxyNeedReactive = ![server isEqualToDictionary:[SSHHelper getActivatedServer]];
     
     [self.userDefaultsController save:self];
@@ -210,6 +214,8 @@
         
         [appController performSelector: @selector(reactiveProxy:) withObject:self afterDelay: 0.0];
     }
+    
+    // TODO: set password to keychain
     
 }
 - (IBAction)revertChanges:(id)sender
@@ -224,6 +230,22 @@
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
     self.isDirty = self.userDefaultsController.hasUnappliedChanges;
+}
+
+#pragma mark NSTableViewDelegate
+- (void)tableViewSelectionDidChange:(NSNotification *)aNotification
+{
+    if (self.serverArrayController.selectedObjects.count > 0) {
+        // recover password from keychain
+        NSDictionary* server = (NSDictionary*)self.serverArrayController.selectedObjects[0];
+        
+        NSString *password = [SSHHelper passwordForServer:server];
+        if (!password) {
+            password = @"";
+        }
+        
+        self.loginPasswordTextField.stringValue = password;
+    }
 }
 
 @end

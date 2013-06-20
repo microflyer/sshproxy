@@ -39,8 +39,10 @@
     return NSLocalizedString(@"General", @"Toolbar item name for the General preference pane");
 }
 
--(void)awakeFromNib
+-(void)loadView
 {
+    [super loadView];
+    
     CharmNumberFormatter *formatter = [[CharmNumberFormatter alloc] init];
     self.localPortTextField.formatter = formatter;
     

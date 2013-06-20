@@ -10,7 +10,7 @@
 #import "MASPreferencesViewController.h"
 #import <INPopoverController/INPopoverController.h>
 
-@interface ServersPreferencesViewController : NSViewController <MASPreferencesViewController> {
+@interface ServersPreferencesViewController : NSViewController <MASPreferencesViewController, NSTableViewDelegate> {
 }
 
 
@@ -35,6 +35,7 @@
 @property (strong) IBOutlet NSStepper* remotePortStepper;
 
 @property (strong) IBOutlet NSTextField* loginNameTextField;
+@property (strong) IBOutlet NSSecureTextField* loginPasswordTextField;
 @property (strong) IBOutlet NSPanel* advancedPanel;
 @property (strong) IBOutlet NSTableView* serversTableView;
 @property (strong) IBOutlet NSButton *passwordHelpButton;
