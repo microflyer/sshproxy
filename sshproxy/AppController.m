@@ -12,7 +12,24 @@
 #import "MASPreferencesWindowController.h"
 #import "SSHHelper.h"
 
-@implementation AppController
+@implementation AppController {
+    /* The other stuff :P */
+    NSStatusItem *statusItem;
+    NSImage *offStatusImage;
+    NSImage *offStatusInverseImage;
+    NSImage *onStatusImage;
+    NSImage *onStatusInverseImage;
+    NSImage *inStatusImage;
+    NSImage *inStatusInverseImage;
+    
+    NSTask *task;
+    NSPipe *pipe;
+    NSString* taskOutput;
+    
+    int proxyStatus;
+}
+
+@synthesize preferencesWindowController;
 
 -(id)init
 {
@@ -26,7 +43,7 @@
 
 - (void) awakeFromNib
 {
-    [NSApp setMainMenu:mainMenu];
+    [NSApp setMainMenu:self.mainMenu];
     
     //Create the NSStatusBar and set its length
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
@@ -52,12 +69,12 @@
     [statusItem setHighlightMode:YES];
     
     // upgrade user preferences from 13.04 to 13.05
-    [SSHHelper upgrade1:serverArrayController];
+    [SSHHelper upgrade1:self.serverArrayController];
 }
 
 - (void)statusItemClicked
 {
-    NSMenu* menu = [statusMenu copy];
+    NSMenu* menu = [self.statusMenu copy];
     menu.minimumWidth = 256.0;
     
     NSArray* servers = [[NSUserDefaults standardUserDefaults] arrayForKey:@"servers"];
@@ -223,15 +240,15 @@
     NSString* connectingString = [NSString stringWithFormat:@"Proxy: Connecting ..."];
     [statusItem setImage:inStatusImage];
     [statusItem setAlternateImage:inStatusInverseImage];
-    [statusMenuItem setTitle:connectingString];
+    [self.statusMenuItem setTitle:connectingString];
     
     // TODO: CATCH TASK EXCEPTION
     
-    [turnOnMenuItem setHidden:YES];
-    [turnOnMenuItem setEnabled:NO];
+    [self.turnOnMenuItem setHidden:YES];
+    [self.turnOnMenuItem setEnabled:NO];
     
-    [turnOffMenuItem setHidden:NO];
-    [turnOffMenuItem setEnabled:YES];
+    [self.turnOffMenuItem setHidden:NO];
+    [self.turnOffMenuItem setEnabled:YES];
     
     task = [[NSTask alloc] init];
     
@@ -276,21 +293,21 @@
     proxyStatus = SSHPROXY_CONNECTED;
     [statusItem setImage:onStatusImage];
     [statusItem setAlternateImage:onStatusInverseImage];
-    [statusMenuItem setTitle:@"Proxy: On"];
+    [self.statusMenuItem setTitle:@"Proxy: On"];
 }
 
 - (void)set2reconnect:(NSString*) state
 {
     [statusItem setImage:inStatusImage];
     [statusItem setAlternateImage:inStatusInverseImage];
-    [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Reconnecting - %@", state]];
+    [self.statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Reconnecting - %@", state]];
     
     // ensure
-    [turnOffMenuItem setHidden:NO];
-    [turnOffMenuItem setEnabled:YES];
+    [self.turnOffMenuItem setHidden:NO];
+    [self.turnOffMenuItem setEnabled:YES];
     
-    [turnOnMenuItem setHidden:YES];
-    [turnOnMenuItem setEnabled:NO];
+    [self.turnOnMenuItem setHidden:YES];
+    [self.turnOnMenuItem setEnabled:NO];
 }
 
 - (void)reconnectIfNeed:(NSString*) state
@@ -300,9 +317,9 @@
         [self performSelector: @selector(_turnOnProxy) withObject:nil afterDelay: 3.0];
     } else {
         if (proxyStatus==SSHPROXY_OFF) {
-            [statusMenuItem setTitle:@"Proxy: Off"];
+            [self.statusMenuItem setTitle:@"Proxy: Off"];
         } else {
-            [statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Off - %@", state]];
+            [self.statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Off - %@", state]];
         }
     }
 }
@@ -333,10 +350,10 @@
         [fh waitForDataInBackgroundAndNotify];
     } else {        
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
-            [statusMenuItem setTitle:@"Proxy: Off - port already in use"];
+            [self.statusMenuItem setTitle:@"Proxy: Off - port already in use"];
             return;
         } else if ([taskOutput rangeOfString:@"Permission denied "].location != NSNotFound) {
-            [statusMenuItem setTitle:@"Proxy: Off - incorrect password"];
+            [self.statusMenuItem setTitle:@"Proxy: Off - incorrect password"];
             return;
         } else {
             NSArray* errors = @[
@@ -366,12 +383,12 @@
     [statusItem setAlternateImage:offStatusInverseImage];
     
     // ensure
-    [turnOffMenuItem setHidden:YES];
-    [turnOffMenuItem setEnabled:NO];
+    [self.turnOffMenuItem setHidden:YES];
+    [self.turnOffMenuItem setEnabled:NO];
     
     // show and enable turn on menu
-    [turnOnMenuItem setHidden:NO];
-    [turnOnMenuItem setEnabled:YES];
+    [self.turnOnMenuItem setHidden:NO];
+    [self.turnOnMenuItem setEnabled:YES];
 }
 
 
@@ -402,7 +419,7 @@
 
 - (NSWindowController *)preferencesWindowController
 {
-    if (_preferencesWindowController == nil)
+    if (preferencesWindowController == nil)
     {
         NSViewController *generalViewController = [[GeneralPreferencesViewController alloc] init];
         NSViewController *serversViewController = [[ServersPreferencesViewController alloc] init];
@@ -412,11 +429,11 @@
         //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];
         
         NSString *title = NSLocalizedString(@"SSH Proxy Preferences", @"SSH Proxy Preferences");
-        _preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
+        preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
         
-        [[_preferencesWindowController window] setReleasedWhenClosed: NO];
+        [[preferencesWindowController window] setReleasedWhenClosed: NO];
     }
-    return _preferencesWindowController;
+    return preferencesWindowController;
 }
 
 - (IBAction)openPreferences:(id)sender
@@ -439,9 +456,9 @@
 {
     [NSApp activateIgnoringOtherApps:YES];
     
-    [aboutWindow makeKeyAndOrderFront:nil];
-    [aboutWindow setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
-    [aboutWindow center];
+    [self.aboutWindow makeKeyAndOrderFront:nil];
+    [self.aboutWindow setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
+    [self.aboutWindow center];
 }
 
 -(IBAction)openSendFeedback:(id)sender

@@ -40,32 +40,33 @@
 -(void)awakeFromNib
 {
     CharmNumberFormatter *formatter = [[CharmNumberFormatter alloc] init];
-    [localPortTextField setFormatter:formatter];
+    self.localPortTextField.formatter = formatter;
     
     NSInteger localPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"local_port"];
     if (localPort<=0 || localPort>65535) {
         localPort = 7070;
     }
-    [localPortTextField setIntegerValue:localPort];
     
-    [localPortStepper setIntegerValue:localPort];
+    self.localPortTextField.integerValue = localPort;
+    self.localPortStepper.integerValue = localPort;
     
     self.isDirty = NO;
 }
 
 - (IBAction)localStepperAction:(id)sender {
-	[localPortTextField setIntValue: [localPortStepper intValue]];
-    self.isDirty = userDefaultsController.hasUnappliedChanges;
+	self.localPortTextField.intValue = self.localPortStepper.intValue;
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
 - (IBAction)toggleAutoTurnOnProxy:(id)sender
 {
-    self.isDirty = userDefaultsController.hasUnappliedChanges;
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
 -(IBAction)toggleLaunchAtLogin:(id)sender
 {
-    NSInteger state = [startAtLoginButton state] ;
+    NSInteger state = self.startAtLoginButton.state;
+    
     if (state == NSOnState) { // ON
         // Turn on launch at login
         if (!SMLoginItemSetEnabled ((__bridge CFStringRef)@"com.codinnstudio.sshproxyhelper", YES)) {
@@ -88,7 +89,6 @@
             [alert runModal];
         }
     }
-    self.isDirty = userDefaultsController.hasUnappliedChanges;
 }
 
 -(IBAction)closePreferencesWindow:(id)sender
@@ -138,12 +138,12 @@
 
 - (IBAction)applyChanges:(id)sender
 {
-    [userDefaultsController save:self];
+    [self.userDefaultsController save:self];
     self.isDirty = NO;
 }
 - (IBAction)revertChanges:(id)sender
 {
-    [userDefaultsController revert:self];
+    [self.userDefaultsController revert:self];
     self.isDirty = NO;
 }
 
@@ -153,8 +153,7 @@
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
-    self.isDirty = userDefaultsController.hasUnappliedChanges;
-    
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
     [super controlTextDidChange:aNotification];
 }
 
