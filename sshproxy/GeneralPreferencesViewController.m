@@ -56,7 +56,7 @@
 
 - (IBAction)localStepperAction:(id)sender {
 	self.localPortTextField.intValue = self.localPortStepper.intValue;
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
 - (IBAction)toggleAutoTurnOnProxy:(id)sender
