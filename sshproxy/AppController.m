@@ -281,10 +281,6 @@
            selector:@selector(taskTerminated:) name:NSTaskDidTerminateNotification
              object:task];
     
-    // delete askpass lock file
-    NSString* lockFile= [userHome stringByAppendingPathComponent:@".sshproxy_askpass_lock"];
-    [[NSFileManager defaultManager] removeItemAtPath:lockFile error:nil];
-    
     [task launch];
 }
 
