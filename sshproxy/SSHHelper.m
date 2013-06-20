@@ -272,4 +272,17 @@
     return YES;
 }
 
+#pragma mark Local Settings
+
++ (NSInteger)getLocalPort
+{
+    NSInteger localPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"local_port"];
+    
+    if (localPort<=0 || localPort>65535) {
+        localPort = 7070;
+    }
+    
+    return localPort;
+}
+
 @end

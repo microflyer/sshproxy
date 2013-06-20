@@ -10,6 +10,7 @@
 #import "CharmNumberFormatter.h"
 #import "SSHHelper.h"
 #import "PasswordHelpViewController.h"
+#import "AppController.h"
 
 @implementation ServersPreferencesViewController
 
@@ -196,8 +197,20 @@
 
 - (IBAction)applyChanges:(id)sender
 {
+    NSInteger index = [SSHHelper getActivatedServerIndex];
+    NSDictionary* server = (NSDictionary*)[self.serverArrayController selectedObjects][index];
+    BOOL isProxyNeedReactive = ![server isEqualToDictionary:[SSHHelper getActivatedServer]];
+    
     [self.userDefaultsController save:self];
     self.isDirty = NO;
+    
+    // reactive proxy
+    if (isProxyNeedReactive) {
+        AppController *appController = (AppController *)([NSApplication sharedApplication].delegate);
+        
+        [appController performSelector: @selector(reactiveProxy:) withObject:self afterDelay: 0.0];
+    }
+    
 }
 - (IBAction)revertChanges:(id)sender
 {

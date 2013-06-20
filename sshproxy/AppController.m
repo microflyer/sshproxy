@@ -118,6 +118,17 @@
     [self _turnOnProxy];
 }
 
+- (void)reactiveProxy:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // if turnOffMenuItem current state is visible and enabled, then reactive proxy
+    if ( !self.turnOffMenuItem.isHidden && self.turnOffMenuItem.isEnabled) {
+        [self turnOffProxy:sender];
+        [self _turnOnProxy];
+    }
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     BOOL disableAutoconnect = [[NSUserDefaults standardUserDefaults] boolForKey:@"disable_autoconnect"];
@@ -160,7 +171,7 @@
     NSString* remoteHost = (NSString *)[server valueForKey:@"remote_host"];
     NSString* loginName = (NSString *)[server valueForKey:@"login_name"];
     int remotePort = [(NSNumber*)[server valueForKey:@"remote_port"] intValue];
-    NSInteger localPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"local_port"];
+    NSInteger localPort = [SSHHelper getLocalPort];
     BOOL enableCompression = [(NSNumber*)[server valueForKey:@"enable_compression"] boolValue];
     BOOL shareSocks = [(NSNumber*)[server valueForKey:@"share_socks"] boolValue];
     
@@ -169,17 +180,12 @@
         remoteHost = @"";
     }
     
-    
     if (!loginName) {
         loginName = @"";
     }
     
     if (remotePort<=0 || remotePort>65535) {
         remotePort = 22;
-    }
-    
-    if (localPort<=0 || localPort>65535) {
-        localPort = 7070;
     }
     
     NSString* userHome = NSHomeDirectory();

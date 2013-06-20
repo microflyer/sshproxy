@@ -9,6 +9,8 @@
 
 #import "GeneralPreferencesViewController.h"
 #import "CharmNumberFormatter.h"
+#import "SSHHelper.h"
+#import "AppController.h"
 
 @implementation GeneralPreferencesViewController
 
@@ -42,10 +44,7 @@
     CharmNumberFormatter *formatter = [[CharmNumberFormatter alloc] init];
     self.localPortTextField.formatter = formatter;
     
-    NSInteger localPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"local_port"];
-    if (localPort<=0 || localPort>65535) {
-        localPort = 7070;
-    }
+    NSInteger localPort = [SSHHelper getLocalPort];
     
     self.localPortTextField.integerValue = localPort;
     self.localPortStepper.integerValue = localPort;
@@ -139,8 +138,17 @@
 
 - (IBAction)applyChanges:(id)sender
 {
+    BOOL isProxyNeedReactive = !([SSHHelper getLocalPort]==self.localPortTextField.integerValue);
+    
     [self.userDefaultsController save:self];
     self.isDirty = NO;
+    
+    // reactive proxy
+    if (isProxyNeedReactive) {
+        AppController *appController = (AppController *)([NSApplication sharedApplication].delegate);
+        
+        [appController performSelector: @selector(reactiveProxy:) withObject:self afterDelay: 0.0];
+    }
 }
 - (IBAction)revertChanges:(id)sender
 {

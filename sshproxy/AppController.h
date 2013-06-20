@@ -34,6 +34,8 @@
 @property IBOutlet NSMenu* mainMenu;
 @property IBOutlet NSArrayController* serverArrayController;
 
+- (void)reactiveProxy:(id)sender;
+
 enum {
     SSHPROXY_OFF = 0,
     SSHPROXY_ON,
