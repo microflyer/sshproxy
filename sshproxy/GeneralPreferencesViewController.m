@@ -51,8 +51,6 @@
     [localPortStepper setIntegerValue:localPort];
     
     self.isDirty = NO;
-    
-    [self addObserver:self forKeyPath:@"isDirty" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (IBAction)localStepperAction:(id)sender {
@@ -103,10 +101,14 @@
     [userDefaultsController save:self];
     self.isDirty = NO;
 }
+- (IBAction)revertChanges:(id)sender
+{
+    [userDefaultsController revert:self];
+    self.isDirty = NO;
+}
 
 - (void)dealloc
 {
-    [self removeObserver:self forKeyPath:@"isDirty"];
 }
 
 - (BOOL)isDirty

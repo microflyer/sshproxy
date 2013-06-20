@@ -31,6 +31,7 @@
 - (IBAction)closePreferencesWindow:(id)sender;
 
 - (IBAction)applyChanges:(id)sender;
+- (IBAction)revertChanges:(id)sender;
 
 @property (nonatomic, readwrite) BOOL isDirty;
 

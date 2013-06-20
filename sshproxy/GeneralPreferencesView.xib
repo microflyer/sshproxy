@@ -43,16 +43,16 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">264</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="NSButton" id="443554442">
+					<object class="NSButton" id="621599872">
 						<reference key="NSNextResponder" ref="695629890"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{355, 13}, {82, 32}}</string>
 						<reference key="NSSuperview" ref="695629890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="634896038"/>
+						<reference key="NSNextKeyView" ref="1028175599"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="153713433">
+						<object class="NSButtonCell" key="NSCell" id="871996330">
 							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">134217728</int>
 							<string key="NSContents">Revert</string>
@@ -62,7 +62,7 @@
 								<int key="NSfFlags">1044</int>
 							</object>
 							<string key="NSCellIdentifier">_NS:9</string>
-							<reference key="NSControlView" ref="443554442"/>
+							<reference key="NSControlView" ref="621599872"/>
 							<int key="NSButtonFlags">-2038284288</int>
 							<int key="NSButtonFlags2">129</int>
 							<string key="NSAlternateContents"/>
@@ -72,7 +72,7 @@
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
-					<object class="NSButton" id="634896038">
+					<object class="NSButton" id="1028175599">
 						<reference key="NSNextResponder" ref="695629890"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{437, 13}, {82, 32}}</string>
@@ -81,13 +81,13 @@
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="215745165">
+						<object class="NSButtonCell" key="NSCell" id="895036753">
 							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">134217728</int>
 							<string key="NSContents">Apply</string>
 							<reference key="NSSupport" ref="417688105"/>
 							<string key="NSCellIdentifier">_NS:9</string>
-							<reference key="NSControlView" ref="634896038"/>
+							<reference key="NSControlView" ref="1028175599"/>
 							<int key="NSButtonFlags">-2038284288</int>
 							<int key="NSButtonFlags2">129</int>
 							<string key="NSAlternateContents"/>
@@ -304,7 +304,7 @@
 						<string key="NSFrame">{{18, 61}, {309, 18}}</string>
 						<reference key="NSSuperview" ref="695629890"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="443554442"/>
+						<reference key="NSNextKeyView" ref="621599872"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="542814019">
@@ -333,7 +333,7 @@
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="NSClassName">NSView</string>
 			</object>
-			<object class="NSUserDefaultsController" id="619595049"/>
+			<object class="NSUserDefaultsController" id="581637778"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -405,7 +405,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">revertButton</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="443554442"/>
+						<reference key="destination" ref="621599872"/>
 					</object>
 					<int key="connectionID">2456</int>
 				</object>
@@ -413,7 +413,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">applyButton</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="634896038"/>
+						<reference key="destination" ref="1028175599"/>
 					</object>
 					<int key="connectionID">2457</int>
 				</object>
@@ -421,7 +421,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">applyChanges:</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="634896038"/>
+						<reference key="destination" ref="1028175599"/>
 					</object>
 					<int key="connectionID">2488</int>
 				</object>
@@ -429,7 +429,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">userDefaultsController</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="619595049"/>
+						<reference key="destination" ref="581637778"/>
 					</object>
 					<int key="connectionID">2500</int>
 				</object>
@@ -442,13 +442,21 @@
 					<int key="connectionID">2516</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">revertChanges:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="621599872"/>
+					</object>
+					<int key="connectionID">2517</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.auto_launch</string>
 						<reference key="source" ref="559997738"/>
-						<reference key="destination" ref="619595049"/>
+						<reference key="destination" ref="581637778"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="559997738"/>
-							<reference key="NSDestination" ref="619595049"/>
+							<reference key="NSDestination" ref="581637778"/>
 							<string key="NSLabel">value: values.auto_launch</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">values.auto_launch</string>
@@ -461,10 +469,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.disable_autoconnect</string>
 						<reference key="source" ref="790325195"/>
-						<reference key="destination" ref="619595049"/>
+						<reference key="destination" ref="581637778"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="790325195"/>
-							<reference key="NSDestination" ref="619595049"/>
+							<reference key="NSDestination" ref="581637778"/>
 							<string key="NSLabel">value: values.disable_autoconnect</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">values.disable_autoconnect</string>
@@ -481,10 +489,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.local_port</string>
 						<reference key="source" ref="756671711"/>
-						<reference key="destination" ref="619595049"/>
+						<reference key="destination" ref="581637778"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="756671711"/>
-							<reference key="NSDestination" ref="619595049"/>
+							<reference key="NSDestination" ref="581637778"/>
 							<string key="NSLabel">value: values.local_port</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">values.local_port</string>
@@ -513,10 +521,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.local_port</string>
 						<reference key="source" ref="392047568"/>
-						<reference key="destination" ref="619595049"/>
+						<reference key="destination" ref="581637778"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="392047568"/>
-							<reference key="NSDestination" ref="619595049"/>
+							<reference key="NSDestination" ref="581637778"/>
 							<string key="NSLabel">value: values.local_port</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">values.local_port</string>
@@ -528,10 +536,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: isDirty</string>
-						<reference key="source" ref="634896038"/>
+						<reference key="source" ref="1028175599"/>
 						<reference key="destination" ref="1001"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="634896038"/>
+							<reference key="NSSource" ref="1028175599"/>
 							<reference key="NSDestination" ref="1001"/>
 							<string key="NSLabel">enabled: isDirty</string>
 							<string key="NSBinding">enabled</string>
@@ -544,10 +552,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: isDirty</string>
-						<reference key="source" ref="443554442"/>
+						<reference key="source" ref="621599872"/>
 						<reference key="destination" ref="1001"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="443554442"/>
+							<reference key="NSSource" ref="621599872"/>
 							<reference key="NSDestination" ref="1001"/>
 							<string key="NSLabel">enabled: isDirty</string>
 							<string key="NSBinding">enabled</string>
@@ -590,8 +598,8 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="841270661"/>
 							<reference ref="559997738"/>
-							<reference ref="443554442"/>
-							<reference ref="634896038"/>
+							<reference ref="621599872"/>
+							<reference ref="1028175599"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">General Preferences View</string>
@@ -690,33 +698,33 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2413</int>
-						<reference key="object" ref="634896038"/>
+						<reference key="object" ref="1028175599"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="215745165"/>
+							<reference ref="895036753"/>
 						</array>
 						<reference key="parent" ref="695629890"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2414</int>
-						<reference key="object" ref="443554442"/>
+						<reference key="object" ref="621599872"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="153713433"/>
+							<reference ref="871996330"/>
 						</array>
 						<reference key="parent" ref="695629890"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2415</int>
-						<reference key="object" ref="153713433"/>
-						<reference key="parent" ref="443554442"/>
+						<reference key="object" ref="871996330"/>
+						<reference key="parent" ref="621599872"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2416</int>
-						<reference key="object" ref="215745165"/>
-						<reference key="parent" ref="634896038"/>
+						<reference key="object" ref="895036753"/>
+						<reference key="parent" ref="1028175599"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2489</int>
-						<reference key="object" ref="619595049"/>
+						<reference key="object" ref="581637778"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</array>
@@ -749,7 +757,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">2516</int>
+			<int key="maxID">2517</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -760,6 +768,7 @@
 						<string key="applyChanges:">id</string>
 						<string key="closePreferencesWindow:">id</string>
 						<string key="localStepperAction:">id</string>
+						<string key="revertChanges:">id</string>
 						<string key="toggleAutoTurnOnProxy:">id</string>
 						<string key="toggleLaunchAtLogin:">id</string>
 					</dictionary>
@@ -774,6 +783,10 @@
 						</object>
 						<object class="IBActionInfo" key="localStepperAction:">
 							<string key="name">localStepperAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="revertChanges:">
+							<string key="name">revertChanges:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="toggleAutoTurnOnProxy:">
