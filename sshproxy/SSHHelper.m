@@ -345,4 +345,83 @@
     return [(NSNumber*)[server valueForKey:@"share_socks"] boolValue];
 }
 
+#pragma mark Prompt Password
+
++ (NSArray *)promptPasswordForServer:(NSDictionary *)server
+{
+    NSString* remoteHost = [self hostFromServer:server];
+    int remotePort = [self portFromServer:server];
+    NSString* loginUser = [self userFromServer:server];
+    
+	CFUserNotificationRef passwordDialog;
+	SInt32 error;
+	CFOptionFlags responseFlags;
+	int button;
+	CFStringRef passwordRef;
+    
+	NSMutableArray *returnArray = [NSMutableArray arrayWithObjects:@"PasswordString",[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],nil];
+    
+    NSString* hostString = [NSString stringWithFormat:@"%@@%@:%d", loginUser, remoteHost, remotePort];
+    
+	NSString *passwordMessageString = [NSString stringWithFormat:@"Enter the password for user “%@”.", hostString];
+    
+    NSString* headerString = [NSString stringWithFormat:@"SSH Proxy connecting to the SSH server “%@”.", hostString];
+    
+    
+	NSDictionary *panelDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                               headerString,kCFUserNotificationAlertHeaderKey,
+                               passwordMessageString,kCFUserNotificationAlertMessageKey,
+							   @"",kCFUserNotificationTextFieldTitlesKey,
+							   @"Cancel",kCFUserNotificationAlternateButtonTitleKey,
+                               @"Remember this password in my keychain",kCFUserNotificationCheckBoxTitlesKey,
+							   nil];
+    
+	passwordDialog = CFUserNotificationCreate(kCFAllocatorDefault,
+											  0,
+											  kCFUserNotificationPlainAlertLevel
+											  | CFUserNotificationSecureTextField(0)
+                                              | CFUserNotificationCheckBoxChecked(0),
+											  &error,
+											  (__bridge CFDictionaryRef)panelDict);
+    
+    
+	if (error){
+		// There was an error creating the password dialog
+		CFRelease(passwordDialog);
+		returnArray[1] = @(error);
+		return returnArray;
+	}
+    
+	error = CFUserNotificationReceiveResponse(passwordDialog,
+											  0,
+											  &responseFlags);
+    
+	if (error){
+		CFRelease(passwordDialog);
+		returnArray[1] = @(error);
+		return returnArray;
+	}
+    
+    
+	button = responseFlags & 0x3;
+	if (button == kCFUserNotificationAlternateResponse) {
+		CFRelease(passwordDialog);
+		returnArray[1] = @1;
+		return returnArray;
+	}
+    
+	if ( responseFlags & CFUserNotificationCheckBoxChecked(0) ){
+        returnArray[2] = @0;
+	}
+	passwordRef = CFUserNotificationGetResponseValue(passwordDialog,
+													 kCFUserNotificationTextFieldValuesKey,
+													 0);
+    
+    
+	returnArray[0] = (__bridge NSString *) passwordRef;
+	CFRelease(passwordDialog); // Note that this will release the passwordRef as well
+	return returnArray;	
+}
+
 @end
+

@@ -43,4 +43,6 @@
 + (BOOL)isEnableCompress:(NSDictionary *)server;
 + (BOOL)isShareSOCKS:(NSDictionary *)server;
 
++ (NSArray *)promptPasswordForServer:(NSDictionary *)server;
+
 @end

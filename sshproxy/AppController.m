@@ -70,6 +70,8 @@
     
     // upgrade user preferences from 13.04 to 13.05
     [SSHHelper upgrade1:self.serverArrayController];
+    
+    self.isPasswordCorrect = YES;
 }
 
 - (void)statusItemClicked
@@ -183,6 +185,26 @@
     
     // First try to get the password from the keychain
     NSString *loginPassword = [SSHHelper passwordForServer:server];
+    
+    if ( [loginPassword isEqual:@""] || !self.isPasswordCorrect ) {
+        // No password was found in the keychain so we should prompt the user for it.
+        NSArray *promptArray = [SSHHelper promptPasswordForServer:server];
+        NSInteger returnCode = [[promptArray objectAtIndex:1] intValue];
+        if ( returnCode == 0 ){
+            // Found a valid password entry
+            
+            // Set the password in the keychain if the user requested this.
+            if ( [[promptArray objectAtIndex:2] intValue]==0 ){
+                [SSHHelper setPassword:[promptArray objectAtIndex:0] forServer:server];
+            }
+            
+            loginPassword = [promptArray objectAtIndex:0];
+        } else {
+            // User cancelled so we'll just abort
+            // We return a non zero exit code here which should cause ssh to abort
+            return;
+        }
+    }
     
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                 @":9999", @"DISPLAY",
@@ -322,16 +344,20 @@
     // If the task is running, start reading again
     if (task) {
         if ( [taskOutput rangeOfString:@"Entering interactive session"].location != NSNotFound){
+            self.isPasswordCorrect = YES;
             [self set2connected];
         }
         
         [fh waitForDataInBackgroundAndNotify];
     } else {        
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
+            self.isPasswordCorrect = YES;
             [self.statusMenuItem setTitle:@"Proxy: Off - port already in use"];
             return;
         } else if ([taskOutput rangeOfString:@"Permission denied "].location != NSNotFound) {
             [self.statusMenuItem setTitle:@"Proxy: Off - incorrect password"];
+            self.isPasswordCorrect = NO;
+            [self performSelector: @selector(turnOnProxy:) withObject:self afterDelay: 0.2];
             return;
         } else {
             NSArray* errors = @[
@@ -410,6 +436,7 @@
         preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
         
         [[preferencesWindowController window] setReleasedWhenClosed: NO];
+        preferencesWindowController.window.level = NSFloatingWindowLevel;
     }
     return preferencesWindowController;
 }
