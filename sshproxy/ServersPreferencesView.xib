@@ -123,7 +123,7 @@
 										<reference key="NSNextResponder" ref="854243338"/>
 										<int key="NSvFlags">300</int>
 										<array class="NSMutableArray" key="NSSubviews">
-											<object class="NSTextField" id="279212296">
+											<object class="NSTextField" id="299775000">
 												<reference key="NSNextResponder" ref="303307495"/>
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{115, 69}, {180, 17}}</string>
@@ -132,13 +132,13 @@
 												<reference key="NSNextKeyView" ref="867054108"/>
 												<string key="NSReuseIdentifierKey">_NS:1535</string>
 												<bool key="NSEnabled">YES</bool>
-												<object class="NSTextFieldCell" key="NSCell" id="432925259">
+												<object class="NSTextFieldCell" key="NSCell" id="1060716179">
 													<int key="NSCellFlags">68157504</int>
 													<int key="NSCellFlags2">138413056</int>
 													<string key="NSContents">Prompt automatically</string>
 													<reference key="NSSupport" ref="534336044"/>
 													<string key="NSCellIdentifier">_NS:1535</string>
-													<reference key="NSControlView" ref="279212296"/>
+													<reference key="NSControlView" ref="299775000"/>
 													<object class="NSColor" key="NSBackgroundColor" id="995567531">
 														<int key="NSColorSpace">6</int>
 														<string key="NSCatalogName">System</string>
@@ -191,7 +191,7 @@
 												<string key="NSFrame">{{23, 69}, {90, 17}}</string>
 												<reference key="NSSuperview" ref="303307495"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView" ref="279212296"/>
+												<reference key="NSNextKeyView" ref="299775000"/>
 												<string key="NSReuseIdentifierKey">_NS:1535</string>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="156605058">
@@ -1334,6 +1334,7 @@
 				<bool key="NSEditable">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
 				<bool key="NSAvoidsEmptySelection">YES</bool>
+				<bool key="NSPreservesSelection">YES</bool>
 				<bool key="NSSelectsInsertedObjects">YES</bool>
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
@@ -2414,7 +2415,7 @@
 							<reference ref="913569890"/>
 							<reference ref="69126304"/>
 							<reference ref="867054108"/>
-							<reference ref="279212296"/>
+							<reference ref="299775000"/>
 						</array>
 						<reference key="parent" ref="425535177"/>
 						<string key="objectName">SSH Details View</string>
@@ -2877,16 +2878,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">470</int>
-						<reference key="object" ref="279212296"/>
+						<reference key="object" ref="299775000"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="432925259"/>
+							<reference ref="1060716179"/>
 						</array>
 						<reference key="parent" ref="303307495"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">471</int>
-						<reference key="object" ref="432925259"/>
-						<reference key="parent" ref="279212296"/>
+						<reference key="object" ref="1060716179"/>
+						<reference key="parent" ref="299775000"/>
 					</object>
 				</array>
 			</object>

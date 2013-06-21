@@ -205,10 +205,14 @@
     NSDictionary* server = (NSDictionary*)[self.serverArrayController arrangedObjects][index];
     BOOL isProxyNeedReactive = ![server isEqualToDictionary:[SSHHelper getActivatedServer]];
     
+    NSInteger selected = self.serverArrayController.selectionIndex;
+    
     [self.userDefaultsController save:self];
     [self.userDefaultsController.defaults synchronize];
     
     self.isDirty = NO;
+    
+    [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selected] byExtendingSelection:NO];
         
     // reactive proxy
     if (isProxyNeedReactive) {
@@ -221,6 +225,8 @@
 }
 - (IBAction)revertChanges:(id)sender
 {
+    NSInteger selected = self.serverArrayController.selectionIndex;
+    
     [self.userDefaultsController revert:self];
     
     // save again to prevent dirty settings
@@ -228,6 +234,8 @@
     [self.userDefaultsController.defaults synchronize];
     
     self.isDirty = NO;
+    
+    [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selected] byExtendingSelection:NO];
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
