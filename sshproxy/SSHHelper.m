@@ -374,14 +374,16 @@
     
 	NSMutableArray *returnArray = [NSMutableArray arrayWithObjects:@"PasswordString",[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],nil];
     
-    NSString* hostString = [NSString stringWithFormat:@"%@@%@:%d", loginUser, remoteHost, remotePort];
+    NSString* hostString = [NSString stringWithFormat:@"%@:%d", remoteHost, remotePort];
     
-	NSString *passwordMessageString = [NSString stringWithFormat:@"Enter the password for user “%@”.", hostString];
+	NSString *passwordMessageString = [NSString stringWithFormat:@"Enter the password for user “%@”.", loginUser];
     
     NSString* headerString = [NSString stringWithFormat:@"SSH Proxy connecting to the SSH server “%@”.", hostString];
     
+    NSURL *iconURL = [[NSBundle mainBundle] URLForResource:@"logo" withExtension:@"icns" subdirectory:@""];
     
 	NSDictionary *panelDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                               iconURL, kCFUserNotificationIconURLKey,
                                headerString,kCFUserNotificationAlertHeaderKey,
                                passwordMessageString,kCFUserNotificationAlertMessageKey,
 							   @"",kCFUserNotificationTextFieldTitlesKey,
