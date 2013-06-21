@@ -6,7 +6,8 @@
 //  Copyright (c) 2013 Codinn Studio. All rights reserved.
 //
 
-#include <Cocoa/Cocoa.h>
+#import <Cocoa/Cocoa.h>
+#import "PasswordHelper.h"
 
 /*! The ASKPASS program for SSH Proxy.
  
@@ -18,7 +19,10 @@
 int main() {
 	// Get basic information from environment variables that were set along with the NSTask itself. We need this info in order to get the correct password from the security keychain
 	NSDictionary *dict = [[NSProcessInfo processInfo] environment];
-    NSString* password = [dict valueForKey:@"SSH_ASKPASS_PASSWORD"];
+    NSString* userHome = [dict valueForKey:@"SSHPROXY_USER_HOME"];
+    NSString* encryptedPassword = [dict valueForKey:@"SSH_ASKPASS_PASSWORD"];
+    
+    NSString* password = [PasswordHelper decryptPassword:encryptedPassword forDir:userHome];
     
 	// The arguments array should contain three elements. The second element is a string which we can use to determine the context in which this program was invoked. This string is either a message prompting for a yes/no or a message prompting for a password. We check it and supply the right response.
 	NSArray *argumentsArray = [[NSProcessInfo processInfo] arguments];

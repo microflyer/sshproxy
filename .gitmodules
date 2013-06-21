@@ -10,3 +10,9 @@
 [submodule "INPopoverController"]
 	path = INPopoverController
 	url = https://github.com/indragiek/INPopoverController
+[submodule "RNCryptor"]
+	path = RNCryptor
+	url = https://github.com/rnapier/RNCryptor
+[submodule "sstoolkit"]
+	path = sstoolkit
+	url = https://github.com/soffes/sstoolkit

@@ -10,6 +10,7 @@
 #import "GeneralPreferencesViewController.h"
 #import "ServersPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
+#import "PasswordHelper.h"
 #import "SSHHelper.h"
 
 @implementation AppController {
@@ -207,11 +208,15 @@
         }
     }
     
+    
+    NSString *encryptedPassword = [PasswordHelper encryptPassword:loginPassword];
+
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                 @":9999", @"DISPLAY",
                                 askPassPath, @"SSH_ASKPASS",
-                                loginPassword, @"SSH_ASKPASS_PASSWORD",
+                                encryptedPassword, @"SSH_ASKPASS_PASSWORD",
                                 @"1",@"INTERACTION",
+                                NSHomeDirectory(), @"SSHPROXY_USER_HOME",
                                 nil];
     [env addEntriesFromDictionary:[SSHHelper getProxyCommandEnv:server]];
     
