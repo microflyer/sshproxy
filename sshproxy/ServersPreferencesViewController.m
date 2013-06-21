@@ -214,9 +214,6 @@
         
         [appController performSelector: @selector(reactiveProxy:) withObject:self afterDelay: 0.0];
     }
-    
-    // TODO: set password to keychain
-    
 }
 - (IBAction)revertChanges:(id)sender
 {
@@ -224,23 +221,13 @@
     
     // save again to prevent dirty settings
     [self.userDefaultsController save:self];
+    
     self.isDirty = NO;
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
     self.isDirty = self.userDefaultsController.hasUnappliedChanges;
-}
-
-#pragma mark NSTableViewDelegate
-- (void)tableViewSelectionDidChange:(NSNotification *)aNotification
-{
-    if (self.serverArrayController.selectedObjects.count > 0) {
-        // recover password from keychain
-        NSDictionary* server = (NSDictionary*)self.serverArrayController.selectedObjects[0];
-        
-        self.loginPasswordTextField.stringValue = [SSHHelper passwordForServer:server];
-    }
 }
 
 @end
