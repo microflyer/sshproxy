@@ -101,9 +101,18 @@
     return proxyCommandStr;
 }
 
++ (NSArray *)getServers
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs synchronize];
+    
+    return [[NSUserDefaults standardUserDefaults] arrayForKey:@"servers"];
+}
+
 + (NSInteger) getActivatedServerIndex
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs synchronize];
     
     NSArray* servers = [prefs arrayForKey:@"servers"];
     NSInteger index = [prefs integerForKey:@"activated_server"];
@@ -118,6 +127,7 @@
 + (NSDictionary*) getActivatedServer
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs synchronize];
     
     NSArray* servers = [prefs arrayForKey:@"servers"];
     
@@ -132,6 +142,8 @@
 + (void) setActivatedServer:(int) index
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs synchronize];
+    
     [prefs setInteger:index forKey:@"activated_server"];
     [prefs synchronize];
 }
@@ -140,7 +152,6 @@
 + (void)upgrade1:(NSArrayController*) serverArrayController
 {
     // fetch preferences that need upgrade
-    
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     NSString* remoteHost = [prefs stringForKey:@"remote_host"];
@@ -292,7 +303,9 @@
 
 + (NSInteger)getLocalPort
 {
-    NSInteger localPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"local_port"];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSInteger localPort = [prefs integerForKey:@"local_port"];
+    [prefs synchronize];
     
     if (localPort<=0 || localPort>65535) {
         localPort = 7070;

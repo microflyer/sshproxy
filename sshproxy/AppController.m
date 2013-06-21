@@ -79,7 +79,7 @@
     NSMenu* menu = [self.statusMenu copy];
     menu.minimumWidth = 256.0;
     
-    NSArray* servers = [[NSUserDefaults standardUserDefaults] arrayForKey:@"servers"];
+    NSArray* servers = [SSHHelper getServers];
     NSInteger activatedServerIndex = [SSHHelper getActivatedServerIndex];
     
     if (servers && servers.count>0) {
@@ -117,7 +117,7 @@
     [SSHHelper setActivatedServer:index];
     
     [self _turnOffProxy];
-    [self _turnOnProxy];
+    [self performSelector: @selector(turnOnProxy:) withObject:self afterDelay: 0.0];
 }
 
 - (void)reactiveProxy:(id)sender
@@ -151,6 +151,7 @@
 - (IBAction)turnOnProxy:(id)sender
 {
     proxyStatus = SSHPROXY_ON;
+    self.isPasswordCorrect = YES;
     
     [self _turnOnProxy];
 }
@@ -349,7 +350,7 @@
         }
         
         [fh waitForDataInBackgroundAndNotify];
-    } else {        
+    } else {
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
             self.isPasswordCorrect = YES;
             [self.statusMenuItem setTitle:@"Proxy: Off - port already in use"];
@@ -357,7 +358,7 @@
         } else if ([taskOutput rangeOfString:@"Permission denied "].location != NSNotFound) {
             [self.statusMenuItem setTitle:@"Proxy: Off - incorrect password"];
             self.isPasswordCorrect = NO;
-            [self performSelector: @selector(turnOnProxy:) withObject:self afterDelay: 0.2];
+            [self performSelector: @selector(_turnOnProxy) withObject:self afterDelay: 0.0];
             return;
         } else {
             NSArray* errors = @[
@@ -436,7 +437,7 @@
         preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
         
         [[preferencesWindowController window] setReleasedWhenClosed: NO];
-        preferencesWindowController.window.level = NSFloatingWindowLevel;
+//        preferencesWindowController.window.level = NSFloatingWindowLevel;
     }
     return preferencesWindowController;
 }

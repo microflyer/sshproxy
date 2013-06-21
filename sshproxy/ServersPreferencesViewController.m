@@ -206,14 +206,18 @@
     BOOL isProxyNeedReactive = ![server isEqualToDictionary:[SSHHelper getActivatedServer]];
     
     [self.userDefaultsController save:self];
-    self.isDirty = NO;
+    [self.userDefaultsController.defaults synchronize];
     
+    self.isDirty = NO;
+        
     // reactive proxy
     if (isProxyNeedReactive) {
         AppController *appController = (AppController *)([NSApplication sharedApplication].delegate);
         
-        [appController performSelector: @selector(reactiveProxy:) withObject:self afterDelay: 0.0];
+        // it seems must delay some microsenconds to wait user defaults synchronize
+        [appController performSelector: @selector(reactiveProxy:) withObject:self afterDelay: 0.1];
     }
+
 }
 - (IBAction)revertChanges:(id)sender
 {
@@ -221,6 +225,7 @@
     
     // save again to prevent dirty settings
     [self.userDefaultsController save:self];
+    [self.userDefaultsController.defaults synchronize];
     
     self.isDirty = NO;
 }
