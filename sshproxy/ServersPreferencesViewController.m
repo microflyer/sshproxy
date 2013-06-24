@@ -97,7 +97,9 @@
 
 - (void)_addServer:(NSDictionary*)server
 {
-    [self.serverArrayController addObject:server];
+    NSMutableArray* servers = [NSMutableArray arrayWithArray:[SSHHelper getServers]];
+    [servers addObject:server];
+    [self.userDefaultsController.defaults setObject:servers forKey:@"servers"];
     
     NSInteger index = [self.serversTableView numberOfRows]-1;
     [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];

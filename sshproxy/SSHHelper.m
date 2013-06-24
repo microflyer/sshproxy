@@ -109,6 +109,13 @@
     return [[NSUserDefaults standardUserDefaults] arrayForKey:@"servers"];
 }
 
++ (void)setServers:(NSMutableArray *) servers
+{
+    [[NSUserDefaults standardUserDefaults] arrayForKey:@"servers"];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs synchronize];
+}
+
 + (NSInteger) getActivatedServerIndex
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
