@@ -356,17 +356,16 @@
 
 - (void)reconnectIfNeed:(NSString*) state
 {
-    errorMsg = state;
-    
     if (proxyStatus==SSHPROXY_CONNECTED) {
+        errorMsg = state;
         [self set2reconnect];
         [self performSelector: @selector(_turnOnProxy) withObject:nil afterDelay: 3.0];
     } else {
-//        if (proxyStatus==SSHPROXY_OFF) { // turn off manually
-//            errorMsg = nil;
-//        } else { // by error
-//            errorMsg = state;
-//        }
+        if (proxyStatus==SSHPROXY_OFF) { // turn off manually
+            errorMsg = nil;
+        } else { // by error
+            errorMsg = state;
+        }
         
         [self set2disconnected];
     }
