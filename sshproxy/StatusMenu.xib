@@ -459,6 +459,18 @@
 						<reference key="NSOnImage" ref="892822162"/>
 						<reference key="NSMixedImage" ref="545007805"/>
 					</object>
+					<object class="NSMenuItem" id="63640785">
+						<reference key="NSMenu" ref="806075472"/>
+						<string key="NSTitle">Incorrect password2</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<object class="NSCustomResource" key="NSImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">warning_24x24</string>
+						</object>
+						<reference key="NSOnImage" ref="892822162"/>
+						<reference key="NSMixedImage" ref="545007805"/>
+					</object>
 					<object class="NSMenuItem" id="686166535">
 						<reference key="NSMenu" ref="806075472"/>
 						<string key="NSTitle">Turn Proxy On</string>
@@ -571,7 +583,6 @@
 							<string key="NSFrame">{{-372, -359}, {0, 32}}</string>
 							<reference key="NSSuperview" ref="94713192"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="539938308">
@@ -1212,14 +1223,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">statusMenuItem</string>
-						<reference key="source" ref="135814413"/>
-						<reference key="destination" ref="645540422"/>
-					</object>
-					<int key="connectionID">812</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">turnOffMenuItem</string>
 						<reference key="source" ref="135814413"/>
 						<reference key="destination" ref="1065274989"/>
@@ -1307,6 +1310,22 @@
 					<int key="connectionID">1223</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">cautionMenuItem</string>
+						<reference key="source" ref="135814413"/>
+						<reference key="destination" ref="63640785"/>
+					</object>
+					<int key="connectionID">1227</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">statusMenuItem</string>
+						<reference key="source" ref="135814413"/>
+						<reference key="destination" ref="645540422"/>
+					</object>
+					<int key="connectionID">1228</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">orderOut:</string>
 						<reference key="source" ref="753612579"/>
@@ -1389,6 +1408,7 @@
 							<reference ref="859877446"/>
 							<reference ref="835806103"/>
 							<reference ref="1025946836"/>
+							<reference ref="63640785"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">StatusMenu</string>
@@ -1950,6 +1970,11 @@
 						<reference key="object" ref="356188136"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1224</int>
+						<reference key="object" ref="63640785"/>
+						<reference key="parent" ref="806075472"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -2016,6 +2041,7 @@
 				<string key="1204.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1220.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1221.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1224.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="371.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="795.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="796.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2052,7 +2078,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1223</int>
+			<int key="maxID">1228</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2100,6 +2126,7 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="aboutWindow">NSWindow</string>
+						<string key="cautionMenuItem">NSMenuItem</string>
 						<string key="mainMenu">NSMenu</string>
 						<string key="serverArrayController">NSArrayController</string>
 						<string key="statusMenu">NSMenu</string>
@@ -2111,6 +2138,10 @@
 						<object class="IBToOneOutletInfo" key="aboutWindow">
 							<string key="name">aboutWindow</string>
 							<string key="candidateClassName">NSWindow</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="cautionMenuItem">
+							<string key="name">cautionMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="mainMenu">
 							<string key="name">mainMenu</string>
@@ -2150,6 +2181,10 @@
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1060" key="NS.object.0"/>
 		</object>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
+			<real value="1070" key="NS.object.0"/>
+		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
 			<real value="4600" key="NS.object.0"/>
@@ -2160,6 +2195,7 @@
 			<string key="NSMenuCheckmark">{11, 11}</string>
 			<string key="NSMenuMixedState">{10, 3}</string>
 			<string key="logo">{512, 512}</string>
+			<string key="warning_24x24">{16, 16}</string>
 		</dictionary>
 	</data>
 </archive>

@@ -71,7 +71,7 @@
     
     // upgrade user preferences from 13.04 to 13.05
     [SSHHelper upgrade1:self.serverArrayController];
-    
+        
     self.isPasswordCorrect = YES;
 }
 
@@ -99,11 +99,11 @@
                 [item setState:NSOnState];
             }
             
-            [menu insertItem:item atIndex:4+i];
+            [menu insertItem:item atIndex:5+i];
             i++;
         }
         
-        [menu insertItem:[NSMenuItem separatorItem] atIndex:4+i];
+        [menu insertItem:[NSMenuItem separatorItem] atIndex:5+i];
     }
     
     [statusItem popUpStatusItemMenu:menu];
@@ -247,18 +247,9 @@
                                 ]
      ];
     
-    NSString* connectingString = [NSString stringWithFormat:@"Proxy: Connecting ..."];
-    [statusItem setImage:inStatusImage];
-    [statusItem setAlternateImage:inStatusInverseImage];
-    [self.statusMenuItem setTitle:connectingString];
+    [self set2connecting];
     
     // TODO: CATCH TASK EXCEPTION
-    
-    [self.turnOnMenuItem setHidden:YES];
-    [self.turnOnMenuItem setEnabled:NO];
-    
-    [self.turnOffMenuItem setHidden:NO];
-    [self.turnOffMenuItem setEnabled:YES];
     
     task = [[NSTask alloc] init];
     
@@ -294,26 +285,59 @@
     [task launch];
 }
 
+#pragma mark Set Status Menu State
+
+- (void)set2connecting
+{
+    [statusItem setImage:inStatusImage];
+    [statusItem setAlternateImage:inStatusInverseImage];
+    [self.statusMenuItem setTitle:@"Proxy: Connecting ..."];
+    
+    [self.cautionMenuItem setHidden:YES];
+    
+    [self.turnOnMenuItem setHidden:YES];
+    [self.turnOffMenuItem setHidden:NO];
+}
+
 - (void)set2connected
 {
     proxyStatus = SSHPROXY_CONNECTED;
     [statusItem setImage:onStatusImage];
     [statusItem setAlternateImage:onStatusInverseImage];
     [self.statusMenuItem setTitle:@"Proxy: On"];
+    
+    [self.cautionMenuItem setHidden:YES];
+    
+    [self.turnOnMenuItem setHidden:YES];
+    [self.turnOffMenuItem setHidden:NO];
+}
+
+- (void)set2disconnected:(NSString*) state
+{
+    [statusItem setImage:offStatusImage];
+    [statusItem setAlternateImage:offStatusInverseImage];
+    [self.statusMenuItem setTitle:@"Proxy: Off"];
+    
+    if (state) {
+        [self.cautionMenuItem setTitle:state];
+        [self.cautionMenuItem setHidden:NO];
+    }
+    
+    [self.turnOffMenuItem setHidden:YES];
+    [self.turnOnMenuItem setHidden:NO];
 }
 
 - (void)set2reconnect:(NSString*) state
 {
     [statusItem setImage:inStatusImage];
     [statusItem setAlternateImage:inStatusInverseImage];
-    [self.statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Reconnecting - %@", state]];
+    [self.statusMenuItem setTitle:@"Proxy: Reconnecting..."];
     
-    // ensure
+    [self.cautionMenuItem setTitle:state];
+    [self.cautionMenuItem setHidden:NO];
+    
     [self.turnOffMenuItem setHidden:NO];
-    [self.turnOffMenuItem setEnabled:YES];
-    
     [self.turnOnMenuItem setHidden:YES];
-    [self.turnOnMenuItem setEnabled:NO];
 }
 
 - (void)reconnectIfNeed:(NSString*) state
@@ -325,7 +349,9 @@
         if (proxyStatus==SSHPROXY_OFF) {
             [self.statusMenuItem setTitle:@"Proxy: Off"];
         } else {
-            [self.statusMenuItem setTitle:[NSString stringWithFormat:@"Proxy: Off - %@", state]];
+            [self.statusMenuItem setTitle:@"Proxy: Off"];
+            [self.cautionMenuItem setTitle:state];
+            [self.cautionMenuItem setHidden:NO];
         }
     }
 }
@@ -358,22 +384,22 @@
     } else {
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
             self.isPasswordCorrect = YES;
-            [self.statusMenuItem setTitle:@"Proxy: Off - port already in use"];
+            [self set2disconnected:@"Port already in use"];
             return;
         } else if ([taskOutput rangeOfString:@"Permission denied "].location != NSNotFound) {
-            [self.statusMenuItem setTitle:@"Proxy: Off - incorrect password"];
             self.isPasswordCorrect = NO;
+            [self set2disconnected:@"Incorrect password"];
             [self performSelector: @selector(_turnOnProxy) withObject:self afterDelay: 0.0];
             return;
         } else {
             NSArray* errors = @[
-                                @[@"ssh: Could not resolve hostname"   , @"could not resolve hostname"],
-                                @[@"Connection refused"                , @"connection refused"],
-                                @[@"Timeout,"                          , @"timeout, server not responding"],
-                                @[@"timed out"                         , @"connection timed out"],
-                                @[@"Write failed: Broken pipe"         , @"disconnected from  remote proxy server"],
-                                @[@"Connection closed by remote host"  , @"failed to connect remote proxy server"],
-                                @[@"unknown error"                     , @"unknown error"],
+                                @[@"ssh: Could not resolve hostname"   , @"Could not resolve hostname"],
+                                @[@"Connection refused"                , @"Connection refused"],
+                                @[@"Timeout,"                          , @"Timeout, server not responding"],
+                                @[@"timed out"                         , @"Connection timed out"],
+                                @[@"Write failed: Broken pipe"         , @"Disconnected from  remote proxy server"],
+                                @[@"Connection closed by remote host"  , @"Failed to connect remote proxy server"],
+                                @[@"unknown error"                     , @"Unknown error"],
                                 ];
             for (NSArray* error in errors) {
                 if ( ([taskOutput rangeOfString:[error objectAtIndex:0]].location != NSNotFound) || [[error objectAtIndex:0] isEqual:@"unknown error"]) {

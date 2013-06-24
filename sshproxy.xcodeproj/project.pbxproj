@@ -52,6 +52,8 @@
 		4A70ACE31774B06400777818 /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACDE1774B06300777818 /* INPopoverWindow.m */; };
 		4A70ACE41774B06400777818 /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACE01774B06400777818 /* INPopoverWindowFrame.m */; };
 		4A70ACE71774B0F600777818 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A70ACE61774B0F600777818 /* QuartzCore.framework */; };
+		4A70ACEE1777F1D900777818 /* warning_24x24.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A70ACEC1777F1D900777818 /* warning_24x24.png */; };
+		4A70ACEF1777F1D900777818 /* warning_24x24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A70ACED1777F1D900777818 /* warning_24x24@2x.png */; };
 		4A7B733016E6F184005D9965 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A7B732F16E6F184005D9965 /* MainMenu.xib */; };
 		4AA6471316BD006700DE5CAD /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA6470E16BD006700DE5CAD /* MASPreferencesWindow.xib */; };
 		4AA6471416BD006700DE5CAD /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6471016BD006700DE5CAD /* MASPreferencesWindowController.m */; };
@@ -216,6 +218,8 @@
 		4A70ACDF1774B06400777818 /* INPopoverWindowFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPopoverWindowFrame.h; path = INPopoverController/INPopoverWindowFrame.h; sourceTree = "<group>"; };
 		4A70ACE01774B06400777818 /* INPopoverWindowFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPopoverWindowFrame.m; path = INPopoverController/INPopoverWindowFrame.m; sourceTree = "<group>"; };
 		4A70ACE61774B0F600777818 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4A70ACEC1777F1D900777818 /* warning_24x24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning_24x24.png; sourceTree = "<group>"; };
+		4A70ACED1777F1D900777818 /* warning_24x24@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning_24x24@2x.png"; sourceTree = "<group>"; };
 		4A7B732F16E6F184005D9965 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		4AA6470D16BD006700DE5CAD /* MASPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
 		4AA6470E16BD006700DE5CAD /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
@@ -596,6 +600,8 @@
 		4ADB92A11747C7E80064D82D /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				4A70ACEC1777F1D900777818 /* warning_24x24.png */,
+				4A70ACED1777F1D900777818 /* warning_24x24@2x.png */,
 				4ADB92A21747C7E80064D82D /* connected-inverse.png */,
 				4ADB92A31747C7E80064D82D /* connected-inverse@2x.png */,
 				4ADB92A41747C7E80064D82D /* connected.png */,
@@ -778,6 +784,8 @@
 				4ADB92B91747C7E80064D82D /* disconnected@2x.png in Resources */,
 				4A2A3953175EC85D002BF361 /* README.txt in Resources */,
 				4A2FAD1B1771B0B0004C8F7B /* PasswordHelpView.xib in Resources */,
+				4A70ACEE1777F1D900777818 /* warning_24x24.png in Resources */,
+				4A70ACEF1777F1D900777818 /* warning_24x24@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

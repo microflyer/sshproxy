@@ -28,6 +28,7 @@
 /* Our outlets which allow us to access the interface */
 @property IBOutlet NSMenu *statusMenu;
 @property IBOutlet NSMenuItem* statusMenuItem;
+@property IBOutlet NSMenuItem* cautionMenuItem;
 @property IBOutlet NSMenuItem* turnOnMenuItem;
 @property IBOutlet NSMenuItem* turnOffMenuItem;
 @property IBOutlet NSWindow* aboutWindow;
