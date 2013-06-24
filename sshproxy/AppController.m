@@ -406,7 +406,7 @@
         } else if ([taskOutput rangeOfString:@"Permission denied "].location != NSNotFound) {
             self.isPasswordCorrect = NO;
             errorMsg = @"Incorrect password";
-            [self set2disconnected];
+            [self set2reconnect];
             [self performSelector: @selector(_turnOnProxy) withObject:self afterDelay: 0.0];
             return;
         } else {
