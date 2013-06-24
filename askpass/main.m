@@ -17,31 +17,34 @@
  */
 
 int main() {
-	// Get basic information from environment variables that were set along with the NSTask itself. We need this info in order to get the correct password from the security keychain
-	NSDictionary *dict = [[NSProcessInfo processInfo] environment];
-    NSString* userHome = [dict valueForKey:@"SSHPROXY_USER_HOME"];
-    NSString* encryptedPassword = [dict valueForKey:@"SSH_ASKPASS_PASSWORD"];
-    
-    NSString* password = [PasswordHelper decryptPassword:encryptedPassword forDir:userHome];
-    
-	// The arguments array should contain three elements. The second element is a string which we can use to determine the context in which this program was invoked. This string is either a message prompting for a yes/no or a message prompting for a password. We check it and supply the right response.
-	NSArray *argumentsArray = [[NSProcessInfo processInfo] arguments];
-	if ( [argumentsArray count] >= 2 ){
-		NSRange yesnoRange = [[argumentsArray objectAtIndex:1] rangeOfString:[NSString stringWithFormat:@"(yes/no)"]];
-		
-		// If the string yes/no was found in the arguments array then we need to return a YES instead of password
-		if ( yesnoRange.location != NSNotFound ){
-			printf("%s","YES");
-			return 0;
-		}
-	}
-	
-	if ( password ){
-		void *pword=(void*)[password UTF8String];
-		printf("%s",(char*)pword);
-		return 0;
-	}
-	
-	// If we get to here something has gone wrong. Just return 1 to indicate failure
-	return 1;
+    @autoreleasepool
+    {
+        // Get basic information from environment variables that were set along with the NSTask itself. We need this info in order to get the correct password from the security keychain
+        NSDictionary *dict = [[NSProcessInfo processInfo] environment];
+        NSString* userHome = [dict valueForKey:@"SSHPROXY_USER_HOME"];
+        NSString* encryptedPassword = [dict valueForKey:@"SSH_ASKPASS_PASSWORD"];
+        
+        NSString* password = [PasswordHelper decryptPassword:encryptedPassword forDir:userHome];
+        
+        // The arguments array should contain three elements. The second element is a string which we can use to determine the context in which this program was invoked. This string is either a message prompting for a yes/no or a message prompting for a password. We check it and supply the right response.
+        NSArray *argumentsArray = [[NSProcessInfo processInfo] arguments];
+        if ( [argumentsArray count] >= 2 ){
+            NSRange yesnoRange = [[argumentsArray objectAtIndex:1] rangeOfString:[NSString stringWithFormat:@"(yes/no)"]];
+            
+            // If the string yes/no was found in the arguments array then we need to return a YES instead of password
+            if ( yesnoRange.location != NSNotFound ){
+                printf("%s","YES");
+                return 0;
+            }
+        }
+        
+        if ( password ){
+            void *pword=(void*)[password UTF8String];
+            printf("%s",(char*)pword);
+            return 0;
+        }
+        
+        // If we get to here something has gone wrong. Just return 1 to indicate failure
+        return 1;
+    }
 }

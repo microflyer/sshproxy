@@ -718,7 +718,7 @@
 		4AD3FDD016A56EF400378F77 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Charm Studio";
 			};
 			buildConfigurationList = 4AD3FDD316A56EF400378F77 /* Build configuration list for PBXProject "sshproxy" */;

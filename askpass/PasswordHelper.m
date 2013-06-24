@@ -16,7 +16,6 @@
 
 + (NSString *)encryptPassword:(NSString *)password
 {
-    return password;
     NSString* userHome = NSHomeDirectory();
     NSString* lockFile= [userHome stringByAppendingPathComponent:@".sshproxy_askpass_lock"];
     
@@ -45,7 +44,6 @@
 }
 + (NSString *)decryptPassword:(NSString *)encryptedPassword forDir:(NSString *)dir
 {
-    return encryptedPassword;
     NSString* lockFile= [dir stringByAppendingPathComponent:@".sshproxy_askpass_lock"];
     
     NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:lockFile error:nil];
