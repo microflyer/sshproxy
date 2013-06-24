@@ -176,7 +176,7 @@
     // open preferences window if remoteHost is empty
     if (!server) {
         [self openServersPreferences];
-        errorMsg = @"No server configured";
+        errorMsg = nil;
         [self set2disconnected];
         return;
     }

@@ -204,6 +204,11 @@
 
 - (IBAction)applyChanges:(id)sender
 {
+    // rember index
+    NSInteger index = [SSHHelper getActivatedServerIndex];
+    NSUInteger selected = self.serverArrayController.selectionIndex;
+    
+    // apply changes
     [self.userDefaultsController save:self];
     [self.userDefaultsController.defaults synchronize];
     
@@ -213,16 +218,14 @@
         return;
     }
     
-    NSInteger index = [SSHHelper getActivatedServerIndex];
-    NSInteger selected = self.serverArrayController.selectionIndex;
-    
-    if (index < 0 || selected < 0) {
-        return;
-    }
-    
+    // recover selection
     NSDictionary* server = (NSDictionary*)[self.serverArrayController.arrangedObjects objectAtIndex:index];
     BOOL isProxyNeedReactive = ![server isEqualToDictionary:[SSHHelper getActivatedServer]];
     
+    if (selected >= [self.serverArrayController.arrangedObjects count]) {
+        selected = [self.serverArrayController.arrangedObjects count] -1;
+    }
+
     self.serverArrayController.selectionIndex = selected;
     
     // reactive proxy
@@ -236,7 +239,7 @@
 }
 - (IBAction)revertChanges:(id)sender
 {
-    NSInteger selected = self.serverArrayController.selectionIndex;
+    NSUInteger selected = self.serverArrayController.selectionIndex;
     
     [self.userDefaultsController revert:self];
     
@@ -246,9 +249,11 @@
     
     self.isDirty = NO;
     
-    if (selected >= 0) {
-        self.serverArrayController.selectionIndex = selected;
+    if (selected >= [self.serverArrayController.arrangedObjects count]) {
+        selected = [self.serverArrayController.arrangedObjects count] -1;
     }
+    
+    self.serverArrayController.selectionIndex = selected;
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
