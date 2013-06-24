@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MASPreferencesViewController.h"
-#import <INPopoverController/INPopoverController.h>
+#import "INPopoverController.h"
 
 @interface ServersPreferencesViewController : NSViewController <MASPreferencesViewController, NSTableViewDelegate> {
 }

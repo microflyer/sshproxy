@@ -136,7 +136,7 @@
     }
     
     NSInteger index = [SSHHelper getActivatedServerIndex];
-    return servers[index];
+    return [servers objectAtIndex:index];
 }
 
 + (void) setActivatedServer:(int) index
@@ -403,7 +403,7 @@
 	if (error){
 		// There was an error creating the password dialog
 		CFRelease(passwordDialog);
-		returnArray[1] = @(error);
+        [returnArray replaceObjectAtIndex:1 withObject:@(error)];
 		return returnArray;
 	}
     
@@ -413,7 +413,7 @@
     
 	if (error){
 		CFRelease(passwordDialog);
-		returnArray[1] = @(error);
+        [returnArray replaceObjectAtIndex:1 withObject:@(error)];
 		return returnArray;
 	}
     
@@ -421,19 +421,19 @@
 	button = responseFlags & 0x3;
 	if (button == kCFUserNotificationAlternateResponse) {
 		CFRelease(passwordDialog);
-		returnArray[1] = @1;
+        [returnArray replaceObjectAtIndex:1 withObject:@(error)];
 		return returnArray;
 	}
     
-	if ( responseFlags & CFUserNotificationCheckBoxChecked(0) ){
-        returnArray[2] = @0;
+	if ( responseFlags & CFUserNotificationCheckBoxChecked(0) ) {
+        [returnArray replaceObjectAtIndex:2 withObject:@0];
 	}
 	passwordRef = CFUserNotificationGetResponseValue(passwordDialog,
 													 kCFUserNotificationTextFieldValuesKey,
 													 0);
     
     
-	returnArray[0] = (__bridge NSString *) passwordRef;
+    [returnArray replaceObjectAtIndex:0 withObject:(__bridge NSString*)passwordRef];
 	CFRelease(passwordDialog); // Note that this will release the passwordRef as well
 	return returnArray;	
 }

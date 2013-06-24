@@ -139,7 +139,7 @@
 
 - (IBAction)duplicateServer:(id)sender
 {
-    NSDictionary* server = (NSDictionary*)[self.serverArrayController selectedObjects][0];
+    NSDictionary* server = (NSDictionary*)[self.serverArrayController.selectedObjects objectAtIndex:0];
     [self _addServer:server];
     self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
@@ -202,7 +202,7 @@
 - (IBAction)applyChanges:(id)sender
 {
     NSInteger index = [SSHHelper getActivatedServerIndex];
-    NSDictionary* server = (NSDictionary*)[self.serverArrayController arrangedObjects][index];
+    NSDictionary* server = (NSDictionary*)[self.serverArrayController.arrangedObjects objectAtIndex:index];
     BOOL isProxyNeedReactive = ![server isEqualToDictionary:[SSHHelper getActivatedServer]];
     
     NSInteger selected = self.serverArrayController.selectionIndex;

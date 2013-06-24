@@ -240,7 +240,7 @@
     
     [arguments addObjectsFromArray:@[
                                      advancedOptions,
-                                     [NSString stringWithFormat:@"%ld", (long)localPort],
+                                     [NSString stringWithFormat:@"%@", @(localPort)],
                                      [NSString stringWithFormat:@"%@@%@", loginName, remoteHost],
                                      @"-p",
                                      [NSString stringWithFormat:@"%d", remotePort]
@@ -376,8 +376,8 @@
                                 @[@"unknown error"                     , @"unknown error"],
                                 ];
             for (NSArray* error in errors) {
-                if ( ([taskOutput rangeOfString:error[0]].location != NSNotFound) || [error[0]isEqual:@"unknown error"]) {
-                    [self reconnectIfNeed:error[1]];
+                if ( ([taskOutput rangeOfString:[error objectAtIndex:0]].location != NSNotFound) || [[error objectAtIndex:0] isEqual:@"unknown error"]) {
+                    [self reconnectIfNeed:[error objectAtIndex:1]];
                     break;
                 }
             }
