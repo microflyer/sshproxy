@@ -72,6 +72,8 @@
     
     // upgrade user preferences from 13.04 to 13.05
     [SSHHelper upgrade1:self.serverArrayController];
+    
+    [self.cautionMenuItem setHidden:YES];
         
     self.isPasswordCorrect = YES;
 }
@@ -128,6 +130,7 @@
     
     // if turnOffMenuItem current state is visible and enabled, then reactive proxy
     if ( !self.turnOffMenuItem.isHidden) {
+        [self set2reconnect];
         [self turnOffProxy:sender];
         [self _turnOnProxy];
     }

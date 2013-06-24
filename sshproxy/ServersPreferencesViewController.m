@@ -40,12 +40,18 @@
     return NSLocalizedString(@"Servers", @"Toolbar item name for the Servers preference pane");
 }
 
-- (void)loadView
+- (void)awakeFromNib
 {
-    [super loadView];
+//    [super awakeFromNib];
     
     CharmNumberFormatter *formatter = [[CharmNumberFormatter alloc] init];
     [self.remotePortTextField setFormatter:formatter];
+}
+
+- (void)viewWillAppear
+{
+    [self.userDefaultsController save:self];
+    self.isDirty = NO;
     
     if ([self.serversTableView numberOfRows]<=0) {
         [self performSelector: @selector(addServer:) withObject:self afterDelay: 0.0f];
@@ -56,9 +62,6 @@
         // invoke tableViewSelectionDidChange
         [[NSNotificationCenter defaultCenter] postNotificationName:NSTableViewSelectionDidChangeNotification object:self.serversTableView];
     }
-    
-    [self.userDefaultsController save:self];
-    self.isDirty = NO;
 }
 
 - (IBAction)remoteStepperAction:(id)sender
@@ -97,10 +100,8 @@
 
 - (void)_addServer:(NSDictionary*)server
 {
-    NSMutableArray* servers = [NSMutableArray arrayWithArray:[SSHHelper getServers]];
-    [servers addObject:server];
-    [self.userDefaultsController.defaults setObject:servers forKey:@"servers"];
-    
+    [self.serverArrayController addObject:server];
+
     NSInteger index = [self.serversTableView numberOfRows]-1;
     [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     
@@ -142,7 +143,7 @@
 - (IBAction)duplicateServer:(id)sender
 {
     NSDictionary* server = (NSDictionary*)[self.serverArrayController.selectedObjects objectAtIndex:0];
-    [self _addServer:server];
+    [self _addServer:[server mutableCopy]];
     self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
@@ -203,19 +204,27 @@
 
 - (IBAction)applyChanges:(id)sender
 {
-    NSInteger index = [SSHHelper getActivatedServerIndex];
-    NSDictionary* server = (NSDictionary*)[self.serverArrayController.arrangedObjects objectAtIndex:index];
-    BOOL isProxyNeedReactive = ![server isEqualToDictionary:[SSHHelper getActivatedServer]];
-    
-    NSInteger selected = self.serverArrayController.selectionIndex;
-    
     [self.userDefaultsController save:self];
     [self.userDefaultsController.defaults synchronize];
     
     self.isDirty = NO;
     
-    [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selected] byExtendingSelection:NO];
-        
+    if ( [self.serverArrayController.arrangedObjects count] <= 0) {
+        return;
+    }
+    
+    NSInteger index = [SSHHelper getActivatedServerIndex];
+    NSInteger selected = self.serverArrayController.selectionIndex;
+    
+    if (index < 0 || selected < 0) {
+        return;
+    }
+    
+    NSDictionary* server = (NSDictionary*)[self.serverArrayController.arrangedObjects objectAtIndex:index];
+    BOOL isProxyNeedReactive = ![server isEqualToDictionary:[SSHHelper getActivatedServer]];
+    
+    self.serverArrayController.selectionIndex = selected;
+    
     // reactive proxy
     if (isProxyNeedReactive) {
         AppController *appController = (AppController *)([NSApplication sharedApplication].delegate);
@@ -237,7 +246,9 @@
     
     self.isDirty = NO;
     
-    [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selected] byExtendingSelection:NO];
+    if (selected >= 0) {
+        self.serverArrayController.selectionIndex = selected;
+    }
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
