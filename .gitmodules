@@ -1,6 +1,6 @@
 [submodule "MASPreferences"]
 	path = MASPreferences
-	url = https://github.com/shpakovski/MASPreferences.git
+	url = https://github.com/brantyoung/MASPreferences.git
 [submodule "CocoaLumberjack"]
 	path = CocoaLumberjack
 	url = https://github.com/robbiehanson/CocoaLumberjack

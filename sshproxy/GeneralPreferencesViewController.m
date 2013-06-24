@@ -140,7 +140,7 @@
 
 - (IBAction)applyChanges:(id)sender
 {
-    BOOL isProxyNeedReactive = !([SSHHelper getLocalPort]==self.localPortTextField.integerValue);
+    BOOL isProxyNeedReactive = [SSHHelper getLocalPort]!=self.localPortTextField.integerValue;
     
     [self.userDefaultsController save:self];
     self.isDirty = NO;

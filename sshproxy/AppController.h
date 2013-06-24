@@ -10,9 +10,9 @@
 #import "GeneralPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
 
-@interface AppController : NSObject <NSApplicationDelegate, NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate, NSMenuDelegate, MASPreferencesWindowDelegate>
 
-@property (nonatomic, readonly) MASPreferencesWindowController *preferencesWindowController;
+@property (nonatomic, readwrite) MASPreferencesWindowController *preferencesWindowController;
 
 /* Our IBAction which will call the helloWorld method when our connected Menu Item is pressed */
 

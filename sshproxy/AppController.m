@@ -28,6 +28,7 @@
     NSString* taskOutput;
     
     int proxyStatus;
+    NSString *errorMsg;
 }
 
 @synthesize preferencesWindowController;
@@ -126,7 +127,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // if turnOffMenuItem current state is visible and enabled, then reactive proxy
-    if ( !self.turnOffMenuItem.isHidden && self.turnOffMenuItem.isEnabled) {
+    if ( !self.turnOffMenuItem.isHidden) {
         [self turnOffProxy:sender];
         [self _turnOnProxy];
     }
@@ -154,6 +155,9 @@
     proxyStatus = SSHPROXY_ON;
     self.isPasswordCorrect = YES;
     
+    errorMsg = nil;
+    [self set2connect];
+    
     [self _turnOnProxy];
 }
 
@@ -169,6 +173,8 @@
     // open preferences window if remoteHost is empty
     if (!server) {
         [self openServersPreferences];
+        errorMsg = @"No server configured";
+        [self set2disconnected];
         return;
     }
     
@@ -204,7 +210,7 @@
         } else {
             // User cancelled so we'll just abort
             // We return a non zero exit code here which should cause ssh to abort
-            [self set2disconnected:nil];
+            [self set2disconnected];
             return;
         }
     }
@@ -248,8 +254,6 @@
                                 ]
      ];
     
-    [self set2connecting];
-    
     // TODO: CATCH TASK EXCEPTION
     
     task = [[NSTask alloc] init];
@@ -288,13 +292,13 @@
 
 #pragma mark Set Status Menu State
 
-- (void)set2connecting
+- (void)set2connect
 {
     [statusItem setImage:inStatusImage];
     [statusItem setAlternateImage:inStatusInverseImage];
-    [self.statusMenuItem setTitle:@"Proxy: Connecting ..."];
+    [self.statusMenuItem setTitle:@"Proxy: Connecting..."];
     
-    [self.cautionMenuItem setHidden:YES];
+    [self setCautionMessage];
     
     [self.turnOnMenuItem setHidden:YES];
     [self.turnOffMenuItem setHidden:NO];
@@ -307,37 +311,41 @@
     [statusItem setAlternateImage:onStatusInverseImage];
     [self.statusMenuItem setTitle:@"Proxy: On"];
     
-    [self.cautionMenuItem setHidden:YES];
+    [self setCautionMessage];
     
     [self.turnOnMenuItem setHidden:YES];
     [self.turnOffMenuItem setHidden:NO];
 }
 
-- (void)set2disconnected:(NSString*) state
+- (void)set2disconnected
 {
     [statusItem setImage:offStatusImage];
     [statusItem setAlternateImage:offStatusInverseImage];
     [self.statusMenuItem setTitle:@"Proxy: Off"];
     
-    if (state) {
-        [self.cautionMenuItem setTitle:state];
-        [self.cautionMenuItem setHidden:NO];
-    } else {
-        [self.cautionMenuItem setHidden:YES];
-    }
+    [self setCautionMessage];
     
     [self.turnOffMenuItem setHidden:YES];
     [self.turnOnMenuItem setHidden:NO];
 }
 
-- (void)set2reconnect:(NSString*) state
+- (void)setCautionMessage
+{
+    if (errorMsg) {
+        [self.cautionMenuItem setTitle:errorMsg];
+        [self.cautionMenuItem setHidden:NO];
+    } else {
+        [self.cautionMenuItem setHidden:YES];
+    }
+}
+
+- (void)set2reconnect
 {
     [statusItem setImage:inStatusImage];
     [statusItem setAlternateImage:inStatusInverseImage];
     [self.statusMenuItem setTitle:@"Proxy: Reconnecting..."];
     
-    [self.cautionMenuItem setTitle:state];
-    [self.cautionMenuItem setHidden:NO];
+    [self setCautionMessage];
     
     [self.turnOffMenuItem setHidden:NO];
     [self.turnOnMenuItem setHidden:YES];
@@ -345,17 +353,19 @@
 
 - (void)reconnectIfNeed:(NSString*) state
 {
+    errorMsg = state;
+    
     if (proxyStatus==SSHPROXY_CONNECTED) {
-        [self set2reconnect:state];
+        [self set2reconnect];
         [self performSelector: @selector(_turnOnProxy) withObject:nil afterDelay: 3.0];
     } else {
-        if (proxyStatus==SSHPROXY_OFF) {
-            [self.statusMenuItem setTitle:@"Proxy: Off"];
-        } else {
-            [self.statusMenuItem setTitle:@"Proxy: Off"];
-            [self.cautionMenuItem setTitle:state];
-            [self.cautionMenuItem setHidden:NO];
-        }
+//        if (proxyStatus==SSHPROXY_OFF) { // turn off manually
+//            errorMsg = nil;
+//        } else { // by error
+//            errorMsg = state;
+//        }
+        
+        [self set2disconnected];
     }
 }
 
@@ -380,6 +390,7 @@
     if (task) {
         if ( [taskOutput rangeOfString:@"Entering interactive session"].location != NSNotFound){
             self.isPasswordCorrect = YES;
+            errorMsg = nil;
             [self set2connected];
         }
         
@@ -387,11 +398,13 @@
     } else {
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
             self.isPasswordCorrect = YES;
-            [self set2disconnected:@"Port already in use"];
+            errorMsg = @"Port already in use";
+            [self set2disconnected];
             return;
         } else if ([taskOutput rangeOfString:@"Permission denied "].location != NSNotFound) {
             self.isPasswordCorrect = NO;
-            [self set2disconnected:@"Incorrect password"];
+            errorMsg = @"Incorrect password";
+            [self set2disconnected];
             [self performSelector: @selector(_turnOnProxy) withObject:self afterDelay: 0.0];
             return;
         } else {
@@ -399,8 +412,9 @@
                                 @[@"ssh: Could not resolve hostname"   , @"Could not resolve hostname"],
                                 @[@"Connection refused"                , @"Connection refused"],
                                 @[@"Timeout,"                          , @"Timeout, server not responding"],
+                                @[@"Connection timed out during banner exchange"                     , @"Remote proxy server connection timed out"],
                                 @[@"timed out"                         , @"Connection timed out"],
-                                @[@"Write failed: Broken pipe"         , @"Disconnected from  remote proxy server"],
+                                @[@"Write failed: Broken pipe"         , @"Disconnected from remote proxy server"],
                                 @[@"Connection closed by remote host"  , @"Failed to connect remote proxy server"],
                                 @[@"unknown error"                     , @"Unknown error"],
                                 ];
@@ -418,16 +432,8 @@
 {
     task = nil;
 
-    [statusItem setImage:offStatusImage];
-    [statusItem setAlternateImage:offStatusInverseImage];
-    
-    // ensure
-    [self.turnOffMenuItem setHidden:YES];
-    [self.turnOffMenuItem setEnabled:NO];
-    
-    // show and enable turn on menu
-    [self.turnOnMenuItem setHidden:NO];
-    [self.turnOnMenuItem setEnabled:YES];
+    errorMsg = nil;
+    [self set2disconnected];
 }
 
 
@@ -458,7 +464,7 @@
 
 - (NSWindowController *)preferencesWindowController
 {
-    if (preferencesWindowController == nil)
+    if (!preferencesWindowController)
     {
         NSViewController *generalViewController = [[GeneralPreferencesViewController alloc] init];
         NSViewController *serversViewController = [[ServersPreferencesViewController alloc] init];
@@ -468,9 +474,10 @@
         //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];
         
         NSString *title = NSLocalizedString(@"SSH Proxy Preferences", @"SSH Proxy Preferences");
-        preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
+        preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title delegate:self];
         
-        [[preferencesWindowController window] setReleasedWhenClosed: NO];
+        [preferencesWindowController.window setReleasedWhenClosed: NO];
+        [[preferencesWindowController.window standardWindowButton:NSWindowZoomButton] setEnabled:NO];
 //        preferencesWindowController.window.level = NSFloatingWindowLevel;
     }
     return preferencesWindowController;
@@ -530,6 +537,11 @@
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
     [task interrupt];
     return NSTerminateNow;
+}
+
+- (void)preferencesWindowWillClose:(NSNotification *)notification
+{
+    self.preferencesWindowController = nil;
 }
 
 @end
