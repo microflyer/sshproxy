@@ -204,6 +204,7 @@
         } else {
             // User cancelled so we'll just abort
             // We return a non zero exit code here which should cause ssh to abort
+            [self set2disconnected:nil];
             return;
         }
     }
@@ -321,6 +322,8 @@
     if (state) {
         [self.cautionMenuItem setTitle:state];
         [self.cautionMenuItem setHidden:NO];
+    } else {
+        [self.cautionMenuItem setHidden:YES];
     }
     
     [self.turnOffMenuItem setHidden:YES];

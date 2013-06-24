@@ -459,9 +459,9 @@
 						<reference key="NSOnImage" ref="892822162"/>
 						<reference key="NSMixedImage" ref="545007805"/>
 					</object>
-					<object class="NSMenuItem" id="63640785">
+					<object class="NSMenuItem" id="928522643">
 						<reference key="NSMenu" ref="806075472"/>
-						<string key="NSTitle">Incorrect password2</string>
+						<string key="NSTitle">Error message here</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<object class="NSCustomResource" key="NSImage">
@@ -583,6 +583,7 @@
 							<string key="NSFrame">{{-372, -359}, {0, 32}}</string>
 							<reference key="NSSuperview" ref="94713192"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="539938308">
@@ -1313,7 +1314,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">cautionMenuItem</string>
 						<reference key="source" ref="135814413"/>
-						<reference key="destination" ref="63640785"/>
+						<reference key="destination" ref="928522643"/>
 					</object>
 					<int key="connectionID">1227</int>
 				</object>
@@ -1408,7 +1409,7 @@
 							<reference ref="859877446"/>
 							<reference ref="835806103"/>
 							<reference ref="1025946836"/>
-							<reference ref="63640785"/>
+							<reference ref="928522643"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">StatusMenu</string>
@@ -1972,7 +1973,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1224</int>
-						<reference key="object" ref="63640785"/>
+						<reference key="object" ref="928522643"/>
 						<reference key="parent" ref="806075472"/>
 					</object>
 				</array>

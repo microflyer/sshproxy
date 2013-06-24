@@ -421,7 +421,7 @@
 	button = responseFlags & 0x3;
 	if (button == kCFUserNotificationAlternateResponse) {
 		CFRelease(passwordDialog);
-        [returnArray replaceObjectAtIndex:1 withObject:@(error)];
+        [returnArray replaceObjectAtIndex:1 withObject:@1];
 		return returnArray;
 	}
     
