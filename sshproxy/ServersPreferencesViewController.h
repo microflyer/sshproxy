@@ -26,6 +26,7 @@
 - (IBAction)endTheSheet:(id)sender;
 
 - (IBAction)togglePasswordHelpPopover:(id)sender;
+- (IBAction)togglePublickeyHelpPopover:(id)sender;
 
 @property (strong) IBOutlet NSArrayController* serverArrayController;
 @property (strong) IBOutlet NSUserDefaultsController *userDefaultsController;
@@ -37,9 +38,9 @@
 @property (strong) IBOutlet NSTextField* loginNameTextField;
 @property (strong) IBOutlet NSPanel* advancedPanel;
 @property (strong) IBOutlet NSTableView* serversTableView;
-@property (strong) IBOutlet NSButton *passwordHelpButton;
 
 @property (nonatomic,readonly) INPopoverController *passwordHelpPopoverController;
+@property (nonatomic,readonly) INPopoverController *publickeyHelpPopoverController;
 
 - (IBAction)applyChanges:(id)sender;
 - (IBAction)revertChanges:(id)sender;

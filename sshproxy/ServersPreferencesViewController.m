@@ -10,11 +10,13 @@
 #import "CharmNumberFormatter.h"
 #import "SSHHelper.h"
 #import "PasswordHelpViewController.h"
+#import "PublicKeyHelpViewController.h"
 #import "AppController.h"
 
 @implementation ServersPreferencesViewController
 
 @synthesize passwordHelpPopoverController;
+@synthesize publickeyHelpPopoverController;
 @synthesize isDirty;
 
 #pragma mark -
@@ -94,6 +96,15 @@
         [self.passwordHelpPopoverController closePopover:nil];
     } else {
         [self.passwordHelpPopoverController presentPopoverFromRect:[sender bounds] inView:sender preferredArrowDirection:INPopoverArrowDirectionLeft anchorsToPositionView:YES];
+    }
+}
+
+- (IBAction)togglePublickeyHelpPopover:(id)sender
+{
+    if (self.publickeyHelpPopoverController.popoverIsVisible) {
+        [self.publickeyHelpPopoverController closePopover:nil];
+    } else {
+        [self.publickeyHelpPopoverController presentPopoverFromRect:[sender bounds] inView:sender preferredArrowDirection:INPopoverArrowDirectionLeft anchorsToPositionView:YES];
     }
 }
 
@@ -200,6 +211,16 @@
     }
     
     return passwordHelpPopoverController;
+}
+- (INPopoverController *)publickeyHelpPopoverController
+{
+    if (!publickeyHelpPopoverController) {
+        PublicKeyHelpViewController *viewController = [[PublicKeyHelpViewController alloc] init];
+        
+        publickeyHelpPopoverController = [[INPopoverController alloc] initWithContentViewController:viewController];
+    }
+    
+    return publickeyHelpPopoverController;
 }
 
 - (IBAction)applyChanges:(id)sender

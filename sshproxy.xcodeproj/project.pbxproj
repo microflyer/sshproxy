@@ -14,6 +14,10 @@
 		4A1BE49D16A68F30000E56D7 /* sshproxy.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4A1BE49C16A68F30000E56D7 /* sshproxy.entitlements */; };
 		4A1E89041701F09F007DF2A0 /* logo.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 4A1E89031701F09F007DF2A0 /* logo.iconset */; };
 		4A1F18AD16A7E65A00F39F74 /* CharmNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F18AC16A7E65A00F39F74 /* CharmNumberFormatter.m */; };
+		4A27AD99178A4ECA008BC36F /* PasswordHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A27AD93178A4ECA008BC36F /* PasswordHelpView.xib */; };
+		4A27AD9A178A4ECA008BC36F /* PasswordHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27AD95178A4ECA008BC36F /* PasswordHelpViewController.m */; };
+		4A27AD9B178A4ECA008BC36F /* PublicKeyHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27AD97178A4ECA008BC36F /* PublicKeyHelpViewController.m */; };
+		4A27AD9C178A4ECA008BC36F /* PublicKeyHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A27AD98178A4ECA008BC36F /* PublicKeyHelpView.xib */; };
 		4A2A394E175EC85D002BF361 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A3941175EC85D002BF361 /* DDFileLogger.m */; };
 		4A2A394F175EC85D002BF361 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A3943175EC85D002BF361 /* DDLog.m */; };
 		4A2A3950175EC85D002BF361 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A3945175EC85D002BF361 /* DDTTYLogger.m */; };
@@ -21,8 +25,6 @@
 		4A2A3952175EC85D002BF361 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A394A175EC85D002BF361 /* DispatchQueueLogFormatter.m */; };
 		4A2A3953175EC85D002BF361 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A394B175EC85D002BF361 /* README.txt */; };
 		4A2FAD0D1770B89F004C8F7B /* EMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FAD0C1770B89F004C8F7B /* EMKeychain.m */; };
-		4A2FAD1B1771B0B0004C8F7B /* PasswordHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FAD1A1771B0B0004C8F7B /* PasswordHelpView.xib */; };
-		4A2FAD1F1771E5D4004C8F7B /* PasswordHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FAD1E1771E5D3004C8F7B /* PasswordHelpViewController.m */; };
 		4A37A086171AEC6300605BE1 /* CharmTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A37A085171AEC6300605BE1 /* CharmTextField.m */; };
 		4A41067C16BE7FB000D46D91 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067B16BE7FB000D46D91 /* ServiceManagement.framework */; };
 		4A41067D16BE7FD000D46D91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067916BE7F4600D46D91 /* Security.framework */; };
@@ -167,6 +169,12 @@
 		4A1E89031701F09F007DF2A0 /* logo.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = logo.iconset; sourceTree = "<group>"; };
 		4A1F18AB16A7E65A00F39F74 /* CharmNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CharmNumberFormatter.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A1F18AC16A7E65A00F39F74 /* CharmNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CharmNumberFormatter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4A27AD93178A4ECA008BC36F /* PasswordHelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordHelpView.xib; sourceTree = "<group>"; };
+		4A27AD94178A4ECA008BC36F /* PasswordHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordHelpViewController.h; sourceTree = "<group>"; };
+		4A27AD95178A4ECA008BC36F /* PasswordHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordHelpViewController.m; sourceTree = "<group>"; };
+		4A27AD96178A4ECA008BC36F /* PublicKeyHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicKeyHelpViewController.h; sourceTree = "<group>"; };
+		4A27AD97178A4ECA008BC36F /* PublicKeyHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicKeyHelpViewController.m; sourceTree = "<group>"; };
+		4A27AD98178A4ECA008BC36F /* PublicKeyHelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublicKeyHelpView.xib; sourceTree = "<group>"; };
 		4A2A3940175EC85D002BF361 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
 		4A2A3941175EC85D002BF361 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
 		4A2A3942175EC85D002BF361 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
@@ -180,9 +188,6 @@
 		4A2A394B175EC85D002BF361 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		4A2FAD0B1770B89F004C8F7B /* EMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EMKeychain.h; path = EMKeychain/EMKeychain.h; sourceTree = "<group>"; };
 		4A2FAD0C1770B89F004C8F7B /* EMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EMKeychain.m; path = EMKeychain/EMKeychain.m; sourceTree = "<group>"; };
-		4A2FAD1A1771B0B0004C8F7B /* PasswordHelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordHelpView.xib; sourceTree = "<group>"; };
-		4A2FAD1D1771E5D3004C8F7B /* PasswordHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordHelpViewController.h; sourceTree = "<group>"; };
-		4A2FAD1E1771E5D3004C8F7B /* PasswordHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordHelpViewController.m; sourceTree = "<group>"; };
 		4A37A084171AEC6300605BE1 /* CharmTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharmTextField.h; sourceTree = "<group>"; };
 		4A37A085171AEC6300605BE1 /* CharmTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharmTextField.m; sourceTree = "<group>"; };
 		4A41067916BE7F4600D46D91 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -344,6 +349,19 @@
 				4A44D68116A837A800EB44A8 /* askpass-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4A27AD92178A4ECA008BC36F /* HelpView */ = {
+			isa = PBXGroup;
+			children = (
+				4A27AD93178A4ECA008BC36F /* PasswordHelpView.xib */,
+				4A27AD94178A4ECA008BC36F /* PasswordHelpViewController.h */,
+				4A27AD95178A4ECA008BC36F /* PasswordHelpViewController.m */,
+				4A27AD98178A4ECA008BC36F /* PublicKeyHelpView.xib */,
+				4A27AD96178A4ECA008BC36F /* PublicKeyHelpViewController.h */,
+				4A27AD97178A4ECA008BC36F /* PublicKeyHelpViewController.m */,
+			);
+			path = HelpView;
 			sourceTree = "<group>";
 		};
 		4A2A393B175EC85D002BF361 /* Lumberjack */ = {
@@ -532,6 +550,7 @@
 		4AD3FDE316A56EF400378F77 /* sshproxy */ = {
 			isa = PBXGroup;
 			children = (
+				4A27AD92178A4ECA008BC36F /* HelpView */,
 				4A37A084171AEC6300605BE1 /* CharmTextField.h */,
 				4A37A085171AEC6300605BE1 /* CharmTextField.m */,
 				4A1F18AB16A7E65A00F39F74 /* CharmNumberFormatter.h */,
@@ -549,9 +568,6 @@
 				4AE2C1701742151D00D0C57D /* ServersPreferencesView.xib */,
 				4AE2C1721742154100D0C57D /* ServersPreferencesViewController.h */,
 				4AE2C1731742154100D0C57D /* ServersPreferencesViewController.m */,
-				4A2FAD1A1771B0B0004C8F7B /* PasswordHelpView.xib */,
-				4A2FAD1D1771E5D3004C8F7B /* PasswordHelpViewController.h */,
-				4A2FAD1E1771E5D3004C8F7B /* PasswordHelpViewController.m */,
 			);
 			path = sshproxy;
 			sourceTree = "<group>";
@@ -783,9 +799,10 @@
 				4ADB92B81747C7E80064D82D /* disconnected.png in Resources */,
 				4ADB92B91747C7E80064D82D /* disconnected@2x.png in Resources */,
 				4A2A3953175EC85D002BF361 /* README.txt in Resources */,
-				4A2FAD1B1771B0B0004C8F7B /* PasswordHelpView.xib in Resources */,
 				4A70ACEE1777F1D900777818 /* warning_24x24.png in Resources */,
 				4A70ACEF1777F1D900777818 /* warning_24x24@2x.png in Resources */,
+				4A27AD99178A4ECA008BC36F /* PasswordHelpView.xib in Resources */,
+				4A27AD9C178A4ECA008BC36F /* PublicKeyHelpView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -867,7 +884,6 @@
 				4A2A3951175EC85D002BF361 /* ContextFilterLogFormatter.m in Sources */,
 				4A2A3952175EC85D002BF361 /* DispatchQueueLogFormatter.m in Sources */,
 				4A2FAD0D1770B89F004C8F7B /* EMKeychain.m in Sources */,
-				4A2FAD1F1771E5D4004C8F7B /* PasswordHelpViewController.m in Sources */,
 				4A70ACB71774536000777818 /* RNCryptor.m in Sources */,
 				4A70ACB91774536000777818 /* RNCryptorEngine.m in Sources */,
 				4A70ACBB1774536000777818 /* RNDecryptor.m in Sources */,
@@ -879,6 +895,8 @@
 				4A70ACE21774B06400777818 /* INPopoverParentWindow.m in Sources */,
 				4A70ACE31774B06400777818 /* INPopoverWindow.m in Sources */,
 				4A70ACE41774B06400777818 /* INPopoverWindowFrame.m in Sources */,
+				4A27AD9A178A4ECA008BC36F /* PasswordHelpViewController.m in Sources */,
+				4A27AD9B178A4ECA008BC36F /* PublicKeyHelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
