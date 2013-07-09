@@ -127,7 +127,7 @@
 											<object class="NSTextField" id="583484712">
 												<reference key="NSNextResponder" ref="303307495"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{146, 45}, {181, 40}}</string>
+												<string key="NSFrame">{{146, 26}, {181, 56}}</string>
 												<reference key="NSSuperview" ref="303307495"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="205922499"/>
@@ -135,7 +135,7 @@
 												<string key="NSAntiCompressionPriority">{250, 750}</string>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="156080524">
-													<int key="NSCellFlags">337641473</int>
+													<int key="NSCellFlags">69206017</int>
 													<int key="NSCellFlags2">272630272</int>
 													<string key="NSContents"/>
 													<object class="NSFont" key="NSSupport">
@@ -207,7 +207,7 @@
 												<int key="NSNumCols">1</int>
 												<array class="NSMutableArray" key="NSCells">
 													<object class="NSButtonCell" id="224617915">
-														<int key="NSCellFlags">67108864</int>
+														<int key="NSCellFlags">-2080374784</int>
 														<int key="NSCellFlags2">0</int>
 														<string key="NSContents">Password</string>
 														<reference key="NSSupport" ref="534336044"/>
@@ -359,7 +359,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 												<reference key="NSNextResponder" ref="303307495"/>
 												<int key="NSvFlags">289</int>
 												<array class="NSMutableArray" key="NSSubviews"/>
-												<string key="NSFrame">{{212, 13}, {118, 32}}</string>
+												<string key="NSFrame">{{212, -7}, {118, 32}}</string>
 												<reference key="NSSuperview" ref="303307495"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="399015721"/>
@@ -2407,32 +2407,32 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">492</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.privatekey_path</string>
-						<reference key="source" ref="583484712"/>
-						<reference key="destination" ref="577821051"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="583484712"/>
-							<reference key="NSDestination" ref="577821051"/>
-							<string key="NSLabel">value: selection.privatekey_path</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.privatekey_path</string>
-							<dictionary key="NSOptions">
-								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
-								<boolean value="YES" key="NSValidatesImmediately"/>
-							</dictionary>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">503</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="583484712"/>
 						<reference key="destination" ref="1001"/>
 					</object>
 					<int key="connectionID">514</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">displayPatternValue1: selection.privatekey_path</string>
+						<reference key="source" ref="583484712"/>
+						<reference key="destination" ref="577821051"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="583484712"/>
+							<reference key="NSDestination" ref="577821051"/>
+							<string key="NSLabel">displayPatternValue1: selection.privatekey_path</string>
+							<string key="NSBinding">displayPatternValue1</string>
+							<string key="NSKeyPath">selection.privatekey_path</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSDisplayPattern</string>
+								<string type="base64-UTF8" key="NS.object.0">UHJpdmF0ZSBrZXkgaW1wb3J0ZWQ6CiV7dmFsdWUxfUA</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">522</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2617,7 +2617,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="602322129"/>
 							<reference ref="295201419"/>
 							<reference ref="1042953745"/>
-							<reference ref="811501542"/>
 							<reference ref="359183891"/>
 							<reference ref="452600336"/>
 							<reference ref="669800185"/>
@@ -2628,6 +2627,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="867054108"/>
 							<reference ref="205922499"/>
 							<reference ref="583484712"/>
+							<reference ref="811501542"/>
 						</array>
 						<reference key="parent" ref="425535177"/>
 						<string key="objectName">SSH Details View</string>
@@ -3260,7 +3260,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">514</int>
+			<int key="maxID">522</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

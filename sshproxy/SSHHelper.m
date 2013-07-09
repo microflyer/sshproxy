@@ -368,7 +368,17 @@
     
     return privatekey;
 }
-
++ (NSString *)privatekeyNameOfServer:(NSDictionary *)server
+{
+    return [NSString stringWithFormat:@"%@@%@:%d.key", [self userFromServer:server], [self hostFromServer:server], [self portFromServer:server]];
+}
++ (NSURL *)privatekeyURLOfServer:(NSDictionary *)server
+{
+    NSString* userhome = NSHomeDirectory();
+    NSURL* url = [NSURL fileURLWithPath:userhome isDirectory:YES];
+    
+    return [url URLByAppendingPathComponent:[self privatekeyNameOfServer:server] isDirectory:NO];
+}
 
 + (BOOL)isEnableCompress:(NSDictionary *)server
 {

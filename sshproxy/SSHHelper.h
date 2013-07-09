@@ -45,6 +45,9 @@
 + (BOOL)isShareSOCKS:(NSDictionary *)server;
 + (NSString *)privatekeyFromServer:(NSDictionary *)server;
 
++ (NSString *)privatekeyNameOfServer:(NSDictionary *)server;
++ (NSURL *)privatekeyURLOfServer:(NSDictionary *)server;
+
 // setters for server parameters
 + (NSDictionary *)setPrivatekey:(NSString *)path ForServer:(NSDictionary *)server;
 

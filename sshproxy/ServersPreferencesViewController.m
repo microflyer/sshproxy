@@ -12,6 +12,7 @@
 #import "PasswordHelpViewController.h"
 #import "PublicKeyHelpViewController.h"
 #import "AppController.h"
+#import "NSString+SSToolkitAdditions.h"
 #import <pwd.h>
 
 @implementation ServersPreferencesViewController
@@ -296,8 +297,9 @@
         
         // Enable the selection of files in the dialog.
         openDlg.canChooseFiles = YES;
-        openDlg.title = @"Select Private Key";
-        openDlg.prompt = @"Select Private Key";
+        openDlg.title = @"Import Private Key";
+        openDlg.prompt = @"Import Private Key";
+        openDlg.message = @"Please choose a private key file:";
         
         openDlg.allowsMultipleSelection = NO;
         openDlg.directoryURL = [url URLByAppendingPathComponent:@".ssh" isDirectory:YES];
@@ -305,11 +307,31 @@
         [openDlg beginSheetModalForWindow:self.view.window
                       completionHandler:^(NSInteger returnCode) {
                           if (returnCode == NSOKButton) {
-                              NSURL *theURL = [[openDlg URLs] objectAtIndex:0];
                               NSDictionary *server = [self.serverArrayController.selectedObjects objectAtIndex:0];
                               
                               if (server) {
-                                  [SSHHelper setPrivatekey:theURL.path ForServer:server];
+                                  NSString *selectedKeyPath = openDlg.URL.path;
+                                  
+                                  // create ".ssh" dir at sandbox container
+                                  NSString *importedKeyDir = [NSHomeDirectory() stringByAppendingPathComponent:@".ssh"];
+                                  
+                                  if (![[NSFileManager defaultManager] fileExistsAtPath:importedKeyDir])
+                                  {
+                                      [[NSFileManager defaultManager] createDirectoryAtPath:importedKeyDir withIntermediateDirectories:YES attributes:nil error:nil];
+                                  }
+                                  
+                                  // copy key
+                                  NSString *importedKeyName = [selectedKeyPath MD5Sum];
+                                  NSString *importedKeyPath = [importedKeyDir stringByAppendingPathComponent:importedKeyName];
+                                                                    
+                                  if ([[NSFileManager defaultManager] fileExistsAtPath:importedKeyPath] == YES)
+                                  {
+                                      [[NSFileManager defaultManager] removeItemAtPath:importedKeyPath error:nil];
+                                  }
+                                  
+                                  [[NSFileManager defaultManager] copyItemAtPath:selectedKeyPath toPath:importedKeyPath error:nil];
+                                  
+                                  [SSHHelper setPrivatekey:selectedKeyPath ForServer:server];
                                   
                                   // hack code to make sure user defaults controller is aware of server array controller is changed.
                                   NSUInteger index = [self.serverArrayController.arrangedObjects count];
@@ -320,8 +342,6 @@
                               }
                           }}];
     }
-    
-    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
