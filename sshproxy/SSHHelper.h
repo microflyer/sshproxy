@@ -43,6 +43,10 @@
 + (NSString *)userFromServer:(NSDictionary *)server;
 + (BOOL)isEnableCompress:(NSDictionary *)server;
 + (BOOL)isShareSOCKS:(NSDictionary *)server;
++ (NSString *)privatekeyFromServer:(NSDictionary *)server;
+
+// setters for server parameters
++ (NSDictionary *)setPrivatekey:(NSString *)path ForServer:(NSDictionary *)server;
 
 + (NSArray *)promptPasswordForServer:(NSDictionary *)server;
 

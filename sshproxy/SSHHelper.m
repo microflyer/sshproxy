@@ -27,7 +27,9 @@
                                  // TODO:
                                  //                        [NSString stringWithFormat:@"-F \"%@\"", configFile],
                                  @"-oIdentitiesOnly=yes",
-                                 @"-oPubkeyAuthentication=no",
+//                                 @"-oPreferredAuthentications=publickey",
+                                 @"-oPubkeyAuthentication=yes",
+                                 @"-oAskPassGUI=no", // TODO:
                                  @"-T", @"-a",
                                  @"-oConnectTimeout=8", @"-oConnectionAttempts=1",
                                  @"-oServerAliveInterval=8", @"-oServerAliveCountMax=1",
@@ -356,6 +358,18 @@
     return loginName;
 }
 
++ (NSString *)privatekeyFromServer:(NSDictionary *)server
+{
+    NSString* privatekey = (NSString *)[server valueForKey:@"privatekey_path"];
+    
+    if (!privatekey) {
+        privatekey = @"";
+    }
+    
+    return privatekey;
+}
+
+
 + (BOOL)isEnableCompress:(NSDictionary *)server
 {
     return [(NSNumber*)[server valueForKey:@"enable_compression"] boolValue];
@@ -363,6 +377,14 @@
 + (BOOL)isShareSOCKS:(NSDictionary *)server
 {
     return [(NSNumber*)[server valueForKey:@"share_socks"] boolValue];
+}
+
+#pragma mark setters
+
++ (NSDictionary *)setPrivatekey:(NSString *)path ForServer:(NSDictionary *)server
+{
+    [server setValue:path forKey:@"privatekey_path"];
+    return server;
 }
 
 #pragma mark Prompt Password

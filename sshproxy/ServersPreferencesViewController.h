@@ -10,6 +10,11 @@
 #import "MASPreferencesViewController.h"
 #import "INPopoverController.h"
 
+enum {
+    CD_AUTH_METHOD_PASSWORD = 0,
+    CD_AUTH_METHOD_PUBLICKEY,
+} CD_AUTH_METHOD;
+
 @interface ServersPreferencesViewController : NSViewController <MASPreferencesViewController, NSTableViewDelegate> {
 }
 
@@ -28,16 +33,24 @@
 - (IBAction)togglePasswordHelpPopover:(id)sender;
 - (IBAction)togglePublickeyHelpPopover:(id)sender;
 
-@property (strong) IBOutlet NSArrayController* serverArrayController;
+- (IBAction)authMethodChanged:(id)sender;
+
+@property (strong) IBOutlet NSArrayController *serverArrayController;
 @property (strong) IBOutlet NSUserDefaultsController *userDefaultsController;
 
-@property (strong) IBOutlet NSTextField* remoteHostTextField;
-@property (strong) IBOutlet NSTextField* remotePortTextField;
-@property (strong) IBOutlet NSStepper* remotePortStepper;
+@property (strong) IBOutlet NSTextField *remoteHostTextField;
+@property (strong) IBOutlet NSTextField *remotePortTextField;
+@property (strong) IBOutlet NSStepper *remotePortStepper;
 
-@property (strong) IBOutlet NSTextField* loginNameTextField;
-@property (strong) IBOutlet NSPanel* advancedPanel;
-@property (strong) IBOutlet NSTableView* serversTableView;
+@property (strong) IBOutlet NSTextField *loginNameTextField;
+@property (strong) IBOutlet NSPanel *advancedPanel;
+@property (strong) IBOutlet NSTableView *serversTableView;
+
+@property (strong) IBOutlet NSMatrix *authMethodMatrix;
+@property (strong) IBOutlet NSTextField *privatekeyLabel;
+
+@property (strong) IBOutlet NSButtonCell *privatekeyButtonCell;
+
 
 @property (nonatomic,readonly) INPopoverController *passwordHelpPopoverController;
 @property (nonatomic,readonly) INPopoverController *publickeyHelpPopoverController;

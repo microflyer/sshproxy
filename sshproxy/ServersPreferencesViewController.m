@@ -12,6 +12,7 @@
 #import "PasswordHelpViewController.h"
 #import "PublicKeyHelpViewController.h"
 #import "AppController.h"
+#import <pwd.h>
 
 @implementation ServersPreferencesViewController
 
@@ -275,6 +276,52 @@
     }
     
     self.serverArrayController.selectionIndex = selected;
+}
+
+
+- (IBAction)authMethodChanged:(id)sender
+{
+    NSUInteger selectedTag = self.authMethodMatrix.selectedTag;
+    
+    if (CD_AUTH_METHOD_PUBLICKEY==selectedTag) {
+        // http://stackoverflow.com/questions/10952225/is-there-any-way-to-give-my-sandboxed-mac-app-read-only-access-to-files-in-lib/10955994
+        const char *home = getpwuid(getuid())->pw_dir;
+        NSString *path = [[NSFileManager defaultManager]
+                          stringWithFileSystemRepresentation:home
+                          length:strlen(home)];
+        NSURL *url = [NSURL fileURLWithPath:path isDirectory:YES];
+        
+        // Create the File Open Dialog class.
+        NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+        
+        // Enable the selection of files in the dialog.
+        openDlg.canChooseFiles = YES;
+        openDlg.title = @"Select Private Key";
+        openDlg.prompt = @"Select Private Key";
+        
+        openDlg.allowsMultipleSelection = NO;
+        openDlg.directoryURL = [url URLByAppendingPathComponent:@".ssh" isDirectory:YES];
+        
+        [openDlg beginSheetModalForWindow:self.view.window
+                      completionHandler:^(NSInteger returnCode) {
+                          if (returnCode == NSOKButton) {
+                              NSURL *theURL = [[openDlg URLs] objectAtIndex:0];
+                              NSDictionary *server = [self.serverArrayController.selectedObjects objectAtIndex:0];
+                              
+                              if (server) {
+                                  [SSHHelper setPrivatekey:theURL.path ForServer:server];
+                                  
+                                  // hack code to make sure user defaults controller is aware of server array controller is changed.
+                                  NSUInteger index = [self.serverArrayController.arrangedObjects count];
+                                  [self.serverArrayController insertObject:server atArrangedObjectIndex:index];
+                                  [self.serverArrayController removeObjectAtArrangedObjectIndex:index];
+                                  
+                                  self.isDirty = self.userDefaultsController.hasUnappliedChanges;
+                              }
+                          }}];
+    }
+    
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
