@@ -194,8 +194,15 @@
     
     // This creates a dictionary of environment variables (keys) and their values (objects) to be set in the environment where the task will be run. This environment dictionary will then be accessible to our Askpass program.
     
+    BOOL isPublicKeyMode = [SSHHelper authMethodFromServer:server] == OW_AUTH_METHOD_PUBLICKEY;
+    
     // First try to get the password from the keychain
-    NSString *loginPassword = [SSHHelper passwordForServer:server];
+    NSString *loginPassword = nil;
+    if (isPublicKeyMode) {
+        loginPassword = [SSHHelper passphraseForServer:server];
+    } else {
+        loginPassword = [SSHHelper passwordForServer:server];
+    }
     
     if ( [loginPassword isEqual:@""] || !self.isPasswordCorrect ) {
         // No password was found in the keychain so we should prompt the user for it.
@@ -203,13 +210,16 @@
         NSInteger returnCode = [[promptArray objectAtIndex:1] intValue];
         if ( returnCode == 0 ){
             // Found a valid password entry
+            loginPassword = [promptArray objectAtIndex:0];
             
             // Set the password in the keychain if the user requested this.
             if ( [[promptArray objectAtIndex:2] intValue]==0 ){
-                [SSHHelper setPassword:[promptArray objectAtIndex:0] forServer:server];
+                if (isPublicKeyMode) {
+                    [SSHHelper setPassphrase:loginPassword forServer:server];
+                } else {
+                    [SSHHelper setPassword:loginPassword forServer:server];
+                }
             }
-            
-            loginPassword = [promptArray objectAtIndex:0];
         } else {
             // User cancelled so we'll just abort
             // We return a non zero exit code here which should cause ssh to abort
@@ -242,10 +252,10 @@
     //    DLog(@"Environment dict %@",env);
     
     NSMutableArray *arguments = nil;
-    if ( OW_AUTH_METHOD_PASSWORD==[SSHHelper authMethodFromServer:server] ) {
-        arguments = [SSHHelper getPasswordMethodConnectArgs];
-    } else if ( OW_AUTH_METHOD_PUBLICKEY==[SSHHelper authMethodFromServer:server] ) {
+    if ( isPublicKeyMode ) {
         arguments = [SSHHelper getPublicKeyMethodConnectArgsForServer:server];
+    } else if ( OW_AUTH_METHOD_PUBLICKEY==[SSHHelper authMethodFromServer:server] ) {
+        arguments = [SSHHelper getPasswordMethodConnectArgs];
     }
     
     if (!arguments) {

@@ -337,68 +337,51 @@
 #pragma mark - Passphrase Helper
 
 //! Simply looks for the keychain entry corresponding to a username and hostname and returns it. Returns nil if the password is not found
-+ (NSString *)passphraseForHost:(NSString *)hostName port:(int) hostPort user:(NSString *) userName
++ (NSString *)passphraseForServer:(NSDictionary *)server
 {
-	if ( hostName == nil || userName == nil ){
+	if ( server ){
 		return nil;
 	}
 	
-	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:hostName withUsername:userName path:@"privatekey" port:hostPort protocol:kSecProtocolTypeSSH];
+	EMGenericKeychainItem *keychainItem = [EMGenericKeychainItem genericKeychainItemForService:@"com.codinnstudio.sshproxy.privatekey" withUsername:[self importedPrivateKeyNameFromServer:server]];
     
     return keychainItem ? keychainItem.password : @"";
 }
 
-+ (NSString *)passphraseForServer:(NSDictionary *)server
-{
-    NSString* remoteHost = [self hostFromServer:server];
-    NSString* loginName = [self userFromServer:server];
-    int remotePort = [self portFromServer:server];
-    
-    return [SSHHelper passphraseForHost:remoteHost port:remotePort user:loginName];
-}
-
 
 /*! Set the password into the keychain for a specific user and host. If the username/hostname combo already has an entry in the keychain then change it. If not then add a new entry */
-+ (BOOL)setPassphrase:(NSString*)newPassphrase forHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
++ (BOOL)setPassphrase:(NSString *)newPassphrase forServer:(NSDictionary *)server
 {
-	if ( hostName == nil || userName == nil ) {
+	if ( server == nil ) {
 		return NO;
 	}
 	
 	// Look for a password in the keychain
-    EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:hostName withUsername:userName path:nil port:hostPort protocol:kSecProtocolTypeSSH];
+    EMGenericKeychainItem *keychainItem = [EMGenericKeychainItem genericKeychainItemForService:@"com.codinnstudio.sshproxy.privatekey" withUsername:[self importedPrivateKeyNameFromServer:server]];
     
     if (!keychainItem) {
-        keychainItem = [EMInternetKeychainItem addInternetKeychainItemForServer:hostName withUsername:userName password:newPassphrase path:@"privatekey" port:hostPort protocol:kSecProtocolTypeSSH];
+        keychainItem = [EMGenericKeychainItem addGenericKeychainItemForService:@"com.codinnstudio.sshproxy.privatekey" withUsername:[self importedPrivateKeyNameFromServer:server] password:newPassphrase];
         return NO;
     }
     
     keychainItem.password = newPassphrase;
     return YES;
 }
-+ (BOOL)setPassphrase:(NSString *)newPassphrase forServer:(NSDictionary *)server
-{
-    NSString* remoteHost = [self hostFromServer:server];
-    NSString* loginName = [self userFromServer:server];
-    int remotePort = [self portFromServer:server];
-    
-    return [self setPassphrase:newPassphrase forHost:remoteHost port:remotePort user:loginName];
-}
 
-+ (BOOL) deletePassphraseForHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
++ (BOOL)deletePassphraseForServer:(NSDictionary *)server
 {
-	if ( hostName == nil || userName == nil ) {
+	if ( server == nil ) {
 		return NO;
 	}
     
 	// Look for a password in the keychain
-    EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:hostName withUsername:userName path:@"privatekey" port:hostPort protocol:kSecProtocolTypeSSH];
+    EMGenericKeychainItem *keychainItem = [EMGenericKeychainItem genericKeychainItemForService:@"com.codinnstudio.sshproxy.privatekey" withUsername:[self importedPrivateKeyNameFromServer:server]];
     
     if (!keychainItem) {
         return NO;
     }
     
-    [EMInternetKeychainItem removeKeychainItem:keychainItem];
+    [EMGenericKeychainItem removeKeychainItem:keychainItem];
     return YES;
 }
 
@@ -468,6 +451,12 @@
     
     return privatekey;
 }
++ (NSString *)importedPrivateKeyNameFromServer:(NSDictionary *)server
+{
+    NSString *origPrivateKeyPath = [self privateKeyPathFromServer:server];
+    
+    return [origPrivateKeyPath MD5Sum];
+}
 + (NSString *)importedPrivateKeyPathFromServer:(NSDictionary *)server
 {
     // create ".ssh" dir at sandbox container
@@ -477,10 +466,8 @@
     {
         [[NSFileManager defaultManager] createDirectoryAtPath:importedKeyDir withIntermediateDirectories:YES attributes:nil error:nil];
     }
-    
-    NSString *origPrivateKeyPath = [self privateKeyPathFromServer:server];
-    
-    NSString *importedKeyName = [origPrivateKeyPath MD5Sum];
+        
+    NSString *importedKeyName = [self importedPrivateKeyNameFromServer:server];
     NSString *importedKeyPath = [importedKeyDir stringByAppendingPathComponent:importedKeyName];
     
     return importedKeyPath;
