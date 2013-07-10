@@ -339,7 +339,7 @@
 //! Simply looks for the keychain entry corresponding to a username and hostname and returns it. Returns nil if the password is not found
 + (NSString *)passphraseForServer:(NSDictionary *)server
 {
-	if ( server ){
+	if ( !server ){
 		return nil;
 	}
 	
@@ -352,7 +352,7 @@
 /*! Set the password into the keychain for a specific user and host. If the username/hostname combo already has an entry in the keychain then change it. If not then add a new entry */
 + (BOOL)setPassphrase:(NSString *)newPassphrase forServer:(NSDictionary *)server
 {
-	if ( server == nil ) {
+	if ( !server ) {
 		return NO;
 	}
 	
@@ -370,7 +370,7 @@
 
 + (BOOL)deletePassphraseForServer:(NSDictionary *)server
 {
-	if ( server == nil ) {
+	if ( !server ) {
 		return NO;
 	}
     
