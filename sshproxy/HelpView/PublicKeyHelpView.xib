@@ -40,9 +40,10 @@
 					<object class="NSTextField" id="638431542">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{17, 3}, {310, 168}}</string>
+						<string key="NSFrame">{{17, 3}, {310, 184}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSAntiCompressionPriority">{250, 750}</string>
 						<bool key="NSEnabled">YES</bool>
@@ -50,11 +51,12 @@
 							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">4194304</int>
 							<object class="NSMutableString" key="NSContents">
-								<bytes key="NS.bytes">U1NIIFByb3h5IHdpbGwgYXV0b21hdGljYWxseSBwb3B1cCBhIGRpYWxvZyBwcm9tcHRzIHlvdSB0byBl
-bnRlciBhIHBhc3NwaHJhc2UgdG8gZGVjcnlwdCBwcml2YXRlIGtleSBpbiB5b3VyIGxvY2FsIG1hY2hp
-bmUu4oCo4oCoUGFzc3BocmFzZXMgYXJlIHJlbWVtYmVyZWQgaW4gT1MgWCBLZXljaGFpbiB0byBndWFy
-YW50ZWUgdGhlIHNlY3VyaXR5LuKAqOKAqFlvdSBjYW4gdXNlICJLZXljaGFpbiBBY2Nlc3MiIHV0aWxp
-dHkgc2hpcHBlZCB3aXRoIE9TIFggdG8gYWNjZXNzIHlvdXIgcGFzc3BocmFzZXMuA</bytes>
+								<bytes key="NS.bytes">WW91IHdpbGwgbmVlZCB0byBpbXBvcnQgdGhlIHByaXZhdGUga2V5IChha2EgaWRlbnRpdHkpIHdoZW4g
+dXNpbmcgIlB1YmxpYyBLZXkiIGF1dGhlbnRpY2F0aW9uIG1ldGhvZC7igKjigKhZb3UgbXVzdCBjbGlj
+ayAiUHVibGljIEtleSIgY2hlY2tib3ggYWdhaW4gdG8gcmUtaW1wb3J0IGFmdGVyIHByaXZhdGUga2V5
+IGNoYW5nZWQu4oCo4oCoU1NIIFByb3h5IHdpbGwgYXV0b21hdGljYWxseSBwb3B1cCBhIGRpYWxvZyBw
+cm9tcHRzIHlvdSB0byBlbnRlciBhIHBhc3NwaHJhc2UgdG8gZGVjcnlwdCBwcml2YXRlIGtleSBpbiB5
+b3VyIGxvY2FsIG1hY2hpbmUuA</bytes>
 							</object>
 							<object class="NSFont" key="NSSupport">
 								<string key="NSName">LucidaGrande</string>
@@ -85,7 +87,7 @@ dHkgc2hpcHBlZCB3aXRoIE9TIFggdG8gYWNjZXNzIHlvdXIgcGFzc3BocmFzZXMuA</bytes>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
 				</array>
-				<string key="NSFrameSize">{344, 191}</string>
+				<string key="NSFrameSize">{344, 207}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="638431542"/>
