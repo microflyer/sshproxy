@@ -241,7 +241,20 @@
     
     //    DLog(@"Environment dict %@",env);
     
-    NSMutableArray *arguments = [SSHHelper getConnectArgs];
+    NSMutableArray *arguments = nil;
+    if ( OW_AUTH_METHOD_PASSWORD==[SSHHelper authMethodFromServer:server] ) {
+        arguments = [SSHHelper getPasswordMethodConnectArgs];
+    } else if ( OW_AUTH_METHOD_PUBLICKEY==[SSHHelper authMethodFromServer:server] ) {
+        arguments = [SSHHelper getPublicKeyMethodConnectArgsForServer:server];
+    }
+    
+    if (!arguments) {
+        // abort connection
+        errorMsg = @"Invalid authentication method or private key does not exist";
+        [self set2disconnected];
+        return;
+    }
+    
     NSString *proxyCommandStr = [SSHHelper getProxyCommandStr:server];
     
     if (proxyCommandStr) {

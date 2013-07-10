@@ -12,7 +12,6 @@
 #import "PasswordHelpViewController.h"
 #import "PublicKeyHelpViewController.h"
 #import "AppController.h"
-#import "NSString+SSToolkitAdditions.h"
 #import <pwd.h>
 
 @implementation ServersPreferencesViewController
@@ -46,7 +45,7 @@
 
 - (void)awakeFromNib
 {
-//    [super awakeFromNib];
+    //    [super awakeFromNib];
     
     CharmNumberFormatter *formatter = [[CharmNumberFormatter alloc] init];
     [self.remotePortTextField setFormatter:formatter];
@@ -114,7 +113,7 @@
 - (void)_addServer:(NSDictionary*)server
 {
     [self.serverArrayController addObject:server];
-
+    
     NSInteger index = [self.serversTableView numberOfRows]-1;
     [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     
@@ -208,7 +207,7 @@
 {
     if (!passwordHelpPopoverController) {
         PasswordHelpViewController *viewController = [[PasswordHelpViewController alloc] init];
-    
+        
         passwordHelpPopoverController = [[INPopoverController alloc] initWithContentViewController:viewController];
     }
     
@@ -248,7 +247,7 @@
     if (selected >= [self.serverArrayController.arrangedObjects count]) {
         selected = [self.serverArrayController.arrangedObjects count] -1;
     }
-
+    
     self.serverArrayController.selectionIndex = selected;
     
     // reactive proxy
@@ -258,7 +257,7 @@
         // it seems must delay some microsenconds to wait user defaults synchronize
         [appController performSelector: @selector(reactiveProxy:) withObject:self afterDelay: 0.1];
     }
-
+    
 }
 - (IBAction)revertChanges:(id)sender
 {
@@ -284,7 +283,7 @@
 {
     NSUInteger selectedTag = self.authMethodMatrix.selectedTag;
     
-    if (CD_AUTH_METHOD_PUBLICKEY==selectedTag) {
+    if (OW_AUTH_METHOD_PUBLICKEY==selectedTag) {
         // http://stackoverflow.com/questions/10952225/is-there-any-way-to-give-my-sandboxed-mac-app-read-only-access-to-files-in-lib/10955994
         const char *home = getpwuid(getuid())->pw_dir;
         NSString *path = [[NSFileManager defaultManager]
@@ -305,43 +304,36 @@
         openDlg.directoryURL = [url URLByAppendingPathComponent:@".ssh" isDirectory:YES];
         
         [openDlg beginSheetModalForWindow:self.view.window
-                      completionHandler:^(NSInteger returnCode) {
-                          if (returnCode == NSOKButton) {
-                              NSDictionary *server = [self.serverArrayController.selectedObjects objectAtIndex:0];
-                              
-                              if (server) {
-                                  NSString *selectedKeyPath = openDlg.URL.path;
-                                  
-                                  // create ".ssh" dir at sandbox container
-                                  NSString *importedKeyDir = [NSHomeDirectory() stringByAppendingPathComponent:@".ssh"];
-                                  
-                                  if (![[NSFileManager defaultManager] fileExistsAtPath:importedKeyDir])
-                                  {
-                                      [[NSFileManager defaultManager] createDirectoryAtPath:importedKeyDir withIntermediateDirectories:YES attributes:nil error:nil];
-                                  }
-                                  
-                                  // copy key
-                                  NSString *importedKeyName = [selectedKeyPath MD5Sum];
-                                  NSString *importedKeyPath = [importedKeyDir stringByAppendingPathComponent:importedKeyName];
-                                                                    
-                                  if ([[NSFileManager defaultManager] fileExistsAtPath:importedKeyPath] == YES)
-                                  {
-                                      [[NSFileManager defaultManager] removeItemAtPath:importedKeyPath error:nil];
-                                  }
-                                  
-                                  [[NSFileManager defaultManager] copyItemAtPath:selectedKeyPath toPath:importedKeyPath error:nil];
-                                  
-                                  [SSHHelper setPrivatekey:selectedKeyPath ForServer:server];
-                                  
-                                  // hack code to make sure user defaults controller is aware of server array controller is changed.
-                                  NSUInteger index = [self.serverArrayController.arrangedObjects count];
-                                  [self.serverArrayController insertObject:server atArrangedObjectIndex:index];
-                                  [self.serverArrayController removeObjectAtArrangedObjectIndex:index];
-                                  
-                                  self.isDirty = self.userDefaultsController.hasUnappliedChanges;
-                              }
-                          }}];
+                        completionHandler:^(NSInteger returnCode) {
+                            if (returnCode == NSOKButton) {
+                                NSDictionary *server = [self.serverArrayController.selectedObjects objectAtIndex:0];
+                                
+                                if (server) {
+                                    NSString *selectedKeyPath = openDlg.URL.path;
+                                    
+                                    [SSHHelper setPrivateKeyPath:selectedKeyPath forServer:server];
+                                    
+                                    NSString *importedKeyPath = [SSHHelper importedPrivateKeyPathFromServer:server];
+                                    
+                                    // copy key
+                                    
+                                    if ( [[NSFileManager defaultManager] fileExistsAtPath:importedKeyPath isDirectory:NO] )
+                                    {
+                                        [[NSFileManager defaultManager] removeItemAtPath:importedKeyPath error:nil];
+                                    }
+                                    
+                                    [[NSFileManager defaultManager] copyItemAtPath:selectedKeyPath toPath:importedKeyPath error:nil];
+                                    
+                                    // hack code to make sure user defaults controller is aware of server array controller is changed.
+                                    NSUInteger index = [self.serverArrayController.arrangedObjects count];
+                                    [self.serverArrayController insertObject:server atArrangedObjectIndex:index];
+                                    [self.serverArrayController removeObjectAtArrangedObjectIndex:index];
+                                    
+                                    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
+                                }
+                            }}];
     }
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification

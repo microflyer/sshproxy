@@ -10,11 +10,6 @@
 #import "MASPreferencesViewController.h"
 #import "INPopoverController.h"
 
-enum {
-    CD_AUTH_METHOD_PASSWORD = 0,
-    CD_AUTH_METHOD_PUBLICKEY,
-} CD_AUTH_METHOD;
-
 @interface ServersPreferencesViewController : NSViewController <MASPreferencesViewController, NSTableViewDelegate> {
 }
 

@@ -8,28 +8,24 @@
 
 #import "SSHHelper.h"
 #import "EMKeychain.h"
+#import "NSString+SSToolkitAdditions.h"
 
 @implementation SSHHelper
 
-
-+ (NSMutableArray*) getConnectArgs
++ (NSMutableArray*)_getCommonConnectArgs
 {
-    NSString* userHome = NSHomeDirectory();
     NSString* knownHostFile = @"/dev/null";
-//    NSString* knownHostFile= [userHome stringByAppendingPathComponent:@".sshproxy_known_hosts"];
-    NSString* identityFile= [userHome stringByAppendingPathComponent:@".sshproxy_identity"];
+    //    NSString* knownHostFile= [userHome stringByAppendingPathComponent:@".sshproxy_known_hosts"];
     //    NSString* configFile= [userHome stringByAppendingPathComponent:@".sshproxy_config"];
     
     NSMutableArray *arguments = [NSMutableArray arrayWithObjects:
                                  [NSString stringWithFormat:@"-oUserKnownHostsFile=\"%@\"", knownHostFile],
                                  [NSString stringWithFormat:@"-oGlobalKnownHostsFile=\"%@\"", knownHostFile],
-                                 [NSString stringWithFormat:@"-oIdentityFile=\"%@\"", identityFile],
                                  // TODO:
                                  //                        [NSString stringWithFormat:@"-F \"%@\"", configFile],
                                  @"-oIdentitiesOnly=yes",
-//                                 @"-oPreferredAuthentications=publickey",
                                  @"-oPubkeyAuthentication=yes",
-                                 @"-oAskPassGUI=no", // TODO:
+                                 @"-oAskPassGUI=no", // TODO: OS X 10.6 may fail
                                  @"-T", @"-a",
                                  @"-oConnectTimeout=8", @"-oConnectionAttempts=1",
                                  @"-oServerAliveInterval=8", @"-oServerAliveCountMax=1",
@@ -40,8 +36,40 @@
     return arguments;
 }
 
++ (NSMutableArray*)getPasswordMethodConnectArgs
+{
+    NSMutableArray *arguments = [self _getCommonConnectArgs];
+    
+    [arguments addObjectsFromArray:@[
+     @"-oPreferredAuthentications=keyboard-interactive,password",
+     @"-oPubkeyAuthentication=no"]
+     ];
+    
+    return arguments;
+}
+
++ (NSMutableArray*)getPublicKeyMethodConnectArgsForServer:(NSDictionary *)server
+{
+    NSString* privateKeyPath= [self importedPrivateKeyPathFromServer:server];
+    
+    if ( ![[NSFileManager defaultManager] fileExistsAtPath:privateKeyPath isDirectory:NO] ) {
+        // return nil if imported private key miss
+        return nil;
+    }
+    
+    NSMutableArray *arguments = [self _getCommonConnectArgs];
+    
+    [arguments addObjectsFromArray:@[
+     [NSString stringWithFormat:@"-oIdentityFile=\"%@\"", privateKeyPath],
+     @"-oPreferredAuthentications=publickey",
+     @"-oPubkeyAuthentication=yes"]
+     ];
+    
+    return arguments;
+}
+
 // for ProxyCommand Env
-+ (NSDictionary*) getProxyCommandEnv:(NSDictionary*) server
++ (NSDictionary*) getProxyCommandEnv:(NSDictionary *)server
 {
     NSMutableDictionary* env = [NSMutableDictionary dictionary];
     
@@ -346,6 +374,12 @@
     
     return remotePort;
 }
++ (int)authMethodFromServer:(NSDictionary *)server
+{
+    int authMethod = [(NSNumber*)[server valueForKey:@"auth_method"] intValue];
+    
+    return authMethod;
+}
 
 + (NSString *)userFromServer:(NSDictionary *)server
 {
@@ -358,7 +392,7 @@
     return loginName;
 }
 
-+ (NSString *)privatekeyFromServer:(NSDictionary *)server
++ (NSString *)privateKeyPathFromServer:(NSDictionary *)server
 {
     NSString* privatekey = (NSString *)[server valueForKey:@"privatekey_path"];
     
@@ -368,16 +402,22 @@
     
     return privatekey;
 }
-+ (NSString *)privatekeyNameOfServer:(NSDictionary *)server
++ (NSString *)importedPrivateKeyPathFromServer:(NSDictionary *)server
 {
-    return [NSString stringWithFormat:@"%@@%@:%d.key", [self userFromServer:server], [self hostFromServer:server], [self portFromServer:server]];
-}
-+ (NSURL *)privatekeyURLOfServer:(NSDictionary *)server
-{
-    NSString* userhome = NSHomeDirectory();
-    NSURL* url = [NSURL fileURLWithPath:userhome isDirectory:YES];
+    // create ".ssh" dir at sandbox container
+    NSString *importedKeyDir = [NSHomeDirectory() stringByAppendingPathComponent:@".ssh"];
     
-    return [url URLByAppendingPathComponent:[self privatekeyNameOfServer:server] isDirectory:NO];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:importedKeyDir])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:importedKeyDir withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    NSString *origPrivateKeyPath = [self privateKeyPathFromServer:server];
+    
+    NSString *importedKeyName = [origPrivateKeyPath MD5Sum];
+    NSString *importedKeyPath = [importedKeyDir stringByAppendingPathComponent:importedKeyName];
+    
+    return importedKeyPath;
 }
 
 + (BOOL)isEnableCompress:(NSDictionary *)server
@@ -391,7 +431,7 @@
 
 #pragma mark setters
 
-+ (NSDictionary *)setPrivatekey:(NSString *)path ForServer:(NSDictionary *)server
++ (NSDictionary *)setPrivateKeyPath:(NSString *)path forServer:(NSDictionary *)server
 {
     [server setValue:path forKey:@"privatekey_path"];
     return server;
@@ -474,7 +514,7 @@
     
     [returnArray replaceObjectAtIndex:0 withObject:(__bridge NSString*)passwordRef];
 	CFRelease(passwordDialog); // Note that this will release the passwordRef as well
-	return returnArray;	
+	return returnArray;
 }
 
 @end
