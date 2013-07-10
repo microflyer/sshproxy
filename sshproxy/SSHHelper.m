@@ -266,9 +266,7 @@
     [prefs synchronize];
 }
 
-
-#pragma mark -
-#pragma mark Password Helper
+#pragma mark - Password Helper
 
 //! Simply looks for the keychain entry corresponding to a username and hostname and returns it. Returns nil if the password is not found
 + (NSString *)passwordForHost:(NSString *)hostName port:(int) hostPort user:(NSString *) userName
@@ -293,7 +291,7 @@
 
 
 /*! Set the password into the keychain for a specific user and host. If the username/hostname combo already has an entry in the keychain then change it. If not then add a new entry */
-+ (BOOL) setPassword:(NSString*)newPassword forHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
++ (BOOL)setPassword:(NSString*)newPassword forHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
 {
 	if ( hostName == nil || userName == nil ) {
 		return NO;
@@ -310,7 +308,7 @@
     keychainItem.password = newPassword;
     return YES;
 }
-+ (BOOL) setPassword:(NSString *)newPassword forServer:(NSDictionary *)server
++ (BOOL)setPassword:(NSString *)newPassword forServer:(NSDictionary *)server
 {
     NSString* remoteHost = [self hostFromServer:server];
     NSString* loginName = [self userFromServer:server];
@@ -319,7 +317,7 @@
     return [self setPassword:newPassword forHost:remoteHost port:remotePort user:loginName];
 }
 
-+ (BOOL) deletePasswordForHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
++ (BOOL)deletePasswordForHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
 {
 	if ( hostName == nil || userName == nil ) {
 		return NO;
@@ -336,7 +334,75 @@
     return YES;
 }
 
-#pragma mark Local Settings
+#pragma mark - Passphrase Helper
+
+//! Simply looks for the keychain entry corresponding to a username and hostname and returns it. Returns nil if the password is not found
++ (NSString *)passphraseForHost:(NSString *)hostName port:(int) hostPort user:(NSString *) userName
+{
+	if ( hostName == nil || userName == nil ){
+		return nil;
+	}
+	
+	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:hostName withUsername:userName path:@"privatekey" port:hostPort protocol:kSecProtocolTypeSSH];
+    
+    return keychainItem ? keychainItem.password : @"";
+}
+
++ (NSString *)passphraseForServer:(NSDictionary *)server
+{
+    NSString* remoteHost = [self hostFromServer:server];
+    NSString* loginName = [self userFromServer:server];
+    int remotePort = [self portFromServer:server];
+    
+    return [SSHHelper passphraseForHost:remoteHost port:remotePort user:loginName];
+}
+
+
+/*! Set the password into the keychain for a specific user and host. If the username/hostname combo already has an entry in the keychain then change it. If not then add a new entry */
++ (BOOL)setPassphrase:(NSString*)newPassphrase forHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
+{
+	if ( hostName == nil || userName == nil ) {
+		return NO;
+	}
+	
+	// Look for a password in the keychain
+    EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:hostName withUsername:userName path:nil port:hostPort protocol:kSecProtocolTypeSSH];
+    
+    if (!keychainItem) {
+        keychainItem = [EMInternetKeychainItem addInternetKeychainItemForServer:hostName withUsername:userName password:newPassphrase path:@"privatekey" port:hostPort protocol:kSecProtocolTypeSSH];
+        return NO;
+    }
+    
+    keychainItem.password = newPassphrase;
+    return YES;
+}
++ (BOOL)setPassphrase:(NSString *)newPassphrase forServer:(NSDictionary *)server
+{
+    NSString* remoteHost = [self hostFromServer:server];
+    NSString* loginName = [self userFromServer:server];
+    int remotePort = [self portFromServer:server];
+    
+    return [self setPassphrase:newPassphrase forHost:remoteHost port:remotePort user:loginName];
+}
+
++ (BOOL) deletePassphraseForHost:(NSString*)hostName port:(int) hostPort user:(NSString*) userName
+{
+	if ( hostName == nil || userName == nil ) {
+		return NO;
+	}
+    
+	// Look for a password in the keychain
+    EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:hostName withUsername:userName path:@"privatekey" port:hostPort protocol:kSecProtocolTypeSSH];
+    
+    if (!keychainItem) {
+        return NO;
+    }
+    
+    [EMInternetKeychainItem removeKeychainItem:keychainItem];
+    return YES;
+}
+
+#pragma mark - Local Settings
 
 + (NSInteger)getLocalPort
 {
@@ -445,6 +511,8 @@
     int remotePort = [self portFromServer:server];
     NSString* loginUser = [self userFromServer:server];
     
+    BOOL isPublicKeyMode = [self authMethodFromServer:server] == OW_AUTH_METHOD_PUBLICKEY;
+    
 	CFUserNotificationRef passwordDialog;
 	SInt32 error;
 	CFOptionFlags responseFlags;
@@ -455,7 +523,15 @@
     
     NSString* hostString = [NSString stringWithFormat:@"%@:%d", remoteHost, remotePort];
     
-	NSString *passwordMessageString = [NSString stringWithFormat:@"Enter the password for user “%@”.", loginUser];
+    NSString *passwordMessageString = nil;
+    NSString *remeberCheckBoxTitle = nil;
+    if (isPublicKeyMode) {
+        passwordMessageString = [NSString stringWithFormat:@"Enter the passphrase for private key imported from “%@”.", [self privateKeyPathFromServer:server]];
+        remeberCheckBoxTitle = @"Remember this passphrase in my keychain";
+    } else {
+        passwordMessageString = [NSString stringWithFormat:@"Enter the password for user “%@”.", loginUser];
+        remeberCheckBoxTitle = @"Remember this password in my keychain";
+    }
     
     NSString* headerString = [NSString stringWithFormat:@"SSH Proxy connecting to the SSH server “%@”.", hostString];
     
@@ -467,7 +543,8 @@
                                passwordMessageString,kCFUserNotificationAlertMessageKey,
 							   @"",kCFUserNotificationTextFieldTitlesKey,
 							   @"Cancel",kCFUserNotificationAlternateButtonTitleKey,
-                               @"Remember this password in my keychain",kCFUserNotificationCheckBoxTitlesKey,
+                               remeberCheckBoxTitle,
+                               kCFUserNotificationCheckBoxTitlesKey,
 							   nil];
     
 	passwordDialog = CFUserNotificationCreate(kCFAllocatorDefault,

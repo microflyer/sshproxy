@@ -43,6 +43,14 @@ enum {
 + (NSString *)passwordForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
 + (NSString *)passwordForServer:(NSDictionary *)server;
 
+// passphrase helper
++ (BOOL)setPassphrase:(NSString *)newPassphrase forHost:(NSString*)hostname port:(int) hostport user:(NSString *) username;
++ (BOOL)setPassphrase:(NSString *)newPassphrased forServer:(NSDictionary *)server;
+
++ (BOOL)deletePassphraseForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
++ (NSString *)passphraseForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
++ (NSString *)passphraseForServer:(NSDictionary *)server;
+
 // getters for server parameters
 + (NSString *)hostFromServer:(NSDictionary *)server;
 + (int)portFromServer:(NSDictionary *)server;
