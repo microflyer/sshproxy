@@ -725,7 +725,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="753651638">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">138413056</int>
-												<string key="NSContents">Version: 13.07</string>
+												<string key="NSContents">Version: 13.08</string>
 												<object class="NSFont" key="NSSupport" id="26">
 													<string key="NSName">LucidaGrande</string>
 													<double key="NSSize">11</double>
@@ -758,7 +758,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="691318586">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">138413056</int>
-												<string key="NSContents">Release Date: 2013-07-01</string>
+												<string key="NSContents">Release Date: 2013-08-01</string>
 												<reference key="NSSupport" ref="26"/>
 												<string key="NSCellIdentifier">_NS:1535</string>
 												<reference key="NSControlView" ref="436886593"/>
