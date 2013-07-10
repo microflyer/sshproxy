@@ -10,7 +10,6 @@
 #import "GeneralPreferencesViewController.h"
 #import "ServersPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
-#import "PasswordHelper.h"
 #import "SSHHelper.h"
 
 @implementation AppController {
@@ -74,8 +73,6 @@
     [SSHHelper upgrade1:self.serverArrayController];
     
     [self.cautionMenuItem setHidden:YES];
-        
-    self.isPasswordCorrect = YES;
 }
 
 - (void)statusItemClicked
@@ -156,7 +153,6 @@
 - (IBAction)turnOnProxy:(id)sender
 {
     proxyStatus = SSHPROXY_ON;
-    self.isPasswordCorrect = YES;
     
     errorMsg = nil;
     [self set2connect];
@@ -192,51 +188,18 @@
     NSString *askPassPath = [NSBundle pathForResource:@"SSH Proxy - Ask Password" ofType:@""
                                           inDirectory:[[NSBundle mainBundle] bundlePath]];
     
+    
+    NSString *encryptedServerInfo = [SSHHelper encryptServerInfo:server];
+    
     // This creates a dictionary of environment variables (keys) and their values (objects) to be set in the environment where the task will be run. This environment dictionary will then be accessible to our Askpass program.
-    
-    BOOL isPublicKeyMode = [SSHHelper authMethodFromServer:server] == OW_AUTH_METHOD_PUBLICKEY;
-    
-    // First try to get the password from the keychain
-    NSString *loginPassword = nil;
-    if (isPublicKeyMode) {
-        loginPassword = [SSHHelper passphraseForServer:server];
-    } else {
-        loginPassword = [SSHHelper passwordForServer:server];
-    }
-    
-    if ( [loginPassword isEqual:@""] || !self.isPasswordCorrect ) {
-        // No password was found in the keychain so we should prompt the user for it.
-        NSArray *promptArray = [SSHHelper promptPasswordForServer:server];
-        NSInteger returnCode = [[promptArray objectAtIndex:1] intValue];
-        if ( returnCode == 0 ){
-            // Found a valid password entry
-            loginPassword = [promptArray objectAtIndex:0];
-            
-            // Set the password in the keychain if the user requested this.
-            if ( [[promptArray objectAtIndex:2] intValue]==0 ){
-                if (isPublicKeyMode) {
-                    [SSHHelper setPassphrase:loginPassword forServer:server];
-                } else {
-                    [SSHHelper setPassword:loginPassword forServer:server];
-                }
-            }
-        } else {
-            // User cancelled so we'll just abort
-            // We return a non zero exit code here which should cause ssh to abort
-            [self set2disconnected];
-            return;
-        }
-    }
-    
-    
-    NSString *encryptedPassword = [PasswordHelper encryptPassword:loginPassword];
 
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                 @":9999", @"DISPLAY",
                                 askPassPath, @"SSH_ASKPASS",
-                                encryptedPassword, @"SSH_ASKPASS_PASSWORD",
+                                encryptedServerInfo, @"SSHPROXY_SERVER_INFO",
                                 @"1",@"INTERACTION",
                                 NSHomeDirectory(), @"SSHPROXY_USER_HOME",
+                                NSHomeDirectory(), @"HOME",
                                 nil];
     [env addEntriesFromDictionary:[SSHHelper getProxyCommandEnv:server]];
     
@@ -250,11 +213,12 @@
     [advancedOptions appendString:@"ND"];
     
     //    DLog(@"Environment dict %@",env);
-    
     NSMutableArray *arguments = nil;
+    BOOL isPublicKeyMode = [SSHHelper authMethodFromServer:server]==OW_AUTH_METHOD_PUBLICKEY;
+
     if ( isPublicKeyMode ) {
         arguments = [SSHHelper getPublicKeyMethodConnectArgsForServer:server];
-    } else if ( OW_AUTH_METHOD_PUBLICKEY==[SSHHelper authMethodFromServer:server] ) {
+    } else {
         arguments = [SSHHelper getPasswordMethodConnectArgs];
     }
     
@@ -312,6 +276,10 @@
     [nc addObserver:self
            selector:@selector(taskTerminated:) name:NSTaskDidTerminateNotification
              object:task];
+    
+    // delete askpass lock file
+    NSString* lockFile= [NSHomeDirectory() stringByAppendingPathComponent:@".sshproxy_askpass_lock"];
+    [[NSFileManager defaultManager] removeItemAtPath:lockFile error:nil];
     
     [task launch];
 }
@@ -414,7 +382,6 @@
     // If the task is running, start reading again
     if (task) {
         if ( [taskOutput rangeOfString:@"Entering interactive session"].location != NSNotFound){
-            self.isPasswordCorrect = YES;
             errorMsg = nil;
             [self set2connected];
         }
@@ -422,15 +389,19 @@
         [fh waitForDataInBackgroundAndNotify];
     } else {
         if ([taskOutput rangeOfString:@"bind: Address already in use"].location != NSNotFound) {
-            self.isPasswordCorrect = YES;
             errorMsg = @"Port already in use";
             [self set2disconnected];
             return;
         } else if ([taskOutput rangeOfString:@"Permission denied "].location != NSNotFound) {
-            self.isPasswordCorrect = NO;
-            errorMsg = @"Incorrect password";
-            [self set2reconnect];
-            [self performSelector: @selector(_turnOnProxy) withObject:self afterDelay: 0.0];
+            NSDictionary *server = [SSHHelper getActivatedServer];
+            BOOL isPublicKeyMode = [SSHHelper authMethodFromServer:server]==OW_AUTH_METHOD_PUBLICKEY;
+
+            if (isPublicKeyMode) {
+                errorMsg = @"Incorrect passphrase or private key";
+            } else {
+                errorMsg = @"Incorrect password";
+            }
+            [self set2disconnected];
             return;
         } else {
             NSArray* errors = @[

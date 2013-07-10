@@ -35,8 +35,6 @@
 @property IBOutlet NSMenu* mainMenu;
 @property IBOutlet NSArrayController* serverArrayController;
 
-@property BOOL isPasswordCorrect;
-
 - (void)reactiveProxy:(id)sender;
 
 enum {

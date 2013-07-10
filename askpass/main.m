@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PasswordHelper.h"
+#import "SSHHelper.h"
 
 /*! The ASKPASS program for SSH Proxy.
  
@@ -22,10 +23,10 @@ int main() {
         // Get basic information from environment variables that were set along with the NSTask itself. We need this info in order to get the correct password from the security keychain
         NSDictionary *dict = [[NSProcessInfo processInfo] environment];
         NSString* userHome = [dict valueForKey:@"SSHPROXY_USER_HOME"];
-        NSString* encryptedPassword = [dict valueForKey:@"SSH_ASKPASS_PASSWORD"];
         
-        NSString* password = [PasswordHelper decryptPassword:encryptedPassword forDir:userHome];
-        
+        NSString* encryptedServerInfo = [dict valueForKey:@"SSHPROXY_SERVER_INFO"];
+        NSDictionary *server = [SSHHelper decryptServerInfo:encryptedServerInfo forDir:userHome];
+                
         // The arguments array should contain three elements. The second element is a string which we can use to determine the context in which this program was invoked. This string is either a message prompting for a yes/no or a message prompting for a password. We check it and supply the right response.
         NSArray *argumentsArray = [[NSProcessInfo processInfo] arguments];
         if ( [argumentsArray count] >= 2 ){
@@ -38,13 +39,63 @@ int main() {
             }
         }
         
-        if ( password ){
-            void *pword=(void*)[password UTF8String];
-            printf("%s",(char*)pword);
-            return 0;
+        if ( !server ) {
+            return 1;
         }
         
-        // If we get to here something has gone wrong. Just return 1 to indicate failure
-        return 1;
-    }
+        NSString* lockFile= [userHome stringByAppendingPathComponent:@".sshproxy_askpass_lock"];
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:lockFile];
+        
+        BOOL isPublicKeyMode = [SSHHelper authMethodFromServer:server]==OW_AUTH_METHOD_PUBLICKEY;
+        
+        // First try to get the password from the keychain
+        NSString *password = nil;
+        if (isPublicKeyMode) {
+            password = [PasswordHelper passphraseForServer:server];
+        } else {
+            password = [PasswordHelper passwordForServer:server];
+        }
+        
+        // First try to get the password from the keychain
+        if ( [password isEqual:@""] || fileExists ) {
+            // No password was found in the keychain or password is incorrect
+            // so we should prompt the user for it.
+            
+            NSArray *promptArray = [PasswordHelper promptPasswordForServer:server];
+            NSInteger returnCode = [[promptArray objectAtIndex:1] intValue];
+            if ( returnCode == 0 ){
+                // Found a valid password entry
+                password = [promptArray objectAtIndex:0];
+                
+                // Set the password in the keychain if the user requested this.
+                if ( [[promptArray objectAtIndex:2] intValue]==0 ){
+                    if (isPublicKeyMode) {
+                        [PasswordHelper setPassphrase:password forServer:server];
+                    } else {
+                        [PasswordHelper setPassword:password forServer:server];
+                    }
+                    
+                    void *pword=(void*)[password UTF8String];
+                    printf("%s",(char*)pword);
+                    return 0;
+                } else if ( returnCode == 1 ) {
+                    // User cancelled so we'll just abort
+                    // We return a non zero exit code here which should cause ssh to abort
+                    return 1;
+                }
+            }
+        }
+        
+        // create lock file !
+        if (!fileExists) {
+            // [[NSFileManager defaultManager] createFileAtPath:lockFile contents:nil attributes: nil];
+            // use plain c to avoid create unprivileged cache file
+            FILE *fh = fopen([lockFile UTF8String], "w");
+            fclose(fh);
+        }
+        
+        void *pword=(void*)[password UTF8String];
+        printf("%s",(char*)pword);
+        return 0;
+    } // @autoreleasepool
 }

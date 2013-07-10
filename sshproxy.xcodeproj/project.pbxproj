@@ -18,13 +18,18 @@
 		4A27AD9A178A4ECA008BC36F /* PasswordHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27AD95178A4ECA008BC36F /* PasswordHelpViewController.m */; };
 		4A27AD9B178A4ECA008BC36F /* PublicKeyHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27AD97178A4ECA008BC36F /* PublicKeyHelpViewController.m */; };
 		4A27AD9C178A4ECA008BC36F /* PublicKeyHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A27AD98178A4ECA008BC36F /* PublicKeyHelpView.xib */; };
+		4A27AD9D178D3FEC008BC36F /* SSHHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2C1761743214000D0C57D /* SSHHelper.m */; };
+		4A27AD9E178D4C75008BC36F /* EMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FAD0C1770B89F004C8F7B /* EMKeychain.m */; };
+		4A27AD9F178D4CA1008BC36F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD3FDDD16A56EF400378F77 /* Cocoa.framework */; };
+		4A27ADA2178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27ADA1178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.m */; };
+		4A27ADA3178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27ADA1178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.m */; };
+		4A27ADA4178D5864008BC36F /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACAA1774536000777818 /* RNCryptor.m */; };
 		4A2A394E175EC85D002BF361 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A3941175EC85D002BF361 /* DDFileLogger.m */; };
 		4A2A394F175EC85D002BF361 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A3943175EC85D002BF361 /* DDLog.m */; };
 		4A2A3950175EC85D002BF361 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A3945175EC85D002BF361 /* DDTTYLogger.m */; };
 		4A2A3951175EC85D002BF361 /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A3948175EC85D002BF361 /* ContextFilterLogFormatter.m */; };
 		4A2A3952175EC85D002BF361 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A394A175EC85D002BF361 /* DispatchQueueLogFormatter.m */; };
 		4A2A3953175EC85D002BF361 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A394B175EC85D002BF361 /* README.txt */; };
-		4A2FAD0D1770B89F004C8F7B /* EMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FAD0C1770B89F004C8F7B /* EMKeychain.m */; };
 		4A37A086171AEC6300605BE1 /* CharmTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A37A085171AEC6300605BE1 /* CharmTextField.m */; };
 		4A41067C16BE7FB000D46D91 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067B16BE7FB000D46D91 /* ServiceManagement.framework */; };
 		4A41067D16BE7FD000D46D91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A41067916BE7F4600D46D91 /* Security.framework */; };
@@ -35,7 +40,6 @@
 		4A44D67E16A8368900EB44A8 /* SSH Proxy - Ask Password in Resources */ = {isa = PBXBuildFile; fileRef = 4A1BE47916A5BAA0000E56D7 /* SSH Proxy - Ask Password */; };
 		4A44D68216A837CB00EB44A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A44D67F16A8379C00EB44A8 /* main.m */; };
 		4A70ACB71774536000777818 /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACAA1774536000777818 /* RNCryptor.m */; };
-		4A70ACB81774536000777818 /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACAA1774536000777818 /* RNCryptor.m */; };
 		4A70ACB91774536000777818 /* RNCryptorEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACAC1774536000777818 /* RNCryptorEngine.m */; };
 		4A70ACBA1774536000777818 /* RNCryptorEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACAC1774536000777818 /* RNCryptorEngine.m */; };
 		4A70ACBB1774536000777818 /* RNDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACAE1774536000777818 /* RNDecryptor.m */; };
@@ -47,7 +51,6 @@
 		4A70ACC917746A7C00777818 /* NSData+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACC717746A7C00777818 /* NSData+SSToolkitAdditions.m */; };
 		4A70ACCD177481C200777818 /* NSString+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACCC177481C200777818 /* NSString+SSToolkitAdditions.m */; };
 		4A70ACCE177481C200777818 /* NSString+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACCC177481C200777818 /* NSString+SSToolkitAdditions.m */; };
-		4A70ACD617748E5A00777818 /* PasswordHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACD517748E5A00777818 /* PasswordHelper.m */; };
 		4A70ACD717748E5A00777818 /* PasswordHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACD517748E5A00777818 /* PasswordHelper.m */; };
 		4A70ACE11774B06400777818 /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACD91774B06300777818 /* INPopoverController.m */; };
 		4A70ACE21774B06400777818 /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A70ACDC1774B06300777818 /* INPopoverParentWindow.m */; };
@@ -175,6 +178,8 @@
 		4A27AD96178A4ECA008BC36F /* PublicKeyHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicKeyHelpViewController.h; sourceTree = "<group>"; };
 		4A27AD97178A4ECA008BC36F /* PublicKeyHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicKeyHelpViewController.m; sourceTree = "<group>"; };
 		4A27AD98178A4ECA008BC36F /* PublicKeyHelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublicKeyHelpView.xib; sourceTree = "<group>"; };
+		4A27ADA0178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+SSToolkitAdditions.h"; path = "sstoolkit/SSToolkit/NSDictionary+SSToolkitAdditions.h"; sourceTree = "<group>"; };
+		4A27ADA1178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+SSToolkitAdditions.m"; path = "sstoolkit/SSToolkit/NSDictionary+SSToolkitAdditions.m"; sourceTree = "<group>"; };
 		4A2A3940175EC85D002BF361 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
 		4A2A3941175EC85D002BF361 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
 		4A2A3942175EC85D002BF361 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
@@ -285,6 +290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A27AD9F178D4CA1008BC36F /* Cocoa.framework in Frameworks */,
 				4A70ACC5177453BB00777818 /* Security.framework in Frameworks */,
 				4A1BE47C16A5BAA0000E56D7 /* Foundation.framework in Frameworks */,
 			);
@@ -429,6 +435,8 @@
 		4A70ACCA1774819700777818 /* SSToolkit */ = {
 			isa = PBXGroup;
 			children = (
+				4A27ADA0178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.h */,
+				4A27ADA1178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.m */,
 				4A70ACCB177481C200777818 /* NSString+SSToolkitAdditions.h */,
 				4A70ACCC177481C200777818 /* NSString+SSToolkitAdditions.m */,
 				4A70ACC617746A7C00777818 /* NSData+SSToolkitAdditions.h */,
@@ -838,13 +846,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A44D68216A837CB00EB44A8 /* main.m in Sources */,
-				4A70ACB81774536000777818 /* RNCryptor.m in Sources */,
 				4A70ACBA1774536000777818 /* RNCryptorEngine.m in Sources */,
 				4A70ACBC1774536000777818 /* RNDecryptor.m in Sources */,
 				4A70ACBE1774536000777818 /* RNEncryptor.m in Sources */,
 				4A70ACC917746A7C00777818 /* NSData+SSToolkitAdditions.m in Sources */,
 				4A70ACCE177481C200777818 /* NSString+SSToolkitAdditions.m in Sources */,
 				4A70ACD717748E5A00777818 /* PasswordHelper.m in Sources */,
+				4A27AD9D178D3FEC008BC36F /* SSHHelper.m in Sources */,
+				4A27AD9E178D4C75008BC36F /* EMKeychain.m in Sources */,
+				4A27ADA3178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.m in Sources */,
+				4A27ADA4178D5864008BC36F /* RNCryptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,20 +894,19 @@
 				4A2A3950175EC85D002BF361 /* DDTTYLogger.m in Sources */,
 				4A2A3951175EC85D002BF361 /* ContextFilterLogFormatter.m in Sources */,
 				4A2A3952175EC85D002BF361 /* DispatchQueueLogFormatter.m in Sources */,
-				4A2FAD0D1770B89F004C8F7B /* EMKeychain.m in Sources */,
 				4A70ACB71774536000777818 /* RNCryptor.m in Sources */,
 				4A70ACB91774536000777818 /* RNCryptorEngine.m in Sources */,
 				4A70ACBB1774536000777818 /* RNDecryptor.m in Sources */,
 				4A70ACBD1774536000777818 /* RNEncryptor.m in Sources */,
 				4A70ACC817746A7C00777818 /* NSData+SSToolkitAdditions.m in Sources */,
 				4A70ACCD177481C200777818 /* NSString+SSToolkitAdditions.m in Sources */,
-				4A70ACD617748E5A00777818 /* PasswordHelper.m in Sources */,
 				4A70ACE11774B06400777818 /* INPopoverController.m in Sources */,
 				4A70ACE21774B06400777818 /* INPopoverParentWindow.m in Sources */,
 				4A70ACE31774B06400777818 /* INPopoverWindow.m in Sources */,
 				4A70ACE41774B06400777818 /* INPopoverWindowFrame.m in Sources */,
 				4A27AD9A178A4ECA008BC36F /* PasswordHelpViewController.m in Sources */,
 				4A27AD9B178A4ECA008BC36F /* PublicKeyHelpViewController.m in Sources */,
+				4A27ADA2178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

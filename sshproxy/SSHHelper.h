@@ -35,19 +35,6 @@ enum {
 // code that upgrade user preferences from 13.04 to 13.05
 + (void)upgrade1:(NSArrayController *)serverArrayController;
 
-// password helper
-+ (BOOL)setPassword:(NSString *)newPassword forHost:(NSString*)hostname port:(int) hostport user:(NSString *) username;
-+ (BOOL)setPassword:(NSString *)newPassword forServer:(NSDictionary *)server;
-
-+ (BOOL)deletePasswordForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
-+ (NSString *)passwordForHost:(NSString *)hostname port:(int) hostport user:(NSString *) username;
-+ (NSString *)passwordForServer:(NSDictionary *)server;
-
-// passphrase helper
-+ (BOOL)setPassphrase:(NSString *)newPassphrased forServer:(NSDictionary *)server;
-+ (BOOL)deletePassphraseForServer:(NSDictionary *)server;
-+ (NSString *)passphraseForServer:(NSDictionary *)server;
-
 // getters for server parameters
 + (NSString *)hostFromServer:(NSDictionary *)server;
 + (int)portFromServer:(NSDictionary *)server;
@@ -58,10 +45,13 @@ enum {
 + (NSString *)privateKeyPathFromServer:(NSDictionary *)server;
 
 + (NSString *)importedPrivateKeyPathFromServer:(NSDictionary *)server;
++ (NSString *)importedPrivateKeyNameFromServer:(NSDictionary *)server;
 
 // setters for server parameters
 + (NSDictionary *)setPrivateKeyPath:(NSString *)path forServer:(NSDictionary *)server;
 
-+ (NSArray *)promptPasswordForServer:(NSDictionary *)server;
+
++ (NSString *)encryptServerInfo:(NSDictionary *)server;
++ (NSDictionary *)decryptServerInfo:(NSString *)encryptedServerInfo forDir:(NSString *)dir;
 
 @end
