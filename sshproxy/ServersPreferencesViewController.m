@@ -325,9 +325,15 @@
                                     [[NSFileManager defaultManager] copyItemAtPath:selectedKeyPath toPath:importedKeyPath error:nil];
                                     
                                     // hack code to make sure user defaults controller is aware of server array controller is changed.
+                                    NSUInteger selected = [self.serverArrayController selectionIndex];
+                                    
                                     NSUInteger index = [self.serverArrayController.arrangedObjects count];
                                     [self.serverArrayController insertObject:server atArrangedObjectIndex:index];
                                     [self.serverArrayController removeObjectAtArrangedObjectIndex:index];
+                                    
+                                    // keep selection
+                                    [self.serversTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selected] byExtendingSelection:NO];
+                                    [self.serversTableView scrollRowToVisible:selected];
                                     
                                     self.isDirty = self.userDefaultsController.hasUnappliedChanges;
                                 }
