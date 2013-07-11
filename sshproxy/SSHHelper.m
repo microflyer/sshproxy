@@ -379,7 +379,7 @@
 + (NSString *)encryptServerInfo:(NSDictionary *)server
 {
     NSString* userHome = NSHomeDirectory();
-    NSString* lockFile= [userHome stringByAppendingPathComponent:@".sshproxy_askpass_lock2"];
+    NSString* lockFile= [userHome stringByAppendingPathComponent:OW_SSHPROXY_DECRYPT_LOCK];
     NSString* serverInfo = [server stringWithFormEncodedComponents];
     
     // touch lock file
@@ -405,7 +405,7 @@
 }
 + (NSDictionary *)decryptServerInfo:(NSString *)encryptedServerInfo forDir:(NSString *)dir
 {
-    NSString* lockFile= [dir stringByAppendingPathComponent:@".sshproxy_askpass_lock2"];
+    NSString* lockFile= [dir stringByAppendingPathComponent:OW_SSHPROXY_DECRYPT_LOCK];
     
     NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:lockFile error:nil];
     NSString *digest = attributes ? [attributes.description MD5Sum] : [lockFile MD5Sum];

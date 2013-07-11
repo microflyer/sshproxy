@@ -194,12 +194,12 @@
     // This creates a dictionary of environment variables (keys) and their values (objects) to be set in the environment where the task will be run. This environment dictionary will then be accessible to our Askpass program.
 
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                NSHomeDirectory(), @"HOME",
                                 @":9999", @"DISPLAY",
                                 askPassPath, @"SSH_ASKPASS",
                                 encryptedServerInfo, @"SSHPROXY_SERVER_INFO",
                                 @"1",@"INTERACTION",
                                 NSHomeDirectory(), @"SSHPROXY_USER_HOME",
-                                NSHomeDirectory(), @"HOME",
                                 nil];
     [env addEntriesFromDictionary:[SSHHelper getProxyCommandEnv:server]];
     
@@ -278,7 +278,7 @@
              object:task];
     
     // delete askpass lock file
-    NSString* lockFile= [NSHomeDirectory() stringByAppendingPathComponent:@".sshproxy_askpass_lock"];
+    NSString* lockFile= [NSHomeDirectory() stringByAppendingPathComponent:OW_SSHPROXY_ASKPASS_LOCK];
     [[NSFileManager defaultManager] removeItemAtPath:lockFile error:nil];
     
     [task launch];

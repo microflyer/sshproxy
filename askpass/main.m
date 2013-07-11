@@ -43,7 +43,7 @@ int main() {
             return 1;
         }
         
-        NSString* lockFile= [userHome stringByAppendingPathComponent:@".sshproxy_askpass_lock"];
+        NSString* lockFile= [userHome stringByAppendingPathComponent:OW_SSHPROXY_ASKPASS_LOCK];
         BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:lockFile];
         
         BOOL isPublicKeyMode = [SSHHelper authMethodFromServer:server]==OW_AUTH_METHOD_PUBLICKEY;

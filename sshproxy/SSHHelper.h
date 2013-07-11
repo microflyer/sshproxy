@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define OW_SSHPROXY_ASKPASS_LOCK @".sshproxy_askpass_lock"
+#define OW_SSHPROXY_DECRYPT_LOCK @".sshproxy_decrypt_lock"
+
 enum {
     OW_AUTH_METHOD_PASSWORD = 0,
     OW_AUTH_METHOD_PUBLICKEY,
