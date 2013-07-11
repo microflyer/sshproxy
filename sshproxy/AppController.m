@@ -397,7 +397,7 @@
             BOOL isPublicKeyMode = [SSHHelper authMethodFromServer:server]==OW_AUTH_METHOD_PUBLICKEY;
 
             if (isPublicKeyMode) {
-                errorMsg = @"Incorrect passphrase or private key";
+                errorMsg = @"Invalid passphrase or private key";
             } else {
                 errorMsg = @"Incorrect password";
             }

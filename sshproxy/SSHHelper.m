@@ -44,6 +44,7 @@
     NSMutableArray *arguments = [self _getCommonConnectArgs];
     
     [arguments addObjectsFromArray:@[
+     [NSString stringWithFormat:@"-oIdentityFile=\"%@\"", [NSHomeDirectory() stringByAppendingPathComponent:@".sshproxy_identity"]],
      @"-oPreferredAuthentications=keyboard-interactive,password",
      @"-oPubkeyAuthentication=no"]
      ];
