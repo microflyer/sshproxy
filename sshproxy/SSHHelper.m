@@ -3,7 +3,7 @@
 //  sshproxy
 //
 //  Created by Brant Young on 15/5/13.
-//  Copyright (c) 2013 Charm Studio. All rights reserved.
+//  Copyright (c) 2013 Codinn Studio. All rights reserved.
 //
 
 #import "SSHHelper.h"

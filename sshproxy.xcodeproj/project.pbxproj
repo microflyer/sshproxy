@@ -68,6 +68,9 @@
 		4AA6472716BE3DBA00DE5CAD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4AA6472516BE3DBA00DE5CAD /* Credits.rtf */; };
 		4AA6472A16BE3DBA00DE5CAD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6472916BE3DBA00DE5CAD /* AppDelegate.m */; };
 		4AA6473316BE3F0C00DE5CAD /* SSH Proxy Helper.app in Copy Helper App */ = {isa = PBXBuildFile; fileRef = 4AA6471A16BE3DB900DE5CAD /* SSH Proxy Helper.app */; };
+		4AAF1314178FAA4B00F1DF01 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF1313178FAA4A00F1DF01 /* GCDAsyncSocket.m */; };
+		4AAF1319178FAAA800F1DF01 /* INSOCKSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF1318178FAAA800F1DF01 /* INSOCKSServer.m */; };
+		4AAF131C178FAE1C00F1DF01 /* INSOCKSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF131B178FAE1C00F1DF01 /* INSOCKSConnection.m */; };
 		4AD3FDDE16A56EF400378F77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD3FDDD16A56EF400378F77 /* Cocoa.framework */; };
 		4AD3FDE816A56EF400378F77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AD3FDE616A56EF400378F77 /* InfoPlist.strings */; };
 		4AD3FDEA16A56EF400378F77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3FDE916A56EF400378F77 /* main.m */; };
@@ -244,6 +247,12 @@
 		4AA6472816BE3DBA00DE5CAD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4AA6472916BE3DBA00DE5CAD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4AA6473116BE3DFF00DE5CAD /* sshproxyhelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = sshproxyhelper.entitlements; sourceTree = "<group>"; };
+		4AAF1312178FAA4A00F1DF01 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = INSOCKSServer/CocoaAsyncSocket/GCD/GCDAsyncSocket.h; sourceTree = "<group>"; };
+		4AAF1313178FAA4A00F1DF01 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = INSOCKSServer/CocoaAsyncSocket/GCD/GCDAsyncSocket.m; sourceTree = "<group>"; };
+		4AAF1317178FAAA800F1DF01 /* INSOCKSServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSOCKSServer.h; sourceTree = "<group>"; };
+		4AAF1318178FAAA800F1DF01 /* INSOCKSServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSOCKSServer.m; sourceTree = "<group>"; };
+		4AAF131A178FAE1C00F1DF01 /* INSOCKSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSOCKSConnection.h; sourceTree = "<group>"; };
+		4AAF131B178FAE1C00F1DF01 /* INSOCKSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSOCKSConnection.m; sourceTree = "<group>"; };
 		4AD3FDD916A56EF400378F77 /* SSH Proxy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SSH Proxy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD3FDDD16A56EF400378F77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4AD3FDE016A56EF400378F77 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -496,11 +505,34 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4AAF1315178FAA4F00F1DF01 /* GCDAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				4AAF1312178FAA4A00F1DF01 /* GCDAsyncSocket.h */,
+				4AAF1313178FAA4A00F1DF01 /* GCDAsyncSocket.m */,
+			);
+			name = GCDAsyncSocket;
+			sourceTree = "<group>";
+		};
+		4AAF1316178FAAA800F1DF01 /* INSOCKSServer */ = {
+			isa = PBXGroup;
+			children = (
+				4AAF1317178FAAA800F1DF01 /* INSOCKSServer.h */,
+				4AAF1318178FAAA800F1DF01 /* INSOCKSServer.m */,
+				4AAF131A178FAE1C00F1DF01 /* INSOCKSConnection.h */,
+				4AAF131B178FAE1C00F1DF01 /* INSOCKSConnection.m */,
+			);
+			name = INSOCKSServer;
+			path = INSOCKSServer/INSOCKSServer/Classes;
+			sourceTree = "<group>";
+		};
 		4AD3FDCE16A56EF400378F77 = {
 			isa = PBXGroup;
 			children = (
 				4ADB92A11747C7E80064D82D /* icons */,
 				4A1E89031701F09F007DF2A0 /* logo.iconset */,
+				4AAF1316178FAAA800F1DF01 /* INSOCKSServer */,
+				4AAF1315178FAA4F00F1DF01 /* GCDAsyncSocket */,
 				4A70ACE51774B06B00777818 /* INPopoverController */,
 				4A70ACCA1774819700777818 /* SSToolkit */,
 				4A70ACA61774535F00777818 /* RNCryptor */,
@@ -907,6 +939,9 @@
 				4A27AD9A178A4ECA008BC36F /* PasswordHelpViewController.m in Sources */,
 				4A27AD9B178A4ECA008BC36F /* PublicKeyHelpViewController.m in Sources */,
 				4A27ADA2178D4D19008BC36F /* NSDictionary+SSToolkitAdditions.m in Sources */,
+				4AAF1314178FAA4B00F1DF01 /* GCDAsyncSocket.m in Sources */,
+				4AAF1319178FAAA800F1DF01 /* INSOCKSServer.m in Sources */,
+				4AAF131C178FAE1C00F1DF01 /* INSOCKSConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1102,7 +1137,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -1129,7 +1164,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;

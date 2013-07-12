@@ -16,3 +16,6 @@
 [submodule "sstoolkit"]
 	path = sstoolkit
 	url = https://github.com/soffes/sstoolkit
+[submodule "INSOCKSServer"]
+	path = INSOCKSServer
+	url = https://github.com/brantyoung/INSOCKSServer

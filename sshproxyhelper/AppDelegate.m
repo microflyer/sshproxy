@@ -3,7 +3,7 @@
 //  sshproxyhelper
 //
 //  Created by Brant Young on 3/2/13.
-//  Copyright (c) 2013 Charm Studio. All rights reserved.
+//  Copyright (c) 2013 Codinn Studio. All rights reserved.
 //
 
 #import "AppDelegate.h"
