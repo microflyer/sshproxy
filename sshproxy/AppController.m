@@ -187,6 +187,7 @@
     
     // This creates a dictionary of environment variables (keys) and their values (objects) to be set in the environment where the task will be run. This environment dictionary will then be accessible to our Askpass program.
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                userHome, @"HOME",
                                 loginName, @"SSHPROXY_LOGIN_NAME",
                                 remoteHost, @"SSHPROXY_REMOTE_HOST",
                                 [NSString stringWithFormat:@"%d", remotePort], @"SSHPROXY_REMOTE_PORT",
