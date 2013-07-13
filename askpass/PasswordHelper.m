@@ -183,7 +183,7 @@
 }
 
 //! Get password from the keychain. If this succeeds it allocates password data and must therefore be followed by a call to SecKeychainItemFreeContent
-+ (OSStatus) getPasswordKeychain2:(void*)passwordData
++ (OSStatus) getPasswordKeychain:(void*)passwordData
 						  length:(UInt32*) passwordLength
 						 itemRef:(SecKeychainItemRef *)itemRef
 							host:(NSString*) hostnameStr
@@ -215,7 +215,7 @@
 
 
 //! Get password from the keychain. If this succeeds it allocates password data and must therefore be followed by a call to SecKeychainItemFreeContent
-+ (OSStatus) getPasswordKeychain:(void*)passwordData
++ (OSStatus) getPasswordKeychain2:(void*)passwordData
 						  length:(UInt32*) passwordLength
 						 itemRef:(SecKeychainItemRef *)itemRef
 							host:(NSString*) hostnameStr
