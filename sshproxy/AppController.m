@@ -11,6 +11,7 @@
 #import "ServersPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
 #import "SSHHelper.h"
+#import "INSOCKSServer.h"
 
 @implementation AppController {
     /* The other stuff :P */
@@ -28,6 +29,8 @@
     
     int proxyStatus;
     NSString *errorMsg;
+    
+	INSOCKSServer *_server;
 }
 
 @synthesize preferencesWindowController;
@@ -73,7 +76,72 @@
     [SSHHelper upgrade1:self.serverArrayController];
     
     [self.cautionMenuItem setHidden:YES];
+    
+    [self startServer];
 }
+
+#pragma mark - Set status menu state
+
+- (void)set2connect
+{
+    [statusItem setImage:inStatusImage];
+    [statusItem setAlternateImage:inStatusInverseImage];
+    [self.statusMenuItem setTitle:@"Proxy: Connecting..."];
+    
+    [self setCautionMessage];
+    
+    [self.turnOnMenuItem setHidden:YES];
+    [self.turnOffMenuItem setHidden:NO];
+}
+
+- (void)set2connected
+{
+    proxyStatus = SSHPROXY_CONNECTED;
+    [statusItem setImage:onStatusImage];
+    [statusItem setAlternateImage:onStatusInverseImage];
+    [self.statusMenuItem setTitle:@"Proxy: On"];
+    
+    [self setCautionMessage];
+    
+    [self.turnOnMenuItem setHidden:YES];
+    [self.turnOffMenuItem setHidden:NO];
+}
+
+- (void)set2disconnected
+{
+    [statusItem setImage:offStatusImage];
+    [statusItem setAlternateImage:offStatusInverseImage];
+    [self.statusMenuItem setTitle:@"Proxy: Off"];
+    
+    [self setCautionMessage];
+    
+    [self.turnOffMenuItem setHidden:YES];
+    [self.turnOnMenuItem setHidden:NO];
+}
+
+- (void)setCautionMessage
+{
+    if (errorMsg) {
+        [self.cautionMenuItem setTitle:errorMsg];
+        [self.cautionMenuItem setHidden:NO];
+    } else {
+        [self.cautionMenuItem setHidden:YES];
+    }
+}
+
+- (void)set2reconnect
+{
+    [statusItem setImage:inStatusImage];
+    [statusItem setAlternateImage:inStatusInverseImage];
+    [self.statusMenuItem setTitle:@"Proxy: Reconnecting..."];
+    
+    [self setCautionMessage];
+    
+    [self.turnOffMenuItem setHidden:NO];
+    [self.turnOnMenuItem setHidden:YES];
+}
+
+#pragma mark - Actions
 
 - (void)statusItemClicked
 {
@@ -84,7 +152,7 @@
     NSInteger activatedServerIndex = [SSHHelper getActivatedServerIndex];
     
     if (servers && servers.count>0) {
-//        [menu insertItemWithTitle:@"Servers:" action:nil keyEquivalent:@"" atIndex:4];
+        //        [menu insertItemWithTitle:@"Servers:" action:nil keyEquivalent:@"" atIndex:4];
         
         int i = 0;
         for (NSDictionary* server in servers) {
@@ -284,67 +352,6 @@
     [task launch];
 }
 
-#pragma mark Set Status Menu State
-
-- (void)set2connect
-{
-    [statusItem setImage:inStatusImage];
-    [statusItem setAlternateImage:inStatusInverseImage];
-    [self.statusMenuItem setTitle:@"Proxy: Connecting..."];
-    
-    [self setCautionMessage];
-    
-    [self.turnOnMenuItem setHidden:YES];
-    [self.turnOffMenuItem setHidden:NO];
-}
-
-- (void)set2connected
-{
-    proxyStatus = SSHPROXY_CONNECTED;
-    [statusItem setImage:onStatusImage];
-    [statusItem setAlternateImage:onStatusInverseImage];
-    [self.statusMenuItem setTitle:@"Proxy: On"];
-    
-    [self setCautionMessage];
-    
-    [self.turnOnMenuItem setHidden:YES];
-    [self.turnOffMenuItem setHidden:NO];
-}
-
-- (void)set2disconnected
-{
-    [statusItem setImage:offStatusImage];
-    [statusItem setAlternateImage:offStatusInverseImage];
-    [self.statusMenuItem setTitle:@"Proxy: Off"];
-    
-    [self setCautionMessage];
-    
-    [self.turnOffMenuItem setHidden:YES];
-    [self.turnOnMenuItem setHidden:NO];
-}
-
-- (void)setCautionMessage
-{
-    if (errorMsg) {
-        [self.cautionMenuItem setTitle:errorMsg];
-        [self.cautionMenuItem setHidden:NO];
-    } else {
-        [self.cautionMenuItem setHidden:YES];
-    }
-}
-
-- (void)set2reconnect
-{
-    [statusItem setImage:inStatusImage];
-    [statusItem setAlternateImage:inStatusInverseImage];
-    [self.statusMenuItem setTitle:@"Proxy: Reconnecting..."];
-    
-    [self setCautionMessage];
-    
-    [self.turnOffMenuItem setHidden:NO];
-    [self.turnOnMenuItem setHidden:YES];
-}
-
 - (void)reconnectIfNeed:(NSString*) state
 {
     if (proxyStatus==SSHPROXY_CONNECTED) {
@@ -530,14 +537,49 @@
      [NSURL URLWithString:@"https://github.com/brantyoung/sshproxy/wiki"]];
 }
 
--(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
-    [task interrupt];
-    return NSTerminateNow;
-}
+#pragma mark - MASPreferencesWindowDelegate
 
 - (void)preferencesWindowWillClose:(NSNotification *)notification
 {
     self.preferencesWindowController = nil;
+}
+
+#pragma mark - NSApplicationDelegate
+
+-(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
+    [task interrupt];
+    [self stopServer];
+    return NSTerminateNow;
+}
+
+#pragma mark - SOCKS server control
+
+- (void)startServer
+{
+	if (_server) return;
+	NSError *error = nil;
+	// Start the server on a random port
+	_server = [[INSOCKSServer alloc] initWithPort:1080 error:&error];
+//	_server.delegate = self;
+    
+	if (error) {
+		DDLogInfo(@"Error starting server: %@, %@", error, error.userInfo);
+	} else {
+		DDLogInfo(@"SOCKS server on host %@ listening on port %d", _server.host, _server.port);
+	}
+}
+
+- (void)stopServer
+{
+	if (!_server) return;
+	[_server disconnectAll];
+	_server = nil;
+}
+
+- (void)restartServer
+{
+	[self startServer];
+    [self stopServer];
 }
 
 @end
