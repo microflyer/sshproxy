@@ -73,6 +73,8 @@
 		4AAF131C178FAE1C00F1DF01 /* INSOCKSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF131B178FAE1C00F1DF01 /* INSOCKSConnection.m */; };
 		4AC9BF011794D68700E9A997 /* WhitelistPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9BEFF1794D68700E9A997 /* WhitelistPreferencesViewController.m */; };
 		4AC9BF021794D68700E9A997 /* WhitelistPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC9BF001794D68700E9A997 /* WhitelistPreferencesView.xib */; };
+		4AC9BF051794EAA500E9A997 /* WhitelistHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9BF041794EAA500E9A997 /* WhitelistHelper.m */; };
+		4AC9BF08179519B500E9A997 /* CharmDomainFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9BF07179519B500E9A997 /* CharmDomainFormatter.m */; };
 		4AD3FDDE16A56EF400378F77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD3FDDD16A56EF400378F77 /* Cocoa.framework */; };
 		4AD3FDE816A56EF400378F77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AD3FDE616A56EF400378F77 /* InfoPlist.strings */; };
 		4AD3FDEA16A56EF400378F77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3FDE916A56EF400378F77 /* main.m */; };
@@ -258,6 +260,10 @@
 		4AC9BEFE1794D68700E9A997 /* WhitelistPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhitelistPreferencesViewController.h; sourceTree = "<group>"; };
 		4AC9BEFF1794D68700E9A997 /* WhitelistPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhitelistPreferencesViewController.m; sourceTree = "<group>"; };
 		4AC9BF001794D68700E9A997 /* WhitelistPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WhitelistPreferencesView.xib; sourceTree = "<group>"; };
+		4AC9BF031794EAA500E9A997 /* WhitelistHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhitelistHelper.h; sourceTree = "<group>"; };
+		4AC9BF041794EAA500E9A997 /* WhitelistHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhitelistHelper.m; sourceTree = "<group>"; };
+		4AC9BF06179519B400E9A997 /* CharmDomainFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharmDomainFormatter.h; sourceTree = "<group>"; };
+		4AC9BF07179519B500E9A997 /* CharmDomainFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharmDomainFormatter.m; sourceTree = "<group>"; };
 		4AD3FDD916A56EF400378F77 /* SSH Proxy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SSH Proxy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD3FDDD16A56EF400378F77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4AD3FDE016A56EF400378F77 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -616,6 +622,10 @@
 				4AC9BF001794D68700E9A997 /* WhitelistPreferencesView.xib */,
 				4AC9BEFE1794D68700E9A997 /* WhitelistPreferencesViewController.h */,
 				4AC9BEFF1794D68700E9A997 /* WhitelistPreferencesViewController.m */,
+				4AC9BF031794EAA500E9A997 /* WhitelistHelper.h */,
+				4AC9BF041794EAA500E9A997 /* WhitelistHelper.m */,
+				4AC9BF06179519B400E9A997 /* CharmDomainFormatter.h */,
+				4AC9BF07179519B500E9A997 /* CharmDomainFormatter.m */,
 			);
 			path = sshproxy;
 			sourceTree = "<group>";
@@ -952,6 +962,8 @@
 				4AAF1319178FAAA800F1DF01 /* INSOCKSServer.m in Sources */,
 				4AAF131C178FAE1C00F1DF01 /* INSOCKSConnection.m in Sources */,
 				4AC9BF011794D68700E9A997 /* WhitelistPreferencesViewController.m in Sources */,
+				4AC9BF051794EAA500E9A997 /* WhitelistHelper.m in Sources */,
+				4AC9BF08179519B500E9A997 /* CharmDomainFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

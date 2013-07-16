@@ -16,8 +16,7 @@
 
 @synthesize isDirty;
 
-#pragma mark -
-#pragma mark MASPreferencesViewController
+#pragma mark - MASPreferencesViewController
 
 - (id)init
 {
@@ -54,6 +53,9 @@
     [self.userDefaultsController save:self];
     self.isDirty = NO;
 }
+
+
+#pragma - Actions
 
 - (IBAction)localStepperAction:(id)sender {
 	self.localPortTextField.intValue = self.localPortStepper.intValue;
@@ -98,6 +100,31 @@
     [self.view.window performClose:sender];
 }
 
+- (IBAction)applyChanges:(id)sender
+{
+    BOOL isProxyNeedReactive = [SSHHelper getLocalPort]!=self.localPortTextField.integerValue;
+    
+    [self.userDefaultsController save:self];
+    self.isDirty = NO;
+    
+    // reactive proxy
+    if (isProxyNeedReactive) {
+        AppController *appController = (AppController *)([NSApplication sharedApplication].delegate);
+        
+        [appController performSelector: @selector(reactiveProxy:) withObject:self afterDelay: 0.0];
+    }
+}
+- (IBAction)revertChanges:(id)sender
+{
+    [self.userDefaultsController revert:self];
+    
+    // save again to prevent dirty settings
+    [self.userDefaultsController save:self];
+    self.isDirty = NO;
+}
+
+#pragma - NSViewController
+
 - (BOOL)commitEditing
 {
     BOOL shouldClose = YES;
@@ -136,29 +163,6 @@
             [NSApp stopModalWithCode:YES];
             break;
     }
-}
-
-- (IBAction)applyChanges:(id)sender
-{
-    BOOL isProxyNeedReactive = [SSHHelper getLocalPort]!=self.localPortTextField.integerValue;
-    
-    [self.userDefaultsController save:self];
-    self.isDirty = NO;
-    
-    // reactive proxy
-    if (isProxyNeedReactive) {
-        AppController *appController = (AppController *)([NSApplication sharedApplication].delegate);
-        
-        [appController performSelector: @selector(reactiveProxy:) withObject:self afterDelay: 0.0];
-    }
-}
-- (IBAction)revertChanges:(id)sender
-{
-    [self.userDefaultsController revert:self];
-    
-    // save again to prevent dirty settings
-    [self.userDefaultsController save:self];
-    self.isDirty = NO;
 }
 
 - (void)dealloc
