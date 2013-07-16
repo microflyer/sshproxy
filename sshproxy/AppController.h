@@ -23,6 +23,7 @@
 - (IBAction)openAboutWindow:(id)sender;
 - (IBAction)openSendFeedback:(id)sender;
 - (IBAction)openMacAppStore:(id)sender;
+- (IBAction)switchProxyMode:(id)sender;
 
 
 /* Our outlets which allow us to access the interface */

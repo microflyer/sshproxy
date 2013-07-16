@@ -19,3 +19,6 @@
 [submodule "INSOCKSServer"]
 	path = INSOCKSServer
 	url = https://github.com/brantyoung/INSOCKSServer
+[submodule "TransformerKit"]
+	path = TransformerKit
+	url = https://github.com/mattt/TransformerKit

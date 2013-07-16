@@ -10,4 +10,6 @@
 
 @interface WhitelistHelper : NSObject
 
++ (void)setProxyMode:(NSInteger)index;
+
 @end

@@ -520,6 +520,45 @@
 						<reference key="NSOnImage" ref="892822162"/>
 						<reference key="NSMixedImage" ref="545007805"/>
 					</object>
+					<object class="NSMenuItem" id="537647037">
+						<reference key="NSMenu" ref="806075472"/>
+						<int key="NSIndent">1</int>
+						<string key="NSTitle">Use proxy for all sites</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="892822162"/>
+						<reference key="NSMixedImage" ref="545007805"/>
+					</object>
+					<object class="NSMenuItem" id="377479626">
+						<reference key="NSMenu" ref="806075472"/>
+						<int key="NSIndent">1</int>
+						<string key="NSTitle">Use proxy only for sites in whitelist</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="892822162"/>
+						<reference key="NSMixedImage" ref="545007805"/>
+						<int key="NSTag">1</int>
+					</object>
+					<object class="NSMenuItem" id="127175070">
+						<reference key="NSMenu" ref="806075472"/>
+						<int key="NSIndent">1</int>
+						<string key="NSTitle">Direct internet connection (no proxy)</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="892822162"/>
+						<reference key="NSMixedImage" ref="545007805"/>
+						<int key="NSTag">2</int>
+					</object>
+					<object class="NSMenuItem" id="1020971903">
+						<reference key="NSMenu" ref="806075472"/>
+						<bool key="NSIsDisabled">YES</bool>
+						<bool key="NSIsSeparator">YES</bool>
+						<string key="NSTitle"/>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="892822162"/>
+						<reference key="NSMixedImage" ref="545007805"/>
+					</object>
 					<object class="NSMenuItem" id="835806103">
 						<reference key="NSMenu" ref="806075472"/>
 						<string key="NSTitle">Preferences...</string>
@@ -1328,6 +1367,30 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">switchProxyMode:</string>
+						<reference key="source" ref="135814413"/>
+						<reference key="destination" ref="537647037"/>
+					</object>
+					<int key="connectionID">1251</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">switchProxyMode:</string>
+						<reference key="source" ref="135814413"/>
+						<reference key="destination" ref="377479626"/>
+					</object>
+					<int key="connectionID">1252</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">switchProxyMode:</string>
+						<reference key="source" ref="135814413"/>
+						<reference key="destination" ref="127175070"/>
+					</object>
+					<int key="connectionID">1253</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">orderOut:</string>
 						<reference key="source" ref="753612579"/>
 						<reference key="destination" ref="123848939"/>
@@ -1361,6 +1424,66 @@
 						</object>
 					</object>
 					<int key="connectionID">1222</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: values.proxy_mode</string>
+						<reference key="source" ref="537647037"/>
+						<reference key="destination" ref="356188136"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="537647037"/>
+							<reference key="NSDestination" ref="356188136"/>
+							<string key="NSLabel">value: values.proxy_mode</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">values.proxy_mode</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">OWProxyModeAllSites</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1238</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: values.proxy_mode</string>
+						<reference key="source" ref="377479626"/>
+						<reference key="destination" ref="356188136"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="377479626"/>
+							<reference key="NSDestination" ref="356188136"/>
+							<string key="NSLabel">value: values.proxy_mode</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">values.proxy_mode</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">OWProxyModeWhitelist</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1249</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: values.proxy_mode</string>
+						<reference key="source" ref="127175070"/>
+						<reference key="destination" ref="356188136"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="127175070"/>
+							<reference key="NSDestination" ref="356188136"/>
+							<string key="NSLabel">value: values.proxy_mode</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">values.proxy_mode</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">OWProxyModeDirect</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1250</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1410,6 +1533,10 @@
 							<reference ref="835806103"/>
 							<reference ref="1025946836"/>
 							<reference ref="928522643"/>
+							<reference ref="537647037"/>
+							<reference ref="1020971903"/>
+							<reference ref="377479626"/>
+							<reference ref="127175070"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">StatusMenu</string>
@@ -1976,6 +2103,26 @@
 						<reference key="object" ref="928522643"/>
 						<reference key="parent" ref="806075472"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1229</int>
+						<reference key="object" ref="537647037"/>
+						<reference key="parent" ref="806075472"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1230</int>
+						<reference key="object" ref="1020971903"/>
+						<reference key="parent" ref="806075472"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1232</int>
+						<reference key="object" ref="377479626"/>
+						<reference key="parent" ref="806075472"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1233</int>
+						<reference key="object" ref="127175070"/>
+						<reference key="parent" ref="806075472"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -2043,6 +2190,10 @@
 				<string key="1220.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1221.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1224.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1229.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1230.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1232.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1233.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="371.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="795.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="796.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2079,7 +2230,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1228</int>
+			<int key="maxID">1253</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2092,6 +2243,7 @@
 						<string key="openMacAppStore:">id</string>
 						<string key="openPreferences:">id</string>
 						<string key="openSendFeedback:">id</string>
+						<string key="switchProxyMode:">id</string>
 						<string key="turnOffProxy:">id</string>
 						<string key="turnOnProxy:">id</string>
 					</dictionary>
@@ -2114,6 +2266,10 @@
 						</object>
 						<object class="IBActionInfo" key="openSendFeedback:">
 							<string key="name">openSendFeedback:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="switchProxyMode:">
+							<string key="name">switchProxyMode:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="turnOffProxy:">
@@ -2181,10 +2337,6 @@
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1060" key="NS.object.0"/>
-		</object>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<real value="1070" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>

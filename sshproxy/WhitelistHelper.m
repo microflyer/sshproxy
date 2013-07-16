@@ -10,4 +10,13 @@
 
 @implementation WhitelistHelper
 
++ (void)setProxyMode:(NSInteger)index
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs synchronize];
+    
+    [prefs setInteger:index forKey:@"proxy_mode"];
+    [prefs synchronize];
+}
+
 @end

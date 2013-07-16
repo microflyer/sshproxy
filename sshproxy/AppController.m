@@ -13,6 +13,7 @@
 #import "MASPreferencesWindowController.h"
 #import "SSHHelper.h"
 #import "INSOCKSServer.h"
+#import "WhitelistHelper.h"
 
 @implementation AppController {
     /* The other stuff :P */
@@ -537,6 +538,13 @@
 {
     [[NSWorkspace sharedWorkspace] openURL:
      [NSURL URLWithString:@"https://github.com/brantyoung/sshproxy/wiki"]];
+}
+
+- (IBAction)switchProxyMode:(id)sender
+{
+    NSMenuItem* menuItem = (NSMenuItem*)sender;
+    
+    [WhitelistHelper setProxyMode:menuItem.tag];
 }
 
 #pragma mark - MASPreferencesWindowDelegate

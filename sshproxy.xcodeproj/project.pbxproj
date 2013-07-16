@@ -75,6 +75,10 @@
 		4AC9BF021794D68700E9A997 /* WhitelistPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC9BF001794D68700E9A997 /* WhitelistPreferencesView.xib */; };
 		4AC9BF051794EAA500E9A997 /* WhitelistHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9BF041794EAA500E9A997 /* WhitelistHelper.m */; };
 		4AC9BF08179519B500E9A997 /* CharmDomainFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9BF07179519B500E9A997 /* CharmDomainFormatter.m */; };
+		4AC9BF1317952F6A00E9A997 /* NSValueTransformer+TransformerKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9BF0B17952F6A00E9A997 /* NSValueTransformer+TransformerKit.m */; };
+		4AC9BF1417952F6A00E9A997 /* TTTDateTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9BF0E17952F6A00E9A997 /* TTTDateTransformers.m */; };
+		4AC9BF1517952F6A00E9A997 /* TTTImageTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9BF1017952F6A00E9A997 /* TTTImageTransformers.m */; };
+		4AC9BF1617952F6A00E9A997 /* TTTStringTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9BF1217952F6A00E9A997 /* TTTStringTransformers.m */; };
 		4AD3FDDE16A56EF400378F77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD3FDDD16A56EF400378F77 /* Cocoa.framework */; };
 		4AD3FDE816A56EF400378F77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AD3FDE616A56EF400378F77 /* InfoPlist.strings */; };
 		4AD3FDEA16A56EF400378F77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3FDE916A56EF400378F77 /* main.m */; };
@@ -264,6 +268,15 @@
 		4AC9BF041794EAA500E9A997 /* WhitelistHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhitelistHelper.m; sourceTree = "<group>"; };
 		4AC9BF06179519B400E9A997 /* CharmDomainFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharmDomainFormatter.h; sourceTree = "<group>"; };
 		4AC9BF07179519B500E9A997 /* CharmDomainFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharmDomainFormatter.m; sourceTree = "<group>"; };
+		4AC9BF0A17952F6A00E9A997 /* NSValueTransformer+TransformerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+TransformerKit.h"; sourceTree = "<group>"; };
+		4AC9BF0B17952F6A00E9A997 /* NSValueTransformer+TransformerKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+TransformerKit.m"; sourceTree = "<group>"; };
+		4AC9BF0C17952F6A00E9A997 /* TransformerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformerKit.h; sourceTree = "<group>"; };
+		4AC9BF0D17952F6A00E9A997 /* TTTDateTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDateTransformers.h; sourceTree = "<group>"; };
+		4AC9BF0E17952F6A00E9A997 /* TTTDateTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDateTransformers.m; sourceTree = "<group>"; };
+		4AC9BF0F17952F6A00E9A997 /* TTTImageTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTImageTransformers.h; sourceTree = "<group>"; };
+		4AC9BF1017952F6A00E9A997 /* TTTImageTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTImageTransformers.m; sourceTree = "<group>"; };
+		4AC9BF1117952F6A00E9A997 /* TTTStringTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTStringTransformers.h; sourceTree = "<group>"; };
+		4AC9BF1217952F6A00E9A997 /* TTTStringTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTStringTransformers.m; sourceTree = "<group>"; };
 		4AD3FDD916A56EF400378F77 /* SSH Proxy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SSH Proxy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD3FDDD16A56EF400378F77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4AD3FDE016A56EF400378F77 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -537,11 +550,27 @@
 			path = INSOCKSServer/INSOCKSServer/Classes;
 			sourceTree = "<group>";
 		};
-		4AD3FDCE16A56EF400378F77 = {
+		4AC9BF0917952F6900E9A997 /* TransformerKit */ = {
 			isa = PBXGroup;
 			children = (
-				4ADB92A11747C7E80064D82D /* icons */,
-				4A1E89031701F09F007DF2A0 /* logo.iconset */,
+				4AC9BF0A17952F6A00E9A997 /* NSValueTransformer+TransformerKit.h */,
+				4AC9BF0B17952F6A00E9A997 /* NSValueTransformer+TransformerKit.m */,
+				4AC9BF0C17952F6A00E9A997 /* TransformerKit.h */,
+				4AC9BF0D17952F6A00E9A997 /* TTTDateTransformers.h */,
+				4AC9BF0E17952F6A00E9A997 /* TTTDateTransformers.m */,
+				4AC9BF0F17952F6A00E9A997 /* TTTImageTransformers.h */,
+				4AC9BF1017952F6A00E9A997 /* TTTImageTransformers.m */,
+				4AC9BF1117952F6A00E9A997 /* TTTStringTransformers.h */,
+				4AC9BF1217952F6A00E9A997 /* TTTStringTransformers.m */,
+			);
+			name = TransformerKit;
+			path = TransformerKit/TransformerKit;
+			sourceTree = "<group>";
+		};
+		4AC9BF1717952FF000E9A997 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				4AC9BF0917952F6900E9A997 /* TransformerKit */,
 				4AAF1316178FAAA800F1DF01 /* INSOCKSServer */,
 				4AAF1315178FAA4F00F1DF01 /* GCDAsyncSocket */,
 				4A70ACE51774B06B00777818 /* INPopoverController */,
@@ -551,6 +580,33 @@
 				4ADB925B17476F700064D82D /* RSVerticallyCenteredTextFieldCell */,
 				4AA6470B16BD006700DE5CAD /* MASPreferences */,
 				4A2A393B175EC85D002BF361 /* Lumberjack */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		4AC9BF181795334900E9A997 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4A37A084171AEC6300605BE1 /* CharmTextField.h */,
+				4A37A085171AEC6300605BE1 /* CharmTextField.m */,
+				4A1F18AB16A7E65A00F39F74 /* CharmNumberFormatter.h */,
+				4A1F18AC16A7E65A00F39F74 /* CharmNumberFormatter.m */,
+				4AC9BF06179519B400E9A997 /* CharmDomainFormatter.h */,
+				4AC9BF07179519B500E9A997 /* CharmDomainFormatter.m */,
+				4AE2C1751743214000D0C57D /* SSHHelper.h */,
+				4AE2C1761743214000D0C57D /* SSHHelper.m */,
+				4AC9BF031794EAA500E9A997 /* WhitelistHelper.h */,
+				4AC9BF041794EAA500E9A997 /* WhitelistHelper.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		4AD3FDCE16A56EF400378F77 = {
+			isa = PBXGroup;
+			children = (
+				4A1E89031701F09F007DF2A0 /* logo.iconset */,
+				4ADB92A11747C7E80064D82D /* icons */,
+				4AC9BF1717952FF000E9A997 /* Vendor */,
 				4AD3FDE316A56EF400378F77 /* sshproxy */,
 				4A1BE47D16A5BAA0000E56D7 /* askpass */,
 				4A42310A1719A96800ABD4F6 /* connect */,
@@ -601,16 +657,11 @@
 		4AD3FDE316A56EF400378F77 /* sshproxy */ = {
 			isa = PBXGroup;
 			children = (
+				4AC9BF181795334900E9A997 /* Utils */,
 				4A27AD92178A4ECA008BC36F /* HelpView */,
-				4A37A084171AEC6300605BE1 /* CharmTextField.h */,
-				4A37A085171AEC6300605BE1 /* CharmTextField.m */,
-				4A1F18AB16A7E65A00F39F74 /* CharmNumberFormatter.h */,
-				4A1F18AC16A7E65A00F39F74 /* CharmNumberFormatter.m */,
 				4A03F73D16A695F0009BCD79 /* StatusMenu.xib */,
 				4A03F73716A69519009BCD79 /* AppController.h */,
 				4A03F73816A69519009BCD79 /* AppController.m */,
-				4AE2C1751743214000D0C57D /* SSHHelper.h */,
-				4AE2C1761743214000D0C57D /* SSHHelper.m */,
 				4A1BE49C16A68F30000E56D7 /* sshproxy.entitlements */,
 				4AD3FDE416A56EF400378F77 /* Supporting Files */,
 				4AEC465816A6A35E008BD118 /* GeneralPreferencesView.xib */,
@@ -622,10 +673,6 @@
 				4AC9BF001794D68700E9A997 /* WhitelistPreferencesView.xib */,
 				4AC9BEFE1794D68700E9A997 /* WhitelistPreferencesViewController.h */,
 				4AC9BEFF1794D68700E9A997 /* WhitelistPreferencesViewController.m */,
-				4AC9BF031794EAA500E9A997 /* WhitelistHelper.h */,
-				4AC9BF041794EAA500E9A997 /* WhitelistHelper.m */,
-				4AC9BF06179519B400E9A997 /* CharmDomainFormatter.h */,
-				4AC9BF07179519B500E9A997 /* CharmDomainFormatter.m */,
 			);
 			path = sshproxy;
 			sourceTree = "<group>";
@@ -964,6 +1011,10 @@
 				4AC9BF011794D68700E9A997 /* WhitelistPreferencesViewController.m in Sources */,
 				4AC9BF051794EAA500E9A997 /* WhitelistHelper.m in Sources */,
 				4AC9BF08179519B500E9A997 /* CharmDomainFormatter.m in Sources */,
+				4AC9BF1317952F6A00E9A997 /* NSValueTransformer+TransformerKit.m in Sources */,
+				4AC9BF1417952F6A00E9A997 /* TTTDateTransformers.m in Sources */,
+				4AC9BF1517952F6A00E9A997 /* TTTImageTransformers.m in Sources */,
+				4AC9BF1617952F6A00E9A997 /* TTTStringTransformers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
