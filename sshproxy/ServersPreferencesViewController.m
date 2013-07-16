@@ -20,13 +20,13 @@
 @synthesize publickeyHelpPopoverController;
 @synthesize isDirty;
 
-#pragma mark -
-#pragma mark MASPreferencesViewController
-
 - (id)init
 {
     return [super initWithNibName:@"ServersPreferencesView" bundle:nil];
 }
+
+
+#pragma mark - MASPreferencesViewController
 
 - (NSString *)identifier
 {
@@ -42,6 +42,8 @@
 {
     return NSLocalizedString(@"Servers", @"Toolbar item name for the Servers preference pane");
 }
+
+#pragma mark - 
 
 - (void)awakeFromNib
 {

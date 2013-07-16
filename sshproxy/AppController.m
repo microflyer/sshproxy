@@ -9,6 +9,7 @@
 #import "AppController.h"
 #import "GeneralPreferencesViewController.h"
 #import "ServersPreferencesViewController.h"
+#import "WhitelistPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
 #import "SSHHelper.h"
 #import "INSOCKSServer.h"
@@ -471,7 +472,8 @@
     {
         NSViewController *generalViewController = [[GeneralPreferencesViewController alloc] init];
         NSViewController *serversViewController = [[ServersPreferencesViewController alloc] init];
-        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, serversViewController, nil];
+        NSViewController *whitelistViewController = [[WhitelistPreferencesViewController alloc] init];
+        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, serversViewController, whitelistViewController, nil];
         
         // To add a flexible space between General and Advanced preference panes insert [NSNull null]:
         //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];
