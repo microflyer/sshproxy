@@ -137,9 +137,6 @@
 
 + (NSArray *)getServers
 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs synchronize];
-    
     return [[NSUserDefaults standardUserDefaults] arrayForKey:@"servers"];
 }
 
@@ -153,7 +150,6 @@
 + (NSInteger) getActivatedServerIndex
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs synchronize];
     
     NSArray* servers = [prefs arrayForKey:@"servers"];
     NSInteger index = [prefs integerForKey:@"activated_server"];
@@ -168,7 +164,6 @@
 + (NSDictionary*) getActivatedServer
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs synchronize];
     
     NSArray* servers = [prefs arrayForKey:@"servers"];
     
@@ -183,7 +178,6 @@
 + (void) setActivatedServer:(int) index
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs synchronize];
     
     [prefs setInteger:index forKey:@"activated_server"];
     [prefs synchronize];
@@ -276,13 +270,16 @@
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSInteger localPort = [prefs integerForKey:@"local_port"];
-    [prefs synchronize];
     
     if (localPort<=0 || localPort>65535) {
         localPort = 7070;
     }
     
     return localPort;
+}
++ (NSInteger)getSSHLocalPort
+{
+    return [self getLocalPort]+1;
 }
 
 #pragma mark Getters for server parameters

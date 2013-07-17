@@ -105,6 +105,8 @@
     BOOL isProxyNeedReactive = [SSHHelper getLocalPort]!=self.localPortTextField.integerValue;
     
     [self.userDefaultsController save:self];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     self.isDirty = NO;
     
     // reactive proxy

@@ -12,7 +12,6 @@
 #import "WhitelistPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
 #import "SSHHelper.h"
-#import "INSOCKSServer.h"
 #import "WhitelistHelper.h"
 
 @implementation AppController {
@@ -250,7 +249,7 @@
     NSString* remoteHost = [SSHHelper hostFromServer:server];
     NSString* loginName = [SSHHelper userFromServer:server];
     int remotePort = [SSHHelper portFromServer:server];
-    NSInteger localPort = [SSHHelper getLocalPort];
+    NSInteger localPort = [SSHHelper getSSHLocalPort];
     BOOL enableCompression = [SSHHelper isEnableCompress:server];
     BOOL shareSocks = [SSHHelper isShareSOCKS:server];
     
@@ -569,8 +568,8 @@
 	if (_server) return;
 	NSError *error = nil;
 	// Start the server on a random port
-	_server = [[INSOCKSServer alloc] initWithPort:1080 error:&error];
-//	_server.delegate = self;
+	_server = [[INSOCKSServer alloc] initWithPort:[SSHHelper getLocalPort] error:&error];
+	_server.delegate = self;
     
 	if (error) {
 		DDLogInfo(@"Error starting server: %@, %@", error, error.userInfo);
@@ -590,6 +589,26 @@
 {
 	[self startServer];
     [self stopServer];
+}
+
+
+#pragma mark - INSOCKSServerDelegate
+
+- (void)SOCKSServer:(INSOCKSServer *)server didAcceptConnection:(INSOCKSConnection *)connection
+{
+	connection.delegate = self;
+}
+
+#pragma mark - INSOCKSConnectionDelegate
+
+- (BOOL)SOCKSConnectionShouldRelay:(INSOCKSConnection *)connection
+{
+    return [WhitelistHelper isHostShouldProxy:connection.targetHost];
+}
+
+- (NSArray *)SOCKSConnectionGetRelayAddress:(INSOCKSConnection *)connection
+{
+    return @[@"127.0.0.1", @([SSHHelper getSSHLocalPort])];
 }
 
 @end

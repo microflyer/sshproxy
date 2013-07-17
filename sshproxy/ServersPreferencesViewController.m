@@ -197,7 +197,7 @@
     
     // apply changes
     [self.userDefaultsController save:self];
-    [self.userDefaultsController.defaults synchronize];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     self.isDirty = NO;
     

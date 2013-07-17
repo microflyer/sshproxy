@@ -9,8 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "GeneralPreferencesViewController.h"
 #import "MASPreferencesWindowController.h"
+#import "INSOCKSServer.h"
+#import "INSOCKSConnection.h"
 
-@interface AppController : NSObject <NSApplicationDelegate, NSMenuDelegate, MASPreferencesWindowDelegate>
+@interface AppController : NSObject <NSApplicationDelegate, NSMenuDelegate, MASPreferencesWindowDelegate, INSOCKSConnectionDelegate, INSOCKSServerDelegate>
 
 @property (nonatomic, readwrite) MASPreferencesWindowController *preferencesWindowController;
 

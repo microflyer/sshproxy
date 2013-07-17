@@ -3,6 +3,7 @@
 #import "DDTTYLogger.h"
 #import "DDFileLogger.h"
 #import "NSValueTransformer+TransformerKit.h"
+#import "WhitelistHelper.h"
 
 int main(int argc, char *argv[]) {
     @autoreleasepool
@@ -24,7 +25,7 @@ int main(int argc, char *argv[]) {
         [NSValueTransformer registerValueTransformerWithName:OWProxyModeAllSitesTransformerName
                                        transformedValueClass:[NSNumber class]
                           returningTransformedValueWithBlock:^id(id value) {
-                              return [NSNumber numberWithBool:[value integerValue]==0];
+                              return [NSNumber numberWithBool:[value integerValue]==OW_PROXY_MODE_ALLSITES];
                           }
 //                      allowingReverseTransformationWithBlock:^id(id value) {
 //                          
@@ -33,12 +34,12 @@ int main(int argc, char *argv[]) {
         [NSValueTransformer registerValueTransformerWithName:OWProxyModeWhitelistTransformerName
                                        transformedValueClass:[NSNumber class]
                           returningTransformedValueWithBlock:^id(id value) {
-                              return [NSNumber numberWithBool:[value integerValue]==1];
+                              return [NSNumber numberWithBool:[value integerValue]==OW_PROXY_MODE_WHITELIST];
                           }];
         [NSValueTransformer registerValueTransformerWithName:OWProxyModeDirectTransformerName
                                        transformedValueClass:[NSNumber class]
                           returningTransformedValueWithBlock:^id(id value) {
-                              return [NSNumber numberWithBool:[value integerValue]==2];
+                              return [NSNumber numberWithBool:[value integerValue]==OW_PROXY_MODE_DIRECT];
                           }];
         
         return NSApplicationMain(argc, (const char **)argv);

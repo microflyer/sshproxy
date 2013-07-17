@@ -19,17 +19,17 @@
     NSURL *url = [NSURL URLWithString:anObject];
     
     if (url.host) {
-        return url.host;
+        return url.host.lowercaseString;
     }
     
-    return [url absoluteString];
+    return [url absoluteString].lowercaseString;
 }
 
 - (BOOL)getObjectValue:(id *)anObject forString:(NSString *)string errorDescription:(NSString **)error
 {
     if (anObject)
     {
-        *anObject = string;
+        *anObject = string.lowercaseString;
     }
     
     return YES;

@@ -33,6 +33,7 @@ enum {
 
 // for local settings
 + (NSInteger)getLocalPort;
++ (NSInteger)getSSHLocalPort;
 
 
 // code that upgrade user preferences from 13.04 to 13.05
