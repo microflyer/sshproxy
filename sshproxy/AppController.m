@@ -544,6 +544,7 @@
     NSMenuItem* menuItem = (NSMenuItem*)sender;
     
     [WhitelistHelper setProxyMode:menuItem.tag];
+    [self restartServer];
 }
 
 #pragma mark - MASPreferencesWindowDelegate
@@ -587,8 +588,8 @@
 
 - (void)restartServer
 {
-	[self startServer];
     [self stopServer];
+    [self startServer];
 }
 
 
