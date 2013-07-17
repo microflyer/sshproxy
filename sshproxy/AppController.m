@@ -604,7 +604,7 @@
 
 - (BOOL)SOCKSConnectionShouldRelay:(INSOCKSConnection *)connection
 {
-    return [WhitelistHelper isHostShouldProxy:connection.targetHost];
+    return [WhitelistHelper isHostShouldProxy:connection.targetHost isProxyOn:self.turnOnMenuItem.isHidden];
 }
 
 - (NSArray *)SOCKSConnectionGetRelayAddress:(INSOCKSConnection *)connection

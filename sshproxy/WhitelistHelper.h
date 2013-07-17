@@ -18,6 +18,6 @@ enum {
 
 + (void)setProxyMode:(NSInteger)index;
 
-+ (BOOL)isHostShouldProxy:(NSString *)host;
++ (BOOL)isHostShouldProxy:(NSString *)host isProxyOn:(BOOL)isProxyOn;
 
 @end

@@ -19,8 +19,12 @@
     [prefs synchronize];
 }
 
-+ (BOOL)isHostShouldProxy:(NSString *)host
++ (BOOL)isHostShouldProxy:(NSString *)host isProxyOn:(BOOL)isProxyOn
 {
+    if (!isProxyOn) {
+        return NO;
+    }
+    
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     NSInteger proxyMode = [prefs integerForKey:@"proxy_mode"];
