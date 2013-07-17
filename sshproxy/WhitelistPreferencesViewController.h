@@ -9,6 +9,16 @@
 #import <Cocoa/Cocoa.h>
 #import "MASPreferencesViewController.h"
 
+enum {
+    OW_IMPORT_GOOGLE_SITES = 1,
+    OW_IMPORT_TWITTER_SITES,
+    OW_IMPORT_FACEBOOK_SITES,
+    OW_IMPORT_YOUTUBE_SITES,
+    OW_IMPORT_BLOGGER_SITES,
+    OW_IMPORT_WORDPRESS_SITES,
+    OW_IMPORT_URLSHORTTEN_SITES,
+};
+
 @interface WhitelistPreferencesViewController : NSViewController <MASPreferencesViewController, NSTableViewDelegate>
 
 @property (strong) IBOutlet NSArrayController *whitelistArrayController;
@@ -26,5 +36,6 @@
 - (IBAction)addSite:(id)sender;
 
 - (IBAction)cellButtonClicked:(id)sender;
+- (IBAction)importMenuClicked:(id)sender;
 
 @end

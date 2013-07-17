@@ -62,4 +62,20 @@
     return NO;
 }
 
++ (NSDictionary *)newSite:(NSString *)siteHost
+{
+    NSMutableDictionary* site = [[NSMutableDictionary alloc] init];
+    
+    [site setObject:[NSNumber numberWithBool:YES] forKey:@"enabled"];
+    [site setObject:[NSNumber numberWithBool:YES] forKey:@"subdomains"];
+    
+    if (siteHost) {
+        [site setObject:siteHost forKey:@"address"];
+    } else {
+        [site setObject:@"example.com" forKey:@"address"];
+    }
+    
+    return site;
+}
+
 @end
