@@ -568,7 +568,7 @@
 {
 	if (_server) return;
 	NSError *error = nil;
-	// Start the server on a random port
+
 	_server = [[INSOCKSServer alloc] initWithPort:[SSHHelper getLocalPort] error:&error];
 	_server.delegate = self;
     
@@ -589,7 +589,20 @@
 - (void)restartServer
 {
     [self stopServer];
-    [self startServer];
+    
+	if (_server) return;
+	NSError *error = nil;
+    
+	_server = [[INSOCKSServer alloc] initWithPort:[SSHHelper getLocalPort] error:&error];
+	_server.delegate = self;
+    
+	if (error) {
+		DDLogInfo(@"Error starting server: %@, %@", error, error.userInfo);
+        // retry
+        [self performSelector: @selector(restartServer) withObject:nil afterDelay: 1.0];
+	} else {
+		DDLogInfo(@"SOCKS server on host %@ listening on port %d", _server.host, _server.port);
+	}
 }
 
 
