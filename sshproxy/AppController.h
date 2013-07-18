@@ -21,6 +21,7 @@
 - (IBAction)turnOnProxy:(id)sender;
 - (IBAction)turnOffProxy:(id)sender;
 - (IBAction)openPreferences:(id)sender;
+- (IBAction)openWhitelistPreferences:(id)sender;
 - (IBAction)openHelpURL:(id)sender;
 - (IBAction)openAboutWindow:(id)sender;
 - (IBAction)openSendFeedback:(id)sender;

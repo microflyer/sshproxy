@@ -504,6 +504,16 @@
     [self performSelector: @selector(openPreferences:) withObject:self afterDelay: 0.0];
 }
 
+- (IBAction)openWhitelistPreferences:(id)sender
+{
+    [self.preferencesWindowController selectControllerAtIndex:2];
+    [self performSelector: @selector(openPreferences:) withObject:sender afterDelay: 0.0];
+    
+    WhitelistPreferencesViewController *viewController = (WhitelistPreferencesViewController *)self.preferencesWindowController.selectedViewController;
+    
+    [viewController performSelector: @selector(addSite:) withObject:sender afterDelay: 0.2];
+}
+
 - (IBAction)openAboutWindow:(id)sender
 {
     [NSApp activateIgnoringOtherApps:YES];

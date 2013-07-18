@@ -112,6 +112,7 @@
     [self.whitelistTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     
     [self.whitelistTableView scrollRowToVisible:index];
+    [self.whitelistTableView editColumn:1 row:index withEvent:nil select:YES];
 }
 
 - (IBAction)removeSite:(id)sender
