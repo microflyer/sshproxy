@@ -87,6 +87,7 @@
     return @[
              @[ // google
                  @"google.com",
+                 @"googleapis.com",
                  @"googlecode.com",
                  @"google-analytics.com",
                  @"feedburner.com",
@@ -156,6 +157,21 @@
                  @"dft.ba",
                  @"goo.gl",
                  @"is.gd",
+                 ],
+             @[ // amazon
+                 @"amazon.com",
+                 @"images-amazon.com",
+                 ],
+             @[ // github
+                 @"github.com",
+                 ],
+             @[ // stackoverflow
+                 @"stackoverflow.com",
+                 @"sstatic.net",
+                 @"adzerk.net",
+                 ],
+             @[ // bitbucket
+                 @"bitbucket.org",
                  ],
              ];
 }
