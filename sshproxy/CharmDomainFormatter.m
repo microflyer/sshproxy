@@ -18,6 +18,10 @@
     
     NSURL *url = [NSURL URLWithString:anObject];
     
+    if (!url.scheme) {
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", anObject]];
+    }
+    
     if (url.host) {
         return url.host.lowercaseString;
     }
