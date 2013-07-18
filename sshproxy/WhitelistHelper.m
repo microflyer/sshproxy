@@ -78,4 +78,86 @@
     return site;
 }
 
+#pragma mark - sites helper
+
++ (NSArray *)builtinSites
+{
+    // http://en.wikipedia.org/wiki/List_of_websites_blocked_in_the_People%27s_Republic_of_China
+    
+    return @[
+             @[ // google
+                 @"google.com",
+                 @"googlecode.com",
+                 @"google-analytics.com",
+                 @"feedburner.com",
+                 @"gmail.com",
+                 @"appspot.com",
+                 @"googleusercontent.com",
+                 ],
+             @[ // twitter
+                 @"twitter.com",
+                 @"twimg.com",
+                 @"t.co",
+                 ],
+             @[ // facebook
+                 @"facebook.com",
+                 @"facebook.net",
+                 @"ff.im",
+                 @"fbcdn.net",
+                 ],
+             @[ // youtube
+                 @"youtube.com",
+                 @"youtu.be",
+                 @"ytimg.com",
+                 @"y2u.be",
+                 ],
+             @[ // blogger
+                 @"blogger.com",
+                 @"blogcdn.com",
+                 @"blogspot.com",
+                 ],
+             @[ // wordpress
+                 @"wordpress.com",
+                 @"wp.com",
+                 ],
+             @[ // wikipedia
+                 @"wikipedia.org",
+                 @"wikimedia.org",
+                 ],
+             @[ // imdb
+                 @"imdb.com",
+                 ],
+             @[ // vimeo
+                 @"vimeo.com",
+                 ],
+             @[ // bbc
+                 @"bbc.com",
+                 @"bbc.co.uk",
+                 @"bbci.co.uk",
+                 @"imrworldwide.com",
+                 ],
+             @[ // nytimes
+                 @"nytimes.com",
+                 @"nyt.com",
+                 @"typekit.com",
+                 @"revsci.net",
+                 @"scorecardresearch.com",
+                 @"nytlog.com",
+                 ],
+             @[ // dropbox
+                 @"dropbox.com",
+                 ],
+             @[ // url shortten
+                 @"j.mp",
+                 @"bit.ly",
+                 @"bitly.com",
+                 @"tinyurl.com",
+                 @"ow.ly",
+                 @"dft.ba",
+                 @"goo.gl",
+                 @"is.gd",
+                 ],
+             ];
+}
+
 @end

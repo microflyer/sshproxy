@@ -21,4 +21,6 @@ enum {
 
 + (NSDictionary *)newSite:(NSString *)siteHost;
 
++ (NSArray *)builtinSites;
+
 @end

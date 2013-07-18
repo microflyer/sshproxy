@@ -162,6 +162,14 @@
     self.isDirty = self.userDefaultsController.hasUnappliedChanges;
 }
 
+- (IBAction)emptyWhitelist:(id)sender
+{
+    NSRange range = NSMakeRange(0, [[self.whitelistArrayController arrangedObjects] count]);
+    [self.whitelistArrayController removeObjectsAtArrangedObjectIndexes:[NSIndexSet indexSetWithIndexesInRange:range]];
+    
+    self.isDirty = self.userDefaultsController.hasUnappliedChanges;
+}
+
 #pragma - NSViewController
 
 - (BOOL)commitEditing
@@ -214,73 +222,27 @@
 
 #pragma mark - Import sites
 
-- (void)_importSite:(NSString *)address
+- (void)_importSites:(NSArray *)sites
 {
-    NSDictionary *site = [WhitelistHelper newSite:address];
-    [self _addSite:site];
+    for ( NSString *address in sites ) {
+        NSDictionary *site = [WhitelistHelper newSite:address];
+        [self _addSite:site];
+    }
 }
 
 - (IBAction)importMenuClicked:(id)sender
 {
     NSMenuItem* menuItem = (NSMenuItem*)sender;
     
-    switch (menuItem.tag) {
-        case OW_IMPORT_GOOGLE_SITES:
-            // http://en.wikipedia.org/wiki/List_of_Google_domains
-            [self _importSite:@"google.com"];
-            [self _importSite:@"google-analytics.com"];
-            [self _importSite:@"feedburner.com"];
-            [self _importSite:@"gmail.com"];
-            [self _importSite:@"appspot.com"];
-            [self _importSite:@"googleusercontent.com"];
-            break;
-            
-        case OW_IMPORT_TWITTER_SITES:
-            [self _importSite:@"twitter.com"];
-            [self _importSite:@"twimg.com"];
-            [self _importSite:@"t.co"];
-            break;
-            
-        case OW_IMPORT_FACEBOOK_SITES:
-            [self _importSite:@"facebook.com"];
-            [self _importSite:@"ff.im"];
-            [self _importSite:@"fbcdn.net"];
-            break;
-            
-        case OW_IMPORT_YOUTUBE_SITES:
-            [self _importSite:@"youtube.com"];
-            [self _importSite:@"youtu.be"];
-            [self _importSite:@"ytimg.com"];
-            [self _importSite:@"y2u.be"];
-            break;
-            
-        case OW_IMPORT_BLOGGER_SITES:
-            [self _importSite:@"blogger.com"];
-            [self _importSite:@"blogcdn.com"];
-            [self _importSite:@"blogspot.com"];
-            break;
-            
-        case OW_IMPORT_WORDPRESS_SITES:
-            [self _importSite:@"wordpress.com"];
-            [self _importSite:@"wp.com"];
-            break;
-            
-        case OW_IMPORT_URLSHORTTEN_SITES:
-            [self _importSite:@"j.mp"];
-            [self _importSite:@"bit.ly"];
-            [self _importSite:@"bitly.com"];
-            [self _importSite:@"tinyurl.com"];
-            [self _importSite:@"ow.ly"];
-            [self _importSite:@"dft.ba"];
-            [self _importSite:@"goo.gl"];
-            [self _importSite:@"is.gd"];
-            break;
-        
-        // case others:
-        // http://en.wikipedia.org/wiki/List_of_websites_blocked_in_the_People%27s_Republic_of_China
-            
-        default:
-            break;
+    NSArray *builtinSites = [WhitelistHelper builtinSites];
+    
+    if (menuItem.tag > builtinSites.count) {
+        // import all sites
+        for (NSArray *sites in builtinSites) {
+            [self _importSites:sites];
+        }
+    } else {
+        [self _importSites:builtinSites[menuItem.tag-1]];
     }
     
     self.isDirty = self.userDefaultsController.hasUnappliedChanges;
