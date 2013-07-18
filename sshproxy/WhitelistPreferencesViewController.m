@@ -67,6 +67,14 @@
     // rember index
     NSUInteger selected = self.whitelistArrayController.selectionIndex;
     
+    // remove duplicates
+    NSArray *sites = [NSArray arrayWithArray:[[NSSet setWithArray:self.whitelistArrayController.arrangedObjects] allObjects]];
+    
+    NSRange range = NSMakeRange(0, [[self.whitelistArrayController arrangedObjects] count]);
+    [self.whitelistArrayController removeObjectsAtArrangedObjectIndexes:[NSIndexSet indexSetWithIndexesInRange:range]];
+    
+    [self.whitelistArrayController addObjects:sites];
+    
     // apply changes
     [self.userDefaultsController save:self];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -83,6 +91,7 @@
     }
     
     self.whitelistArrayController.selectionIndex = selected;
+    [self.whitelistTableView scrollRowToVisible:selected];
 }
 - (IBAction)revertChanges:(id)sender
 {
@@ -101,6 +110,7 @@
     }
     
     self.whitelistArrayController.selectionIndex = selected;
+    [self.whitelistTableView scrollRowToVisible:selected];
 }
 
 
