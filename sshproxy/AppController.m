@@ -635,4 +635,9 @@
     return @[@"127.0.0.1", @([SSHHelper getSSHLocalPort])];
 }
 
+- (void)SOCKSConnection:(INSOCKSConnection *)connection didDisconnectWithError:(NSError *)error
+{
+    [_server disconnect:connection];
+}
+
 @end
