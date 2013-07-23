@@ -527,7 +527,7 @@
 {
     NSString *encodedSubject = @"subject=SSH Proxy Support";
     NSString *encodedBody = @"body=Hi Yang,";
-    NSString *encodedTo = @"yang@yangyubo.com";
+    NSString *encodedTo = @"yang@codinnstudio.com";
     NSString *encodedURLString = [NSString stringWithFormat:@"mailto:%@?%@&%@",
                                   [encodedTo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                   [encodedSubject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
